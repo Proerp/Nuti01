@@ -114,6 +114,12 @@ namespace TotalSmartCoding.Views.Productions
                 this.buttonCartonNoreadNow.Visible = GlobalEnums.OnTestScanner;
                 this.buttonPalletReceivedNow.Visible = GlobalEnums.OnTestScanner;
 
+
+
+
+                this.dgvPackQueue.RowTemplate.Height = 216; this.dgvPacksetQueue.RowTemplate.Height = 216; 
+
+
                 if (!fillingData.HasPack) { this.labelNextDigitNo.Visible = false; this.textNextDigitNo.Visible = false; this.labelNextPackNo.Visible = false; this.textNextPackNo.Visible = false; this.dgvCartonPendingQueue.RowTemplate.Height = 280; this.dgvCartonQueue.RowTemplate.Height = 280; this.dgvCartonsetQueue.RowTemplate.Height = 280; this.labelLEDPack.Visible = false; this.labelLEDCartonIgnore.Visible = false; }
                 if (!fillingData.HasCarton) { this.labelNextCartonNo.Visible = false; this.textNextCartonNo.Visible = false; this.dgvPalletQueue.RowTemplate.Height = 280; this.dgvPalletPickupQueue.RowTemplate.Height = 280; this.labelLEDCarton.Visible = false; this.labelLEDCartonPending.Visible = false; }
 
@@ -227,7 +233,7 @@ namespace TotalSmartCoding.Views.Productions
             switch (GlobalVariables.FillingLineID)
             {
                 case GlobalVariables.FillingLine.Smallpack:
-                    return 346; //364 
+                    return 280; //346 
                 case GlobalVariables.FillingLine.Pail:
                     return 0;
                 case GlobalVariables.FillingLine.Drum:
@@ -672,15 +678,20 @@ namespace TotalSmartCoding.Views.Productions
             //else if (printedBarcode.Length > 6) printedBarcode = printedBarcode.Substring(printedBarcode.Length - 7, 6); //Char[3][4][5]...[9]: Serial Number
             else
             {
-                if (this.fillingData.HasPack && printedBarcode.Length >= 29)
-                    printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
+                //if (this.fillingData.HasPack && printedBarcode.Length >= 29)
+                //    printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
 
-                if (!this.fillingData.HasPack && printedBarcode.Length >= 29)
+                if (printedBarcode.Length >= 29) //!this.fillingData.HasPack && 
                 {
-                    if (sender != null && (this.fillingData.HasCarton && sender.Equals(this.dgvPalletQueue) || sender.Equals(this.dgvPalletPickupQueue)))
-                        printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
-                    else
+                    if (sender != null && (sender.Equals(this.dgvPackQueue) || sender.Equals(this.dgvPacksetQueue)))
                         printedBarcode = printedBarcode.Substring(0, indexOfDoubleTabChar);
+                    else
+                        printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
+
+                    //if (sender != null && (this.fillingData.HasCarton && sender.Equals(this.dgvPalletQueue) || sender.Equals(this.dgvPalletPickupQueue)))
+                    //    printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
+                    //else
+                    //    printedBarcode = printedBarcode.Substring(0, indexOfDoubleTabChar);
                 }
             }
 

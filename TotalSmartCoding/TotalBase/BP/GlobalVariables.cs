@@ -176,11 +176,11 @@ namespace TotalBase
                     switch (dominoPrinterNameID)
                     {
                         case PrinterName.DigitInkjet:
-                            return "172.21.67.157";
+                            return "192.168.1.122";
                         case PrinterName.PackInkjet:
-                            return "172.21.67.158";
+                            return "192.168.1.111";
                         case PrinterName.CartonInkjet:
-                            return "172.21.67.159";
+                            return "192.168.1.112";
                         default:
                             return "127.0.0.1";
                     }
@@ -230,11 +230,11 @@ namespace TotalBase
                         case ScannerName.QualityScanner:
                             return "127.0.0.1";
                         case ScannerName.PackScanner:
-                            return "172.21.67.168";
+                            return "192.168.1.121";
                         case ScannerName.CartonScanner:
-                            return "172.21.67.169";
+                            return "192.168.1.123";
                         case ScannerName.PalletScanner:
-                            return "172.21.67.170";
+                            return "192.168.1.124";
                         default:
                             return "127.0.0.1";
                     }
@@ -284,7 +284,7 @@ namespace TotalBase
             switch (GlobalVariables.FillingLineID)
             {
                 case FillingLine.Smallpack:
-                    return 6;
+                    return 1; //6
                 case FillingLine.Pail:
                     return 1;
                 case FillingLine.Drum:
