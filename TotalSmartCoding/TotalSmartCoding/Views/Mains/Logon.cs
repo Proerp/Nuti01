@@ -219,6 +219,9 @@ namespace TotalSmartCoding.Views.Mains
                         #region EMPTY DATABASE
                         if (false && this.checkEmptyData.Checked)
                         {
+                            this.baseRepository.ExecuteStoreCommand("UPDATE GoodsReceipts SET PickupID = NULL, GoodsIssueID = NULL, WarehouseAdjustmentID = NULL", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("UPDATE GoodsReceiptDetails SET PickupDetailID = NULL, PickupID = NULL, GoodsIssueTransferDetailID = NULL, GoodsIssueID = NULL, WarehouseAdjustmentDetailID = NULL, WarehouseAdjustmentID = NULL", new ObjectParameter[] { });
+
                             this.baseRepository.ExecuteStoreCommand("DELETE FROM     WarehouseAdjustmentDetails", new ObjectParameter[] { });
                             this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('WarehouseAdjustmentDetails', RESEED, 0)", new ObjectParameter[] { });
 
