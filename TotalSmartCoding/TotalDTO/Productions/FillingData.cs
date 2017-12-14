@@ -27,12 +27,14 @@ namespace TotalDTO.Productions
         private string commodityCode;
         private string commodityAPICode;
         private string commodityOfficialCode;
+        private string commodityCartonCode;
         private decimal volume;
 
         private int shelflife;
         private bool isPailLabel;
 
         private string batchCode;
+        private DateTime entryDate;
         private DateTime settingDate;
 
         private string nextDigitNo;
@@ -59,6 +61,7 @@ namespace TotalDTO.Productions
         public GlobalVariables.FillingLine FillingLineID { get { return GlobalVariables.FillingLineID; } }
         public string FillingLineCode { get { return GlobalVariables.FillingLineCode; } }
         public string FillingLineName { get { return GlobalVariables.FillingLineName; } }
+        public string FillingLineFactoryCode { get { return GlobalVariables.FillingLineFactoryCode; } }
 
         public bool HasPack { get { return this.FillingLineID == GlobalVariables.FillingLine.Smallpack; } }
         public bool HasCarton { get { return this.FillingLineID == GlobalVariables.FillingLine.Smallpack || this.FillingLineID == GlobalVariables.FillingLine.Pail; } }
@@ -102,6 +105,12 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<FillingData, string>(ref this.commodityOfficialCode, o => o.CommodityOfficialCode, value); }
         }
 
+        public string CommodityCartonCode
+        {
+            get { return this.commodityCartonCode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.commodityCartonCode, o => o.CommodityCartonCode, value); }
+        }        
+
         public decimal Volume
         {
             get { return this.volume; }
@@ -138,6 +147,12 @@ namespace TotalDTO.Productions
         }
 
 
+        public DateTime EntryDate
+        {
+            get { return this.entryDate; }
+            set { ApplyPropertyChange<FillingData, DateTime>(ref this.entryDate, o => o.EntryDate, value); }
+        }
+
         public DateTime SettingDate
         {
             get { return this.settingDate; }
@@ -166,7 +181,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextDigitNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6)
+                    if (int.TryParse(value, out intValue) && value.Length == 5)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextDigitNo, o => o.NextDigitNo, value);
                     }
@@ -187,7 +202,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextPackNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6)
+                    if (int.TryParse(value, out intValue) && value.Length == 5)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextPackNo, o => o.NextPackNo, value);
                     }
@@ -208,7 +223,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextCartonNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6)
+                    if (int.TryParse(value, out intValue) && value.Length == 5)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextCartonNo, o => o.NextCartonNo, value);
                     }
@@ -230,7 +245,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextPalletNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 6)
+                    if (int.TryParse(value, out intValue) && value.Length == 5)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextPalletNo, o => o.NextPalletNo, value);
                     }
@@ -354,28 +369,28 @@ namespace TotalDTO.Productions
 
         public string FirstLineA1(bool isReadableText)
         {
-            return "CXVHP";
+            return this.EntryDate.AddMonths(this.Shelflife).ToString("ddMMyy");
         }
 
         public string FirstLineA2(bool isReadableText)
         {
-            return this.SettingDate.ToString("yyMMdd");
+            return this.FillingLineFactoryCode + this.FillingLineCode + (this.SettingDate.Subtract(this.EntryDate).Days.ToString("N0").Substring(0, 1));
         }
 
 
         public string SecondLineA1(bool isReadableText)
         {
-            return this.CommodityCode;
+            return this.EntryDate.ToString("ddMMyy");
         }
 
         public string SecondLineA2(bool isReadableText)
         {
-            return this.CommodityAPICode;
+            return "";//this.CommodityAPICode
         }
 
         public string ThirdLineA1(bool isReadableText)
         {
-            return this.BatchCode.Substring(0, 7);
+            return this.BatchCode.Substring(this.BatchCode.Length - 4, 4) + "L"; //L: LOT NUMBER
         }
 
     }

@@ -681,7 +681,7 @@ namespace TotalSmartCoding.Views.Productions
                 //if (this.fillingData.HasPack && printedBarcode.Length >= 29)
                 //    printedBarcode = printedBarcode.Substring(indexOfDoubleTabChar - 6, 6);
 
-                if (printedBarcode.Length >= 29) //!this.fillingData.HasPack && 
+                if (printedBarcode.Length >= 22) //!this.fillingData.HasPack && 
                 {
                     if (sender != null && (sender.Equals(this.dgvPackQueue) || sender.Equals(this.dgvPacksetQueue)))
                         printedBarcode = printedBarcode.Substring(0, indexOfDoubleTabChar);

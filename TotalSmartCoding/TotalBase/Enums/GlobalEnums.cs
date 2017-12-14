@@ -8,9 +8,9 @@
 
         public static bool OnTestPrinter = true; //2
         public static bool OnTestDigit = false; //WHEN REAL TEST WITHOUT DIGIT PRINTER
-        public static bool OnTestZebra = false; //false: WILL SEND TEST PRINT WHEN CONNECTED
+        public static bool OnTestZebra = false; //false: test zebra 1    //false: WILL SEND TEST PRINT WHEN CONNECTED
 
-        public static bool SendToZebra = true;
+        public static bool SendToZebra = true; //true: test zebra 2
 
         public static bool OnTestCartonNoreadNow = false;
         public static bool OnTestPalletReceivedNow = false;
@@ -356,7 +356,7 @@
             Maintenance = 3
         };
 
-        
+
 
         public enum CommodityTypeID
         {

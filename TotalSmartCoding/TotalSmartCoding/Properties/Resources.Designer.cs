@@ -1213,6 +1213,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap canned_food {
+            get {
+                object obj = ResourceManager.GetObject("canned-food", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Carlosjj_Google_Jfk_Maps {
             get {
                 object obj = ResourceManager.GetObject("Carlosjj-Google-Jfk-Maps", resourceCulture);

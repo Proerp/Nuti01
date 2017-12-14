@@ -76,7 +76,8 @@
           <Property Name="Unit" Type="nvarchar" MaxLength="10" />
           <Property Name="PackageSize" Type="nvarchar" MaxLength="60" />
           <Property Name="Origin" Type="nvarchar" MaxLength="60" />
-          <Property Name="APICode" Type="nvarchar" MaxLength="60" />
+          <Property Name="APICode" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="CartonCode" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="FillingLineIDs" Type="nvarchar" MaxLength="60" />
           <Property Name="Volume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
           <Property Name="Weight" Type="decimal" Precision="18" Scale="3" Nullable="false" />
@@ -246,6 +247,7 @@
           <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="NickName" Type="nvarchar" MaxLength="60" />
+          <Property Name="FactoryCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="HasPack" Type="bit" Nullable="false" />
           <Property Name="HasCarton" Type="bit" Nullable="false" />
           <Property Name="HasPallet" Type="bit" Nullable="false" />
@@ -4238,8 +4240,9 @@
           <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
           <Property Type="Boolean" Name="InActive" Nullable="false" />
           <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="3" />
-          <Property Type="String" Name="CommodityAPICode" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="CommodityAPICode" Nullable="false" MaxLength="60" />
           <Property Type="Int32" Name="Shelflife" Nullable="false" />
+          <Property Type="String" Name="CommodityCartonCode" Nullable="false" MaxLength="60" />
         </ComplexType>
         <ComplexType Name="CommodityIndex">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -4345,6 +4348,7 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="NickName" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="FactoryCode" Nullable="false" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="FillingLineIndex">
           <Property Type="Int32" Name="FillingLineID" Nullable="false" />
@@ -4406,6 +4410,7 @@
           <Property Name="NickName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="PalletChanged" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="FillingLine" ToRole="Batch" />
+          <Property Name="FactoryCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="GoodsReceiptType">
           <Key>
@@ -5334,7 +5339,7 @@
           <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PackageSize" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Origin" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="APICode" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="APICode" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FillingLineIDs" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="Volume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
@@ -5358,6 +5363,7 @@
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Commodities" FromRole="Commodity" ToRole="WarehouseAdjustmentDetail" />
           <NavigationProperty Name="CommodityCategory" Relationship="TotalSmartCodingModel.FK_Commodities_CommodityCategories" FromRole="Commodity" ToRole="CommodityCategory" />
           <NavigationProperty Name="CommodityType" Relationship="TotalSmartCodingModel.FK_Commodities_CommodityTypes" FromRole="Commodity" ToRole="CommodityType" />
+          <Property Name="CartonCode" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Cartons_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -7396,6 +7402,7 @@
                 <ScalarProperty Name="Volume" ColumnName="Volume" />
                 <ScalarProperty Name="CommodityAPICode" ColumnName="CommodityAPICode" />
                 <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
+                <ScalarProperty Name="CommodityCartonCode" ColumnName="CommodityCartonCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7550,6 +7557,7 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="FactoryCode" ColumnName="FactoryCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7603,6 +7611,7 @@
           <EntitySetMapping Name="FillingLines">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.FillingLine">
               <MappingFragment StoreEntitySet="FillingLines">
+                <ScalarProperty Name="FactoryCode" ColumnName="FactoryCode" />
                 <ScalarProperty Name="PalletChanged" ColumnName="PalletChanged" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
@@ -8416,6 +8425,7 @@
           <EntitySetMapping Name="Commodities">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Commodity">
               <MappingFragment StoreEntitySet="Commodities">
+                <ScalarProperty Name="CartonCode" ColumnName="CartonCode" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="Discontinue" ColumnName="Discontinue" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />

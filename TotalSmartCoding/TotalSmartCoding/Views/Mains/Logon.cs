@@ -202,6 +202,7 @@ namespace TotalSmartCoding.Views.Mains
                             GlobalVariables.FillingLineID = (GlobalVariables.FillingLine)this.comboFillingLineID.SelectedValue;
                             GlobalVariables.FillingLineCode = ((FillingLineBase)this.comboFillingLineID.SelectedItem).Code;
                             GlobalVariables.FillingLineName = ((FillingLineBase)this.comboFillingLineID.SelectedItem).Name;
+                            GlobalVariables.FillingLineFactoryCode = ((FillingLineBase)this.comboFillingLineID.SelectedItem).FactoryCode;
                         }
                         else
                             GlobalVariables.FillingLineID = GlobalVariables.FillingLine.None;

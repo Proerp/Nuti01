@@ -96,6 +96,7 @@ namespace TotalSmartCoding.Views.Commons.Commodities
 
         Binding bindingPackageSize;
         Binding bindingAPICode;
+        Binding bindingCartonCode;
         Binding bindingFillingLineIDs;
         Binding bindingRemarks;
 
@@ -117,6 +118,7 @@ namespace TotalSmartCoding.Views.Commons.Commodities
 
             this.bindingPackageSize = this.textexPackageSize.DataBindings.Add("Text", this.commodityViewModel, CommonExpressions.PropertyName<CommodityDTO>(p => p.PackageSize), true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingAPICode = this.textexAPICode.DataBindings.Add("Text", this.commodityViewModel, CommonExpressions.PropertyName<CommodityDTO>(p => p.APICode), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingCartonCode = this.textexCartonCode.DataBindings.Add("Text", this.commodityViewModel, CommonExpressions.PropertyName<CommodityDTO>(p => p.CartonCode), true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingFillingLineIDs = this.textexFillingLineIDs.DataBindings.Add("Text", this.commodityViewModel, CommonExpressions.PropertyName<CommodityDTO>(p => p.FillingLineIDs), true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.commodityViewModel, CommonExpressions.PropertyName<CommodityDTO>(p => p.Remarks), true, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -138,6 +140,7 @@ namespace TotalSmartCoding.Views.Commons.Commodities
 
             this.bindingPackageSize.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingAPICode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingCartonCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingFillingLineIDs.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 

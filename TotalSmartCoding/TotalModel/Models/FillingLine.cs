@@ -39,6 +39,7 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public string NickName { get; set; }
         public bool PalletChanged { get; set; }
+        public string FactoryCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pickup> Pickups { get; set; }

@@ -13,6 +13,7 @@ using TotalSmartCoding.Views.Mains;
 using TotalSmartCoding.Views.Productions;
 using TotalSmartCoding.Views.Inventories.Pickups;
 using TotalSmartCoding.Views.Inventories.GoodsIssues;
+using TotalSmartCoding.Views.Commons.Commodities;
 
 
 namespace TotalSmartCoding
@@ -50,6 +51,8 @@ namespace TotalSmartCoding
                         Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.Pickup, new Pickups()));
                     else if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.GoodsIssue)
                         Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.GoodsIssue, new GoodsIssues()));
+                    else if (GlobalVariables.ConfigID == (int)GlobalEnums.NmvnTaskID.Commodity)
+                        Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.Commodity, new Commodities()));
                     else
                         Application.Run(new MasterMDI());
                 }

@@ -156,6 +156,7 @@ namespace TotalBase
         public static FillingLine FillingLineID = FillingLine.Pail;
         public static string FillingLineCode = "P1";
         public static string FillingLineName = FillingLine.Pail.ToString();
+        public static string FillingLineFactoryCode = "A";
 
         public static int noItemPerCartonSetByProductID = 0;
 

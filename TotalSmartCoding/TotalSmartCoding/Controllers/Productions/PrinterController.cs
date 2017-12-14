@@ -157,7 +157,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public string getPreviousNo()
         {
-            return (int.Parse(this.getNextNo()) - 1).ToString("0000000").Substring(1);
+            return (int.Parse(this.getNextNo()) - 1).ToString("000000").Substring(1);
         }
 
         private string getNextNo()
@@ -191,7 +191,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 int serialNumber = 0;
                 if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber))
-                    nextNo = serialNumber.ToString("0000000").Substring(1);//SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??): TEST AT DATMY: FOR AX350: NO NEED, BUCAUSE: AX350 RETURN THE NEXT VALUE. BUT FOR A200+: RETURN THE PRINTED VALUE
+                    nextNo = serialNumber.ToString("000000").Substring(1);//SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??): TEST AT DATMY: FOR AX350: NO NEED, BUCAUSE: AX350 RETURN THE NEXT VALUE. BUT FOR A200+: RETURN THE PRINTED VALUE
             }
 
             if (nextNo != "")
@@ -250,40 +250,48 @@ namespace TotalSmartCoding.Controllers.Productions
         private string dominoSerialNumber(int serialNumberIndentity)
         {
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
-                return GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/000000/00000/N/";
+                return GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/05/00001/99999/00001/Y/N/0/00000/00000/N/";
             else
                 return this.privateFillingData.NextPalletNo; //---Dont use counter (This will be updated MANUALLY for each pallet)
+        }
+
+        private string systemTime()
+        {
+            if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
+                return GlobalVariables.charESC + "n/1/H" + GlobalVariables.charESC + "n/1/M";
+            else
+                return DateTime.Now.ToString("hhmm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
         }
 
 
         private string firstLine(bool isReadableText)
         {
-            return this.firstLineA2(isReadableText);
+            return this.firstLineA1(isReadableText, true) + (isReadableText ? " " : "") + this.firstLineA2(isReadableText);
         }
 
-        private string firstLineA1(bool isReadableText)
+        private string firstLineA1(bool isReadableText, bool withBlank)
         {
-            return this.privateFillingData.FirstLineA1(isReadableText);
+            return (isReadableText ? "HSD" : "") + (withBlank ? " " : "") + this.privateFillingData.FirstLineA1(isReadableText);
         }
 
         private string firstLineA2(bool isReadableText)
         {
-            return this.privateFillingData.FirstLineA2(isReadableText) + (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "B" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : "")));
+            return this.privateFillingData.FirstLineA2(isReadableText) + (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "L" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : "")));
         }
 
         public string secondLine(bool isReadableText)
         {
-            return this.secondLineA1(isReadableText); // + this.secondLineA2(isReadableText)
+            return this.secondLineA1(isReadableText, true) + (isReadableText ? " " : "") + this.secondLineA2(isReadableText);
         }
 
-        public string secondLineA1(bool isReadableText)
+        public string secondLineA1(bool isReadableText, bool withBlank)
         {
-            return this.privateFillingData.SecondLineA1(isReadableText);
+            return (isReadableText ? "NSX" : "") + (withBlank ? " " : "") + this.privateFillingData.SecondLineA1(isReadableText);
         }
 
         public string secondLineA2(bool isReadableText)
         {
-            return this.privateFillingData.SecondLineA2(isReadableText);
+            return this.systemTime() + this.privateFillingData.SecondLineA2(isReadableText);
         }
 
         private string thirdLine(bool isReadableText, int serialIndentity)
@@ -293,12 +301,12 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string thirdLineA1(bool isReadableText)
         {
-            return this.privateFillingData.ThirdLineA1(isReadableText);
+            return (isReadableText ? "LOT " : "") + this.privateFillingData.ThirdLineA1(isReadableText);
         }
 
         private string thirdLineA2(bool isReadableText, int serialIndentity)
         {
-            return this.privateFillingData.FillingLineCode + (serialIndentity == 1 || serialIndentity == 2 ? this.dominoSerialNumber(serialIndentity) : (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? this.getNextNo() : this.getPreviousNo()));
+            return this.privateFillingData.CommodityAPICode + (serialIndentity == 1 || serialIndentity == 2 ? this.dominoSerialNumber(serialIndentity) : (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? this.getNextNo() : this.getPreviousNo()));
         }
 
         private string EANInitialize(string twelveDigitCode)
@@ -381,8 +389,8 @@ namespace TotalSmartCoding.Controllers.Productions
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
                 return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstLine(false) + this.secondLine(false) + this.thirdLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
-                       GlobalVariables.charESC + "u/1/" + " " + this.firstLineA1(true) + this.firstLine(true) + "/" +
-                       GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true) + this.secondLineA2(true) +
+                       GlobalVariables.charESC + "u/1/" + " " + this.firstLine(true) + "/" +
+                       GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true) +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1);
             }
             else //this.printerName == GlobalVariables.PrinterName.PalletLabel
@@ -392,12 +400,12 @@ namespace TotalSmartCoding.Controllers.Productions
                 stringMessageBegin = stringMessageBegin + "^XA"; //[^XA - Indicates start of label format.]
                 stringMessageBegin = stringMessageBegin + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
 
-                stringMessageText = stringMessageText + "^FO785,10 ^AV ^FD" + this.firstLineA1(true) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                stringMessageText = stringMessageText + "^FO785,68 ^AV ^FD" + this.firstLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO785,131 ^AV ^FD" + this.secondLineA1(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO785,194 ^AV ^FD" + this.secondLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO785,257 ^AV ^FD" + this.thirdLineA1(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO785,320 ^AV ^FD" + this.thirdLineA2(true, 0) + "^FS";
+                stringMessageText = stringMessageText + "^FO810,10 ^AV ^FD" + this.firstLineA1(true, false) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                stringMessageText = stringMessageText + "^FO810,68 ^AV ^FD" + this.firstLineA2(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO810,131 ^AV ^FD" + this.secondLineA1(true, false) + "^FS";
+                stringMessageText = stringMessageText + "^FO810,194 ^AV ^FD" + this.secondLineA2(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO810,257 ^AV ^FD" + this.thirdLineA1(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO810,320 ^AV ^FD" + this.thirdLineA2(true, 0) + "^FS";
 
 
                 stringMessageEnd = stringMessageEnd + "^XZ"; //[^XZ - Indicates end of label format.]
@@ -417,7 +425,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     stringMessage = stringMessage + stringMessageText;
                     stringMessage = stringMessage + stringMessageEnd;
                 }
-
+                //this.MainStatus = stringMessage;
                 return stringMessage;
             }
         }
@@ -587,7 +595,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 string stringReadFrom = "";
                 if (true || this.ioserialPort.ReadoutSerial(true, ref stringReadFrom)) //NOW: THE ZEBRA USING IN THIS CHEVRON PROJECT DOES NOT SUPPORT: "Error Detection Protocol" => WE CAN NOT USING TRANSACTION TO GET RESPOND FROM ZEBRA PRINTER
                 {
-                    this.feedbackNextNo(this.FillingData.CartonsetQueueZebraStatus >= GlobalVariables.ZebraStatus.Printing1 ? (int.Parse(this.getNextNo()) + 1).ToString("0000000").Substring(1) : this.getNextNo());
+                    this.feedbackNextNo(this.FillingData.CartonsetQueueZebraStatus >= GlobalVariables.ZebraStatus.Printing1 ? (int.Parse(this.getNextNo()) + 1).ToString("000000").Substring(1) : this.getNextNo());
                     this.FillingData.CartonsetQueueZebraStatus = GlobalVariables.ZebraStatus.Printed;
                 }
                 else
@@ -707,10 +715,10 @@ namespace TotalSmartCoding.Controllers.Productions
             this.LoopRoutine = true; this.StopPrint();
 
 
-            if (GlobalEnums.OnTestPrinter && this.printerName != GlobalVariables.PrinterName.DigitInkjet) this.feedbackNextNo((int.Parse(this.getNextNo()) + 1).ToString("0000000").Substring(1));
+            if (GlobalEnums.OnTestPrinter && this.printerName != GlobalVariables.PrinterName.DigitInkjet) this.feedbackNextNo((int.Parse(this.getNextNo()) + 1).ToString("000000").Substring(1));
 
             //This command line is specific to: PalletLabel ON FillingLine.Drum || CartonInkjet ON FillingLine.Pail (Just here only for this specific)
-            if (GlobalEnums.OnTestPrinter || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum && this.printerName != GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail && this.printerName == GlobalVariables.PrinterName.PackInkjet) || (this.printerName == GlobalVariables.PrinterName.DigitInkjet && GlobalEnums.OnTestDigit)) { this.LedGreenOn = true; return; } //DO NOTHING
+            if (GlobalEnums.OnTestPrinter || (GlobalEnums.OnTestZebra && this.printerName == GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum && this.printerName != GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Pail && this.printerName == GlobalVariables.PrinterName.PackInkjet) || (this.printerName == GlobalVariables.PrinterName.DigitInkjet && GlobalEnums.OnTestDigit)) { this.LedGreenOn = true; return; } //DO NOTHING
 
 
             try
@@ -723,11 +731,11 @@ namespace TotalSmartCoding.Controllers.Productions
                     //this.waitforDomino(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length); => AFTER TRIGGER => RETURN: BARCODE OR NOREAD
 
                     this.ionetSocket.WritetoStream("||>SET DVALID.PROG-TARG 3\r\n"); //3: Linear/ Postal/ Stacked
-                    this.ionetSocket.WritetoStream("||>SET DVALID.MATCH-STRING \"" + this.FillingData.CommodityOfficialCode + "\"\r\n"); 
+                    this.ionetSocket.WritetoStream("||>SET DVALID.MATCH-STRING \"" + this.FillingData.CommodityCartonCode + "\"\r\n");
 
                     this.ionetSocket.WritetoStream("||>GET DVALID.MATCH-STRING\r\n");
                     this.waitforDomino(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length);
-                    if (receivedFeedback == this.FillingData.CommodityOfficialCode)
+                    if (receivedFeedback == this.FillingData.CommodityCartonCode)
                         this.setLED(true, this.LedAmberOn, this.LedRedOn);
                 }
                 else

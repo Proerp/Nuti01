@@ -1121,6 +1121,7 @@
     <None Include="Resources\icons8-esc-30-IOS.png" />
     <None Include="Resources\icons8-esc-32-Ios.png" />
     <None Include="Resources\icons8-esc-32-IOS-R.png" />
+    <None Include="Resources\canned-food.png" />
     <Content Include="SmartCodingSolution.ico" />
     <None Include="Resources\Yellow-cross.ico" />
     <None Include="Resources\White-Pallet.ico" />

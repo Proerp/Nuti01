@@ -95,7 +95,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      FillingLineID, Code, Name, NickName " + "\r\n";
+            queryString = queryString + "       SELECT      FillingLineID, Code, Name, NickName, FactoryCode " + "\r\n";
             queryString = queryString + "       FROM        FillingLines " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
