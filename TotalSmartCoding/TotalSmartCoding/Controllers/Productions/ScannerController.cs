@@ -604,7 +604,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
             foreach (string stringBarcode in arrayBarcode)
             {
-                string receivedBarcode = stringBarcode.Trim();                 
+                string receivedBarcode = stringBarcode.Trim();
                 if (receivedBarcode != "NoRead")
                 {
                     lock (this.packQueue)

@@ -8,6 +8,7 @@ namespace TotalCore.Repositories.Productions
     public interface IBatchRepository : IGenericRepository<Batch>
     {
         void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo);
+        void AddLot(int batchID);
     }
 
     public interface IBatchAPIRepository : IGenericAPIRepository

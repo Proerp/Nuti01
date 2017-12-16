@@ -47,7 +47,6 @@ namespace TotalModel.Models
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
         public virtual DbSet<BinLocation> BinLocations { get; set; }
-        public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ModuleDetail> ModuleDetails { get; set; }
         public virtual DbSet<GoodsIssueType> GoodsIssueTypes { get; set; }
         public virtual DbSet<TransferOrderDetail> TransferOrderDetails { get; set; }
@@ -68,6 +67,7 @@ namespace TotalModel.Models
         public virtual DbSet<WarehouseAdjustment> WarehouseAdjustments { get; set; }
         public virtual DbSet<CommodityCategory> CommodityCategories { get; set; }
         public virtual DbSet<CommodityType> CommodityTypes { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -2116,6 +2116,15 @@ namespace TotalModel.Models
                 new ObjectParameter("ToDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityCategoryIndex>("GetCommodityCategoryIndexes", userIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual int BatchAddLot(Nullable<int> batchID)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchAddLot", batchIDParameter);
         }
     }
 }

@@ -23,11 +23,11 @@ namespace TotalModel.Models
             this.Pallets = new HashSet<Pallet>();
             this.PickupDetails = new HashSet<PickupDetail>();
             this.SalesOrderDetails = new HashSet<SalesOrderDetail>();
-            this.Batches = new HashSet<Batch>();
             this.TransferOrderDetails = new HashSet<TransferOrderDetail>();
             this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
             this.GoodsIssueDetails = new HashSet<GoodsIssueDetail>();
             this.WarehouseAdjustmentDetails = new HashSet<WarehouseAdjustmentDetail>();
+            this.Batches = new HashSet<Batch>();
         }
     
         public int CommodityID { get; set; }
@@ -66,8 +66,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesOrderDetail> SalesOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Batch> Batches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransferOrderDetail> TransferOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
@@ -77,5 +75,7 @@ namespace TotalModel.Models
         public virtual ICollection<WarehouseAdjustmentDetail> WarehouseAdjustmentDetails { get; set; }
         public virtual CommodityCategory CommodityCategory { get; set; }
         public virtual CommodityType CommodityType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Batch> Batches { get; set; }
     }
 }

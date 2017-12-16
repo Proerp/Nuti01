@@ -62,6 +62,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textexRemarks = new CustomControls.TextexBox();
             this.textexFillingLineIDs = new CustomControls.TextexBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textexCartonCode = new CustomControls.TextexBox();
             this.fastCommodityIndex = new BrightIdeasSoftware.FastObjectListView();
             this.olvID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBlank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -76,8 +78,7 @@
             this.olvInActive = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvRemarks = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.textexCartonCode = new CustomControls.TextexBox();
+            this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripChildForm.SuspendLayout();
             this.panelCenter.SuspendLayout();
             this.layoutTop.SuspendLayout();
@@ -547,12 +548,36 @@
             this.textexFillingLineIDs.Size = new System.Drawing.Size(491, 28);
             this.textexFillingLineIDs.TabIndex = 100;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Location = new System.Drawing.Point(30, 79);
+            this.label11.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
+            this.label11.Name = "label11";
+            this.label11.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.label11.Size = new System.Drawing.Size(496, 31);
+            this.label11.TabIndex = 101;
+            this.label11.Text = "Carton Code";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // textexCartonCode
+            // 
+            this.textexCartonCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexCartonCode.Editable = true;
+            this.textexCartonCode.Location = new System.Drawing.Point(35, 112);
+            this.textexCartonCode.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
+            this.textexCartonCode.Name = "textexCartonCode";
+            this.textexCartonCode.Size = new System.Drawing.Size(491, 28);
+            this.textexCartonCode.TabIndex = 102;
+            // 
             // fastCommodityIndex
             // 
             this.fastCommodityIndex.AllColumns.Add(this.olvID);
             this.fastCommodityIndex.AllColumns.Add(this.olvBlank);
             this.fastCommodityIndex.AllColumns.Add(this.olvCommodityCategoryName);
             this.fastCommodityIndex.AllColumns.Add(this.olvCommodityCode);
+            this.fastCommodityIndex.AllColumns.Add(this.olvCommodityAPICode);
             this.fastCommodityIndex.AllColumns.Add(this.olvCommodityName);
             this.fastCommodityIndex.AllColumns.Add(this.olvPackageSize);
             this.fastCommodityIndex.AllColumns.Add(this.olvPackageVolume);
@@ -567,6 +592,7 @@
             this.olvBlank,
             this.olvCommodityCategoryName,
             this.olvCommodityCode,
+            this.olvCommodityAPICode,
             this.olvCommodityName,
             this.olvPackageSize,
             this.olvPackageVolume,
@@ -623,7 +649,7 @@
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityName.Text = "Name";
-            this.olvCommodityName.Width = 368;
+            this.olvCommodityName.Width = 218;
             // 
             // olvPackageSize
             // 
@@ -694,28 +720,13 @@
             this.imageList32.Images.SetKeyName(7, "Sign_Order_32");
             this.imageList32.Images.SetKeyName(8, "CustomerRed");
             // 
-            // label11
+            // olvCommodityAPICode
             // 
-            this.label11.AutoSize = true;
-            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(30, 79);
-            this.label11.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
-            this.label11.Name = "label11";
-            this.label11.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label11.Size = new System.Drawing.Size(496, 31);
-            this.label11.TabIndex = 101;
-            this.label11.Text = "Carton Code";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // textexCartonCode
-            // 
-            this.textexCartonCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexCartonCode.Editable = true;
-            this.textexCartonCode.Location = new System.Drawing.Point(35, 112);
-            this.textexCartonCode.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
-            this.textexCartonCode.Name = "textexCartonCode";
-            this.textexCartonCode.Size = new System.Drawing.Size(491, 28);
-            this.textexCartonCode.TabIndex = 102;
+            this.olvCommodityAPICode.AspectName = "CommodityAPICode";
+            this.olvCommodityAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityAPICode.Text = "API";
+            this.olvCommodityAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityAPICode.Width = 45;
             // 
             // Commodities
             // 
@@ -799,6 +810,7 @@
         private CustomControls.TextexBox textexFillingLineIDs;
         private System.Windows.Forms.Label label11;
         private CustomControls.TextexBox textexCartonCode;
+        private BrightIdeasSoftware.OLVColumn olvCommodityAPICode;
 
     }
 }

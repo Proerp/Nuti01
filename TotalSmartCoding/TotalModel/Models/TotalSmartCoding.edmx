@@ -11,8 +11,9 @@
           </Key>
           <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="date" Nullable="false" />
-          <Property Name="Reference" Type="nvarchar" MaxLength="10" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LotNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
@@ -2037,6 +2038,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BatchAddLot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchCommonUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
           <Parameter Name="NextPackNo" Type="nvarchar" Mode="In" />
@@ -3587,23 +3591,10 @@
             <End Role="BinLocation" EntitySet="BinLocations" />
             <End Role="PickupDetail" EntitySet="PickupDetails" />
           </AssociationSet>
-          <EntitySet Name="Batches" EntityType="TotalSmartCodingModel.Batch" />
-          <AssociationSet Name="FK_Batches_Commodities" Association="TotalSmartCodingModel.FK_Batches_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="Batch" EntitySet="Batches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Batches_FillingLines" Association="TotalSmartCodingModel.FK_Batches_FillingLines">
-            <End Role="FillingLine" EntitySet="FillingLines" />
-            <End Role="Batch" EntitySet="Batches" />
-          </AssociationSet>
           <FunctionImport Name="GetVersionID" ReturnType="Collection(Int32)">
           <Parameter Name="ConfigID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="ModuleDetails" EntityType="TotalSmartCodingModel.ModuleDetail" />
-          <AssociationSet Name="FK_DeliveryAdviceDetails_Batches" Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches">
-            <End Role="Batch" EntitySet="Batches" />
-            <End Role="DeliveryAdviceDetail" EntitySet="DeliveryAdviceDetails" />
-          </AssociationSet>
           <FunctionImport Name="GetBatchAvailables" ReturnType="Collection(TotalSmartCodingModel.BatchAvailable)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="DeliveryAdviceID" Mode="In" Type="Int32" />
@@ -4122,6 +4113,22 @@
             <End Role="CommodityType" EntitySet="CommodityTypes" />
             <End Role="CommodityType1" EntitySet="CommodityTypes" />
           </AssociationSet>
+          <EntitySet Name="Batches" EntityType="TotalSmartCodingModel.Batch" />
+          <AssociationSet Name="FK_Batches_Commodities" Association="TotalSmartCodingModel.FK_Batches_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batches_FillingLines" Association="TotalSmartCodingModel.FK_Batches_FillingLines">
+            <End Role="FillingLine" EntitySet="FillingLines" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeliveryAdviceDetails_Batches" Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="DeliveryAdviceDetail" EntitySet="DeliveryAdviceDetails" />
+          </AssociationSet>
+          <FunctionImport Name="BatchAddLot">
+          <Parameter Name="BatchID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -4221,7 +4228,7 @@
         <ComplexType Name="BatchIndex">
           <Property Type="Int32" Name="BatchID" Nullable="false" />
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
-          <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Reference" Nullable="false" MaxLength="30" />
           <Property Type="Int32" Name="FillingLineID" Nullable="false" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
           <Property Type="Int32" Name="CartonPerPallet" Nullable="false" />
@@ -4243,6 +4250,11 @@
           <Property Type="String" Name="CommodityAPICode" Nullable="false" MaxLength="60" />
           <Property Type="Int32" Name="Shelflife" Nullable="false" />
           <Property Type="String" Name="CommodityCartonCode" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="LotNumber" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="PackQuantity" Nullable="true" />
+          <Property Type="Decimal" Name="PackLineVolume" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="Int32" Name="CartonQuantity" Nullable="true" />
+          <Property Type="Decimal" Name="CartonLineVolume" Nullable="true" Precision="38" Scale="3" />
         </ComplexType>
         <ComplexType Name="CommodityIndex">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -4257,6 +4269,7 @@
           <Property Type="Int32" Name="Shelflife" Nullable="false" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="200" />
           <Property Type="Boolean" Name="InActive" Nullable="true" />
+          <Property Type="String" Name="CommodityAPICode" Nullable="false" MaxLength="60" />
           </ComplexType>
         <ComplexType Name="CommodityBase">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -4409,8 +4422,8 @@
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="FillingLine" ToRole="Pack" />
           <Property Name="NickName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="PalletChanged" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="FillingLine" ToRole="Batch" />
           <Property Name="FactoryCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="FillingLine" ToRole="Batch" />
         </EntityType>
         <EntityType Name="GoodsReceiptType">
           <Key>
@@ -4558,11 +4571,11 @@
           <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities" FromRole="DeliveryAdviceDetail" ToRole="Commodity" />
           <Property Name="BatchID" Type="Int32" />
-          <NavigationProperty Name="Batch" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="DeliveryAdviceDetail" ToRole="Batch" />
           <NavigationProperty Name="Customer" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Customers" FromRole="DeliveryAdviceDetail" ToRole="Customer" />
           <Property Name="ReceiverID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer1" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Receivers" FromRole="DeliveryAdviceDetail" ToRole="Customer" />
           <NavigationProperty Name="GoodsIssueDetails" Relationship="TotalSmartCodingModel.FK_GoodsIssueDetails_DeliveryAdviceDetails" FromRole="DeliveryAdviceDetail" ToRole="GoodsIssueDetail" />
+          <NavigationProperty Name="Batch" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="DeliveryAdviceDetail" ToRole="Batch" />
         </EntityType>
         <ComplexType Name="DeliveryAdviceIndex">
           <Property Type="Int32" Name="DeliveryAdviceID" Nullable="false" />
@@ -5356,7 +5369,6 @@
           <NavigationProperty Name="Pallets" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Commodity" ToRole="Pallet" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="Commodity" ToRole="PickupDetail" />
           <NavigationProperty Name="SalesOrderDetails" Relationship="TotalSmartCodingModel.FK_SalesOrderDetails_Commodities" FromRole="Commodity" ToRole="SalesOrderDetail" />
-          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
           <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartCodingModel.FK_TransferOrderDetails_Commodities" FromRole="Commodity" ToRole="TransferOrderDetail" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="Commodity" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="GoodsIssueDetails" Relationship="TotalSmartCodingModel.FK_GoodsIssueDetails_Commodities" FromRole="Commodity" ToRole="GoodsIssueDetail" />
@@ -5364,6 +5376,7 @@
           <NavigationProperty Name="CommodityCategory" Relationship="TotalSmartCodingModel.FK_Commodities_CommodityCategories" FromRole="Commodity" ToRole="CommodityCategory" />
           <NavigationProperty Name="CommodityType" Relationship="TotalSmartCodingModel.FK_Commodities_CommodityTypes" FromRole="Commodity" ToRole="CommodityType" />
           <Property Name="CartonCode" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
         </EntityType>
         <Association Name="FK_Cartons_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -5483,55 +5496,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Batch">
-          <Key>
-            <PropertyRef Name="BatchID" />
-          </Key>
-          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
-          <Property Name="CommodityID" Type="Int32" Nullable="false" />
-          <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="NextPackNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="NextCartonNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="NextPalletNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
-          <Property Name="InActive" Type="Boolean" Nullable="false" />
-          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
-          <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
-          <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="Batch" ToRole="DeliveryAdviceDetail" />
-        </EntityType>
-        <Association Name="FK_Batches_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="Batch">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Batches_FillingLines">
-          <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FillingLine">
-              <PropertyRef Name="FillingLineID" />
-            </Principal>
-            <Dependent Role="Batch">
-              <PropertyRef Name="FillingLineID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="ModuleDetail">
           <Key>
             <PropertyRef Name="ModuleDetailID" />
@@ -5548,18 +5512,6 @@
           <Property Name="ImageIndex" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="InActive" Type="Double" Nullable="false" />
         </EntityType>
-        <Association Name="FK_DeliveryAdviceDetails_Batches">
-          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="0..1" />
-          <End Type="TotalSmartCodingModel.DeliveryAdviceDetail" Role="DeliveryAdviceDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Batch">
-              <PropertyRef Name="BatchID" />
-            </Principal>
-            <Dependent Role="DeliveryAdviceDetail">
-              <PropertyRef Name="BatchID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="BatchAvailable">
           <Property Type="Int32" Name="BatchID" Nullable="true" />
           <Property Type="DateTime" Name="EntryDate" Nullable="false" />
@@ -7243,6 +7195,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="BatchID" />
+          </Key>
+          <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LotNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="NextPackNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NextCartonNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NextPalletNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
+          <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
+          <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="Batch" ToRole="DeliveryAdviceDetail" />
+        </EntityType>
+        <Association Name="FK_Batches_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_FillingLines">
+          <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FillingLine">
+              <PropertyRef Name="FillingLineID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeliveryAdviceDetails_Batches">
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="0..1" />
+          <End Type="TotalSmartCodingModel.DeliveryAdviceDetail" Role="DeliveryAdviceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="DeliveryAdviceDetail">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7403,6 +7417,11 @@
                 <ScalarProperty Name="CommodityAPICode" ColumnName="CommodityAPICode" />
                 <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
                 <ScalarProperty Name="CommodityCartonCode" ColumnName="CommodityCartonCode" />
+                <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+                <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+                <ScalarProperty Name="PackLineVolume" ColumnName="PackLineVolume" />
+                <ScalarProperty Name="CartonQuantity" ColumnName="CartonQuantity" />
+                <ScalarProperty Name="CartonLineVolume" ColumnName="CartonLineVolume" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7423,6 +7442,7 @@
                 <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="CommodityAPICode" ColumnName="CommodityAPICode" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -8469,29 +8489,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Batches">
-            <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
-              <MappingFragment StoreEntitySet="Batches">
-                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
-                <ScalarProperty Name="InActive" ColumnName="InActive" />
-                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="NextPalletNo" ColumnName="NextPalletNo" />
-                <ScalarProperty Name="NextCartonNo" ColumnName="NextCartonNo" />
-                <ScalarProperty Name="NextPackNo" ColumnName="NextPackNo" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetVersionID" FunctionName="TotalSmartCodingModel.Store.GetVersionID" />
           <EntitySetMapping Name="ModuleDetails">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.ModuleDetail">
@@ -9360,6 +9357,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NextPalletNo" ColumnName="NextPalletNo" />
+                <ScalarProperty Name="NextCartonNo" ColumnName="NextCartonNo" />
+                <ScalarProperty Name="NextPackNo" ColumnName="NextPackNo" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="LotNumber" ColumnName="LotNumber" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BatchAddLot" FunctionName="TotalSmartCodingModel.Store.BatchAddLot" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

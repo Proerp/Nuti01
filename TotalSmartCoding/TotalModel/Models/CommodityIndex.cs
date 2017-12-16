@@ -25,5 +25,6 @@ namespace TotalModel.Models
         public int Shelflife { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> InActive { get; set; }
+        public string CommodityAPICode { get; set; }
     }
 }

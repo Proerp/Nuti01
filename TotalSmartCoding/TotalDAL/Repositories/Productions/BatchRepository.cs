@@ -22,6 +22,11 @@ namespace TotalDAL.Repositories.Productions
         {
             this.TotalSmartCodingEntities.BatchCommonUpdate(batchID, nextPackNo, nextCartonNo, nextPalletNo);
         }
+
+        public void AddLot(int batchID)
+        {
+            this.TotalSmartCodingEntities.BatchAddLot(batchID);
+        }        
     }
 
 

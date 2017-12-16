@@ -34,6 +34,7 @@ using TotalCore.Repositories.Commons;
 using TotalModel.Interfaces;
 using BrightIdeasSoftware;
 using TotalSmartCoding.Properties;
+using TotalSmartCoding.Views.Commons.Commodities;
 
 
 
@@ -82,6 +83,7 @@ namespace TotalSmartCoding.Views.Productions
 
             if (propertyName == "ReadonlyMode")
             {
+                this.buttonNewLOT.Enabled = this.Newable && this.ReadonlyMode && !this.batchViewModel.InActive;
                 this.buttonApply.Enabled = this.allQueueEmpty && this.ReadonlyMode;
                 this.buttonDiscontinued.Enabled = this.Newable && this.ReadonlyMode;
             }
@@ -119,6 +121,7 @@ namespace TotalSmartCoding.Views.Productions
 
         Binding bindingEntryDate;
         Binding bindingCode;
+        Binding bindingLotNumber;
 
         Binding bindingNextPackNo;
         Binding bindingNextCartonNo;
@@ -134,6 +137,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.batchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingCode = this.textexCode.DataBindings.Add("Text", this.batchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingLotNumber = this.textexLotNumber.DataBindings.Add("Text", this.batchViewModel, "LotNumber", true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingNextPackNo = this.textexNextPackNo.DataBindings.Add("Text", this.batchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingNextCartonNo = this.textexNextCartonNo.DataBindings.Add("Text", this.batchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -153,6 +157,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingLotNumber.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingNextPackNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingNextCartonNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -161,6 +166,22 @@ namespace TotalSmartCoding.Views.Productions
             this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingCommodityID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+
+            this.fastBatchIndex.AboutToCreateGroups += fastBatchIndex_AboutToCreateGroups;
+
+            this.fastBatchIndex.ShowGroups = true;
+        }
+
+        private void fastBatchIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
+        {
+            if (e.Groups != null && e.Groups.Count > 0)
+            {
+                foreach (OLVGroup olvGroup in e.Groups)
+                {
+                    olvGroup.TitleImage = "Storage32";
+                    olvGroup.Subtitle = olvGroup.Contents.Count.ToString() + " Lot(s)";
+                }
+            }
         }
 
         protected override void CommonControl_BindingComplete(object sender, BindingCompleteEventArgs e)
@@ -177,10 +198,14 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        private BatchController batchController
+        {
+            get { return new BatchController(CommonNinject.Kernel.Get<IBatchService>(), this.batchViewModel); }
+        }
 
         protected override Controllers.BaseController myController
         {
-            get { return new BatchController(CommonNinject.Kernel.Get<IBatchService>(), this.batchViewModel); }
+            get { return this.batchController; }
         }
 
         public override void Loading()
@@ -189,6 +214,12 @@ namespace TotalSmartCoding.Views.Productions
             base.Loading();
 
             this.smartCoding.Initialize();
+        }
+
+        protected override void DoAfterLoad()
+        {
+            base.DoAfterLoad();
+            this.fastBatchIndex.Sort(this.olvBatchCode, SortOrder.Descending);
         }
 
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
@@ -207,6 +238,12 @@ namespace TotalSmartCoding.Views.Productions
             if (this.allQueueEmpty) this.Approve();
         }
 
+
+        private void buttonNewLOT_Click(object sender, EventArgs e)
+        {
+            if (this.batchController.AddLot(this.batchViewModel.BatchID)) this.Loading();
+        }
+
         protected override bool ApproveCheck(int id)
         {
             return !this.batchViewModel.IsDefault && !this.batchViewModel.InActive;
@@ -222,6 +259,27 @@ namespace TotalSmartCoding.Views.Productions
             this.batchViewModel.VoidTypeID = 1;
             return !this.batchViewModel.IsDefault;
         }
+
+        private void buttonItems_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Debug.Print(this.splitContainerPack.SplitterDistance.ToString());
+                //Debug.Print(this.splitContainerCarton.SplitterDistance.ToString());
+                //Debug.Print(this.splitContainerPallet.SplitterDistance.ToString());
+
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Commodity, new Commodities());
+
+                masterMDI.ShowDialog();
+
+                masterMDI.Dispose();
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
 
 
     }

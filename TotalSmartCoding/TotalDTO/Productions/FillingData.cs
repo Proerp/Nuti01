@@ -34,6 +34,7 @@ namespace TotalDTO.Productions
         private bool isPailLabel;
 
         private string batchCode;
+        private string lotNumber;
         private DateTime entryDate;
         private DateTime settingDate;
 
@@ -109,7 +110,7 @@ namespace TotalDTO.Productions
         {
             get { return this.commodityCartonCode; }
             set { ApplyPropertyChange<FillingData, string>(ref this.commodityCartonCode, o => o.CommodityCartonCode, value); }
-        }        
+        }
 
         public decimal Volume
         {
@@ -146,6 +147,11 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<FillingData, string>(ref this.batchCode, o => o.BatchCode, value); }
         }
 
+        public string LotNumber   //ResetSerialNumber
+        {
+            get { return this.lotNumber; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.lotNumber, o => o.LotNumber, value); }
+        }
 
         public DateTime EntryDate
         {
@@ -320,7 +326,7 @@ namespace TotalDTO.Productions
 
         public bool DataValidated()
         {
-            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" & this.NextPackNo != "" & this.NextCartonNo != "" & this.NextPalletNo != "";
+            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" && this.LotNumber != "" && this.NextPackNo != "" && this.NextCartonNo != "" && this.NextPalletNo != "";
         }
 
 
@@ -374,7 +380,7 @@ namespace TotalDTO.Productions
 
         public string FirstLineA2(bool isReadableText)
         {
-            return this.FillingLineFactoryCode + this.FillingLineCode + (this.SettingDate.Subtract(this.EntryDate).Days.ToString("N0").Substring(0, 1));
+            return this.FillingLineFactoryCode + this.FillingLineCode + ((this.SettingDate.Subtract(this.EntryDate).Days + 1).ToString("N0").Substring(0, 1));
         }
 
 
@@ -390,7 +396,7 @@ namespace TotalDTO.Productions
 
         public string ThirdLineA1(bool isReadableText)
         {
-            return this.BatchCode.Substring(this.BatchCode.Length - 4, 4) + "L"; //L: LOT NUMBER
+            return this.BatchCode.Substring(this.BatchCode.Length - 4, 4) + this.LotNumber;
         }
 
     }

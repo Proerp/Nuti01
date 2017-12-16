@@ -187,10 +187,10 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private void feedbackNextNo(string nextNo, string receivedFeedback)
         {
-            if (nextNo == "" && receivedFeedback.Length > 12)
+            if (nextNo == "" && receivedFeedback.Length > 11)
             {
                 int serialNumber = 0;
-                if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber))
+                if (int.TryParse(receivedFeedback.Substring(6, 5), out serialNumber))
                     nextNo = serialNumber.ToString("000000").Substring(1);//SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??): TEST AT DATMY: FOR AX350: NO NEED, BUCAUSE: AX350 RETURN THE NEXT VALUE. BUT FOR A200+: RETURN THE PRINTED VALUE
             }
 
@@ -264,9 +264,9 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        private string firstLine(bool isReadableText)
+        private string firstLine(bool isReadableText, bool withBlank)
         {
-            return this.firstLineA1(isReadableText, true) + (isReadableText ? " " : "") + this.firstLineA2(isReadableText);
+            return this.firstLineA1(isReadableText, withBlank) + (isReadableText ? " " : "") + this.firstLineA2(isReadableText);
         }
 
         private string firstLineA1(bool isReadableText, bool withBlank)
@@ -279,9 +279,9 @@ namespace TotalSmartCoding.Controllers.Productions
             return this.privateFillingData.FirstLineA2(isReadableText) + (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "L" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : "")));
         }
 
-        public string secondLine(bool isReadableText)
+        public string secondLine(bool isReadableText, bool withBlank)
         {
-            return this.secondLineA1(isReadableText, true) + (isReadableText ? " " : "") + this.secondLineA2(isReadableText);
+            return this.secondLineA1(isReadableText, withBlank) + (isReadableText ? " " : "") + this.secondLineA2(isReadableText);
         }
 
         public string secondLineA1(bool isReadableText, bool withBlank)
@@ -388,9 +388,9 @@ namespace TotalSmartCoding.Controllers.Productions
                 return ".              . " + this.firstLineA2(true) + " " + this.thirdLine(true, 1) + " .              ."; //GlobalVariables.charESC + "u/1/" + 
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
-                return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstLine(false) + this.secondLine(false) + this.thirdLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
-                       GlobalVariables.charESC + "u/1/" + " " + this.firstLine(true) + "/" +
-                       GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true) +
+                return GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
+                       GlobalVariables.charESC + "u/1/" + " " + this.firstLine(true, true) + "/" +
+                       GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true, true) +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1);
             }
             else //this.printerName == GlobalVariables.PrinterName.PalletLabel
@@ -400,12 +400,12 @@ namespace TotalSmartCoding.Controllers.Productions
                 stringMessageBegin = stringMessageBegin + "^XA"; //[^XA - Indicates start of label format.]
                 stringMessageBegin = stringMessageBegin + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
 
-                stringMessageText = stringMessageText + "^FO810,10 ^AV ^FD" + this.firstLineA1(true, false) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                stringMessageText = stringMessageText + "^FO810,68 ^AV ^FD" + this.firstLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO810,131 ^AV ^FD" + this.secondLineA1(true, false) + "^FS";
-                stringMessageText = stringMessageText + "^FO810,194 ^AV ^FD" + this.secondLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO810,257 ^AV ^FD" + this.thirdLineA1(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO810,320 ^AV ^FD" + this.thirdLineA2(true, 0) + "^FS";
+                stringMessageText = stringMessageText + "^FO860,10 ^AU ^FD" + this.firstLineA1(true, false) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                stringMessageText = stringMessageText + "^FO860,68 ^AU ^FD" + this.firstLineA2(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO860,131 ^AU ^FD" + this.secondLineA1(true, false) + "^FS";
+                stringMessageText = stringMessageText + "^FO860,194 ^AU ^FD" + this.secondLineA2(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO860,257 ^AU ^FD" + this.thirdLineA1(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO860,320 ^AU ^FD" + this.thirdLineA2(true, 0) + "^FS";
 
 
                 stringMessageEnd = stringMessageEnd + "^XZ"; //[^XZ - Indicates end of label format.]
@@ -413,7 +413,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 if (this.OnPrinting)
                 {
                     stringMessage = stringMessage + stringMessageBegin;
-                    stringMessage = stringMessage + "^FO0,20  ^BC,360,N  ^FD" + this.firstLine(false) + this.secondLine(false) + this.thirdLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
+                    stringMessage = stringMessage + "^FO0,20  ^BC,360,N  ^FD" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
                     stringMessage = stringMessage + stringMessageText;
                     stringMessage = stringMessage + stringMessageEnd;
                 }
@@ -958,7 +958,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             if (this.printerName == GlobalVariables.PrinterName.DigitInkjet || this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
                             {
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/?/" + GlobalVariables.charEOT);//    U: Read Counter 1 (ONLY COUNTER 1---COUNTER 2: THE SAME COUNTER 1: Principlely)
-                                if (this.waitforDomino(ref receivedFeedback, false, "U", 13))
+                                if (this.waitforDomino(ref receivedFeedback, false, "U", 12))
                                     this.feedbackNextNo("", receivedFeedback);
                             }
                             #endregion Read counter

@@ -29,5 +29,19 @@ namespace TotalService.Productions
                 return false;
             }
         }
+
+        public bool AddLot(int batchID)
+        {
+            try
+            {
+                this.batchRepository.AddLot(batchID);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                this.ServiceTag = ex.Message;
+                return false;
+            }
+        }
     }
 }

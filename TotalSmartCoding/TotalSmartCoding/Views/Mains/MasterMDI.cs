@@ -108,7 +108,15 @@ namespace TotalSmartCoding.Views.Mains
                         this.toolStripTopHead.Visible = false;
                         break;
                     case GlobalEnums.NmvnTaskID.Batch:
-                        this.Size = new Size(1120, 680);
+                        this.Size = new Size(1388, 740);
+                        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+                        this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal;
+
+                        this.panelTopRight.Visible = false;
+                        this.panelTopLeft.Dock = DockStyle.Fill;
+                        break;
+                    case GlobalEnums.NmvnTaskID.Commodity:
+                        this.Size = new Size(1388, 740);
                         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
                         this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal;
 

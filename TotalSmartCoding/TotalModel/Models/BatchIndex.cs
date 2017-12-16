@@ -37,5 +37,10 @@ namespace TotalModel.Models
         public string CommodityAPICode { get; set; }
         public int Shelflife { get; set; }
         public string CommodityCartonCode { get; set; }
+        public string LotNumber { get; set; }
+        public Nullable<int> PackQuantity { get; set; }
+        public Nullable<decimal> PackLineVolume { get; set; }
+        public Nullable<int> CartonQuantity { get; set; }
+        public Nullable<decimal> CartonLineVolume { get; set; }
     }
 }
