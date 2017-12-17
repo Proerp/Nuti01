@@ -30,6 +30,7 @@ namespace TotalModel.Models
             this.WarehouseAdjustmentDetails1 = new HashSet<WarehouseAdjustmentDetail>();
             this.WarehouseAdjustments = new HashSet<WarehouseAdjustment>();
             this.WarehouseAdjustments1 = new HashSet<WarehouseAdjustment>();
+            this.Batches = new HashSet<Batch>();
         }
     
         public int WarehouseID { get; set; }
@@ -41,6 +42,7 @@ namespace TotalModel.Models
         public bool Issuable { get; set; }
         public bool IsDefault { get; set; }
         public string Remarks { get; set; }
+        public string APICode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pickup> Pickups { get; set; }
@@ -69,5 +71,7 @@ namespace TotalModel.Models
         public virtual ICollection<WarehouseAdjustment> WarehouseAdjustments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseAdjustment> WarehouseAdjustments1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Batch> Batches { get; set; }
     }
 }

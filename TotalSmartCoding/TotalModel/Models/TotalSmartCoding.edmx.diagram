@@ -147,6 +147,7 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Warehouses" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

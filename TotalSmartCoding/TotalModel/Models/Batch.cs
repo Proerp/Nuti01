@@ -38,10 +38,12 @@ namespace TotalModel.Models
         public bool IsDefault { get; set; }
         public bool InActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
+        public int WarehouseID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FillingLine FillingLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
     }
 }

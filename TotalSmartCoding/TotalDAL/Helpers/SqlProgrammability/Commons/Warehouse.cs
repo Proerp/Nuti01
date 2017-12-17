@@ -96,7 +96,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      WarehouseID, Code, Name " + "\r\n";
+            queryString = queryString + "       SELECT      WarehouseID, Code, Name, APICode " + "\r\n";
             queryString = queryString + "       FROM        Warehouses " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";

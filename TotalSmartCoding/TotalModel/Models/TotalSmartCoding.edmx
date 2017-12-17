@@ -16,6 +16,7 @@
           <Property Name="LotNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="NextPackNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NextCartonNo" Type="nvarchar" MaxLength="10" Nullable="false" />
@@ -819,6 +820,7 @@
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="APICode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="WarehouseCategoryID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="Bookable" Type="bit" Nullable="false" />
@@ -847,6 +849,18 @@
             </Principal>
             <Dependent Role="Batches">
               <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2684,6 +2698,10 @@
             <End Role="FillingLines" EntitySet="FillingLines" />
             <End Role="Batches" EntitySet="Batches" />
           </AssociationSet>
+          <AssociationSet Name="FK_Batches_Warehouses" Association="Self.FK_Batches_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
           <AssociationSet Name="FK_BinLocations_Warehouses" Association="Self.FK_BinLocations_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="BinLocations" EntitySet="BinLocations" />
@@ -4129,6 +4147,10 @@
           <FunctionImport Name="BatchAddLot">
           <Parameter Name="BatchID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_Batches_Warehouses" Association="TotalSmartCodingModel.FK_Batches_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -4255,6 +4277,8 @@
           <Property Type="Decimal" Name="PackLineVolume" Nullable="true" Precision="38" Scale="3" />
           <Property Type="Int32" Name="CartonQuantity" Nullable="true" />
           <Property Type="Decimal" Name="CartonLineVolume" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="String" Name="WarehouseCode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="WarehouseAPICode" Nullable="false" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="CommodityIndex">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -4345,6 +4369,7 @@
           <Property Type="Int32" Name="WarehouseID" Nullable="false" />
           <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="APICode" Nullable="false" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="EmployeeIndex">
           <Property Type="Int32" Name="EmployeeID" Nullable="false" />
@@ -4799,6 +4824,8 @@
           <NavigationProperty Name="WarehouseAdjustmentDetails1" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Warehouses1" FromRole="Warehouse" ToRole="WarehouseAdjustmentDetail" />
           <NavigationProperty Name="WarehouseAdjustments" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustments_Warehouses" FromRole="Warehouse" ToRole="WarehouseAdjustment" />
           <NavigationProperty Name="WarehouseAdjustments1" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustments_Warehouses1" FromRole="Warehouse" ToRole="WarehouseAdjustment" />
+          <Property Name="APICode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Warehouses" FromRole="Warehouse" ToRole="Batch" />
           </EntityType>
         <EntityType Name="Pickup">
           <Key>
@@ -7220,6 +7247,8 @@
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="Batch" ToRole="DeliveryAdviceDetail" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_Batches_Warehouses" FromRole="Batch" ToRole="Warehouse" />
         </EntityType>
         <Association Name="FK_Batches_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -7254,6 +7283,18 @@
             </Principal>
             <Dependent Role="DeliveryAdviceDetail">
               <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batches_Warehouses">
+          <End Type="TotalSmartCodingModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="WarehouseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7422,6 +7463,8 @@
                 <ScalarProperty Name="PackLineVolume" ColumnName="PackLineVolume" />
                 <ScalarProperty Name="CartonQuantity" ColumnName="CartonQuantity" />
                 <ScalarProperty Name="CartonLineVolume" ColumnName="CartonLineVolume" />
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
+                <ScalarProperty Name="WarehouseAPICode" ColumnName="WarehouseAPICode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -7549,6 +7592,7 @@
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -8074,6 +8118,7 @@
           <EntitySetMapping Name="Warehouses">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Warehouse">
               <MappingFragment StoreEntitySet="Warehouses">
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="Issuable" ColumnName="Issuable" />
@@ -9360,6 +9405,7 @@
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />

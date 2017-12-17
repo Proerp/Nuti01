@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Batches));
             this.layoutMaster = new System.Windows.Forms.TableLayoutPanel();
+            this.combexWarehouseID = new CustomControls.CombexBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.textexNextPalletNo = new CustomControls.TextexBox();
             this.textexRemarks = new CustomControls.TextexBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textexCommodityAPICode = new CustomControls.TextexBox();
             this.textexLotNumber = new CustomControls.TextexBox();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
@@ -59,6 +59,7 @@
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
+            this.buttonItems = new System.Windows.Forms.ToolStripButton();
             this.naviBarMaster = new Guifreaks.Navisuite.NaviBar(this.components);
             this.naviBand1 = new Guifreaks.Navisuite.NaviBand(this.components);
             this.fastBatchIndex = new BrightIdeasSoftware.FastObjectListView();
@@ -69,6 +70,7 @@
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvWarehouseAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCartonQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -78,7 +80,6 @@
             this.olvNextPalletNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsDefault = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
-            this.buttonItems = new System.Windows.Forms.ToolStripButton();
             this.layoutMaster.SuspendLayout();
             this.toolStripChildForm.SuspendLayout();
             this.naviBarMaster.SuspendLayout();
@@ -95,6 +96,7 @@
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.layoutMaster.Controls.Add(this.combexWarehouseID, 1, 12);
             this.layoutMaster.Controls.Add(this.label1, 1, 19);
             this.layoutMaster.Controls.Add(this.label6, 1, 1);
             this.layoutMaster.Controls.Add(this.label2, 1, 3);
@@ -106,13 +108,12 @@
             this.layoutMaster.Controls.Add(this.dateTimexEntryDate, 1, 2);
             this.layoutMaster.Controls.Add(this.textexCode, 1, 4);
             this.layoutMaster.Controls.Add(this.combexCommodityID, 1, 8);
-            this.layoutMaster.Controls.Add(this.textexCommodityName, 1, 12);
+            this.layoutMaster.Controls.Add(this.textexCommodityName, 1, 10);
             this.layoutMaster.Controls.Add(this.textexNextPackNo, 1, 14);
             this.layoutMaster.Controls.Add(this.textexNextCartonNo, 1, 16);
             this.layoutMaster.Controls.Add(this.textexNextPalletNo, 1, 18);
             this.layoutMaster.Controls.Add(this.textexRemarks, 1, 20);
             this.layoutMaster.Controls.Add(this.label3, 1, 9);
-            this.layoutMaster.Controls.Add(this.textexCommodityAPICode, 1, 10);
             this.layoutMaster.Controls.Add(this.textexLotNumber, 1, 6);
             this.layoutMaster.Controls.Add(this.label5, 1, 5);
             this.layoutMaster.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -143,15 +144,29 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(378, 582);
+            this.layoutMaster.Size = new System.Drawing.Size(378, 637);
             this.layoutMaster.TabIndex = 62;
+            // 
+            // combexWarehouseID
+            // 
+            this.combexWarehouseID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexWarehouseID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexWarehouseID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.combexWarehouseID.Editable = true;
+            this.combexWarehouseID.FormattingEnabled = true;
+            this.combexWarehouseID.Location = new System.Drawing.Point(33, 350);
+            this.combexWarehouseID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexWarehouseID.Name = "combexWarehouseID";
+            this.combexWarehouseID.ReadOnly = false;
+            this.combexWarehouseID.Size = new System.Drawing.Size(319, 28);
+            this.combexWarehouseID.TabIndex = 74;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 568);
+            this.label1.Location = new System.Drawing.Point(30, 569);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(322, 20);
@@ -203,7 +218,7 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 508);
+            this.label4.Location = new System.Drawing.Point(30, 509);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(322, 20);
@@ -216,7 +231,7 @@
             this.labelNextCartonNo.AutoSize = true;
             this.labelNextCartonNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelNextCartonNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNextCartonNo.Location = new System.Drawing.Point(30, 448);
+            this.labelNextCartonNo.Location = new System.Drawing.Point(30, 449);
             this.labelNextCartonNo.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.labelNextCartonNo.Name = "labelNextCartonNo";
             this.labelNextCartonNo.Size = new System.Drawing.Size(322, 20);
@@ -229,7 +244,7 @@
             this.labelNextPackNo.AutoSize = true;
             this.labelNextPackNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelNextPackNo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNextPackNo.Location = new System.Drawing.Point(30, 388);
+            this.labelNextPackNo.Location = new System.Drawing.Point(30, 389);
             this.labelNextPackNo.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.labelNextPackNo.Name = "labelNextPackNo";
             this.labelNextPackNo.Size = new System.Drawing.Size(322, 20);
@@ -252,7 +267,7 @@
             // 
             // dateTimexEntryDate
             // 
-            this.dateTimexEntryDate.CustomFormat = "dd/MMM/yyyy HH:mm:ss";
+            this.dateTimexEntryDate.CustomFormat = "dd/MMM/yyyy";
             this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimexEntryDate.Editable = true;
             this.dateTimexEntryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -291,17 +306,17 @@
             // 
             this.textexCommodityName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityName.Editable = false;
-            this.textexCommodityName.Location = new System.Drawing.Point(33, 350);
+            this.textexCommodityName.Location = new System.Drawing.Point(33, 290);
             this.textexCommodityName.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexCommodityName.Name = "textexCommodityName";
             this.textexCommodityName.Size = new System.Drawing.Size(319, 27);
-            this.textexCommodityName.TabIndex = 74;
+            this.textexCommodityName.TabIndex = 73;
             // 
             // textexNextPackNo
             // 
             this.textexNextPackNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexNextPackNo.Editable = true;
-            this.textexNextPackNo.Location = new System.Drawing.Point(33, 410);
+            this.textexNextPackNo.Location = new System.Drawing.Point(33, 411);
             this.textexNextPackNo.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexNextPackNo.Name = "textexNextPackNo";
             this.textexNextPackNo.Size = new System.Drawing.Size(319, 27);
@@ -311,7 +326,7 @@
             // 
             this.textexNextCartonNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexNextCartonNo.Editable = true;
-            this.textexNextCartonNo.Location = new System.Drawing.Point(33, 470);
+            this.textexNextCartonNo.Location = new System.Drawing.Point(33, 471);
             this.textexNextCartonNo.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexNextCartonNo.Name = "textexNextCartonNo";
             this.textexNextCartonNo.Size = new System.Drawing.Size(319, 27);
@@ -321,7 +336,7 @@
             // 
             this.textexNextPalletNo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexNextPalletNo.Editable = true;
-            this.textexNextPalletNo.Location = new System.Drawing.Point(33, 530);
+            this.textexNextPalletNo.Location = new System.Drawing.Point(33, 531);
             this.textexNextPalletNo.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexNextPalletNo.Name = "textexNextPalletNo";
             this.textexNextPalletNo.Size = new System.Drawing.Size(319, 27);
@@ -331,7 +346,7 @@
             // 
             this.textexRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexRemarks.Editable = true;
-            this.textexRemarks.Location = new System.Drawing.Point(33, 590);
+            this.textexRemarks.Location = new System.Drawing.Point(33, 591);
             this.textexRemarks.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexRemarks.Name = "textexRemarks";
             this.textexRemarks.Size = new System.Drawing.Size(319, 27);
@@ -349,16 +364,6 @@
             this.label3.TabIndex = 77;
             this.label3.Text = "API Code";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // textexCommodityAPICode
-            // 
-            this.textexCommodityAPICode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexCommodityAPICode.Editable = false;
-            this.textexCommodityAPICode.Location = new System.Drawing.Point(33, 290);
-            this.textexCommodityAPICode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.textexCommodityAPICode.Name = "textexCommodityAPICode";
-            this.textexCommodityAPICode.Size = new System.Drawing.Size(319, 27);
-            this.textexCommodityAPICode.TabIndex = 73;
             // 
             // textexLotNumber
             // 
@@ -460,6 +465,16 @@
             this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
             this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
             // 
+            // buttonItems
+            // 
+            this.buttonItems.Image = global::TotalSmartCoding.Properties.Resources.Bookmark_add;
+            this.buttonItems.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonItems.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonItems.Name = "buttonItems";
+            this.buttonItems.Size = new System.Drawing.Size(97, 52);
+            this.buttonItems.Text = "Items";
+            this.buttonItems.Click += new System.EventHandler(this.buttonItems_Click);
+            // 
             // naviBarMaster
             // 
             this.naviBarMaster.ActiveBand = this.naviBand1;
@@ -468,13 +483,13 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(1103, 55);
+            this.naviBarMaster.Location = new System.Drawing.Point(1103, 0);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(380, 630);
+            this.naviBarMaster.Size = new System.Drawing.Size(380, 685);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -486,13 +501,13 @@
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 582);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 637);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(378, 582);
+            this.naviBand1.Size = new System.Drawing.Size(378, 637);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -505,6 +520,7 @@
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityCode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityAPICode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityName);
+            this.fastBatchIndex.AllColumns.Add(this.olvWarehouseAPICode);
             this.fastBatchIndex.AllColumns.Add(this.olvPackQuantity);
             this.fastBatchIndex.AllColumns.Add(this.olvPackLineVolume);
             this.fastBatchIndex.AllColumns.Add(this.olvCartonQuantity);
@@ -521,6 +537,7 @@
             this.olvCommodityCode,
             this.olvCommodityAPICode,
             this.olvCommodityName,
+            this.olvWarehouseAPICode,
             this.olvPackQuantity,
             this.olvPackLineVolume,
             this.olvCartonQuantity,
@@ -535,11 +552,11 @@
             this.fastBatchIndex.GroupImageList = this.imageList32;
             this.fastBatchIndex.HideSelection = false;
             this.fastBatchIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchIndex.Location = new System.Drawing.Point(0, 55);
+            this.fastBatchIndex.Location = new System.Drawing.Point(0, 0);
             this.fastBatchIndex.Name = "fastBatchIndex";
             this.fastBatchIndex.OwnerDraw = true;
             this.fastBatchIndex.ShowGroups = false;
-            this.fastBatchIndex.Size = new System.Drawing.Size(1103, 630);
+            this.fastBatchIndex.Size = new System.Drawing.Size(1103, 685);
             this.fastBatchIndex.TabIndex = 67;
             this.fastBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchIndex.UseCompatibleStateImageBehavior = false;
@@ -568,7 +585,6 @@
             this.olvBatchCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvBatchCode.Text = "Batch";
             this.olvBatchCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvBatchCode.Width = 90;
             // 
             // olvLotNumber
             // 
@@ -584,7 +600,6 @@
             this.olvCommodityCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityCode.Text = "Item Code";
             this.olvCommodityCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCommodityCode.Width = 90;
             // 
             // olvCommodityAPICode
             // 
@@ -596,7 +611,15 @@
             // 
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.Text = "Desccription";
-            this.olvCommodityName.Width = 168;
+            this.olvCommodityName.Width = 188;
+            // 
+            // olvWarehouseAPICode
+            // 
+            this.olvWarehouseAPICode.AspectName = "WarehouseAPICode";
+            this.olvWarehouseAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvWarehouseAPICode.Text = "WH";
+            this.olvWarehouseAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvWarehouseAPICode.Width = 40;
             // 
             // olvPackQuantity
             // 
@@ -678,16 +701,6 @@
             this.imageList32.Images.SetKeyName(7, "Sign_Order_32");
             this.imageList32.Images.SetKeyName(8, "CustomerRed");
             // 
-            // buttonItems
-            // 
-            this.buttonItems.Image = global::TotalSmartCoding.Properties.Resources.Bookmark_add;
-            this.buttonItems.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonItems.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonItems.Name = "buttonItems";
-            this.buttonItems.Size = new System.Drawing.Size(97, 52);
-            this.buttonItems.Text = "Items";
-            this.buttonItems.Click += new System.EventHandler(this.buttonItems_Click);
-            // 
             // Batches
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -754,7 +767,6 @@
         private CustomControls.TextexBox textexNextPalletNo;
         private CustomControls.TextexBox textexRemarks;
         private System.Windows.Forms.Label label3;
-        private CustomControls.TextexBox textexCommodityAPICode;
         private CustomControls.TextexBox textexLotNumber;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripButton buttonNewLOT;
@@ -766,6 +778,8 @@
         private BrightIdeasSoftware.OLVColumn olvCartonQuantity;
         private BrightIdeasSoftware.OLVColumn olvCartonLineVolume;
         private System.Windows.Forms.ToolStripButton buttonItems;
+        private CustomControls.CombexBox combexWarehouseID;
+        private BrightIdeasSoftware.OLVColumn olvWarehouseAPICode;
 
     }
 }

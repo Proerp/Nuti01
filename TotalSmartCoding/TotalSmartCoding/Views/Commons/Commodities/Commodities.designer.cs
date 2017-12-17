@@ -69,6 +69,7 @@
             this.olvBlank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCategoryName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackageSize = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackageVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -78,7 +79,6 @@
             this.olvInActive = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvRemarks = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
-            this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripChildForm.SuspendLayout();
             this.panelCenter.SuspendLayout();
             this.layoutTop.SuspendLayout();
@@ -644,6 +644,14 @@
             this.olvCommodityCode.Text = "Code";
             this.olvCommodityCode.Width = 100;
             // 
+            // olvCommodityAPICode
+            // 
+            this.olvCommodityAPICode.AspectName = "CommodityAPICode";
+            this.olvCommodityAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityAPICode.Text = "API";
+            this.olvCommodityAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityAPICode.Width = 45;
+            // 
             // olvCommodityName
             // 
             this.olvCommodityName.AspectName = "CommodityName";
@@ -720,14 +728,6 @@
             this.imageList32.Images.SetKeyName(7, "Sign_Order_32");
             this.imageList32.Images.SetKeyName(8, "CustomerRed");
             // 
-            // olvCommodityAPICode
-            // 
-            this.olvCommodityAPICode.AspectName = "CommodityAPICode";
-            this.olvCommodityAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCommodityAPICode.Text = "API";
-            this.olvCommodityAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCommodityAPICode.Width = 45;
-            // 
             // Commodities
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -737,7 +737,7 @@
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.toolStripChildForm);
             this.Name = "Commodities";
-            this.Text = "Bin Locations";
+            this.Text = "Commodities";
             this.Controls.SetChildIndex(this.toolStripChildForm, 0);
             this.Controls.SetChildIndex(this.panelCenter, 0);
             this.Controls.SetChildIndex(this.fastCommodityIndex, 0);

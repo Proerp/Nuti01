@@ -457,6 +457,11 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
     }
 
+    public partial class WarehouseBase
+    {
+        public string CodeAPICode { get { return this.Code + "   [" + this.APICode + "]"; } }
+    }
+
     public partial class Module : IPrimitiveEntity, IBaseEntity
     {
         public int GetID() { return this.ModuleID; }
@@ -686,6 +691,11 @@ namespace TotalModel.Models
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime EditedDate { get; set; }
 
+    }
+
+    public partial class CommodityBase
+    {
+        public string CodeAPICode { get { return this.Code + "   [" + this.APICode + "]"; } }
     }
 
     public partial class BatchIndex : IBaseIndex
