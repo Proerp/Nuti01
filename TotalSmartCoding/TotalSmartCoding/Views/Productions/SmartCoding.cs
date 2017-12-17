@@ -117,7 +117,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-                this.dgvPackQueue.RowTemplate.Height = 216; this.dgvPacksetQueue.RowTemplate.Height = 216; 
+                this.dgvPackQueue.RowTemplate.Height = 216; this.dgvPacksetQueue.RowTemplate.Height = 216;
 
 
                 if (!fillingData.HasPack) { this.labelNextDigitNo.Visible = false; this.textNextDigitNo.Visible = false; this.labelNextPackNo.Visible = false; this.textNextPackNo.Visible = false; this.dgvCartonPendingQueue.RowTemplate.Height = 280; this.dgvCartonQueue.RowTemplate.Height = 280; this.dgvCartonsetQueue.RowTemplate.Height = 280; this.labelLEDPack.Visible = false; this.labelLEDCartonIgnore.Visible = false; }
@@ -126,7 +126,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
 
-                this.labelNextDigitNo.Visible = false; this.textNextDigitNo.Visible = false; 
+                this.labelNextDigitNo.Visible = false; this.textNextDigitNo.Visible = false;
 
 
 
@@ -144,7 +144,11 @@ namespace TotalSmartCoding.Views.Productions
             try
             {
                 BatchIndex batchIndex = (new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
-                if (batchIndex != null) Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
+                if (batchIndex != null)
+                {
+                    Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
+                    if (this.scannerController != null) this.scannerController.InitializePallet(); //WHEN USER PRESS BUTTON buttonBatches => TO OPEN Batches VIEW => THEN APPLY NEW BATCH FOR PRODUCTION
+                }
             }
             catch (Exception exception)
             {
@@ -384,7 +388,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
-        private void toolStripButtonSetting_Click(object sender, EventArgs e)
+        private void buttonBatches_Click(object sender, EventArgs e)
         {
             try
             {
@@ -395,7 +399,6 @@ namespace TotalSmartCoding.Views.Productions
                 MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(this, this.scannerController.AllQueueEmpty));
 
                 masterMDI.ShowDialog();
-
                 masterMDI.Dispose();
             }
             catch (Exception exception)

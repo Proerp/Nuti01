@@ -264,14 +264,9 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                //Debug.Print(this.splitContainerPack.SplitterDistance.ToString());
-                //Debug.Print(this.splitContainerCarton.SplitterDistance.ToString());
-                //Debug.Print(this.splitContainerPallet.SplitterDistance.ToString());
-
                 MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Commodity, new Commodities());
 
                 masterMDI.ShowDialog();
-
                 masterMDI.Dispose();
             }
             catch (Exception exception)

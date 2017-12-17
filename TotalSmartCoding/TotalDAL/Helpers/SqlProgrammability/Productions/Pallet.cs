@@ -95,7 +95,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       UPDATE FillingLines SET PalletChanged = 0 WHERE FillingLineID = @FillingLineID " + "\r\n";
-            queryString = queryString + "       SELECT * FROM Pallets WHERE FillingLineID = @FillingLineID AND (QuantityPickup = 0 OR BatchID = @BatchID) AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs))  " + "\r\n";
+            queryString = queryString + "       SELECT * FROM Pallets WHERE FillingLineID = @FillingLineID AND (BatchID = @BatchID) AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs))  " + "\r\n"; //AT NUTIFOOD: REPLACE (QuantityPickup = 0 OR BatchID = @BatchID) BY (BatchID = @BatchID)
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetPallets", queryString);
         }

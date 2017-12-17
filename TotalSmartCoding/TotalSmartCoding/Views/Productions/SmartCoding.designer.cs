@@ -281,7 +281,7 @@
             this.digitStatusbox.Name = "digitStatusbox";
             this.digitStatusbox.ReadOnly = true;
             this.digitStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.digitStatusbox.Size = new System.Drawing.Size(293, 300);
+            this.digitStatusbox.Size = new System.Drawing.Size(333, 300);
             this.digitStatusbox.TabIndex = 3;
             // 
             // dgvPackQueue
@@ -448,7 +448,7 @@
             this.cartonStatusbox.Name = "cartonStatusbox";
             this.cartonStatusbox.ReadOnly = true;
             this.cartonStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.cartonStatusbox.Size = new System.Drawing.Size(268, 300);
+            this.cartonStatusbox.Size = new System.Drawing.Size(294, 300);
             this.cartonStatusbox.TabIndex = 11;
             // 
             // timerEverySecond
@@ -1218,8 +1218,8 @@
             // 
             // splitDigit.Panel1
             // 
-            this.splitDigit.Panel1.Controls.Add(this.digitStatusbox);
-            this.splitDigit.Panel1.Controls.Add(this.toolStrip1);
+            this.splitDigit.Panel1.Controls.Add(this.packStatusbox);
+            this.splitDigit.Panel1.Controls.Add(this.toolStrip2);
             this.splitDigit.Panel1MinSize = 39;
             // 
             // splitDigit.Panel2
@@ -1245,14 +1245,14 @@
             this.digitLEDAmber});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(293, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(333, 55);
             this.toolStrip1.TabIndex = 14;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::TotalSmartCoding.Properties.Resources.Numbers_1;
+            this.toolStripButton5.Image = global::TotalSmartCoding.Properties.Resources.Numbers_4;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
             this.toolStripButton5.Size = new System.Drawing.Size(24, 52);
@@ -1315,8 +1315,8 @@
             // 
             // splitPack.Panel1
             // 
-            this.splitPack.Panel1.Controls.Add(this.packStatusbox);
-            this.splitPack.Panel1.Controls.Add(this.toolStrip2);
+            this.splitPack.Panel1.Controls.Add(this.cartonStatusbox);
+            this.splitPack.Panel1.Controls.Add(this.toolStrip3);
             this.splitPack.Panel1MinSize = 39;
             // 
             // splitPack.Panel2
@@ -1337,7 +1337,7 @@
             this.packStatusbox.Name = "packStatusbox";
             this.packStatusbox.ReadOnly = true;
             this.packStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.packStatusbox.Size = new System.Drawing.Size(294, 300);
+            this.packStatusbox.Size = new System.Drawing.Size(293, 300);
             this.packStatusbox.TabIndex = 20;
             // 
             // toolStrip2
@@ -1354,14 +1354,14 @@
             this.packLEDAmber});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(294, 55);
+            this.toolStrip2.Size = new System.Drawing.Size(293, 55);
             this.toolStrip2.TabIndex = 19;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::TotalSmartCoding.Properties.Resources.Numbers_2;
+            this.toolStripButton6.Image = global::TotalSmartCoding.Properties.Resources.Numbers_1;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
             this.toolStripButton6.Size = new System.Drawing.Size(24, 52);
@@ -1424,8 +1424,8 @@
             // 
             // splitCarton.Panel1
             // 
-            this.splitCarton.Panel1.Controls.Add(this.cartonStatusbox);
-            this.splitCarton.Panel1.Controls.Add(this.toolStrip3);
+            this.splitCarton.Panel1.Controls.Add(this.palletStatusbox);
+            this.splitCarton.Panel1.Controls.Add(this.toolStrip7);
             this.splitCarton.Panel1MinSize = 39;
             // 
             // splitCarton.Panel2
@@ -1452,14 +1452,14 @@
             this.cartonLEDAmber});
             this.toolStrip3.Location = new System.Drawing.Point(0, 0);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(268, 55);
+            this.toolStrip3.Size = new System.Drawing.Size(294, 55);
             this.toolStrip3.TabIndex = 20;
             this.toolStrip3.Text = "toolStrip3";
             // 
             // toolStripButton7
             // 
             this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = global::TotalSmartCoding.Properties.Resources.Numbers_3;
+            this.toolStripButton7.Image = global::TotalSmartCoding.Properties.Resources.Numbers_2;
             this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton7.Name = "toolStripButton7";
             this.toolStripButton7.Size = new System.Drawing.Size(24, 52);
@@ -1531,8 +1531,8 @@
             // 
             // splitPallet.Panel1
             // 
-            this.splitPallet.Panel1.Controls.Add(this.palletStatusbox);
-            this.splitPallet.Panel1.Controls.Add(this.toolStrip7);
+            this.splitPallet.Panel1.Controls.Add(this.digitStatusbox);
+            this.splitPallet.Panel1.Controls.Add(this.toolStrip1);
             this.splitPallet.Panel1MinSize = 39;
             // 
             // splitPallet.Panel2
@@ -1553,7 +1553,7 @@
             this.palletStatusbox.Name = "palletStatusbox";
             this.palletStatusbox.ReadOnly = true;
             this.palletStatusbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.palletStatusbox.Size = new System.Drawing.Size(333, 300);
+            this.palletStatusbox.Size = new System.Drawing.Size(268, 300);
             this.palletStatusbox.TabIndex = 23;
             // 
             // toolStrip7
@@ -1575,14 +1575,14 @@
             this.toolStripButton13});
             this.toolStrip7.Location = new System.Drawing.Point(0, 0);
             this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.Size = new System.Drawing.Size(333, 55);
+            this.toolStrip7.Size = new System.Drawing.Size(268, 55);
             this.toolStrip7.TabIndex = 22;
             this.toolStrip7.Text = "toolStrip7";
             // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources.Numbers_4;
+            this.toolStripButton2.Image = global::TotalSmartCoding.Properties.Resources.Numbers_3;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(24, 52);
@@ -1650,7 +1650,7 @@
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(21, 52);
+            this.toolStripLabel3.Size = new System.Drawing.Size(21, 20);
             this.toolStripLabel3.Text = "   ";
             // 
             // toolStripButton11
@@ -1896,14 +1896,15 @@
             this.toolStripLED.Location = new System.Drawing.Point(0, 0);
             this.toolStripLED.Name = "toolStripLED";
             this.toolStripLED.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripLED.Size = new System.Drawing.Size(238, 1748);
+            this.toolStripLED.Size = new System.Drawing.Size(238, 1742);
             this.toolStripLED.TabIndex = 0;
             this.toolStripLED.Text = "toolStrip13";
             // 
             // labelLEDPack
             // 
+            this.labelLEDPack.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLEDPack.Name = "labelLEDPack";
-            this.labelLEDPack.Size = new System.Drawing.Size(237, 153);
+            this.labelLEDPack.Size = new System.Drawing.Size(237, 152);
             this.labelLEDPack.Text = "0";
             // 
             // toolStripSeparator3
@@ -1913,9 +1914,10 @@
             // 
             // labelLEDPackIgnore
             // 
+            this.labelLEDPackIgnore.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLEDPackIgnore.ForeColor = System.Drawing.Color.Firebrick;
             this.labelLEDPackIgnore.Name = "labelLEDPackIgnore";
-            this.labelLEDPackIgnore.Size = new System.Drawing.Size(237, 153);
+            this.labelLEDPackIgnore.Size = new System.Drawing.Size(237, 152);
             this.labelLEDPackIgnore.Text = "   ";
             // 
             // toolStripSeparator7
@@ -1925,8 +1927,9 @@
             // 
             // labelLEDCarton
             // 
+            this.labelLEDCarton.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLEDCarton.Name = "labelLEDCarton";
-            this.labelLEDCarton.Size = new System.Drawing.Size(237, 153);
+            this.labelLEDCarton.Size = new System.Drawing.Size(237, 152);
             this.labelLEDCarton.Text = "0";
             // 
             // toolStripSeparator8
@@ -1936,9 +1939,10 @@
             // 
             // labelLEDCartonPending
             // 
+            this.labelLEDCartonPending.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLEDCartonPending.ForeColor = System.Drawing.Color.Firebrick;
             this.labelLEDCartonPending.Name = "labelLEDCartonPending";
-            this.labelLEDCartonPending.Size = new System.Drawing.Size(237, 153);
+            this.labelLEDCartonPending.Size = new System.Drawing.Size(237, 152);
             this.labelLEDCartonPending.Text = "   ";
             // 
             // toolStripSeparator9
@@ -1948,9 +1952,10 @@
             // 
             // labelLEDCartonIgnore
             // 
+            this.labelLEDCartonIgnore.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLEDCartonIgnore.ForeColor = System.Drawing.Color.Red;
             this.labelLEDCartonIgnore.Name = "labelLEDCartonIgnore";
-            this.labelLEDCartonIgnore.Size = new System.Drawing.Size(237, 153);
+            this.labelLEDCartonIgnore.Size = new System.Drawing.Size(237, 152);
             this.labelLEDCartonIgnore.Text = "   ";
             // 
             // toolStripSeparator10
@@ -1960,8 +1965,9 @@
             // 
             // labelLEDPallet
             // 
+            this.labelLEDPallet.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLEDPallet.Name = "labelLEDPallet";
-            this.labelLEDPallet.Size = new System.Drawing.Size(237, 153);
+            this.labelLEDPallet.Size = new System.Drawing.Size(237, 152);
             this.labelLEDPallet.Text = "0";
             // 
             // toolStripLabel4
@@ -2097,7 +2103,7 @@
             this.buttonBatches.Size = new System.Drawing.Size(60, 72);
             this.buttonBatches.Text = "Setting";
             this.buttonBatches.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.buttonBatches.Click += new System.EventHandler(this.toolStripButtonSetting_Click);
+            this.buttonBatches.Click += new System.EventHandler(this.buttonBatches_Click);
             // 
             // toolStripSeparator5
             // 
