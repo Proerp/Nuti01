@@ -186,6 +186,12 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
+                if (!(GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail))
+                {
+                    CustomMsgBox.Show(this, "Sorry, can not open this application." + "\r\n" + "\r\n" + "Call 0919 878 329 for more information. Thanks!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    this.DialogResult = DialogResult.Cancel; return; 
+                }
+
                 if (sender.Equals(this.buttonExit)) { this.DialogResult = DialogResult.Cancel; return; }
 
                 if (this.comboBoxEmployeeID.SelectedIndex >= 0)

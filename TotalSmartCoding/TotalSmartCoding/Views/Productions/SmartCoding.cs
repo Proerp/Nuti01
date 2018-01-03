@@ -103,7 +103,6 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.comboBoxEmptyCarton.ComboBox.Items.AddRange(new string[] { "Ignore empty carton", "Keep empty carton" });
                 this.comboBoxEmptyCarton.ComboBox.SelectedIndex = GlobalVariables.IgnoreEmptyCarton ? 0 : 1;
-                this.comboBoxEmptyCarton.Enabled = this.fillingData.FillingLineID != GlobalVariables.FillingLine.Pail;
 
                 this.comboBoxSendToZebra.ComboBox.Items.AddRange(new string[] { "Stop print label", "Print new label" });
                 this.comboBoxSendToZebra.ComboBox.SelectedIndex = GlobalEnums.SendToZebra ? 1 : 0;
@@ -239,7 +238,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 280; //346 
                 case GlobalVariables.FillingLine.Pail:
-                    return 0;
+                    return 280; //0
                 case GlobalVariables.FillingLine.Drum:
                     return 0; //86;
                 default:
@@ -254,7 +253,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 225;
                 case GlobalVariables.FillingLine.Pail:
-                    return 458;
+                    return 225; //458
                 case GlobalVariables.FillingLine.Drum:
                     return 347; //86;
                 default:
@@ -269,7 +268,7 @@ namespace TotalSmartCoding.Views.Productions
                 case GlobalVariables.FillingLine.Smallpack:
                     return 111;
                 case GlobalVariables.FillingLine.Pail:
-                    return 344;
+                    return 111; //344
                 case GlobalVariables.FillingLine.Drum:
                     return 0; //86;
                 default:
@@ -475,21 +474,21 @@ namespace TotalSmartCoding.Views.Productions
                 if (sender.Equals(this.digitController))
                 {
                     if (e.PropertyName == "MainStatus") { this.digitStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.digitController.MainStatus + "\r\n" + this.digitStatusbox.Text; this.cutStatusBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.digitLEDGreen.Enabled = this.digitController.LedGreenOn; this.digitLEDAmber.Enabled = this.digitController.LedAmberOn; this.digitLEDRed.Enabled = this.digitController.LedRedOn; if (this.digitController.LedRedOn) this.StopPrint(true, true, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail, false); return; }
+                    if (e.PropertyName == "LedStatus") { this.digitLEDGreen.Enabled = this.digitController.LedGreenOn; this.digitLEDAmber.Enabled = this.digitController.LedAmberOn; this.digitLEDRed.Enabled = this.digitController.LedRedOn; if (this.digitController.LedRedOn) this.StopPrint(true, true, false, false); return; }
 
                     if (e.PropertyName == "NextDigitNo") { this.fillingData.NextDigitNo = this.packController.NextDigitNo; return; }
                 }
                 else if (sender.Equals(this.packController))
                 {
                     if (e.PropertyName == "MainStatus") { this.packStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.packController.MainStatus + "\r\n" + this.packStatusbox.Text; this.cutStatusBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.packLEDGreen.Enabled = this.packController.LedGreenOn; this.packLEDAmber.Enabled = this.packController.LedAmberOn; this.packLEDRed.Enabled = this.packController.LedRedOn; if (this.packController.LedRedOn) this.StopPrint(true, true, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail, false); return; }
+                    if (e.PropertyName == "LedStatus") { this.packLEDGreen.Enabled = this.packController.LedGreenOn; this.packLEDAmber.Enabled = this.packController.LedAmberOn; this.packLEDRed.Enabled = this.packController.LedRedOn; if (this.packController.LedRedOn) this.StopPrint(true, true, false, false); return; }
 
                     if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.packController.NextPackNo; return; }
                 }
                 else if (sender.Equals(this.cartonController))
                 {
                     if (e.PropertyName == "MainStatus") { this.cartonStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.cartonController.MainStatus + "\r\n" + this.cartonStatusbox.Text; this.cutStatusBox(false); return; }
-                    if (e.PropertyName == "LedStatus") { this.cartonLEDGreen.Enabled = this.cartonController.LedGreenOn; this.cartonLEDAmber.Enabled = this.cartonController.LedAmberOn; this.cartonLEDRed.Enabled = this.cartonController.LedRedOn; if (this.cartonController.LedRedOn) this.StopPrint(this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail, this.fillingData.FillingLineID == GlobalVariables.FillingLine.Pail, false); return; }
+                    if (e.PropertyName == "LedStatus") { this.cartonLEDGreen.Enabled = this.cartonController.LedGreenOn; this.cartonLEDAmber.Enabled = this.cartonController.LedAmberOn; this.cartonLEDRed.Enabled = this.cartonController.LedRedOn; if (this.cartonController.LedRedOn) this.StopPrint(false, false, true, false); return; }
 
                     if (e.PropertyName == "NextCartonNo") { this.fillingData.NextCartonNo = this.cartonController.NextCartonNo; return; }
                 }

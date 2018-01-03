@@ -540,7 +540,8 @@
             this.buttonPackQueueCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonPackQueueCount.Size = new System.Drawing.Size(77, 52);
             this.buttonPackQueueCount.Text = "[1/1]";
-            this.buttonPackQueueCount.ToolTipText = "Số thứ tự chia làn auto packer. Nhấn vào đây để reset về vị trí gốc [1, 1].";
+            this.buttonPackQueueCount.ToolTipText = "Khi kết thúc mẻ, số lượng lon không đủ đóng carton => nhấn vào đây để đóng carton" +
+    " cho những lon lẻ cuối cùng";
             this.buttonPackQueueCount.Click += new System.EventHandler(this.buttonPackQueueCount_Click);
             // 
             // buttonDeleteAllPack
@@ -552,7 +553,7 @@
             this.buttonDeleteAllPack.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonDeleteAllPack.Size = new System.Drawing.Size(79, 52);
             this.buttonDeleteAllPack.Text = "[0]";
-            this.buttonDeleteAllPack.ToolTipText = "Xóa tất cả chai trên dàn đóng gói";
+            this.buttonDeleteAllPack.ToolTipText = "Xóa tất cả lon trên dàn đóng gói";
             this.buttonDeleteAllPack.Click += new System.EventHandler(this.buttonDeletePack_Click);
             // 
             // toolStripButton4
@@ -800,7 +801,7 @@
             this.buttonDeleteCartonPending.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDeleteCartonPending.Name = "buttonDeleteCartonPending";
             this.buttonDeleteCartonPending.Size = new System.Drawing.Size(52, 52);
-            this.buttonDeleteCartonPending.ToolTipText = "Xóa toàn bộ carton đang chọn, bao gồm xóa tất chai bên trong carton.";
+            this.buttonDeleteCartonPending.ToolTipText = "Xóa toàn bộ carton đang chọn, bao gồm xóa tất cả lon bên trong carton.";
             this.buttonDeleteCartonPending.Click += new System.EventHandler(this.dgvCartonPending_RemoveDelete);
             // 
             // toolStripButton17
@@ -1896,7 +1897,7 @@
             this.toolStripLED.Location = new System.Drawing.Point(0, 0);
             this.toolStripLED.Name = "toolStripLED";
             this.toolStripLED.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripLED.Size = new System.Drawing.Size(238, 1766);
+            this.toolStripLED.Size = new System.Drawing.Size(238, 1742);
             this.toolStripLED.TabIndex = 0;
             this.toolStripLED.Text = "toolStrip13";
             // 
