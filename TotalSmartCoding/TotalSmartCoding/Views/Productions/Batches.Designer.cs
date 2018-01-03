@@ -262,7 +262,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(322, 20);
             this.label8.TabIndex = 68;
-            this.label8.Text = "Item Name";
+            this.label8.Text = "Item Type [N, L, T)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // dateTimexEntryDate
@@ -362,7 +362,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(322, 20);
             this.label3.TabIndex = 77;
-            this.label3.Text = "API Code";
+            this.label3.Text = "Item Name";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // textexLotNumber
@@ -611,15 +611,14 @@
             // 
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.Text = "Desccription";
-            this.olvCommodityName.Width = 188;
+            this.olvCommodityName.Width = 168;
             // 
             // olvWarehouseAPICode
             // 
             this.olvWarehouseAPICode.AspectName = "WarehouseAPICode";
             this.olvWarehouseAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvWarehouseAPICode.Text = "WH";
+            this.olvWarehouseAPICode.Text = "Type";
             this.olvWarehouseAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvWarehouseAPICode.Width = 40;
             // 
             // olvPackQuantity
             // 

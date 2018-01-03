@@ -102,13 +102,6 @@
             this.buttonPalletPickupQueueCount = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton16 = new System.Windows.Forms.ToolStripButton();
             this.splitDigit = new System.Windows.Forms.SplitContainer();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.digitLEDGreen = new System.Windows.Forms.ToolStripButton();
-            this.digitLEDPrinting = new System.Windows.Forms.ToolStripButton();
-            this.digitLEDRed = new System.Windows.Forms.ToolStripButton();
-            this.digitLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.splitPack = new System.Windows.Forms.SplitContainer();
             this.packStatusbox = new System.Windows.Forms.TextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
@@ -116,7 +109,7 @@
             this.packLEDPrinting = new System.Windows.Forms.ToolStripButton();
             this.packLEDRed = new System.Windows.Forms.ToolStripButton();
             this.packLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.splitCarton = new System.Windows.Forms.SplitContainer();
+            this.splitPack = new System.Windows.Forms.SplitContainer();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.cartonLEDGreen = new System.Windows.Forms.ToolStripButton();
@@ -124,7 +117,7 @@
             this.cartonLEDRed = new System.Windows.Forms.ToolStripButton();
             this.buttonCartonNoreadNow = new System.Windows.Forms.ToolStripButton();
             this.cartonLEDAmber = new System.Windows.Forms.ToolStripButton();
-            this.splitPallet = new System.Windows.Forms.SplitContainer();
+            this.splitCarton = new System.Windows.Forms.SplitContainer();
             this.palletStatusbox = new System.Windows.Forms.TextBox();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -137,6 +130,13 @@
             this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton12 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton13 = new System.Windows.Forms.ToolStripButton();
+            this.splitPallet = new System.Windows.Forms.SplitContainer();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDGreen = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDPrinting = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDRed = new System.Windows.Forms.ToolStripButton();
+            this.digitLEDAmber = new System.Windows.Forms.ToolStripButton();
             this.scannerStatusbox = new System.Windows.Forms.TextBox();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
@@ -246,22 +246,22 @@
             this.splitDigit.Panel1.SuspendLayout();
             this.splitDigit.Panel2.SuspendLayout();
             this.splitDigit.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPack)).BeginInit();
             this.splitPack.Panel1.SuspendLayout();
             this.splitPack.Panel2.SuspendLayout();
             this.splitPack.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitCarton)).BeginInit();
             this.splitCarton.Panel1.SuspendLayout();
             this.splitCarton.Panel2.SuspendLayout();
             this.splitCarton.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
+            this.toolStrip7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPallet)).BeginInit();
             this.splitPallet.Panel1.SuspendLayout();
             this.splitPallet.Panel2.SuspendLayout();
             this.splitPallet.SuspendLayout();
-            this.toolStrip7.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMaster)).BeginInit();
             this.splitContainerMaster.Panel1.SuspendLayout();
@@ -1231,103 +1231,6 @@
             this.splitDigit.SplitterWidth = 1;
             this.splitDigit.TabIndex = 25;
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("toolStrip1.BackgroundImage")));
-            this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton5,
-            this.digitLEDGreen,
-            this.digitLEDPrinting,
-            this.digitLEDRed,
-            this.digitLEDAmber});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(333, 55);
-            this.toolStrip1.TabIndex = 14;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::TotalSmartCoding.Properties.Resources.Numbers_4;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(24, 52);
-            this.toolStripButton5.Text = "toolStripButton5";
-            // 
-            // digitLEDGreen
-            // 
-            this.digitLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.digitLEDGreen.Enabled = false;
-            this.digitLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
-            this.digitLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.digitLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.digitLEDGreen.Name = "digitLEDGreen";
-            this.digitLEDGreen.Size = new System.Drawing.Size(52, 52);
-            this.digitLEDGreen.Text = "Ready to print";
-            this.digitLEDGreen.ToolTipText = "Ready to print";
-            // 
-            // digitLEDPrinting
-            // 
-            this.digitLEDPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.digitLEDPrinting.Enabled = false;
-            this.digitLEDPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
-            this.digitLEDPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.digitLEDPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.digitLEDPrinting.Name = "digitLEDPrinting";
-            this.digitLEDPrinting.Size = new System.Drawing.Size(52, 52);
-            this.digitLEDPrinting.Text = "Printing";
-            // 
-            // digitLEDRed
-            // 
-            this.digitLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.digitLEDRed.Enabled = false;
-            this.digitLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
-            this.digitLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.digitLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.digitLEDRed.Name = "digitLEDRed";
-            this.digitLEDRed.Size = new System.Drawing.Size(52, 52);
-            this.digitLEDRed.Text = "Error";
-            this.digitLEDRed.ToolTipText = "Error";
-            // 
-            // digitLEDAmber
-            // 
-            this.digitLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.digitLEDAmber.Enabled = false;
-            this.digitLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
-            this.digitLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.digitLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.digitLEDAmber.Name = "digitLEDAmber";
-            this.digitLEDAmber.Size = new System.Drawing.Size(52, 52);
-            this.digitLEDAmber.Text = "toolStripButton4";
-            this.digitLEDAmber.ToolTipText = "Amber LED";
-            this.digitLEDAmber.Visible = false;
-            // 
-            // splitPack
-            // 
-            this.splitPack.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitPack.Location = new System.Drawing.Point(0, 0);
-            this.splitPack.Margin = new System.Windows.Forms.Padding(4);
-            this.splitPack.Name = "splitPack";
-            // 
-            // splitPack.Panel1
-            // 
-            this.splitPack.Panel1.Controls.Add(this.cartonStatusbox);
-            this.splitPack.Panel1.Controls.Add(this.toolStrip3);
-            this.splitPack.Panel1MinSize = 39;
-            // 
-            // splitPack.Panel2
-            // 
-            this.splitPack.Panel2.Controls.Add(this.splitCarton);
-            this.splitPack.Panel2MinSize = 39;
-            this.splitPack.Size = new System.Drawing.Size(1346, 355);
-            this.splitPack.SplitterDistance = 294;
-            this.splitPack.SplitterWidth = 1;
-            this.splitPack.TabIndex = 0;
-            // 
             // packStatusbox
             // 
             this.packStatusbox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1415,27 +1318,27 @@
             this.packLEDAmber.ToolTipText = "Amber LED";
             this.packLEDAmber.Visible = false;
             // 
-            // splitCarton
+            // splitPack
             // 
-            this.splitCarton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitCarton.Location = new System.Drawing.Point(0, 0);
-            this.splitCarton.Margin = new System.Windows.Forms.Padding(4);
-            this.splitCarton.Name = "splitCarton";
+            this.splitPack.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPack.Location = new System.Drawing.Point(0, 0);
+            this.splitPack.Margin = new System.Windows.Forms.Padding(4);
+            this.splitPack.Name = "splitPack";
             // 
-            // splitCarton.Panel1
+            // splitPack.Panel1
             // 
-            this.splitCarton.Panel1.Controls.Add(this.palletStatusbox);
-            this.splitCarton.Panel1.Controls.Add(this.toolStrip7);
-            this.splitCarton.Panel1MinSize = 39;
+            this.splitPack.Panel1.Controls.Add(this.cartonStatusbox);
+            this.splitPack.Panel1.Controls.Add(this.toolStrip3);
+            this.splitPack.Panel1MinSize = 39;
             // 
-            // splitCarton.Panel2
+            // splitPack.Panel2
             // 
-            this.splitCarton.Panel2.Controls.Add(this.splitPallet);
-            this.splitCarton.Panel2MinSize = 39;
-            this.splitCarton.Size = new System.Drawing.Size(1051, 355);
-            this.splitCarton.SplitterDistance = 268;
-            this.splitCarton.SplitterWidth = 1;
-            this.splitCarton.TabIndex = 0;
+            this.splitPack.Panel2.Controls.Add(this.splitCarton);
+            this.splitPack.Panel2MinSize = 39;
+            this.splitPack.Size = new System.Drawing.Size(1346, 355);
+            this.splitPack.SplitterDistance = 294;
+            this.splitPack.SplitterWidth = 1;
+            this.splitPack.TabIndex = 0;
             // 
             // toolStrip3
             // 
@@ -1523,26 +1426,27 @@
             this.cartonLEDAmber.ToolTipText = "Amber LED";
             this.cartonLEDAmber.Visible = false;
             // 
-            // splitPallet
+            // splitCarton
             // 
-            this.splitPallet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitPallet.Location = new System.Drawing.Point(0, 0);
-            this.splitPallet.Name = "splitPallet";
+            this.splitCarton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitCarton.Location = new System.Drawing.Point(0, 0);
+            this.splitCarton.Margin = new System.Windows.Forms.Padding(4);
+            this.splitCarton.Name = "splitCarton";
             // 
-            // splitPallet.Panel1
+            // splitCarton.Panel1
             // 
-            this.splitPallet.Panel1.Controls.Add(this.digitStatusbox);
-            this.splitPallet.Panel1.Controls.Add(this.toolStrip1);
-            this.splitPallet.Panel1MinSize = 39;
+            this.splitCarton.Panel1.Controls.Add(this.palletStatusbox);
+            this.splitCarton.Panel1.Controls.Add(this.toolStrip7);
+            this.splitCarton.Panel1MinSize = 39;
             // 
-            // splitPallet.Panel2
+            // splitCarton.Panel2
             // 
-            this.splitPallet.Panel2.Controls.Add(this.scannerStatusbox);
-            this.splitPallet.Panel2.Controls.Add(this.toolStrip4);
-            this.splitPallet.Panel2MinSize = 39;
-            this.splitPallet.Size = new System.Drawing.Size(782, 355);
-            this.splitPallet.SplitterDistance = 333;
-            this.splitPallet.TabIndex = 23;
+            this.splitCarton.Panel2.Controls.Add(this.splitPallet);
+            this.splitCarton.Panel2MinSize = 39;
+            this.splitCarton.Size = new System.Drawing.Size(1051, 355);
+            this.splitCarton.SplitterDistance = 268;
+            this.splitCarton.SplitterWidth = 1;
+            this.splitCarton.TabIndex = 0;
             // 
             // palletStatusbox
             // 
@@ -1688,6 +1592,102 @@
             this.toolStripButton13.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton13.Text = "Carton scanner";
             this.toolStripButton13.Visible = false;
+            // 
+            // splitPallet
+            // 
+            this.splitPallet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitPallet.Location = new System.Drawing.Point(0, 0);
+            this.splitPallet.Name = "splitPallet";
+            // 
+            // splitPallet.Panel1
+            // 
+            this.splitPallet.Panel1.Controls.Add(this.digitStatusbox);
+            this.splitPallet.Panel1.Controls.Add(this.toolStrip1);
+            this.splitPallet.Panel1MinSize = 39;
+            // 
+            // splitPallet.Panel2
+            // 
+            this.splitPallet.Panel2.Controls.Add(this.scannerStatusbox);
+            this.splitPallet.Panel2.Controls.Add(this.toolStrip4);
+            this.splitPallet.Panel2MinSize = 39;
+            this.splitPallet.Size = new System.Drawing.Size(782, 355);
+            this.splitPallet.SplitterDistance = 333;
+            this.splitPallet.TabIndex = 23;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.toolStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("toolStrip1.BackgroundImage")));
+            this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton5,
+            this.digitLEDGreen,
+            this.digitLEDPrinting,
+            this.digitLEDRed,
+            this.digitLEDAmber});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(333, 55);
+            this.toolStrip1.TabIndex = 14;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = global::TotalSmartCoding.Properties.Resources.Numbers_4;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(24, 52);
+            this.toolStripButton5.Text = "toolStripButton5";
+            // 
+            // digitLEDGreen
+            // 
+            this.digitLEDGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDGreen.Enabled = false;
+            this.digitLEDGreen.Image = global::TotalSmartCoding.Properties.Resources.ok;
+            this.digitLEDGreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDGreen.Name = "digitLEDGreen";
+            this.digitLEDGreen.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDGreen.Text = "Ready to print";
+            this.digitLEDGreen.ToolTipText = "Ready to print";
+            // 
+            // digitLEDPrinting
+            // 
+            this.digitLEDPrinting.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDPrinting.Enabled = false;
+            this.digitLEDPrinting.Image = global::TotalSmartCoding.Properties.Resources.Land_Play;
+            this.digitLEDPrinting.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDPrinting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDPrinting.Name = "digitLEDPrinting";
+            this.digitLEDPrinting.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDPrinting.Text = "Printing";
+            // 
+            // digitLEDRed
+            // 
+            this.digitLEDRed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDRed.Enabled = false;
+            this.digitLEDRed.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Private;
+            this.digitLEDRed.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDRed.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDRed.Name = "digitLEDRed";
+            this.digitLEDRed.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDRed.Text = "Error";
+            this.digitLEDRed.ToolTipText = "Error";
+            // 
+            // digitLEDAmber
+            // 
+            this.digitLEDAmber.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.digitLEDAmber.Enabled = false;
+            this.digitLEDAmber.Image = global::TotalSmartCoding.Properties.Resources.Alarm_Warning;
+            this.digitLEDAmber.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.digitLEDAmber.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.digitLEDAmber.Name = "digitLEDAmber";
+            this.digitLEDAmber.Size = new System.Drawing.Size(52, 52);
+            this.digitLEDAmber.Text = "toolStripButton4";
+            this.digitLEDAmber.ToolTipText = "Amber LED";
+            this.digitLEDAmber.Visible = false;
             // 
             // scannerStatusbox
             // 
@@ -1896,7 +1896,7 @@
             this.toolStripLED.Location = new System.Drawing.Point(0, 0);
             this.toolStripLED.Name = "toolStripLED";
             this.toolStripLED.Padding = new System.Windows.Forms.Padding(0);
-            this.toolStripLED.Size = new System.Drawing.Size(238, 1742);
+            this.toolStripLED.Size = new System.Drawing.Size(238, 1766);
             this.toolStripLED.TabIndex = 0;
             this.toolStripLED.Text = "toolStrip13";
             // 
@@ -1915,7 +1915,7 @@
             // labelLEDPackIgnore
             // 
             this.labelLEDPackIgnore.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLEDPackIgnore.ForeColor = System.Drawing.Color.Firebrick;
+            this.labelLEDPackIgnore.ForeColor = System.Drawing.Color.Orange;
             this.labelLEDPackIgnore.Name = "labelLEDPackIgnore";
             this.labelLEDPackIgnore.Size = new System.Drawing.Size(237, 152);
             this.labelLEDPackIgnore.Text = "   ";
@@ -1940,7 +1940,7 @@
             // labelLEDCartonPending
             // 
             this.labelLEDCartonPending.Font = new System.Drawing.Font("Arial Narrow", 78F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLEDCartonPending.ForeColor = System.Drawing.Color.Firebrick;
+            this.labelLEDCartonPending.ForeColor = System.Drawing.Color.Orange;
             this.labelLEDCartonPending.Name = "labelLEDCartonPending";
             this.labelLEDCartonPending.Size = new System.Drawing.Size(237, 152);
             this.labelLEDCartonPending.Text = "   ";
@@ -2359,30 +2359,30 @@
             this.splitDigit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitDigit)).EndInit();
             this.splitDigit.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.splitPack.Panel1.ResumeLayout(false);
             this.splitPack.Panel1.PerformLayout();
             this.splitPack.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitPack)).EndInit();
             this.splitPack.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
             this.splitCarton.Panel1.ResumeLayout(false);
             this.splitCarton.Panel1.PerformLayout();
             this.splitCarton.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitCarton)).EndInit();
             this.splitCarton.ResumeLayout(false);
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
+            this.toolStrip7.ResumeLayout(false);
+            this.toolStrip7.PerformLayout();
             this.splitPallet.Panel1.ResumeLayout(false);
             this.splitPallet.Panel1.PerformLayout();
             this.splitPallet.Panel2.ResumeLayout(false);
             this.splitPallet.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitPallet)).EndInit();
             this.splitPallet.ResumeLayout(false);
-            this.toolStrip7.ResumeLayout(false);
-            this.toolStrip7.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.splitContainerMaster.Panel1.ResumeLayout(false);

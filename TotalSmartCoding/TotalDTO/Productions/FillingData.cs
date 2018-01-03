@@ -33,6 +33,9 @@ namespace TotalDTO.Productions
         private int shelflife;
         private bool isPailLabel;
 
+        private string warehouseCode;
+        private string warehouseAPICode;
+
         private string batchCode;
         private string lotNumber;
         private DateTime entryDate;
@@ -133,6 +136,19 @@ namespace TotalDTO.Productions
         }
 
 
+        public string WarehouseCode
+        {
+            get { return this.warehouseCode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.warehouseCode, o => o.WarehouseCode, value); }
+        }
+
+        public string WarehouseAPICode
+        {
+            get { return this.warehouseAPICode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.warehouseAPICode, o => o.WarehouseAPICode, value); }
+        }
+
+
         //-------------------------
         private int batchID;
         public int BatchID
@@ -187,7 +203,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextDigitNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 5)
+                    if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextDigitNo, o => o.NextDigitNo, value);
                     }
@@ -208,7 +224,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextPackNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 5)
+                    if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextPackNo, o => o.NextPackNo, value);
                     }
@@ -229,7 +245,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextCartonNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 5)
+                    if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextCartonNo, o => o.NextCartonNo, value);
                     }
@@ -251,7 +267,7 @@ namespace TotalDTO.Productions
                 if (value != this.nextPalletNo)
                 {
                     int intValue = 0;
-                    if (int.TryParse(value, out intValue) && value.Length == 5)
+                    if (int.TryParse(value, out intValue) && value.Length == 6)
                     {
                         ApplyPropertyChange<FillingData, string>(ref this.nextPalletNo, o => o.NextPalletNo, value);
                     }
@@ -373,14 +389,19 @@ namespace TotalDTO.Productions
 
 
 
-        public string FirstLineA1(bool isReadableText)
+        public string FirstLineA1(bool isReadableText, bool yyyy)
         {
-            return this.EntryDate.AddMonths(this.Shelflife).ToString("ddMMyy");
+            return isReadableText ? this.EntryDate.AddMonths(this.Shelflife).ToString(yyyy ? "ddMMyyyy" : "ddMMyy") : "";
         }
 
         public string FirstLineA2(bool isReadableText)
         {
-            return this.FillingLineFactoryCode + this.FillingLineCode + ((this.SettingDate.Subtract(this.EntryDate).Days + 1).ToString("N0").Substring(0, 1));
+            return this.FillingLineCode + this.FillingLineFactoryCode;
+        }
+
+        public string FirstLineA2B(bool isReadableText)
+        {
+            return this.WarehouseAPICode + this.CommodityAPICode;
         }
 
 
@@ -391,12 +412,12 @@ namespace TotalDTO.Productions
 
         public string SecondLineA2(bool isReadableText)
         {
-            return "";//this.CommodityAPICode
+            return "";
         }
 
         public string ThirdLineA1(bool isReadableText)
         {
-            return this.BatchCode.Substring(this.BatchCode.Length - 4, 4) + this.LotNumber;
+            return this.BatchCode + this.LotNumber;
         }
 
     }
