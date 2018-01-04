@@ -105,7 +105,7 @@ namespace TotalSmartCoding.Views.Productions
                 customTabBatch.DisplayStyle = TabStyle.VisualStudio;
                 customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
-                customTabBatch.TabPages.Add("Batch", "Batch Information    ");
+                customTabBatch.TabPages.Add("Batch", "Lot Details    ");
                 customTabBatch.TabPages[0].Controls.Add(this.layoutMaster);
 
                 this.naviBarMaster.Bands[0].ClientArea.Controls.Add(customTabBatch);
@@ -130,7 +130,7 @@ namespace TotalSmartCoding.Views.Productions
         Binding bindingRemarks;
 
         Binding bindingCommodityID;
-        Binding bindingWarehouseID;
+        Binding bindingBatchTypeID;
 
         protected override void InitializeCommonControlBinding()
         {
@@ -154,11 +154,11 @@ namespace TotalSmartCoding.Views.Productions
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
-            WarehouseAPIs warehouseAPIs = new WarehouseAPIs(CommonNinject.Kernel.Get<IWarehouseAPIRepository>());
-            this.combexWarehouseID.DataSource = warehouseAPIs.GetWarehouseBases();
-            this.combexWarehouseID.DisplayMember = CommonExpressions.PropertyName<WarehouseBase>(p => p.CodeAPICode);
-            this.combexWarehouseID.ValueMember = CommonExpressions.PropertyName<WarehouseBase>(p => p.WarehouseID);
-            this.bindingWarehouseID = this.combexWarehouseID.DataBindings.Add("SelectedValue", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.WarehouseID), true, DataSourceUpdateMode.OnPropertyChanged);
+            BatchTypeAPIs batchTypeAPIs = new BatchTypeAPIs(CommonNinject.Kernel.Get<IBatchTypeAPIRepository>());
+            this.combexBatchTypeID.DataSource = batchTypeAPIs.GetBatchTypeBases();
+            this.combexBatchTypeID.DisplayMember = CommonExpressions.PropertyName<BatchTypeBase>(p => p.CodeName);
+            this.combexBatchTypeID.ValueMember = CommonExpressions.PropertyName<BatchTypeBase>(p => p.BatchTypeID);
+            this.bindingBatchTypeID = this.combexBatchTypeID.DataBindings.Add("SelectedValue", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.BatchTypeID), true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -171,7 +171,7 @@ namespace TotalSmartCoding.Views.Productions
             this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingCommodityID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-            this.bindingWarehouseID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingBatchTypeID.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.fastBatchIndex.AboutToCreateGroups += fastBatchIndex_AboutToCreateGroups;
 

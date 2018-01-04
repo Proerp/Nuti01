@@ -51,6 +51,8 @@
     <Compile Include="Extensions\ObjectExtension.cs" />
     <Compile Include="Helpers\ISqlRoutines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Commons\IBatchStatusRepository.cs" />
+    <Compile Include="Repositories\Commons\IBatchTypeRepository.cs" />
     <Compile Include="Repositories\Commons\IBinLocationRepository.cs" />
     <Compile Include="Repositories\Commons\ICommodityCategoryRepository.cs" />
     <Compile Include="Repositories\Commons\ICommodityRepository.cs" />

@@ -129,10 +129,10 @@ namespace TotalSmartCoding.Views.Productions
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
-            WarehouseAPIs warehouseAPIs = new WarehouseAPIs(CommonNinject.Kernel.Get<IWarehouseAPIRepository>());
-            this.combexBatchStatusID.DataSource = warehouseAPIs.GetWarehouseBases();
-            this.combexBatchStatusID.DisplayMember = CommonExpressions.PropertyName<WarehouseBase>(p => p.CodeAPICode);
-            this.combexBatchStatusID.ValueMember = CommonExpressions.PropertyName<WarehouseBase>(p => p.WarehouseID);
+            BatchStatusAPIs batchStatusAPIs = new BatchStatusAPIs(CommonNinject.Kernel.Get<IBatchStatusAPIRepository>());
+            this.combexBatchStatusID.DataSource = batchStatusAPIs.GetBatchStatusBases();
+            this.combexBatchStatusID.DisplayMember = CommonExpressions.PropertyName<BatchStatusBase>(p => p.Code);
+            this.combexBatchStatusID.ValueMember = CommonExpressions.PropertyName<BatchStatusBase>(p => p.BatchStatusID);
             this.bindingBatchStatusID = this.combexBatchStatusID.DataBindings.Add("SelectedValue", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.BatchStatusID), true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);

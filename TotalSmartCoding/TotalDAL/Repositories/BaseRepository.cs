@@ -108,6 +108,16 @@ namespace TotalDAL.Repositories
 
             //return;
 
+            Helpers.SqlProgrammability.Commons.BatchType batchType = new Helpers.SqlProgrammability.Commons.BatchType(totalSmartCodingEntities);
+            batchType.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Commons.BatchStatus batchStatus = new Helpers.SqlProgrammability.Commons.BatchStatus(totalSmartCodingEntities);
+            batchStatus.RestoreProcedure();
+
+            //return;
+
             Helpers.SqlProgrammability.Productions.Pack pack = new Helpers.SqlProgrammability.Productions.Pack(totalSmartCodingEntities);
             pack.RestoreProcedure();
 

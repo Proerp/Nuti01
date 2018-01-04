@@ -26,7 +26,9 @@ namespace TotalModel.Models
         public string Code { get; set; }
         public string LotNumber { get; set; }
         public int FillingLineID { get; set; }
+        public int BatchMasterID { get; set; }
         public int CommodityID { get; set; }
+        public int BatchTypeID { get; set; }
         public int LocationID { get; set; }
         public string NextPackNo { get; set; }
         public string NextCartonNo { get; set; }
@@ -38,14 +40,12 @@ namespace TotalModel.Models
         public bool IsDefault { get; set; }
         public bool InActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
-        public int WarehouseID { get; set; }
-        public int BatchMasterID { get; set; }
     
+        public virtual BatchMaster BatchMaster { get; set; }
+        public virtual BatchType BatchType { get; set; }
         public virtual Commodity Commodity { get; set; }
         public virtual FillingLine FillingLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
-        public virtual BatchMaster BatchMaster { get; set; }
     }
 }

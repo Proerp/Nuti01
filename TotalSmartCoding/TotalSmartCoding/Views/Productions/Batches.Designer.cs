@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Batches));
             this.layoutMaster = new System.Windows.Forms.TableLayoutPanel();
-            this.combexWarehouseID = new CustomControls.CombexBox();
+            this.combexBatchTypeID = new CustomControls.CombexBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,11 +70,9 @@
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvWarehouseAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvBatchTypeCodeName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCartonQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCartonLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvNextPackNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvNextCartonNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvNextPalletNo = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -96,7 +94,7 @@
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.layoutMaster.Controls.Add(this.combexWarehouseID, 1, 12);
+            this.layoutMaster.Controls.Add(this.combexBatchTypeID, 1, 12);
             this.layoutMaster.Controls.Add(this.label1, 1, 19);
             this.layoutMaster.Controls.Add(this.label6, 1, 1);
             this.layoutMaster.Controls.Add(this.label2, 1, 3);
@@ -147,19 +145,19 @@
             this.layoutMaster.Size = new System.Drawing.Size(378, 637);
             this.layoutMaster.TabIndex = 62;
             // 
-            // combexWarehouseID
+            // combexBatchTypeID
             // 
-            this.combexWarehouseID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.combexWarehouseID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.combexWarehouseID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexWarehouseID.Editable = true;
-            this.combexWarehouseID.FormattingEnabled = true;
-            this.combexWarehouseID.Location = new System.Drawing.Point(33, 350);
-            this.combexWarehouseID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.combexWarehouseID.Name = "combexWarehouseID";
-            this.combexWarehouseID.ReadOnly = false;
-            this.combexWarehouseID.Size = new System.Drawing.Size(319, 28);
-            this.combexWarehouseID.TabIndex = 74;
+            this.combexBatchTypeID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.combexBatchTypeID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.combexBatchTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.combexBatchTypeID.Editable = true;
+            this.combexBatchTypeID.FormattingEnabled = true;
+            this.combexBatchTypeID.Location = new System.Drawing.Point(33, 350);
+            this.combexBatchTypeID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexBatchTypeID.Name = "combexBatchTypeID";
+            this.combexBatchTypeID.ReadOnly = false;
+            this.combexBatchTypeID.Size = new System.Drawing.Size(319, 28);
+            this.combexBatchTypeID.TabIndex = 74;
             // 
             // label1
             // 
@@ -262,7 +260,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(322, 20);
             this.label8.TabIndex = 68;
-            this.label8.Text = "Item Type [N, L, T)";
+            this.label8.Text = "Type: N, R, T";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // dateTimexEntryDate
@@ -520,11 +518,9 @@
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityCode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityAPICode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityName);
-            this.fastBatchIndex.AllColumns.Add(this.olvWarehouseAPICode);
+            this.fastBatchIndex.AllColumns.Add(this.olvBatchTypeCodeName);
             this.fastBatchIndex.AllColumns.Add(this.olvPackQuantity);
             this.fastBatchIndex.AllColumns.Add(this.olvPackLineVolume);
-            this.fastBatchIndex.AllColumns.Add(this.olvCartonQuantity);
-            this.fastBatchIndex.AllColumns.Add(this.olvCartonLineVolume);
             this.fastBatchIndex.AllColumns.Add(this.olvNextPackNo);
             this.fastBatchIndex.AllColumns.Add(this.olvNextCartonNo);
             this.fastBatchIndex.AllColumns.Add(this.olvNextPalletNo);
@@ -537,11 +533,9 @@
             this.olvCommodityCode,
             this.olvCommodityAPICode,
             this.olvCommodityName,
-            this.olvWarehouseAPICode,
+            this.olvBatchTypeCodeName,
             this.olvPackQuantity,
             this.olvPackLineVolume,
-            this.olvCartonQuantity,
-            this.olvCartonLineVolume,
             this.olvNextPackNo,
             this.olvNextCartonNo,
             this.olvNextPalletNo,
@@ -611,49 +605,33 @@
             // 
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.Text = "Desccription";
-            this.olvCommodityName.Width = 168;
+            this.olvCommodityName.Width = 253;
             // 
-            // olvWarehouseAPICode
+            // olvBatchTypeCodeName
             // 
-            this.olvWarehouseAPICode.AspectName = "WarehouseAPICode";
-            this.olvWarehouseAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvWarehouseAPICode.Text = "Type";
-            this.olvWarehouseAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBatchTypeCodeName.AspectName = "BatchTypeCodeName";
+            this.olvBatchTypeCodeName.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBatchTypeCodeName.Text = "Type";
+            this.olvBatchTypeCodeName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBatchTypeCodeName.Width = 67;
             // 
             // olvPackQuantity
             // 
             this.olvPackQuantity.AspectName = "PackQuantity";
             this.olvPackQuantity.AspectToStringFormat = "{0:#,#}";
             this.olvPackQuantity.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvPackQuantity.Text = "Unpacked Qty";
+            this.olvPackQuantity.Text = "Qty";
             this.olvPackQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvPackQuantity.Width = 90;
+            this.olvPackQuantity.Width = 56;
             // 
             // olvPackLineVolume
             // 
             this.olvPackLineVolume.AspectName = "PackLineVolume";
             this.olvPackLineVolume.AspectToStringFormat = "{0:#,##0.00}";
             this.olvPackLineVolume.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvPackLineVolume.Text = "Unpacked Volume";
+            this.olvPackLineVolume.Text = "Volume";
             this.olvPackLineVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvPackLineVolume.Width = 100;
-            // 
-            // olvCartonQuantity
-            // 
-            this.olvCartonQuantity.AspectName = "CartonQuantity";
-            this.olvCartonQuantity.AspectToStringFormat = "{0:#,#}";
-            this.olvCartonQuantity.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvCartonQuantity.Text = "Qty";
-            this.olvCartonQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvCartonQuantity.Width = 45;
-            // 
-            // olvCartonLineVolume
-            // 
-            this.olvCartonLineVolume.AspectName = "CartonLineVolume";
-            this.olvCartonLineVolume.AspectToStringFormat = "{0:#,##0.00}";
-            this.olvCartonLineVolume.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvCartonLineVolume.Text = "Volume";
-            this.olvCartonLineVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvPackLineVolume.Width = 58;
             // 
             // olvNextPackNo
             // 
@@ -774,11 +752,9 @@
         private System.Windows.Forms.ImageList imageList32;
         private BrightIdeasSoftware.OLVColumn olvPackQuantity;
         private BrightIdeasSoftware.OLVColumn olvPackLineVolume;
-        private BrightIdeasSoftware.OLVColumn olvCartonQuantity;
-        private BrightIdeasSoftware.OLVColumn olvCartonLineVolume;
         private System.Windows.Forms.ToolStripButton buttonItems;
-        private CustomControls.CombexBox combexWarehouseID;
-        private BrightIdeasSoftware.OLVColumn olvWarehouseAPICode;
+        private CustomControls.CombexBox combexBatchTypeID;
+        private BrightIdeasSoftware.OLVColumn olvBatchTypeCodeName;
 
     }
 }

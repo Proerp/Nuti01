@@ -81,6 +81,24 @@
     <Compile Include="Models\BatchMasterIndex.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BatchStatus.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchStatusBase.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchStatusIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchType.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchTypeBase.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BatchTypeIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BinLocation.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>

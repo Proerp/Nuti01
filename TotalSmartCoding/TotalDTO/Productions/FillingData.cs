@@ -33,8 +33,7 @@ namespace TotalDTO.Productions
         private int shelflife;
         private bool isPailLabel;
 
-        private string warehouseCode;
-        private string warehouseAPICode;
+        private string batchTypeCode;
 
         private string batchCode;
         private string lotNumber;
@@ -136,16 +135,10 @@ namespace TotalDTO.Productions
         }
 
 
-        public string WarehouseCode
+        public string BatchTypeCode
         {
-            get { return this.warehouseCode; }
-            set { ApplyPropertyChange<FillingData, string>(ref this.warehouseCode, o => o.WarehouseCode, value); }
-        }
-
-        public string WarehouseAPICode
-        {
-            get { return this.warehouseAPICode; }
-            set { ApplyPropertyChange<FillingData, string>(ref this.warehouseAPICode, o => o.WarehouseAPICode, value); }
+            get { return this.batchTypeCode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.batchTypeCode, o => o.BatchTypeCode, value); }
         }
 
 
@@ -401,7 +394,7 @@ namespace TotalDTO.Productions
 
         public string FirstLineA2B(bool isReadableText)
         {
-            return this.WarehouseAPICode + this.CommodityAPICode;
+            return this.BatchTypeCode + this.CommodityAPICode;
         }
 
 

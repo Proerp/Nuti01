@@ -162,6 +162,16 @@ namespace TotalSmartCoding.Libraries
                 Kernel.Bind<ICustomerTypeAPIRepository>().To<CustomerTypeAPIRepository>();
                 //Kernel.Bind<CustomerTypeViewModel>().ToSelf();
 
+                //Kernel.Bind<IBatchTypeService>().To<BatchTypeService>();
+                Kernel.Bind<IBatchTypeRepository>().To<BatchTypeRepository>();
+                Kernel.Bind<IBatchTypeAPIRepository>().To<BatchTypeAPIRepository>();
+                //Kernel.Bind<BatchTypeViewModel>().ToSelf();
+
+                //Kernel.Bind<IBatchStatusService>().To<BatchStatusService>();
+                Kernel.Bind<IBatchStatusRepository>().To<BatchStatusRepository>();
+                Kernel.Bind<IBatchStatusAPIRepository>().To<BatchStatusAPIRepository>();
+                //Kernel.Bind<BatchStatusViewModel>().ToSelf();
+
                 //Kernel.Bind<ILocationService>().To<LocationService>();
                 //Kernel.Bind<ILocationRepository>().To<LocationRepository>();
                 Kernel.Bind<ILocationAPIRepository>().To<LocationAPIRepository>();

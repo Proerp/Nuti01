@@ -43,12 +43,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.LotNumber, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
-            queryString = queryString + "                   Warehouses.Code AS WarehouseCode, Warehouses.APICode AS WarehouseAPICode, Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, CummulativePacks.PackQuantity, CummulativePacks.PackLineVolume, CummulativePacks.CartonQuantity, CummulativePacks.CartonLineVolume, Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault, Batches.InActive " + "\r\n";
+            queryString = queryString + "                   BatchTypes.Code AS BatchTypeCode, BatchTypes.Code + '-' + BatchTypes.Name AS BatchTypeCodeName, Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, CummulativePacks.PackQuantity, CummulativePacks.PackLineVolume, Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault, Batches.InActive " + "\r\n";
             queryString = queryString + "       FROM        Batches " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON Batches.FillingLineID = @FillingLineID AND (@ActiveOption = -1 OR Batches.InActive = @ActiveOption) AND ((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Warehouses ON Batches.WarehouseID = Warehouses.WarehouseID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN BatchTypes ON Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
 
-            queryString = queryString + "                   LEFT JOIN (SELECT BatchID, SUM(CASE WHEN CartonID IS NULL THEN 1 ELSE 0 END) AS PackQuantity, SUM(CASE WHEN CartonID IS NULL THEN LineVolume ELSE 0 END) AS PackLineVolume, SUM(CASE WHEN CartonID IS NULL THEN 0 ELSE 1 END) AS CartonQuantity, SUM(CASE WHEN CartonID IS NULL THEN 0 ELSE LineVolume END) AS CartonLineVolume FROM Packs GROUP BY BatchID) CummulativePacks ON Batches.BatchID = CummulativePacks.BatchID " + "\r\n";
+            queryString = queryString + "                   LEFT JOIN (SELECT BatchID, SUM(1) AS PackQuantity, SUM(LineVolume) AS PackLineVolume FROM Packs GROUP BY BatchID) CummulativePacks ON Batches.BatchID = CummulativePacks.BatchID " + "\r\n";
             
 
             queryString = queryString + "    END " + "\r\n";

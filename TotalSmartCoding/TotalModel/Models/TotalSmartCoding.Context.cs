@@ -67,8 +67,10 @@ namespace TotalModel.Models
         public virtual DbSet<WarehouseAdjustment> WarehouseAdjustments { get; set; }
         public virtual DbSet<CommodityCategory> CommodityCategories { get; set; }
         public virtual DbSet<CommodityType> CommodityTypes { get; set; }
-        public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<BatchMaster> BatchMasters { get; set; }
+        public virtual DbSet<BatchStatus> BatchStatuses { get; set; }
+        public virtual DbSet<BatchType> BatchTypes { get; set; }
+        public virtual DbSet<Batch> Batches { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -2182,6 +2184,50 @@ namespace TotalModel.Models
                 new ObjectParameter("ActiveOption", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterIndex>("GetBatchMasterIndexes", userIDParameter, fromDateParameter, toDateParameter, activeOptionParameter);
+        }
+    
+        public virtual ObjectResult<BatchStatusBase> GetBatchStatusBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchStatusBase>("GetBatchStatusBases");
+        }
+    
+        public virtual ObjectResult<BatchStatusIndex> GetBatchStatusIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchStatusIndex>("GetBatchStatusIndexes", userIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<BatchTypeBase> GetBatchTypeBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchTypeBase>("GetBatchTypeBases");
+        }
+    
+        public virtual ObjectResult<BatchTypeIndex> GetBatchTypeIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchTypeIndex>("GetBatchTypeIndexes", userIDParameter, fromDateParameter, toDateParameter);
         }
     }
 }

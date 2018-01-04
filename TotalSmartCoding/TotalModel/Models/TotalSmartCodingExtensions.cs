@@ -729,6 +729,34 @@ namespace TotalModel.Models
     }
 
 
+    public partial class BatchType : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.BatchTypeID; }
+
+        public int LocationID { get; set; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+    }
+
+    public partial class BatchStatus : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.BatchStatusID; }
+
+        public int LocationID { get; set; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+    }
+
     public partial class Pack : IPrimitiveEntity, IBaseEntity
     {
         public int GetID() { return this.PackID; }
