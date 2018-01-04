@@ -120,11 +120,12 @@ namespace TotalSmartCoding.Views.Productions
 
             this.bindingRemarks = this.textexRemarks.DataBindings.Add("Text", this.batchMasterViewModel, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged);
 
+            this.textexCommodityAPICode.DataBindings.Add("Text", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityAPICode), true);
             this.textexCommodityName.DataBindings.Add("Text", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityName), true);
 
             CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
             this.combexCommodityID.DataSource = commodityAPIs.GetCommodityBases();
-            this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CodeAPICode);
+            this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 

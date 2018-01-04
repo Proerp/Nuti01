@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BatchMasters));
             this.layoutMaster = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textexCommodityAPICode = new CustomControls.TextexBox();
             this.numericPlannedQuantity = new CustomControls.NumericBox();
             this.label12 = new System.Windows.Forms.Label();
             this.combexBatchStatusID = new CustomControls.CombexBox();
@@ -83,28 +85,32 @@
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.layoutMaster.Controls.Add(this.numericPlannedQuantity, 1, 10);
-            this.layoutMaster.Controls.Add(this.label12, 1, 9);
-            this.layoutMaster.Controls.Add(this.combexBatchStatusID, 1, 12);
-            this.layoutMaster.Controls.Add(this.label1, 1, 13);
+            this.layoutMaster.Controls.Add(this.label4, 1, 7);
+            this.layoutMaster.Controls.Add(this.textexCommodityAPICode, 1, 8);
+            this.layoutMaster.Controls.Add(this.numericPlannedQuantity, 1, 12);
+            this.layoutMaster.Controls.Add(this.label12, 1, 11);
+            this.layoutMaster.Controls.Add(this.combexBatchStatusID, 1, 14);
+            this.layoutMaster.Controls.Add(this.label1, 1, 15);
             this.layoutMaster.Controls.Add(this.label6, 1, 1);
             this.layoutMaster.Controls.Add(this.label2, 1, 3);
             this.layoutMaster.Controls.Add(this.label14, 1, 5);
-            this.layoutMaster.Controls.Add(this.label8, 1, 11);
+            this.layoutMaster.Controls.Add(this.label8, 1, 13);
             this.layoutMaster.Controls.Add(this.dateTimexEntryDate, 1, 2);
             this.layoutMaster.Controls.Add(this.textexCode, 1, 4);
             this.layoutMaster.Controls.Add(this.combexCommodityID, 1, 6);
-            this.layoutMaster.Controls.Add(this.textexCommodityName, 1, 8);
-            this.layoutMaster.Controls.Add(this.textexRemarks, 1, 14);
-            this.layoutMaster.Controls.Add(this.label3, 1, 7);
+            this.layoutMaster.Controls.Add(this.textexCommodityName, 1, 10);
+            this.layoutMaster.Controls.Add(this.textexRemarks, 1, 16);
+            this.layoutMaster.Controls.Add(this.label3, 1, 9);
             this.layoutMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutMaster.Location = new System.Drawing.Point(0, 0);
             this.layoutMaster.Margin = new System.Windows.Forms.Padding(0);
             this.layoutMaster.Name = "layoutMaster";
             this.layoutMaster.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.layoutMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.layoutMaster.RowCount = 15;
+            this.layoutMaster.RowCount = 17;
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -122,12 +128,34 @@
             this.layoutMaster.Size = new System.Drawing.Size(378, 637);
             this.layoutMaster.TabIndex = 62;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(30, 208);
+            this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(322, 20);
+            this.label4.TabIndex = 104;
+            this.label4.Text = "Short Code";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // textexCommodityAPICode
+            // 
+            this.textexCommodityAPICode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexCommodityAPICode.Editable = false;
+            this.textexCommodityAPICode.Location = new System.Drawing.Point(33, 230);
+            this.textexCommodityAPICode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexCommodityAPICode.Name = "textexCommodityAPICode";
+            this.textexCommodityAPICode.Size = new System.Drawing.Size(319, 27);
+            this.textexCommodityAPICode.TabIndex = 3;
+            // 
             // numericPlannedQuantity
             // 
-            this.numericPlannedQuantity.DecimalPlaces = 2;
             this.numericPlannedQuantity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericPlannedQuantity.Editable = true;
-            this.numericPlannedQuantity.Location = new System.Drawing.Point(33, 290);
+            this.numericPlannedQuantity.Location = new System.Drawing.Point(33, 350);
             this.numericPlannedQuantity.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.numericPlannedQuantity.Maximum = new decimal(new int[] {
             1410065408,
@@ -136,14 +164,14 @@
             0});
             this.numericPlannedQuantity.Name = "numericPlannedQuantity";
             this.numericPlannedQuantity.Size = new System.Drawing.Size(319, 27);
-            this.numericPlannedQuantity.TabIndex = 102;
+            this.numericPlannedQuantity.TabIndex = 5;
             this.numericPlannedQuantity.ThousandsSeparator = true;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(30, 268);
+            this.label12.Location = new System.Drawing.Point(30, 328);
             this.label12.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(322, 20);
@@ -158,19 +186,19 @@
             this.combexBatchStatusID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexBatchStatusID.Editable = true;
             this.combexBatchStatusID.FormattingEnabled = true;
-            this.combexBatchStatusID.Location = new System.Drawing.Point(33, 350);
+            this.combexBatchStatusID.Location = new System.Drawing.Point(33, 410);
             this.combexBatchStatusID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.combexBatchStatusID.Name = "combexBatchStatusID";
             this.combexBatchStatusID.ReadOnly = false;
             this.combexBatchStatusID.Size = new System.Drawing.Size(319, 28);
-            this.combexBatchStatusID.TabIndex = 74;
+            this.combexBatchStatusID.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 389);
+            this.label1.Location = new System.Drawing.Point(30, 449);
             this.label1.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(322, 20);
@@ -222,12 +250,12 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(30, 328);
+            this.label8.Location = new System.Drawing.Point(30, 388);
             this.label8.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(322, 20);
             this.label8.TabIndex = 68;
-            this.label8.Text = "Item Type [N, L, T)";
+            this.label8.Text = "Status";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // dateTimexEntryDate
@@ -241,7 +269,7 @@
             this.dateTimexEntryDate.Name = "dateTimexEntryDate";
             this.dateTimexEntryDate.ReadOnly = false;
             this.dateTimexEntryDate.Size = new System.Drawing.Size(319, 27);
-            this.dateTimexEntryDate.TabIndex = 69;
+            this.dateTimexEntryDate.TabIndex = 0;
             // 
             // textexCode
             // 
@@ -251,7 +279,7 @@
             this.textexCode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexCode.Name = "textexCode";
             this.textexCode.Size = new System.Drawing.Size(319, 27);
-            this.textexCode.TabIndex = 70;
+            this.textexCode.TabIndex = 1;
             // 
             // combexCommodityID
             // 
@@ -265,34 +293,34 @@
             this.combexCommodityID.Name = "combexCommodityID";
             this.combexCommodityID.ReadOnly = false;
             this.combexCommodityID.Size = new System.Drawing.Size(319, 28);
-            this.combexCommodityID.TabIndex = 72;
+            this.combexCommodityID.TabIndex = 2;
             // 
             // textexCommodityName
             // 
             this.textexCommodityName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityName.Editable = false;
-            this.textexCommodityName.Location = new System.Drawing.Point(33, 230);
+            this.textexCommodityName.Location = new System.Drawing.Point(33, 290);
             this.textexCommodityName.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexCommodityName.Name = "textexCommodityName";
             this.textexCommodityName.Size = new System.Drawing.Size(319, 27);
-            this.textexCommodityName.TabIndex = 73;
+            this.textexCommodityName.TabIndex = 4;
             // 
             // textexRemarks
             // 
             this.textexRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexRemarks.Editable = true;
-            this.textexRemarks.Location = new System.Drawing.Point(33, 411);
+            this.textexRemarks.Location = new System.Drawing.Point(33, 471);
             this.textexRemarks.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexRemarks.Name = "textexRemarks";
             this.textexRemarks.Size = new System.Drawing.Size(319, 27);
-            this.textexRemarks.TabIndex = 78;
+            this.textexRemarks.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(30, 208);
+            this.label3.Location = new System.Drawing.Point(30, 268);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(322, 20);
@@ -606,6 +634,8 @@
         private BrightIdeasSoftware.OLVColumn olvBatchStatusCode;
         private System.Windows.Forms.Label label12;
         private CustomControls.NumericBox numericPlannedQuantity;
+        private System.Windows.Forms.Label label4;
+        private CustomControls.TextexBox textexCommodityAPICode;
 
     }
 }
