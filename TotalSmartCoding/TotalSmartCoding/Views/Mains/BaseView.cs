@@ -503,7 +503,7 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     this.myController.Void(this.baseDTO.GetID());
 
-                    if (this.VoidCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, (this.baseDTO is BatchViewModel ? "Dừng sản xuất batch này " : "Are you sure you want to " + (this.baseDTO.Voidable ? "void" : "un-void") + " this entry data") + "?" + "\r\n\r\n" + "Important: this action cannot be undone." + "\r\n\r\n\r\n\r\n" + "Lưu ý: Sau khi nhấn Yes, dữ liệu sẽ được vô hiệu vĩnh viễn.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
+                    if (this.VoidCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, (this.baseDTO is BatchViewModel || this.baseDTO is BatchMasterViewModel ? "Dừng sản xuất batch này " : "Are you sure you want to " + (this.baseDTO.Voidable ? "void" : "un-void") + " this entry data") + "?" + "\r\n\r\n" + "Important: this action cannot be undone." + "\r\n\r\n\r\n\r\n" + "Lưu ý: Sau khi nhấn Yes, dữ liệu sẽ được vô hiệu vĩnh viễn.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.Yes)
                         if (this.myController.VoidConfirmed())
                         {
                             this.VoidMore(this.baseDTO.GetID());

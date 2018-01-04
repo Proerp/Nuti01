@@ -85,7 +85,7 @@ namespace TotalSmartCoding.Views.Productions
                 customTabBatchMaster.DisplayStyle = TabStyle.VisualStudio;
                 customTabBatchMaster.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
-                customTabBatchMaster.TabPages.Add("BatchMaster", "BatchMaster Information    ");
+                customTabBatchMaster.TabPages.Add("BatchMaster", "Batch Information    ");
                 customTabBatchMaster.TabPages[0].Controls.Add(this.layoutMaster);
 
                 this.naviBarMaster.Bands[0].ClientArea.Controls.Add(customTabBatchMaster);
