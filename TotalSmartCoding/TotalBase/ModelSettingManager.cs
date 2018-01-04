@@ -13,6 +13,8 @@ namespace TotalBase
             {
                 case GlobalEnums.NmvnTaskID.Batch:
                     return "FI";
+                case GlobalEnums.NmvnTaskID.BatchMaster:
+                    return "FM";
 
                 case GlobalEnums.NmvnTaskID.PurchaseOrder:
                     return "D";

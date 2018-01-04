@@ -62,6 +62,7 @@
             UnKnown = 0,
 
             Batch = 28106,
+            BatchMaster = 28106888,
 
             Pack = 686868,
             Carton = 686868,

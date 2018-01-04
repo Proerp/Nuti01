@@ -714,6 +714,20 @@ namespace TotalModel.Models
         public int OrganizationalUnitID { get; set; }
     }
 
+    public partial class BatchMasterIndex : IBaseIndex
+    {
+        public int Id { get { return this.BatchMasterID; } }
+    }
+
+    public partial class BatchMaster : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.BatchMasterID; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+    }
+
 
     public partial class Pack : IPrimitiveEntity, IBaseEntity
     {

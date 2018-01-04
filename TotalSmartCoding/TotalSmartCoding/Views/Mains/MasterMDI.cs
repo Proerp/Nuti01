@@ -115,6 +115,14 @@ namespace TotalSmartCoding.Views.Mains
                         this.panelTopRight.Visible = false;
                         this.panelTopLeft.Dock = DockStyle.Fill;
                         break;
+                    case GlobalEnums.NmvnTaskID.BatchMaster:
+                        this.Size = new Size(1388, 740);
+                        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+                        this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal;
+
+                        this.panelTopRight.Visible = false;
+                        this.panelTopLeft.Dock = DockStyle.Fill;
+                        break;
                     case GlobalEnums.NmvnTaskID.Commodity:
                         this.Size = new Size(1388, 740);
                         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -480,19 +488,19 @@ namespace TotalSmartCoding.Views.Mains
                     this.buttonExport.Enabled = exportable;//&& !isDirty && readonlyMode;
                     this.toolStripSeparatorImport.Visible = importable || exportable;
 
-                    this.buttonApprove.Visible = sender is Batches ? false : (approvable || unapprovable);
+                    this.buttonApprove.Visible = (sender is Batches || sender is BatchMasters) ? false : (approvable || unapprovable);
                     this.buttonApprove.Enabled = (approvable || unapprovable) && readonlyMode;
                     this.buttonApprove.Text = approvable ? "Verify" : "Un-verify";
                     this.buttonApprove.Image = approvable ? Resources.Check_Saki_Ok : Resources.Cross_UnVerify;
 
-                    this.toolStripSeparatorApprove.Visible = sender is Batches ? false : (approvable || unapprovable);
+                    this.toolStripSeparatorApprove.Visible = (sender is Batches || sender is BatchMasters) ? false : (approvable || unapprovable);
 
-                    this.buttonVoid.Visible = sender is Batches ? false : (voidable || unvoidable);
+                    this.buttonVoid.Visible = (sender is Batches || sender is BatchMasters) ? false : (voidable || unvoidable);
                     this.buttonVoid.Enabled = (voidable || unvoidable) && readonlyMode;
                     this.buttonVoid.Text = voidable ? "Void" : "Un-void";
                     this.buttonVoid.Image = voidable ? Resources.Void_24 : Resources.Cross_UnVerify;
 
-                    this.toolStripSeparatorVoid.Visible = sender is Batches ? false : (voidable || unvoidable);
+                    this.toolStripSeparatorVoid.Visible = (sender is Batches || sender is BatchMasters) ? false : (voidable || unvoidable);
 
                     this.buttonPrint.Enabled = printable;
                     this.buttonPrint.Visible = printVisible;
@@ -547,8 +555,6 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     if (sender.Equals(this.comboFilterTexts))
                         toolstripChild.ApplyFilter(this.comboFilterTexts.Text);
-                    if (sender.Equals(this.comboDetailFilterTexts))
-                        toolstripChild.ApplyDetailFilter(this.comboDetailFilterTexts.Text);
                 }
             }
             catch (Exception exception)
@@ -561,8 +567,6 @@ namespace TotalSmartCoding.Views.Mains
         {
             if (sender.Equals(this.buttonClearFilters))
                 this.comboFilterTexts.Text = "";
-            if (sender.Equals(this.buttonClearDetailFilters))
-                this.comboDetailFilterTexts.Text = "";
         }
 
 

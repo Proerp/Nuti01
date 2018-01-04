@@ -270,7 +270,9 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Commodity, new Commodities());
+                //MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Commodity, new Commodities());
+
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.BatchMaster, new BatchMasters());
 
                 masterMDI.ShowDialog();
                 masterMDI.Dispose();

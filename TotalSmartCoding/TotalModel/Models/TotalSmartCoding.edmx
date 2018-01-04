@@ -14,6 +14,7 @@
           <Property Name="Reference" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LotNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="BatchMasterID" Type="int" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
@@ -21,6 +22,26 @@
           <Property Name="NextPackNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NextCartonNo" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="NextPalletNo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="InActiveDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BatchMasters">
+          <Key>
+            <PropertyRef Name="BatchMasterID" />
+          </Key>
+          <Property Name="BatchMasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="30" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="BatchStatusID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="PlannedQuantity" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -828,6 +849,18 @@
           <Property Name="IsDefault" Type="bit" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_Batches_BatchMasters">
+          <End Role="BatchMasters" Type="Self.BatchMasters" Multiplicity="1" />
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatchMasters">
+              <PropertyRef Name="BatchMasterID" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="BatchMasterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Batches_Commodities">
           <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
           <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
@@ -2064,6 +2097,17 @@
         <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchMasterEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BatchMasterPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BatchMasterToggleVoid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="InActive" Type="bit" Mode="In" />
+          <Parameter Name="VoidTypeID" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -2162,6 +2206,12 @@
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
+          <Parameter Name="ActiveOption" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBatchMasterIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
           <Parameter Name="ActiveOption" Type="int" Mode="In" />
         </Function>
         <Function Name="GetBinLocationBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2650,6 +2700,7 @@
         </Function>
         <EntityContainer Name="TotalSmartCodingModelStoreContainer">
           <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BatchMasters" EntityType="Self.BatchMasters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BinLocations" EntityType="Self.BinLocations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cartons" EntityType="Self.Cartons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commodities" EntityType="Self.Commodities" Schema="dbo" store:Type="Tables" />
@@ -2690,6 +2741,10 @@
           <EntitySet Name="WarehouseAdjustments" EntityType="Self.WarehouseAdjustments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WarehouseAdjustmentTypes" EntityType="Self.WarehouseAdjustmentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Batches_BatchMasters" Association="Self.FK_Batches_BatchMasters">
+            <End Role="BatchMasters" EntitySet="BatchMasters" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
           <AssociationSet Name="FK_Batches_Commodities" Association="Self.FK_Batches_Commodities">
             <End Role="Commodities" EntitySet="Commodities" />
             <End Role="Batches" EntitySet="Batches" />
@@ -4149,6 +4204,28 @@
           </FunctionImport>
           <AssociationSet Name="FK_Batches_Warehouses" Association="TotalSmartCodingModel.FK_Batches_Warehouses">
             <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <FunctionImport Name="BatchMasterEditable" ReturnType="Collection(String)">
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchMasterPostSaveValidate" ReturnType="Collection(String)">
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchMasterToggleVoid">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="InActive" Mode="In" Type="Boolean" />
+            <Parameter Name="VoidTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchMasterIndexes" ReturnType="Collection(TotalSmartCodingModel.BatchMasterIndex)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ActiveOption" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="BatchMasters" EntityType="TotalSmartCodingModel.BatchMaster" />
+          <AssociationSet Name="FK_Batches_BatchMasters" Association="TotalSmartCodingModel.FK_Batches_BatchMasters">
+            <End Role="BatchMaster" EntitySet="BatchMasters" />
             <End Role="Batch" EntitySet="Batches" />
           </AssociationSet>
           </EntityContainer>
@@ -7249,6 +7326,8 @@
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="Batch" ToRole="DeliveryAdviceDetail" />
           <Property Name="WarehouseID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartCodingModel.FK_Batches_Warehouses" FromRole="Batch" ToRole="Warehouse" />
+          <Property Name="BatchMasterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BatchMaster" Relationship="TotalSmartCodingModel.FK_Batches_BatchMasters" FromRole="Batch" ToRole="BatchMaster" />
         </EntityType>
         <Association Name="FK_Batches_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -7295,6 +7374,66 @@
             </Principal>
             <Dependent Role="Batch">
               <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="BatchMasterIndex">
+          <Property Type="Int32" Name="BatchMasterID" Nullable="false" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="true" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="BatchMasterCode" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CommodityOfficialCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="CommodityAPICode" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CommodityCartonCode" Nullable="false" MaxLength="60" />
+          <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="3" />
+          <Property Type="Int32" Name="PackPerCarton" Nullable="false" />
+          <Property Type="Int32" Name="CartonPerPallet" Nullable="false" />
+          <Property Type="Int32" Name="Shelflife" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="PackQuantity" Nullable="true" />
+          <Property Type="Decimal" Name="PackLineVolume" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="EditedDate" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="Boolean" Name="InActive" Nullable="false" />
+          <Property Type="Int32" Name="BatchStatusID" Nullable="false" />
+          <Property Type="String" Name="BatchStatusCode" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="PlannedQuantity" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <EntityType Name="BatchMaster">
+          <Key>
+            <PropertyRef Name="BatchMasterID" />
+          </Key>
+          <Property Name="BatchMasterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reference" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="BatchStatusID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="PlannedQuantity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_BatchMasters" FromRole="BatchMaster" ToRole="Batch" />
+        </EntityType>
+        <Association Name="FK_Batches_BatchMasters">
+          <End Type="TotalSmartCodingModel.BatchMaster" Role="BatchMaster" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatchMaster">
+              <PropertyRef Name="BatchMasterID" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="BatchMasterID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9405,6 +9544,7 @@
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="BatchMasterID" ColumnName="BatchMasterID" />
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
@@ -9428,6 +9568,61 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="BatchAddLot" FunctionName="TotalSmartCodingModel.Store.BatchAddLot" />
+          <FunctionImportMapping FunctionImportName="BatchMasterEditable" FunctionName="TotalSmartCodingModel.Store.BatchMasterEditable" />
+          <FunctionImportMapping FunctionImportName="BatchMasterPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.BatchMasterPostSaveValidate" />
+          <FunctionImportMapping FunctionImportName="BatchMasterToggleVoid" FunctionName="TotalSmartCodingModel.Store.BatchMasterToggleVoid" />
+          <FunctionImportMapping FunctionImportName="GetBatchMasterIndexes" FunctionName="TotalSmartCodingModel.Store.GetBatchMasterIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchMasterIndex">
+                <ScalarProperty Name="BatchMasterID" ColumnName="BatchMasterID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="BatchMasterCode" ColumnName="BatchMasterCode" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityOfficialCode" ColumnName="CommodityOfficialCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="CommodityAPICode" ColumnName="CommodityAPICode" />
+                <ScalarProperty Name="CommodityCartonCode" ColumnName="CommodityCartonCode" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="PackPerCarton" ColumnName="PackPerCarton" />
+                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
+                <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+                <ScalarProperty Name="PackLineVolume" ColumnName="PackLineVolume" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="BatchStatusID" ColumnName="BatchStatusID" />
+                <ScalarProperty Name="BatchStatusCode" ColumnName="BatchStatusCode" />
+                <ScalarProperty Name="PlannedQuantity" ColumnName="PlannedQuantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="BatchMasters">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.BatchMaster">
+              <MappingFragment StoreEntitySet="BatchMasters">
+                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PlannedQuantity" ColumnName="PlannedQuantity" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="BatchStatusID" ColumnName="BatchStatusID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="BatchMasterID" ColumnName="BatchMasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -117,6 +117,7 @@
     <Compile Include="Controllers\APIs\Inventories\GoodsIssueAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\WarehouseAdjustmentAPIs.cs" />
+    <Compile Include="Controllers\APIs\Productions\BatchMasterAPIs.cs" />
     <Compile Include="Controllers\APIs\Productions\CartonAPIs.cs" />
     <Compile Include="Controllers\APIs\Productions\ScannerAPIs.cs" />
     <Compile Include="Controllers\APIs\Sales\DeliveryAdviceAPIs.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Controllers\Inventories\GoodsIssueController.cs" />
     <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Controllers\Inventories\WarehouseAdjustmentController.cs" />
+    <Compile Include="Controllers\Productions\BatchMasterController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdviceController.cs" />
     <Compile Include="Controllers\Sales\SalesOrderController.cs" />
     <Compile Include="Controllers\Sales\TransferOrderController.cs" />
@@ -183,6 +185,7 @@
     <Compile Include="ViewModels\Inventories\GoodsReceiptViewModel.cs" />
     <Compile Include="ViewModels\Inventories\PickupViewModel.cs" />
     <Compile Include="ViewModels\Inventories\WarehouseAdjustmentViewModel.cs" />
+    <Compile Include="ViewModels\Productions\BatchMasterViewModel.cs" />
     <Compile Include="ViewModels\Productions\BatchViewModel.cs" />
     <Compile Include="ViewModels\Productions\CartonViewModel.cs" />
     <Compile Include="ViewModels\Productions\PackViewModel.cs" />
@@ -368,6 +371,12 @@
     <Compile Include="Views\Productions\Batches.Designer.cs">
       <DependentUpon>Batches.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Productions\BatchMasters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\BatchMasters.Designer.cs">
+      <DependentUpon>BatchMasters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Productions\QuickView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -522,6 +531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Productions\Batches.resx">
       <DependentUpon>Batches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\BatchMasters.resx">
+      <DependentUpon>BatchMasters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Productions\QuickView.resx">
       <DependentUpon>QuickView.cs</DependentUpon>

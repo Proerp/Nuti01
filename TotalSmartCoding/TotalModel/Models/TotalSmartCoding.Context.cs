@@ -68,6 +68,7 @@ namespace TotalModel.Models
         public virtual DbSet<CommodityCategory> CommodityCategories { get; set; }
         public virtual DbSet<CommodityType> CommodityTypes { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<BatchMaster> BatchMasters { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -2125,6 +2126,62 @@ namespace TotalModel.Models
                 new ObjectParameter("BatchID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchAddLot", batchIDParameter);
+        }
+    
+        public virtual ObjectResult<string> BatchMasterEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchMasterEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> BatchMasterPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchMasterPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int BatchMasterToggleVoid(Nullable<int> entityID, Nullable<bool> inActive, Nullable<int> voidTypeID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var inActiveParameter = inActive.HasValue ?
+                new ObjectParameter("InActive", inActive) :
+                new ObjectParameter("InActive", typeof(bool));
+    
+            var voidTypeIDParameter = voidTypeID.HasValue ?
+                new ObjectParameter("VoidTypeID", voidTypeID) :
+                new ObjectParameter("VoidTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterToggleVoid", entityIDParameter, inActiveParameter, voidTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<BatchMasterIndex> GetBatchMasterIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> activeOption)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var activeOptionParameter = activeOption.HasValue ?
+                new ObjectParameter("ActiveOption", activeOption) :
+                new ObjectParameter("ActiveOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterIndex>("GetBatchMasterIndexes", userIDParameter, fromDateParameter, toDateParameter, activeOptionParameter);
         }
     }
 }

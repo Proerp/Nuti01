@@ -12,25 +12,22 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Batch
+    public partial class BatchMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Batch()
+        public BatchMaster()
         {
-            this.DeliveryAdviceDetails = new HashSet<DeliveryAdviceDetail>();
+            this.Batches = new HashSet<Batch>();
         }
     
-        public int BatchID { get; set; }
+        public int BatchMasterID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public string Code { get; set; }
-        public string LotNumber { get; set; }
-        public int FillingLineID { get; set; }
         public int CommodityID { get; set; }
+        public int BatchStatusID { get; set; }
         public int LocationID { get; set; }
-        public string NextPackNo { get; set; }
-        public string NextCartonNo { get; set; }
-        public string NextPalletNo { get; set; }
+        public Nullable<decimal> PlannedQuantity { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -38,14 +35,8 @@ namespace TotalModel.Models
         public bool IsDefault { get; set; }
         public bool InActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
-        public int WarehouseID { get; set; }
-        public int BatchMasterID { get; set; }
     
-        public virtual Commodity Commodity { get; set; }
-        public virtual FillingLine FillingLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
-        public virtual BatchMaster BatchMaster { get; set; }
+        public virtual ICollection<Batch> Batches { get; set; }
     }
 }

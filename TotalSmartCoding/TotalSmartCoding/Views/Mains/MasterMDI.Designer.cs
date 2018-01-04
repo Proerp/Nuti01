@@ -83,9 +83,6 @@
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.comboFilterTexts = new System.Windows.Forms.ToolStripComboBox();
             this.buttonClearFilters = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.comboDetailFilterTexts = new System.Windows.Forms.ToolStripComboBox();
-            this.buttonClearDetailFilters = new System.Windows.Forms.ToolStripButton();
             this.naviBarModuleMaster.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -617,10 +614,7 @@
             this.buttonLoading,
             this.toolStripSeparator13,
             this.comboFilterTexts,
-            this.buttonClearFilters,
-            this.toolStripSeparator1,
-            this.comboDetailFilterTexts,
-            this.buttonClearDetailFilters});
+            this.buttonClearFilters});
             this.toolStripTopHead.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripTopHead.Location = new System.Drawing.Point(0, 0);
             this.toolStripTopHead.Name = "toolStripTopHead";
@@ -649,6 +643,7 @@
             this.buttonLockedDate.Name = "buttonLockedDate";
             this.buttonLockedDate.Size = new System.Drawing.Size(36, 52);
             this.buttonLockedDate.ToolTipText = "Lock data readonly";
+            this.buttonLockedDate.Visible = false;
             // 
             // txtLockedDate
             // 
@@ -658,6 +653,7 @@
             this.txtLockedDate.Size = new System.Drawing.Size(108, 55);
             this.txtLockedDate.Text = "01/09/2017";
             this.txtLockedDate.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtLockedDate.Visible = false;
             // 
             // toolStripSeparator12
             // 
@@ -727,30 +723,6 @@
             this.buttonClearFilters.Size = new System.Drawing.Size(52, 52);
             this.buttonClearFilters.ToolTipText = "Clear current filters";
             this.buttonClearFilters.Click += new System.EventHandler(this.buttonClearFilters_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
-            // 
-            // comboDetailFilterTexts
-            // 
-            this.comboDetailFilterTexts.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
-            this.comboDetailFilterTexts.Font = new System.Drawing.Font("Calibri", 10.2F);
-            this.comboDetailFilterTexts.Name = "comboDetailFilterTexts";
-            this.comboDetailFilterTexts.Size = new System.Drawing.Size(318, 55);
-            this.comboDetailFilterTexts.TextChanged += new System.EventHandler(this.comboFilterTexts_TextChanged);
-            // 
-            // buttonClearDetailFilters
-            // 
-            this.buttonClearDetailFilters.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonClearDetailFilters.Image = global::TotalSmartCoding.Properties.Resources.Edit_clear;
-            this.buttonClearDetailFilters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonClearDetailFilters.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonClearDetailFilters.Name = "buttonClearDetailFilters";
-            this.buttonClearDetailFilters.Size = new System.Drawing.Size(52, 52);
-            this.buttonClearDetailFilters.Text = "toolStripButton1";
-            this.buttonClearDetailFilters.Click += new System.EventHandler(this.buttonClearFilters_Click);
             // 
             // MasterMDI
             // 
@@ -844,9 +816,6 @@
         private System.Windows.Forms.ToolStripComboBox comboSearchBarcode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorVoid;
         private System.Windows.Forms.ToolStripButton buttonVoid;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripComboBox comboDetailFilterTexts;
-        private System.Windows.Forms.ToolStripButton buttonClearDetailFilters;
 
     }
 }
