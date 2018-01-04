@@ -14,8 +14,8 @@
           <Property Name="Reference" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LotNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="BatchMasterID" Type="int" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
+          <Property Name="BatchMasterID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
