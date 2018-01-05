@@ -2229,5 +2229,10 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchTypeIndex>("GetBatchTypeIndexes", userIDParameter, fromDateParameter, toDateParameter);
         }
+    
+        public virtual ObjectResult<BatchMasterBase> GetBatchMasterBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterBase>("GetBatchMasterBases");
+        }
     }
 }

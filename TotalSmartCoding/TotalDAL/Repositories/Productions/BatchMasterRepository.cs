@@ -39,6 +39,11 @@ namespace TotalDAL.Repositories.Productions
 
             return new ObjectParameter[] { baseParameters[0], baseParameters[1], baseParameters[2], new ObjectParameter("ActiveOption", (int)(this.RepositoryBag["ActiveOption"] != null ? this.RepositoryBag["ActiveOption"] : GlobalEnums.ActiveOption.Both)) };
         }
+
+        public IList<BatchMasterBase> GetBatchMasterBases()
+        {
+            return this.TotalSmartCodingEntities.GetBatchMasterBases().ToList();
+        }
     }
 
 

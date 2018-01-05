@@ -25,6 +25,14 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.batchID, o => o.BatchID, value); }
         }
 
+        private int batchMasterID;
+        [DefaultValue(null)]
+        public int BatchMasterID
+        {
+            get { return this.batchMasterID; }
+            set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.batchMasterID, o => o.BatchMasterID, value); }
+        }
+
         public override string Reference { get { return this.Code + this.LotNumber; } set { } }
 
         private string code;
@@ -60,6 +68,14 @@ namespace TotalDTO.Productions
         {
             get { return this.batchTypeID; }
             set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.batchTypeID, o => o.BatchTypeID, value); }
+        }
+
+        private string batchStatusCode;
+        [DefaultValue(null)]
+        public string BatchStatusCode
+        {
+            get { return this.batchStatusCode; }
+            set { ApplyPropertyChange<BatchDTO, string>(ref this.batchStatusCode, o => o.BatchStatusCode, value, false); }
         }
 
         private string nextPackNo;
@@ -100,6 +116,14 @@ namespace TotalDTO.Productions
             this.LocationID = GlobalVariables.LocationID;
         }
 
+        private string commodityCode;
+        [DefaultValue(null)]
+        public string CommodityCode
+        {
+            get { return this.commodityCode; }
+            set { ApplyPropertyChange<BatchDTO, string>(ref this.commodityCode, o => o.CommodityCode, value, false); }
+        }
+
         private string commodityName;
         [DefaultValue(null)]
         public string CommodityName
@@ -116,10 +140,71 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchDTO, string>(ref this.commodityAPICode, o => o.CommodityAPICode, value, false); }
         }
 
+        private string commodityCartonCode;
+        [DefaultValue(null)]
+        public string CommodityCartonCode
+        {
+            get { return this.commodityCartonCode; }
+            set { ApplyPropertyChange<BatchDTO, string>(ref this.commodityCartonCode, o => o.CommodityCartonCode, value, false); }
+        }
+
+
+        private decimal volume;
+        public virtual decimal Volume
+        {
+            get { return this.volume; }
+            set { ApplyPropertyChange<BatchDTO, decimal>(ref this.volume, o => o.Volume, Math.Round(value, (int)GlobalEnums.rndVolume)); }
+        }
+
+        private int packPerCarton;
+        public virtual int PackPerCarton
+        {
+            get { return this.packPerCarton; }
+            set { ApplyPropertyChange<BatchDTO, int>(ref this.packPerCarton, o => o.PackPerCarton, value); }
+        }
+
+        private int cartonPerPallet;
+        public virtual int CartonPerPallet
+        {
+            get { return this.cartonPerPallet; }
+            set { ApplyPropertyChange<BatchDTO, int>(ref this.cartonPerPallet, o => o.CartonPerPallet, value); }
+        }
+
+        private int shelflife;
+        public virtual int Shelflife
+        {
+            get { return this.shelflife; }
+            set { ApplyPropertyChange<BatchDTO, int>(ref this.shelflife, o => o.Shelflife, value); }
+        }
+
+        private decimal plannedQuantity;
+        public virtual decimal PlannedQuantity
+        {
+            get { return this.plannedQuantity; }
+            set { ApplyPropertyChange<BatchDTO, decimal>(ref this.plannedQuantity, o => o.PlannedQuantity, value); }
+        }
+
+
+        private decimal packQuantity;
+        public virtual decimal PackQuantity
+        {
+            get { return this.packQuantity; }
+            set { ApplyPropertyChange<BatchDTO, decimal>(ref this.packQuantity, o => o.PackQuantity, value); }
+        }
+
+        private decimal packLineVolume;
+        public virtual decimal PackLineVolume
+        {
+            get { return this.packLineVolume; }
+            set { ApplyPropertyChange<BatchDTO, decimal>(ref this.packLineVolume, o => o.PackLineVolume, value); }
+        }
+
+
         protected override List<ValidationRule> CreateRules()
         {
             List<ValidationRule> validationRules = base.CreateRules(); int value;
             validationRules.Add(new SimpleValidationRule("CommodityID", "Vui lòng chọn mã sản phẩm.", delegate { return this.CommodityID > 0; }));
+            validationRules.Add(new SimpleValidationRule("BatchMasterID", "Vui lòng chọn batch.", delegate { return this.BatchMasterID > 0; }));
             validationRules.Add(new SimpleValidationRule("BatchTypeID", "Vui lòng chọn [N-new], [R-Repack], [T-Trial].", delegate { return this.BatchTypeID > 0; }));
             validationRules.Add(new SimpleValidationRule("Code", "Số batch quy định là 5 ký tự.", delegate { return this.Code != null && this.Code.Length == 5; }));
             validationRules.Add(new SimpleValidationRule("LotNumber", "Số Lot quy định là 1 ký tự.", delegate { return this.LotNumber != null && this.LotNumber.Length == 1 && TotalBase.CommonExpressions.AlphaNumericStringLOTNUMBER(this.LotNumber).Length == 1; }));

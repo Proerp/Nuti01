@@ -25,9 +25,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.BatchMasterToggleVoid();
 
-            this.BatchMasterInitReference(); //NOT USE THIS ANY MORE. NOW: Reference = Code + LotNumber
+            this.BatchMasterInitReference();
 
-            //this.BatchMasterAddLot();
+            this.GetBatchMasterBases();
         }
 
 
@@ -100,26 +100,25 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateTrigger("BatchMasterInitReference", simpleInitReference.CreateQuery());
         }
 
-
-        private void BatchMasterAddLot()
+        private void GetBatchMasterBases()
         {
-            string queryString = " @BatchMasterID int " + "\r\n";
+            string queryString;
+
+            queryString = " " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       DECLARE     @LotNumber nvarchar(10), @NextPackNo nvarchar(10), @NextCartonNo nvarchar(10), @NextPalletNo nvarchar(10) ";
-            queryString = queryString + "       SELECT      @LotNumber = LotNumber, @NextPackNo = NextPackNo, @NextCartonNo = NextCartonNo, @NextPalletNo = NextPalletNo FROM BatchMasters WHERE BatchMasterID = (SELECT MAX(BatchMasterID) FROM BatchMasters WHERE Code = (SELECT Code FROM BatchMasters WHERE BatchMasterID = @BatchMasterID)) ";
-
-            queryString = queryString + "       SELECT      @LotNumber = CHAR(CASE WHEN (ASCII(@LotNumber) >= 49 AND ASCII(@LotNumber) < 57) OR (ASCII(@LotNumber) >= 65 AND ASCII(@LotNumber) < 90) THEN ASCII(@LotNumber) + 1 WHEN ASCII(@LotNumber) = 57 THEN 65 ELSE 97 END), @NextPackNo = RIGHT(CAST(CAST(@NextPackNo AS int) + 1000001 AS varchar), 5), @NextCartonNo = RIGHT(CAST(CAST(@NextCartonNo AS int) + 1000001 AS varchar), 5), @NextPalletNo = RIGHT(CAST(CAST(@NextPalletNo AS int) + 1000001 AS varchar), 5) " + "\r\n";
-
-            queryString = queryString + "       INSERT INTO BatchMasters (EntryDate, Reference, Code, LotNumber, FillingLineID, CommodityID, LocationID, NextPackNo, NextCartonNo, NextPalletNo, Description, Remarks, CreatedDate, EditedDate, IsDefault, InActive, InActiveDate) " + "\r\n";
-            queryString = queryString + "       SELECT      EntryDate, Code + @LotNumber AS Reference, Code, @LotNumber, FillingLineID, CommodityID, LocationID, @NextPackNo, @NextCartonNo, @NextPalletNo, Description, Remarks, GETDATE() AS CreatedDate, GETDATE() AS EditedDate, 0 AS IsDefault, 0 AS InActive, NULL AS InActiveDate " + "\r\n";
+            queryString = queryString + "       SELECT      BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, ISNULL(BatchMasters.PlannedQuantity, 0) AS PlannedQuantity, ISNULL(CummulativePacks.PackQuantity, 0) AS PackQuantity, ISNULL(CummulativePacks.PackLineVolume, 0) AS PackLineVolume, BatchStatuses.Code AS BatchStatusCode, BatchMasters.Remarks, " + "\r\n";
+            queryString = queryString + "                   BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.Shelflife, Commodities.PackPerCarton, Commodities.CartonPerPallet " + "\r\n";
             queryString = queryString + "       FROM        BatchMasters " + "\r\n";
-            queryString = queryString + "       WHERE       BatchMasterID = @BatchMasterID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON BatchMasters.Approved = 1 AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN BatchStatuses ON BatchMasters.BatchStatusID = BatchStatuses.BatchStatusID " + "\r\n";
+            queryString = queryString + "                   LEFT JOIN (SELECT Batches.BatchMasterID, SUM(1) AS PackQuantity, SUM(Packs.LineVolume) AS PackLineVolume FROM Packs INNER JOIN Batches ON Packs.BatchID = Batches.BatchID GROUP BY Batches.BatchMasterID) CummulativePacks ON BatchMasters.BatchMasterID = CummulativePacks.BatchMasterID " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterAddLot", queryString);
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterBases", queryString);
         }
-
-
     }
 }

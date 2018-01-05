@@ -228,6 +228,15 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBatchIndex.Sort(this.olvBatchCode, SortOrder.Descending);
         }
 
+        protected override DialogResult wizardMaster()
+        {
+            BatchWizard batchWizard = new BatchWizard(this.batchViewModel);
+            DialogResult dialogResult = batchWizard.ShowDialog();
+
+            batchWizard.Dispose();
+            return dialogResult;
+        }
+
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.batchAPIs != null) this.Loading();
