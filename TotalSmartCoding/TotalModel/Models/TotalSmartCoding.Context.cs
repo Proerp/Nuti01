@@ -2234,5 +2234,27 @@ namespace TotalModel.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterBase>("GetBatchMasterBases");
         }
+    
+        public virtual ObjectResult<string> BatchMasterApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchMasterApproved", entityIDParameter);
+        }
+    
+        public virtual int BatchMasterToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterToggleApproved", entityIDParameter, approvedParameter);
+        }
     }
 }

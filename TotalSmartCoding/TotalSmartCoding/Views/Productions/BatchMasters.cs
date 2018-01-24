@@ -45,6 +45,8 @@ namespace TotalSmartCoding.Views.Productions
         private BatchMasterAPIs batchMasterAPIs;
         private BatchMasterViewModel batchMasterViewModel { get; set; }
 
+        private CommodityAPIs commodityAPIs { get; set; }
+
         public BatchMasters()
             : base()
         {
@@ -123,8 +125,8 @@ namespace TotalSmartCoding.Views.Productions
             this.textexCommodityAPICode.DataBindings.Add("Text", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityAPICode), true);
             this.textexCommodityName.DataBindings.Add("Text", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityName), true);
 
-            CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
-            this.combexCommodityID.DataSource = commodityAPIs.GetCommodityBases();
+            this.commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
+            this.combexCommodityID.DataSource = this.commodityAPIs.GetCommodityBases();
             this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.Code);
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -157,7 +159,7 @@ namespace TotalSmartCoding.Views.Productions
                 foreach (OLVGroup olvGroup in e.Groups)
                 {
                     olvGroup.TitleImage = "Storage32";
-                    olvGroup.Subtitle = olvGroup.Contents.Count.ToString() + " Lot(s)";
+                    olvGroup.Subtitle = olvGroup.Contents.Count.ToString() + " Batch" + (olvGroup.Contents.Count > 1 ? "es" : "");
                 }
             }
         }
@@ -195,7 +197,7 @@ namespace TotalSmartCoding.Views.Productions
         protected override void DoAfterLoad()
         {
             base.DoAfterLoad();
-            this.fastBatchMasterIndex.Sort(this.olvEntryDate, SortOrder.Ascending);
+            this.fastBatchMasterIndex.Sort(this.olvEntryDate, SortOrder.Descending);
         }
 
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
@@ -233,6 +235,9 @@ namespace TotalSmartCoding.Views.Productions
 
                 masterMDI.ShowDialog();
                 masterMDI.Dispose();
+
+                this.combexCommodityID.DataSource = this.commodityAPIs.GetCommodityBases();
+                this.invokeEdit(this.batchMasterViewModel.BatchMasterID);
             }
             catch (Exception exception)
             {

@@ -34,6 +34,7 @@
             this.buttonOK = new System.Windows.Forms.ToolStripButton();
             this.errorProviderMaster = new System.Windows.Forms.ErrorProvider(this.components);
             this.layoutTop = new System.Windows.Forms.TableLayoutPanel();
+            this.dateTimexEntryDate = new CustomControls.DateTimexPicker();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.combexBatchTypeID = new CustomControls.CombexBox();
@@ -60,7 +61,6 @@
             this.textexCommodityAPICode = new CustomControls.TextexBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.dateTimexEntryDate = new CustomControls.DateTimexPicker();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderMaster)).BeginInit();
             this.layoutTop.SuspendLayout();
@@ -78,7 +78,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.buttonESC,
             this.buttonOK});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 431);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 449);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStrip1.Size = new System.Drawing.Size(955, 55);
@@ -172,8 +172,23 @@
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.layoutTop.Size = new System.Drawing.Size(955, 431);
+            this.layoutTop.Size = new System.Drawing.Size(955, 449);
             this.layoutTop.TabIndex = 98;
+            // 
+            // dateTimexEntryDate
+            // 
+            this.dateTimexEntryDate.CustomFormat = "dd/MMM/yyyy";
+            this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimexEntryDate.Editable = false;
+            this.dateTimexEntryDate.Enabled = false;
+            this.dateTimexEntryDate.Font = new System.Drawing.Font("Calibri Light", 10.2F);
+            this.dateTimexEntryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimexEntryDate.Location = new System.Drawing.Point(297, 120);
+            this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(1);
+            this.dateTimexEntryDate.Name = "dateTimexEntryDate";
+            this.dateTimexEntryDate.ReadOnly = false;
+            this.dateTimexEntryDate.Size = new System.Drawing.Size(634, 28);
+            this.dateTimexEntryDate.TabIndex = 108;
             // 
             // label13
             // 
@@ -331,7 +346,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(206, 30);
             this.label4.TabIndex = 77;
-            this.label4.Text = "Contact Info";
+            this.label4.Text = "Carton Code";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
@@ -343,7 +358,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(206, 30);
             this.label5.TabIndex = 78;
-            this.label5.Text = "Customer";
+            this.label5.Text = "Date";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textexCommodityCartonCode
@@ -379,7 +394,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(206, 30);
             this.label1.TabIndex = 82;
-            this.label1.Text = "Shipping Address";
+            this.label1.Text = "Volume";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label2
@@ -391,7 +406,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(206, 30);
             this.label2.TabIndex = 83;
-            this.label2.Text = "Salesperson";
+            this.label2.Text = "Status";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label3
@@ -415,7 +430,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(206, 30);
             this.label6.TabIndex = 86;
-            this.label6.Text = "Delivery Lead Time";
+            this.label6.Text = "Packed Quantity";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label7
@@ -427,7 +442,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(206, 30);
             this.label7.TabIndex = 88;
-            this.label7.Text = "Voucher #";
+            this.label7.Text = "Planned Quantity";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label8
@@ -462,7 +477,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(206, 30);
             this.label9.TabIndex = 92;
-            this.label9.Text = "Receiver";
+            this.label9.Text = "Name";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // textexCommodityCode
@@ -498,7 +513,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(206, 30);
             this.label10.TabIndex = 95;
-            this.label10.Text = "Customer Name";
+            this.label10.Text = "Item Code";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
@@ -510,28 +525,14 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(206, 30);
             this.label11.TabIndex = 96;
-            this.label11.Text = "Receiver Name";
+            this.label11.Text = "Short Code";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // dateTimexEntryDate
-            // 
-            this.dateTimexEntryDate.CustomFormat = "dd/MMM/yyyy";
-            this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimexEntryDate.Editable = true;
-            this.dateTimexEntryDate.Font = new System.Drawing.Font("Calibri Light", 10.2F);
-            this.dateTimexEntryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimexEntryDate.Location = new System.Drawing.Point(297, 120);
-            this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(1);
-            this.dateTimexEntryDate.Name = "dateTimexEntryDate";
-            this.dateTimexEntryDate.ReadOnly = false;
-            this.dateTimexEntryDate.Size = new System.Drawing.Size(634, 28);
-            this.dateTimexEntryDate.TabIndex = 108;
             // 
             // BatchWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 486);
+            this.ClientSize = new System.Drawing.Size(955, 504);
             this.Controls.Add(this.layoutTop);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

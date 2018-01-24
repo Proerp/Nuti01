@@ -48,6 +48,8 @@ namespace TotalSmartCoding.Views.Productions
         private BatchAPIs batchAPIs;
         private BatchViewModel batchViewModel { get; set; }
 
+        private CommodityAPIs commodityAPIs { get; set; }
+
         public Batches(SmartCoding smartCoding, bool allQueueEmpty)
             : base()
         {
@@ -148,8 +150,8 @@ namespace TotalSmartCoding.Views.Productions
 
             this.textexCommodityName.DataBindings.Add("Text", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityName), true);
 
-            CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
-            this.combexCommodityID.DataSource = commodityAPIs.GetCommodityBases().Where(p => p.FillingLineIDs.Contains(((int)GlobalVariables.FillingLineID).ToString())).ToList();
+            this.commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
+            this.combexCommodityID.DataSource = this.commodityAPIs.GetCommodityBases();
             this.combexCommodityID.DisplayMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CodeAPICode);
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchViewModel, CommonExpressions.PropertyName<BatchViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -285,6 +287,9 @@ namespace TotalSmartCoding.Views.Productions
 
                 masterMDI.ShowDialog();
                 masterMDI.Dispose();
+
+                this.combexCommodityID.DataSource = this.commodityAPIs.GetCommodityBases();
+                this.invokeEdit(this.batchViewModel.BatchID);
             }
             catch (Exception exception)
             {

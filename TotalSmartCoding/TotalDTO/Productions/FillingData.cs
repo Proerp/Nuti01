@@ -28,6 +28,7 @@ namespace TotalDTO.Productions
         private string commodityAPICode;
         private string commodityOfficialCode;
         private string commodityCartonCode;
+        private string commodityName;
         private decimal volume;
 
         private int shelflife;
@@ -112,6 +113,12 @@ namespace TotalDTO.Productions
         {
             get { return this.commodityCartonCode; }
             set { ApplyPropertyChange<FillingData, string>(ref this.commodityCartonCode, o => o.CommodityCartonCode, value); }
+        }
+
+        public string CommodityName
+        {
+            get { return this.commodityName; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.commodityName, o => o.CommodityName, value); }
         }
 
         public decimal Volume
@@ -384,7 +391,7 @@ namespace TotalDTO.Productions
 
         public string FirstLineA1(bool isReadableText, bool yyyy)
         {
-            return isReadableText ? this.EntryDate.AddMonths(this.Shelflife).ToString(yyyy ? "ddMMyyyy" : "ddMMyy") : "";
+            return isReadableText ? this.EntryDate.AddMonths(this.Shelflife).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
         }
 
         public string FirstLineA2(bool isReadableText)
@@ -394,7 +401,7 @@ namespace TotalDTO.Productions
 
         public string FirstLineA2B(bool isReadableText)
         {
-            return this.BatchTypeCode + this.CommodityAPICode;
+            return this.BatchTypeCode + (isReadableText ? "" : this.CommodityAPICode);
         }
 
 

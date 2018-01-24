@@ -14,7 +14,7 @@ namespace TotalDAL.Repositories.Productions
     public class BatchMasterRepository : GenericRepository<BatchMaster>, IBatchMasterRepository
     {
         public BatchMasterRepository(TotalSmartCodingEntities totalSmartCodingEntities)
-            : base(totalSmartCodingEntities, "BatchMasterEditable")
+            : base(totalSmartCodingEntities, "BatchMasterEditable", "BatchMasterApproved")
         {
         }
     }

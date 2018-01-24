@@ -128,16 +128,16 @@ namespace TotalBase
         public static int ConfigVersionID(int configID)
         {
             if (configID == (int)GlobalVariables.FillingLine.None)
-                return 1;
+                return 3;
             else if (configID == (int)GlobalVariables.FillingLine.Pickup)
-                return 1;
+                return 3;
             else if (configID == (int)GlobalVariables.FillingLine.GoodsIssue)
-                return 1;
+                return 3;
 
 
 
             else if (configID == (int)GlobalVariables.FillingLine.Smallpack || configID == (int)GlobalVariables.FillingLine.Pail || configID == (int)GlobalVariables.FillingLine.Drum)
-                return 1; //PAY ATTENTION WHEN CHANGE THIS VALUE BECAUSE: THIS IS USING ON THE FILLING LINES
+                return 3; //PAY ATTENTION WHEN CHANGE THIS VALUE BECAUSE: THIS IS USING ON THE FILLING LINES
             else
                 return -1;
         }
@@ -191,9 +191,9 @@ namespace TotalBase
                     {
                         case PrinterName.DigitInkjet:
                             return "192.168.1.127";
-                        case PrinterName.CartonInkjet:
+                        case PrinterName.PackInkjet:
                             return "192.168.1.115";
-                        case PrinterName.PalletLabel:
+                        case PrinterName.CartonInkjet:
                             return "192.168.1.116";
                         default:
                             return "127.0.0.1";

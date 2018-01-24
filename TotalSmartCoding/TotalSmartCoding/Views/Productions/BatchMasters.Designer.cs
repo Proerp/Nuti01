@@ -525,7 +525,7 @@
             this.olvCommodityCartonCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityCartonCode.Text = "Carton Code";
             this.olvCommodityCartonCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCommodityCartonCode.Width = 127;
+            this.olvCommodityCartonCode.Width = 120;
             // 
             // olvPlannedQuantity
             // 

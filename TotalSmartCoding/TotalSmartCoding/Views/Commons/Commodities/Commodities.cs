@@ -68,8 +68,8 @@ namespace TotalSmartCoding.Views.Commons.Commodities
                 this.customTabCenter.DisplayStyle = TabStyle.VisualStudio;
                 this.customTabCenter.Font = this.panelCenter.Font;
 
-                this.customTabCenter.TabPages.Add("tabCenterAA", "Commodity Details          ");
-                this.customTabCenter.TabPages.Add("tabCenterBB", "API Code, Remarks        ");
+                this.customTabCenter.TabPages.Add("tabCenterAA", "Details           ");
+                this.customTabCenter.TabPages.Add("tabCenterBB", "Remarks      ");
 
                 this.customTabCenter.TabPages[0].Controls.Add(this.layoutTop);
                 this.customTabCenter.TabPages[1].Controls.Add(this.layoutRight);

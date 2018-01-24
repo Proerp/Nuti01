@@ -150,7 +150,7 @@
             this.combexBatchTypeID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.combexBatchTypeID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.combexBatchTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexBatchTypeID.Editable = true;
+            this.combexBatchTypeID.Editable = false;
             this.combexBatchTypeID.FormattingEnabled = true;
             this.combexBatchTypeID.Location = new System.Drawing.Point(33, 350);
             this.combexBatchTypeID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
@@ -267,7 +267,7 @@
             // 
             this.dateTimexEntryDate.CustomFormat = "dd/MMM/yyyy";
             this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimexEntryDate.Editable = true;
+            this.dateTimexEntryDate.Editable = false;
             this.dateTimexEntryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimexEntryDate.Location = new System.Drawing.Point(33, 49);
             this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
@@ -279,7 +279,7 @@
             // textexCode
             // 
             this.textexCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexCode.Editable = true;
+            this.textexCode.Editable = false;
             this.textexCode.Location = new System.Drawing.Point(33, 109);
             this.textexCode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexCode.Name = "textexCode";
@@ -291,7 +291,7 @@
             this.combexCommodityID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.combexCommodityID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.combexCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexCommodityID.Editable = true;
+            this.combexCommodityID.Editable = false;
             this.combexCommodityID.FormattingEnabled = true;
             this.combexCommodityID.Location = new System.Drawing.Point(33, 229);
             this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
@@ -366,7 +366,7 @@
             // textexLotNumber
             // 
             this.textexLotNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexLotNumber.Editable = true;
+            this.textexLotNumber.Editable = false;
             this.textexLotNumber.Location = new System.Drawing.Point(33, 169);
             this.textexLotNumber.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
             this.textexLotNumber.Name = "textexLotNumber";
@@ -469,8 +469,8 @@
             this.buttonItems.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonItems.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonItems.Name = "buttonItems";
-            this.buttonItems.Size = new System.Drawing.Size(97, 52);
-            this.buttonItems.Text = "Items";
+            this.buttonItems.Size = new System.Drawing.Size(112, 52);
+            this.buttonItems.Text = "Batches";
             this.buttonItems.Click += new System.EventHandler(this.buttonItems_Click);
             // 
             // naviBarMaster
@@ -579,6 +579,7 @@
             this.olvBatchCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvBatchCode.Text = "Batch";
             this.olvBatchCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBatchCode.Width = 69;
             // 
             // olvLotNumber
             // 
@@ -594,18 +595,21 @@
             this.olvCommodityCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityCode.Text = "Item Code";
             this.olvCommodityCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityCode.Width = 87;
             // 
             // olvCommodityAPICode
             // 
             this.olvCommodityAPICode.AspectName = "CommodityAPICode";
+            this.olvCommodityAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityAPICode.Text = "Code";
-            this.olvCommodityAPICode.Width = 50;
+            this.olvCommodityAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityAPICode.Width = 51;
             // 
             // olvCommodityName
             // 
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.Text = "Desccription";
-            this.olvCommodityName.Width = 253;
+            this.olvCommodityName.Width = 296;
             // 
             // olvBatchTypeCodeName
             // 
@@ -622,7 +626,7 @@
             this.olvPackQuantity.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvPackQuantity.Text = "Qty";
             this.olvPackQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvPackQuantity.Width = 56;
+            this.olvPackQuantity.Width = 59;
             // 
             // olvPackLineVolume
             // 
@@ -631,7 +635,7 @@
             this.olvPackLineVolume.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvPackLineVolume.Text = "Volume";
             this.olvPackLineVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvPackLineVolume.Width = 58;
+            this.olvPackLineVolume.Width = 61;
             // 
             // olvNextPackNo
             // 

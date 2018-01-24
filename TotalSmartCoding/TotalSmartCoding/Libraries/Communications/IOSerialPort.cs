@@ -131,10 +131,17 @@ namespace TotalSmartCoding.Libraries.Communications
             }
         }
 
-
         public void WritetoSerial(string stringToWrite)
         {
             this.WritetoSerial(stringToWrite, false);
+        }
+
+        public void WritetoSerial(string stringToWrite, int ntimes)
+        {
+            for (int i = 1; i <= ntimes; i++)
+            {
+                this.WritetoSerial(stringToWrite, false);
+            }
         }
 
         public void WritetoSerial(string stringToWrite, bool isHEXCommand)

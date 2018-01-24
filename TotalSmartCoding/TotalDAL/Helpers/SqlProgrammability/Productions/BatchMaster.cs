@@ -20,9 +20,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             this.GetBatchMasterIndexes();
 
+            this.BatchMasterApproved();
             this.BatchMasterEditable();
             this.BatchMasterPostSaveValidate();
 
+            this.BatchMasterToggleApproved();
             this.BatchMasterToggleVoid();
 
             this.BatchMasterInitReference();
@@ -54,6 +56,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         }
 
 
+        private void BatchMasterApproved()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = BatchMasterID FROM BatchMasters WHERE BatchMasterID = @EntityID AND Approved = 1";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchMasterApproved", queryArray);
+        }
 
         private void BatchMasterEditable()
         {
@@ -74,6 +84,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             //queryArray[2] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất hóa đơn vượt quá số lượng xuất kho: ' + CAST(ROUND(GoodsIssueDetails.Quantity - GoodsIssueDetails.QuantityInvoice, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) + ' OR free quantity: ' + CAST(ROUND(GoodsIssueDetails.FreeQuantity - GoodsIssueDetails.FreeQuantityInvoice, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM BatchMasterDetails INNER JOIN GoodsIssueDetails ON BatchMasterDetails.BatchMasterID = @EntityID AND BatchMasterDetails.GoodsIssueDetailID = GoodsIssueDetails.GoodsIssueDetailID AND (ROUND(GoodsIssueDetails.Quantity - GoodsIssueDetails.QuantityInvoice, " + (int)GlobalEnums.rndQuantity + ") < 0 OR ROUND(GoodsIssueDetails.FreeQuantity - GoodsIssueDetails.FreeQuantityInvoice, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchMasterPostSaveValidate", queryArray);
+        }
+
+        private void BatchMasterToggleApproved()
+        {
+            string queryString = " @EntityID int, @Approved bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      BatchMasters  SET Approved = @Approved, ApprovedDate = GetDate() WHERE BatchMasterID = @EntityID AND Approved = ~@Approved" + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc đã ' + iif(@Approved = 0, 'hủy', '')  + ' duyệt' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterToggleApproved", queryString);
         }
 
         private void BatchMasterToggleVoid()

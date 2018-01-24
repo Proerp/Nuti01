@@ -488,12 +488,12 @@ namespace TotalSmartCoding.Views.Mains
                     this.buttonExport.Enabled = exportable;//&& !isDirty && readonlyMode;
                     this.toolStripSeparatorImport.Visible = importable || exportable;
 
-                    this.buttonApprove.Visible = (sender is Batches || sender is BatchMasters) ? false : (approvable || unapprovable);
+                    this.buttonApprove.Visible = (sender is Batches) ? false : true; //(approvable || unapprovable)
                     this.buttonApprove.Enabled = (approvable || unapprovable) && readonlyMode;
                     this.buttonApprove.Text = approvable ? "Verify" : "Un-verify";
                     this.buttonApprove.Image = approvable ? Resources.Check_Saki_Ok : Resources.Cross_UnVerify;
 
-                    this.toolStripSeparatorApprove.Visible = (sender is Batches || sender is BatchMasters) ? false : (approvable || unapprovable);
+                    this.toolStripSeparatorApprove.Visible = (sender is Batches) ? false : true; //(approvable || unapprovable)
 
                     this.buttonVoid.Visible = (sender is Batches || sender is BatchMasters) ? false : (voidable || unvoidable);
                     this.buttonVoid.Enabled = (voidable || unvoidable) && readonlyMode;

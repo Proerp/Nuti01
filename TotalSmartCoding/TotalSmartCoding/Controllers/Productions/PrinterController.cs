@@ -257,15 +257,15 @@ namespace TotalSmartCoding.Controllers.Productions
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
                 return GlobalVariables.charESC + "n/1/A";
             else
-                return DateTime.Now.ToString("hhmm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
+                return DateTime.Now.ToString("dd"); //---Dont use system time (This will be updated MANUALLY for each pallet)
         }
 
-        private string systemTime()
+        private string systemTime(bool isReadableText)
         {
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
-                return GlobalVariables.charESC + "n/1/H" + GlobalVariables.charESC + "n/1/M";
+                return GlobalVariables.charESC + "n/1/H" + (isReadableText ? ":" : "") + GlobalVariables.charESC + "n/1/M";
             else
-                return DateTime.Now.ToString("hhmm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
+                return DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
         }
 
 
@@ -281,7 +281,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         private string firstLineA2(bool isReadableText)
         {
-            return this.privateFillingData.FirstLineA2(isReadableText) + this.systemDate() + this.privateFillingData.FirstLineA2B(isReadableText) + (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "L" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : "")));
+            return this.privateFillingData.FirstLineA2(isReadableText) + this.systemDate() + this.privateFillingData.FirstLineA2B(isReadableText) + (isReadableText ? "" : (this.printerName == GlobalVariables.PrinterName.PackInkjet ? "L" : (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? "C" : (this.printerName == GlobalVariables.PrinterName.PalletLabel ? "P" : ""))));
         }
 
         public string secondLine(bool isReadableText, bool withBlank)
@@ -296,7 +296,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
         public string secondLineA2(bool isReadableText)
         {
-            return this.systemTime() + this.privateFillingData.SecondLineA2(isReadableText);
+            return this.systemTime(isReadableText) + this.privateFillingData.SecondLineA2(isReadableText);
         }
 
         private string thirdLine(bool isReadableText, int serialIndentity, bool withBlank)
@@ -393,7 +393,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 return ".              . " + this.firstLineA2(true) + " " + this.thirdLine(true, 1, false) + " .              ."; //GlobalVariables.charESC + "u/1/" + 
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
-                return (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? GlobalVariables.charESC + "u/3/" + this.privateFillingData.FirstLineA1(true, true) + " " + this.thirdLineA1(true) + "                       " : "") + GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 2, false) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
+                return (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? GlobalVariables.charESC + "u/3/" + "HSD:  " + this.privateFillingData.FirstLineA1(true, true) + (GlobalEnums.PrintLOT ? "    " + this.thirdLineA1(true) : "         ") + "                       " : "") + GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 2, false) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
                        GlobalVariables.charESC + "u/1/" + " " + this.firstLine(true, true) + "/" +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true, true) +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1, true);
@@ -405,12 +405,12 @@ namespace TotalSmartCoding.Controllers.Productions
                 stringMessageBegin = stringMessageBegin + "^XA"; //[^XA - Indicates start of label format.]
                 stringMessageBegin = stringMessageBegin + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
 
-                stringMessageText = stringMessageText + "^FO860,10 ^AU ^FD" + this.firstLineA1(true, false) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                stringMessageText = stringMessageText + "^FO860,68 ^AU ^FD" + this.firstLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO860,131 ^AU ^FD" + this.secondLineA1(true, false) + "^FS";
-                stringMessageText = stringMessageText + "^FO860,194 ^AU ^FD" + this.secondLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO860,257 ^AU ^FD" + this.thirdLineA1(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO860,320 ^AU ^FD" + this.thirdLineA2(true, 0) + "^FS";
+                stringMessageText = stringMessageText + "^FO830,10 ^AU ^FD" + this.firstLineA1(true, true) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+                stringMessageText = stringMessageText + "^FO830,68 ^AU ^FD" + this.firstLineA2(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO830,131 ^AU ^FD" + this.secondLineA1(true, true) + "^FS";
+                stringMessageText = stringMessageText + "^FO830,194 ^AU ^FD" + this.secondLineA2(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO830,257 ^AU ^FD" + this.thirdLineA1(true) + "^FS";
+                stringMessageText = stringMessageText + "^FO830,320 ^AU ^FD" + this.thirdLineA2(true, 0) + "^FS";
 
 
                 stringMessageEnd = stringMessageEnd + "^XZ"; //[^XZ - Indicates end of label format.]
@@ -580,7 +580,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                 if (GlobalEnums.SendToZebra)
                 {
-                    this.ioserialPort.WritetoSerial(this.wholeMessageLine());
+                    this.ioserialPort.WritetoSerial(this.wholeMessageLine(), 4);
                     this.FillingData.CartonsetQueueZebraStatus = this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? GlobalVariables.ZebraStatus.Printing1 : GlobalVariables.ZebraStatus.Reprinting1; Thread.Sleep(88);
                 }
             }
@@ -735,13 +735,19 @@ namespace TotalSmartCoding.Controllers.Productions
                     //this.ionetSocket.WritetoStream("||>TRIGGER ON\r\n"); 
                     //this.waitforDomino(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length); => AFTER TRIGGER => RETURN: BARCODE OR NOREAD
 
+                    this.MainStatus = "SET: " + this.FillingData.CommodityCartonCode;
                     this.ionetSocket.WritetoStream("||>SET DVALID.PROG-TARG 3\r\n"); //3: Linear/ Postal/ Stacked
                     this.ionetSocket.WritetoStream("||>SET DVALID.MATCH-STRING \"" + this.FillingData.CommodityCartonCode + "\"\r\n");
 
                     this.ionetSocket.WritetoStream("||>GET DVALID.MATCH-STRING\r\n");
                     this.waitforDomino(ref receivedFeedback, false, "RESULT GETVERSION", "RESULT GETVERSION".Length);
                     if (receivedFeedback == this.FillingData.CommodityCartonCode)
+                    {
                         this.setLED(true, this.LedAmberOn, this.LedRedOn);
+                        this.MainStatus = "Set carton ok: " + this.FillingData.CommodityCartonCode;
+                    }
+                    else
+                        this.MainStatus = "FAIL: " + receivedFeedback;
                 }
                 else
                     if (this.printerName == GlobalVariables.PrinterName.PalletLabel)
@@ -846,7 +852,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         if (!this.isLaser)
                         {
                             //C: Set Clock
-                            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/C/" + DateTime.Now.ToString("yyyy/MM/dd/00/hh/mm/ss") + "/" + GlobalVariables.charEOT);     //C: Set Clock
+                            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/C/" + DateTime.Now.ToString("yyyy/MM/dd/00/HH/mm/ss") + "/" + GlobalVariables.charEOT);     //C: Set Clock
                             if (!this.waitforDomino(ref receivedFeedback, true)) throw new System.InvalidOperationException("Lỗi cài đặt ngày giờ máy in phun: " + receivedFeedback);
 
                             //T: Reset Product Counting

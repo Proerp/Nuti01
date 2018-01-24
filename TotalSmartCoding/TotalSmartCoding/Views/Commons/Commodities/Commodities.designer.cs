@@ -37,9 +37,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panelCenter = new System.Windows.Forms.Panel();
             this.layoutTop = new System.Windows.Forms.TableLayoutPanel();
-            this.textexOfficialName = new CustomControls.TextexBox();
+            this.textexAPICode = new CustomControls.TextexBox();
             this.numericShelflife = new CustomControls.NumericBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.textexCartonCode = new CustomControls.TextexBox();
             this.textexPackageSize = new CustomControls.TextexBox();
             this.textexName = new CustomControls.TextexBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -56,14 +57,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.layoutRight = new System.Windows.Forms.TableLayoutPanel();
+            this.textexOfficialName = new CustomControls.TextexBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textexAPICode = new CustomControls.TextexBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textexRemarks = new CustomControls.TextexBox();
             this.textexFillingLineIDs = new CustomControls.TextexBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textexCartonCode = new CustomControls.TextexBox();
             this.fastCommodityIndex = new BrightIdeasSoftware.FastObjectListView();
             this.olvID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBlank = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -108,7 +108,7 @@
             this.combexCommodityCategoryID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexCommodityCategoryID.Editable = true;
             this.combexCommodityCategoryID.FormattingEnabled = true;
-            this.combexCommodityCategoryID.Location = new System.Drawing.Point(35, 238);
+            this.combexCommodityCategoryID.Location = new System.Drawing.Point(35, 112);
             this.combexCommodityCategoryID.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
             this.combexCommodityCategoryID.Name = "combexCommodityCategoryID";
             this.combexCommodityCategoryID.ReadOnly = false;
@@ -153,9 +153,9 @@
             this.panelCenter.Controls.Add(this.layoutRight);
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelCenter.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelCenter.Location = new System.Drawing.Point(982, 0);
+            this.panelCenter.Location = new System.Drawing.Point(1151, 0);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(549, 962);
+            this.panelCenter.Size = new System.Drawing.Size(380, 962);
             this.panelCenter.TabIndex = 76;
             // 
             // layoutTop
@@ -167,11 +167,11 @@
             this.layoutTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.layoutTop.Controls.Add(this.textexOfficialName, 1, 6);
+            this.layoutTop.Controls.Add(this.textexAPICode, 1, 6);
             this.layoutTop.Controls.Add(this.numericShelflife, 1, 20);
             this.layoutTop.Controls.Add(this.textexCode, 1, 2);
-            this.layoutTop.Controls.Add(this.combexCommodityCategoryID, 1, 8);
             this.layoutTop.Controls.Add(this.label10, 1, 19);
+            this.layoutTop.Controls.Add(this.textexCartonCode, 1, 8);
             this.layoutTop.Controls.Add(this.textexPackageSize, 1, 10);
             this.layoutTop.Controls.Add(this.textexName, 1, 4);
             this.layoutTop.Controls.Add(this.label13, 1, 1);
@@ -214,24 +214,24 @@
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutTop.Size = new System.Drawing.Size(571, 646);
+            this.layoutTop.Size = new System.Drawing.Size(571, 645);
             this.layoutTop.TabIndex = 8;
             // 
-            // textexOfficialName
+            // textexAPICode
             // 
-            this.textexOfficialName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexOfficialName.Editable = true;
-            this.textexOfficialName.Location = new System.Drawing.Point(35, 175);
-            this.textexOfficialName.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
-            this.textexOfficialName.Name = "textexOfficialName";
-            this.textexOfficialName.Size = new System.Drawing.Size(510, 28);
-            this.textexOfficialName.TabIndex = 80;
+            this.textexAPICode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexAPICode.Editable = true;
+            this.textexAPICode.Location = new System.Drawing.Point(35, 175);
+            this.textexAPICode.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
+            this.textexAPICode.Name = "textexAPICode";
+            this.textexAPICode.Size = new System.Drawing.Size(510, 28);
+            this.textexAPICode.TabIndex = 82;
             // 
             // numericShelflife
             // 
             this.numericShelflife.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericShelflife.Editable = true;
-            this.numericShelflife.Location = new System.Drawing.Point(39, 617);
+            this.numericShelflife.Location = new System.Drawing.Point(39, 616);
             this.numericShelflife.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericShelflife.Name = "numericShelflife";
             this.numericShelflife.Size = new System.Drawing.Size(506, 28);
@@ -242,7 +242,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(30, 584);
+            this.label10.Location = new System.Drawing.Point(30, 583);
             this.label10.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -251,11 +251,21 @@
             this.label10.Text = "Shelflife (Month)";
             this.label10.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
+            // textexCartonCode
+            // 
+            this.textexCartonCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexCartonCode.Editable = true;
+            this.textexCartonCode.Location = new System.Drawing.Point(35, 238);
+            this.textexCartonCode.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
+            this.textexCartonCode.Name = "textexCartonCode";
+            this.textexCartonCode.Size = new System.Drawing.Size(510, 28);
+            this.textexCartonCode.TabIndex = 102;
+            // 
             // textexPackageSize
             // 
             this.textexPackageSize.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexPackageSize.Editable = true;
-            this.textexPackageSize.Location = new System.Drawing.Point(35, 302);
+            this.textexPackageSize.Location = new System.Drawing.Point(35, 301);
             this.textexPackageSize.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
             this.textexPackageSize.Name = "textexPackageSize";
             this.textexPackageSize.Size = new System.Drawing.Size(510, 28);
@@ -301,7 +311,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(30, 332);
+            this.label3.Location = new System.Drawing.Point(30, 331);
             this.label3.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label3.Name = "label3";
             this.label3.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -320,14 +330,14 @@
             this.label5.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.label5.Size = new System.Drawing.Size(515, 31);
             this.label5.TabIndex = 89;
-            this.label5.Text = "Official Name";
+            this.label5.Text = "Short Code";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(30, 269);
+            this.label8.Location = new System.Drawing.Point(30, 268);
             this.label8.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -346,14 +356,14 @@
             this.label9.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.label9.Size = new System.Drawing.Size(515, 31);
             this.label9.TabIndex = 91;
-            this.label9.Text = "Category";
+            this.label9.Text = "Carton Code";
             this.label9.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(30, 395);
+            this.label12.Location = new System.Drawing.Point(30, 394);
             this.label12.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -367,7 +377,7 @@
             this.numericVolume.DecimalPlaces = 2;
             this.numericVolume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericVolume.Editable = true;
-            this.numericVolume.Location = new System.Drawing.Point(39, 365);
+            this.numericVolume.Location = new System.Drawing.Point(39, 364);
             this.numericVolume.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericVolume.Maximum = new decimal(new int[] {
             1000,
@@ -384,7 +394,7 @@
             this.numericPackageVolume.DecimalPlaces = 2;
             this.numericPackageVolume.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericPackageVolume.Editable = false;
-            this.numericPackageVolume.Location = new System.Drawing.Point(39, 428);
+            this.numericPackageVolume.Location = new System.Drawing.Point(39, 427);
             this.numericPackageVolume.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericPackageVolume.Maximum = new decimal(new int[] {
             1000,
@@ -400,7 +410,7 @@
             // 
             this.numericPackPerCarton.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericPackPerCarton.Editable = true;
-            this.numericPackPerCarton.Location = new System.Drawing.Point(39, 491);
+            this.numericPackPerCarton.Location = new System.Drawing.Point(39, 490);
             this.numericPackPerCarton.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericPackPerCarton.Name = "numericPackPerCarton";
             this.numericPackPerCarton.Size = new System.Drawing.Size(506, 28);
@@ -411,7 +421,7 @@
             // 
             this.numericCartonPerPallet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericCartonPerPallet.Editable = true;
-            this.numericCartonPerPallet.Location = new System.Drawing.Point(39, 554);
+            this.numericCartonPerPallet.Location = new System.Drawing.Point(39, 553);
             this.numericCartonPerPallet.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericCartonPerPallet.Name = "numericCartonPerPallet";
             this.numericCartonPerPallet.Size = new System.Drawing.Size(506, 28);
@@ -422,7 +432,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(30, 458);
+            this.label6.Location = new System.Drawing.Point(30, 457);
             this.label6.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -435,7 +445,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(30, 521);
+            this.label7.Location = new System.Drawing.Point(30, 520);
             this.label7.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
@@ -453,14 +463,14 @@
             this.layoutRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutRight.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.layoutRight.Controls.Add(this.textexOfficialName, 1, 2);
             this.layoutRight.Controls.Add(this.label4, 1, 5);
-            this.layoutRight.Controls.Add(this.textexAPICode, 1, 2);
             this.layoutRight.Controls.Add(this.label1, 1, 1);
+            this.layoutRight.Controls.Add(this.combexCommodityCategoryID, 1, 4);
             this.layoutRight.Controls.Add(this.label2, 1, 7);
             this.layoutRight.Controls.Add(this.textexRemarks, 1, 8);
             this.layoutRight.Controls.Add(this.textexFillingLineIDs, 1, 6);
             this.layoutRight.Controls.Add(this.label11, 1, 3);
-            this.layoutRight.Controls.Add(this.textexCartonCode, 1, 4);
             this.layoutRight.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.layoutRight.Location = new System.Drawing.Point(0, 647);
             this.layoutRight.Margin = new System.Windows.Forms.Padding(0);
@@ -476,31 +486,31 @@
             this.layoutRight.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutRight.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutRight.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutRight.Size = new System.Drawing.Size(552, 267);
+            this.layoutRight.Size = new System.Drawing.Size(571, 268);
             this.layoutRight.TabIndex = 10;
+            // 
+            // textexOfficialName
+            // 
+            this.textexOfficialName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexOfficialName.Editable = true;
+            this.textexOfficialName.Location = new System.Drawing.Point(35, 49);
+            this.textexOfficialName.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
+            this.textexOfficialName.Name = "textexOfficialName";
+            this.textexOfficialName.Size = new System.Drawing.Size(510, 28);
+            this.textexOfficialName.TabIndex = 80;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(30, 142);
+            this.label4.Location = new System.Drawing.Point(30, 143);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label4.Size = new System.Drawing.Size(496, 31);
+            this.label4.Size = new System.Drawing.Size(515, 31);
             this.label4.TabIndex = 99;
             this.label4.Text = "Filling Line (s)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // textexAPICode
-            // 
-            this.textexAPICode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexAPICode.Editable = true;
-            this.textexAPICode.Location = new System.Drawing.Point(35, 49);
-            this.textexAPICode.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
-            this.textexAPICode.Name = "textexAPICode";
-            this.textexAPICode.Size = new System.Drawing.Size(491, 28);
-            this.textexAPICode.TabIndex = 82;
             // 
             // label1
             // 
@@ -510,20 +520,20 @@
             this.label1.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label1.Size = new System.Drawing.Size(496, 31);
+            this.label1.Size = new System.Drawing.Size(515, 31);
             this.label1.TabIndex = 96;
-            this.label1.Text = "API Code";
+            this.label1.Text = "Official Name";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(30, 205);
+            this.label2.Location = new System.Drawing.Point(30, 206);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label2.Name = "label2";
             this.label2.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label2.Size = new System.Drawing.Size(496, 31);
+            this.label2.Size = new System.Drawing.Size(515, 31);
             this.label2.TabIndex = 94;
             this.label2.Text = "Remarks";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -532,20 +542,20 @@
             // 
             this.textexRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexRemarks.Editable = true;
-            this.textexRemarks.Location = new System.Drawing.Point(35, 238);
+            this.textexRemarks.Location = new System.Drawing.Point(35, 239);
             this.textexRemarks.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
             this.textexRemarks.Name = "textexRemarks";
-            this.textexRemarks.Size = new System.Drawing.Size(491, 28);
+            this.textexRemarks.Size = new System.Drawing.Size(510, 28);
             this.textexRemarks.TabIndex = 88;
             // 
             // textexFillingLineIDs
             // 
             this.textexFillingLineIDs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexFillingLineIDs.Editable = true;
-            this.textexFillingLineIDs.Location = new System.Drawing.Point(35, 175);
+            this.textexFillingLineIDs.Location = new System.Drawing.Point(35, 176);
             this.textexFillingLineIDs.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
             this.textexFillingLineIDs.Name = "textexFillingLineIDs";
-            this.textexFillingLineIDs.Size = new System.Drawing.Size(491, 28);
+            this.textexFillingLineIDs.Size = new System.Drawing.Size(510, 28);
             this.textexFillingLineIDs.TabIndex = 100;
             // 
             // label11
@@ -556,20 +566,10 @@
             this.label11.Margin = new System.Windows.Forms.Padding(0, 1, 1, 1);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.label11.Size = new System.Drawing.Size(496, 31);
+            this.label11.Size = new System.Drawing.Size(515, 31);
             this.label11.TabIndex = 101;
-            this.label11.Text = "Carton Code";
+            this.label11.Text = "Category";
             this.label11.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // textexCartonCode
-            // 
-            this.textexCartonCode.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexCartonCode.Editable = true;
-            this.textexCartonCode.Location = new System.Drawing.Point(35, 112);
-            this.textexCartonCode.Margin = new System.Windows.Forms.Padding(5, 1, 1, 1);
-            this.textexCartonCode.Name = "textexCartonCode";
-            this.textexCartonCode.Size = new System.Drawing.Size(491, 28);
-            this.textexCartonCode.TabIndex = 102;
             // 
             // fastCommodityIndex
             // 
@@ -612,7 +612,7 @@
             this.fastCommodityIndex.Name = "fastCommodityIndex";
             this.fastCommodityIndex.OwnerDraw = true;
             this.fastCommodityIndex.ShowGroups = false;
-            this.fastCommodityIndex.Size = new System.Drawing.Size(982, 962);
+            this.fastCommodityIndex.Size = new System.Drawing.Size(1151, 962);
             this.fastCommodityIndex.TabIndex = 68;
             this.fastCommodityIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastCommodityIndex.UseCompatibleStateImageBehavior = false;
@@ -648,16 +648,16 @@
             // 
             this.olvCommodityAPICode.AspectName = "CommodityAPICode";
             this.olvCommodityAPICode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCommodityAPICode.Text = "API";
+            this.olvCommodityAPICode.Text = "Code";
             this.olvCommodityAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCommodityAPICode.Width = 45;
+            this.olvCommodityAPICode.Width = 51;
             // 
             // olvCommodityName
             // 
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityName.Text = "Name";
-            this.olvCommodityName.Width = 218;
+            this.olvCommodityName.Width = 294;
             // 
             // olvPackageSize
             // 

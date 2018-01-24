@@ -2,11 +2,12 @@
 {
     public static class GlobalEnums
     {
+        public static bool PrintLOT = false;
 
-        public static bool OnTestScanner = true; //1
-        public static bool OnTestPalletScanner = true; //3 //WHEN REAL TEST WITHOUT PalletScanner
+        public static bool OnTestScanner = false; //1
+        public static bool OnTestPalletScanner = false; //3 //WHEN REAL TEST WITHOUT PalletScanner
 
-        public static bool OnTestPrinter = true; //2
+        public static bool OnTestPrinter = false; //2
         public static bool OnTestDigit = false; //WHEN REAL TEST WITHOUT DIGIT PRINTER
         public static bool OnTestZebra = false; //false: test zebra 1    //false: WILL SEND TEST PRINT WHEN CONNECTED
 

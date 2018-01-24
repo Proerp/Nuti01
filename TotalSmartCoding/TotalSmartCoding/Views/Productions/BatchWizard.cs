@@ -91,7 +91,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.bindingCommodityName.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingCommodityAPICode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingCommodityCartonCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-                
+
                 this.bindingVolume.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingPlannedQuantity.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingPackQuantity.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -99,6 +99,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.bindingBatchStatusCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
                 this.bindingRemarks.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
+                this.dateTimexEntryDate.Enabled = false;
                 this.errorProviderMaster.DataSource = this.batchViewModel;
             }
             catch (Exception exception)
@@ -147,10 +148,10 @@ namespace TotalSmartCoding.Views.Productions
             {
                 if (sender.Equals(this.buttonOK))
                 {
-                    if (this.batchViewModel.BatchMasterID != null)
+                    if (this.batchViewModel.BatchMasterID != null && this.batchViewModel.BatchMasterID > 0)
                         this.DialogResult = DialogResult.OK;
                     else
-                        CustomMsgBox.Show(this, "Vui lòng chọn khách hàng, nhân viên kinh doanh.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                        CustomMsgBox.Show(this, "Vui lòng chọn batch.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                 }
 
                 if (sender.Equals(this.buttonESC))
