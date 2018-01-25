@@ -49,6 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.addLOT = new System.Windows.Forms.ToolStripButton();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
@@ -68,6 +69,7 @@
             this.olvPackQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
+            this.olvLotCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.layoutMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPlannedQuantity)).BeginInit();
             this.toolStripChildForm.SuspendLayout();
@@ -334,6 +336,7 @@
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator2,
+            this.addLOT,
             this.buttonDiscontinued,
             this.toolStripLabel1,
             this.comboDiscontinued,
@@ -349,6 +352,16 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            // 
+            // addLOT
+            // 
+            this.addLOT.Image = global::TotalSmartCoding.Properties.Resources.Add_continue;
+            this.addLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.addLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addLOT.Name = "addLOT";
+            this.addLOT.Size = new System.Drawing.Size(119, 52);
+            this.addLOT.Text = "Add LOT";
+            this.addLOT.Click += new System.EventHandler(this.addLOT_Click);
             // 
             // buttonDiscontinued
             // 
@@ -428,6 +441,7 @@
             this.fastBatchMasterIndex.AllColumns.Add(this.olvID);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvEntryDate);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvBatchMasterCode);
+            this.fastBatchMasterIndex.AllColumns.Add(this.olvLotCode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvBatchStatusCode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityCode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityName);
@@ -440,6 +454,7 @@
             this.olvID,
             this.olvEntryDate,
             this.olvBatchMasterCode,
+            this.olvLotCode,
             this.olvBatchStatusCode,
             this.olvCommodityCode,
             this.olvCommodityName,
@@ -568,6 +583,14 @@
             this.imageList32.Images.SetKeyName(7, "Sign_Order_32");
             this.imageList32.Images.SetKeyName(8, "CustomerRed");
             // 
+            // olvLotCode
+            // 
+            this.olvLotCode.AspectName = "LotCode";
+            this.olvLotCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Text = "Lot";
+            this.olvLotCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Width = 30;
+            // 
             // BatchMasters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -636,6 +659,8 @@
         private CustomControls.NumericBox numericPlannedQuantity;
         private System.Windows.Forms.Label label4;
         private CustomControls.TextexBox textexCommodityAPICode;
+        private System.Windows.Forms.ToolStripButton addLOT;
+        private BrightIdeasSoftware.OLVColumn olvLotCode;
 
     }
 }

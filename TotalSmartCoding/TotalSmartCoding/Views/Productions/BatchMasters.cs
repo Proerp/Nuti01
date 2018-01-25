@@ -245,6 +245,18 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        private void addLOT_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID)) this.Loading();
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
 
 
     }

@@ -7,6 +7,7 @@ namespace TotalCore.Repositories.Productions
 {
     public interface IBatchMasterRepository : IGenericRepository<BatchMaster>
     {
+        void AddLot(int batchMasterID);
     }
 
     public interface IBatchMasterAPIRepository : IGenericAPIRepository

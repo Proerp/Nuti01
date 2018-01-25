@@ -17,6 +17,11 @@ namespace TotalDAL.Repositories.Productions
             : base(totalSmartCodingEntities, "BatchMasterEditable", "BatchMasterApproved")
         {
         }
+
+        public void AddLot(int batchMasterID)
+        {
+            this.TotalSmartCodingEntities.BatchMasterAddLot(batchMasterID);
+        }
     }
 
 

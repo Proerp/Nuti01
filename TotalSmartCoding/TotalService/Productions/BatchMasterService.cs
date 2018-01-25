@@ -15,5 +15,11 @@ namespace TotalService.Productions
         {
             this.batchMasterRepository = batchMasterRepository;
         }
+
+        public bool AddLot(int batchMasterID)
+        {
+            this.batchMasterRepository.AddLot(batchMasterID);
+            return true;
+        }
     }
 }

@@ -2256,5 +2256,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterToggleApproved", entityIDParameter, approvedParameter);
         }
+    
+        public virtual int BatchMasterAddLot(Nullable<int> batchMasterID)
+        {
+            var batchMasterIDParameter = batchMasterID.HasValue ?
+                new ObjectParameter("BatchMasterID", batchMasterID) :
+                new ObjectParameter("BatchMasterID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterAddLot", batchMasterIDParameter);
+        }
     }
 }

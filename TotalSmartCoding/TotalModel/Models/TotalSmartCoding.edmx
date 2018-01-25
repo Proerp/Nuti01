@@ -2129,6 +2129,9 @@
         <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchMasterAddLot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchMasterID" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchMasterApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -4306,11 +4309,14 @@
           </AssociationSet>
           <FunctionImport Name="GetBatchMasterBases" ReturnType="Collection(TotalSmartCodingModel.BatchMasterBase)" />
           <FunctionImport Name="BatchMasterApproved" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BatchMasterToggleApproved">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="Approved" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="BatchMasterAddLot">
+          <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -7406,6 +7412,9 @@
           <Property Type="Int32" Name="BatchStatusID" Nullable="false" />
           <Property Type="String" Name="BatchStatusCode" Nullable="false" MaxLength="50" />
           <Property Type="Decimal" Name="PlannedQuantity" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="LotID" Nullable="true" />
+          <Property Type="DateTime" Name="LotEntryDate" Nullable="true" />
+          <Property Type="String" Name="LotCode" Nullable="true" MaxLength="10" />
         </ComplexType>
         <EntityType Name="BatchMaster">
           <Key>
@@ -9727,6 +9736,9 @@
                 <ScalarProperty Name="BatchStatusID" ColumnName="BatchStatusID" />
                 <ScalarProperty Name="BatchStatusCode" ColumnName="BatchStatusCode" />
                 <ScalarProperty Name="PlannedQuantity" ColumnName="PlannedQuantity" />
+                <ScalarProperty Name="LotID" ColumnName="LotID" />
+                <ScalarProperty Name="LotEntryDate" ColumnName="LotEntryDate" />
+                <ScalarProperty Name="LotCode" ColumnName="LotCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -9861,6 +9873,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BatchMasterApproved" FunctionName="TotalSmartCodingModel.Store.BatchMasterApproved" />
           <FunctionImportMapping FunctionImportName="BatchMasterToggleApproved" FunctionName="TotalSmartCodingModel.Store.BatchMasterToggleApproved" />
+          <FunctionImportMapping FunctionImportName="BatchMasterAddLot" FunctionName="TotalSmartCodingModel.Store.BatchMasterAddLot" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
