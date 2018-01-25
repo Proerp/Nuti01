@@ -33,7 +33,15 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.batchMasterID, o => o.BatchMasterID, value); }
         }
 
-        public override string Reference { get { return this.Code + this.LotNumber; } set { } }
+        public override string Reference { get { return this.Code + this.LotCode; } set { } }
+
+        private int lotID;
+        [DefaultValue(null)]
+        public int LotID
+        {
+            get { return this.lotID; }
+            set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.lotID, o => o.LotID, value); }
+        }
 
         private string code;
         [DefaultValue(null)]
@@ -43,12 +51,12 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchPrimitiveDTO, string>(ref this.code, o => o.Code, value); }
         }
 
-        private string lotNumber;
+        private string lotCode;
         [DefaultValue(null)]
-        public string LotNumber
+        public string LotCode
         {
-            get { return this.lotNumber; }
-            set { ApplyPropertyChange<BatchPrimitiveDTO, string>(ref this.lotNumber, o => o.LotNumber, value); }
+            get { return this.lotCode; }
+            set { ApplyPropertyChange<BatchPrimitiveDTO, string>(ref this.lotCode, o => o.LotCode, value); }
         }
 
         public int FillingLineID { get; set; }
@@ -204,10 +212,11 @@ namespace TotalDTO.Productions
         {
             List<ValidationRule> validationRules = base.CreateRules(); int value;
             validationRules.Add(new SimpleValidationRule("CommodityID", "Vui lòng chọn mã sản phẩm.", delegate { return this.CommodityID > 0; }));
-            validationRules.Add(new SimpleValidationRule("BatchMasterID", "Vui lòng chọn batch.", delegate { return this.BatchMasterID > 0; }));
+            validationRules.Add(new SimpleValidationRule("BatchMasterID", "Vui lòng chọn Batch.", delegate { return this.BatchMasterID > 0; }));
+            validationRules.Add(new SimpleValidationRule("LotID", "Vui lòng chọn Lot.", delegate { return this.LotID > 0; }));
             validationRules.Add(new SimpleValidationRule("BatchTypeID", "Vui lòng chọn [N-new], [R-Repack], [T-Trial].", delegate { return this.BatchTypeID > 0; }));
             validationRules.Add(new SimpleValidationRule("Code", "Số batch quy định là 5 ký tự.", delegate { return this.Code != null && this.Code.Length == 5; }));
-            validationRules.Add(new SimpleValidationRule("LotNumber", "Số Lot quy định là 1 ký tự.", delegate { return this.LotNumber != null && this.LotNumber.Length == 1 && TotalBase.CommonExpressions.AlphaNumericStringLOTNUMBER(this.LotNumber).Length == 1; }));
+            validationRules.Add(new SimpleValidationRule("LotCode", "Số Lot quy định là 1 ký tự.", delegate { return this.LotCode != null && this.LotCode.Length == 1 && TotalBase.CommonExpressions.AlphaNumericStringLOTNUMBER(this.LotCode).Length == 1; }));
             validationRules.Add(new SimpleValidationRule("NextPackNo", "Số thứ tự chai quy định là 6 chữ số.", delegate { return this.NextPackNo.Length == 6 && int.TryParse(this.NextPackNo, out value); }));
             validationRules.Add(new SimpleValidationRule("NextCartonNo", "Số thứ tự carton quy định là 6 chữ số.", delegate { return this.NextCartonNo.Length == 6 && int.TryParse(this.NextCartonNo, out value); }));
             validationRules.Add(new SimpleValidationRule("NextPalletNo", "Số thứ tự pallet quy định là 6 chữ số.", delegate { return this.NextPalletNo.Length == 6 && int.TryParse(this.NextPalletNo, out value); }));

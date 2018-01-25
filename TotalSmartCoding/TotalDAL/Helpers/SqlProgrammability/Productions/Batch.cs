@@ -20,13 +20,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             this.GetBatchIndexes();
 
+            this.GetPendingLots();
+
             this.BatchEditable();
             this.BatchPostSaveValidate();
 
             this.BatchToggleApproved();
             this.BatchToggleVoid();
 
-            //this.BatchInitReference(); NOT USE THIS ANY MORE. NOW: Reference = Code + LotNumber
+            //this.BatchInitReference(); NOT USE THIS ANY MORE. NOW: Reference = Code + LotCode
 
             this.BatchAddLot();
             this.BatchCommonUpdate();
@@ -42,7 +44,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.LotNumber, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
+            queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.LotCode, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
             queryString = queryString + "                   BatchTypes.Code AS BatchTypeCode, BatchTypes.Code + '-' + BatchTypes.Name AS BatchTypeCodeName, Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, CummulativePacks.PackQuantity, CummulativePacks.PackLineVolume, Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault, Batches.InActive " + "\r\n";
             queryString = queryString + "       FROM        Batches " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON Batches.FillingLineID = @FillingLineID AND (@ActiveOption = -1 OR Batches.InActive = @ActiveOption) AND ((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -56,7 +58,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchIndexes", queryString);
         }
 
+        private void GetPendingLots()
+        {
+            string queryString = " @LocationID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
 
+            queryString = queryString + "       SELECT          Lots.LotID, Lots.Code AS LotCode, BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, BatchMasters.PlannedQuantity, BatchStatuses.Code AS BatchStatusCode, BatchStatuses.Remarks, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet " + "\r\n";
+            queryString = queryString + "       FROM            Lots " + "\r\n";
+            queryString = queryString + "                       INNER JOIN BatchMasters ON Lots.LocationID = @LocationID AND Lots.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN BatchStatuses ON BatchMasters.BatchStatusID = BatchStatuses.BatchStatusID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetPendingLots", queryString);
+        }
 
         private void BatchEditable()
         {
@@ -134,13 +149,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       DECLARE     @LotNumber nvarchar(10), @NextPackNo nvarchar(10), @NextCartonNo nvarchar(10), @NextPalletNo nvarchar(10) ";
-            queryString = queryString + "       SELECT      @LotNumber = LotNumber, @NextPackNo = NextPackNo, @NextCartonNo = NextCartonNo, @NextPalletNo = NextPalletNo FROM Batches WHERE BatchID = (SELECT MAX(BatchID) FROM Batches WHERE Code = (SELECT Code FROM Batches WHERE BatchID = @BatchID)) ";
+            queryString = queryString + "       DECLARE     @LotCode nvarchar(10), @NextPackNo nvarchar(10), @NextCartonNo nvarchar(10), @NextPalletNo nvarchar(10) ";
+            queryString = queryString + "       SELECT      @LotCode = LotCode, @NextPackNo = NextPackNo, @NextCartonNo = NextCartonNo, @NextPalletNo = NextPalletNo FROM Batches WHERE BatchID = (SELECT MAX(BatchID) FROM Batches WHERE Code = (SELECT Code FROM Batches WHERE BatchID = @BatchID)) ";
 
-            queryString = queryString + "       SELECT      @LotNumber = CHAR(CASE WHEN (ASCII(@LotNumber) >= 49 AND ASCII(@LotNumber) < 57) OR (ASCII(@LotNumber) >= 65 AND ASCII(@LotNumber) < 90) THEN ASCII(@LotNumber) + 1 WHEN ASCII(@LotNumber) = 57 THEN 65 ELSE 97 END), @NextPackNo = RIGHT(CAST(CAST(@NextPackNo AS int) + 1000001 AS varchar), 5), @NextCartonNo = RIGHT(CAST(CAST(@NextCartonNo AS int) + 1000001 AS varchar), 5), @NextPalletNo = RIGHT(CAST(CAST(@NextPalletNo AS int) + 1000001 AS varchar), 5) " + "\r\n";
+            queryString = queryString + "       SELECT      @LotCode = CHAR(CASE WHEN (ASCII(@LotCode) >= 49 AND ASCII(@LotCode) < 57) OR (ASCII(@LotCode) >= 65 AND ASCII(@LotCode) < 90) THEN ASCII(@LotCode) + 1 WHEN ASCII(@LotCode) = 57 THEN 65 ELSE 97 END), @NextPackNo = RIGHT(CAST(CAST(@NextPackNo AS int) + 1000001 AS varchar), 5), @NextCartonNo = RIGHT(CAST(CAST(@NextCartonNo AS int) + 1000001 AS varchar), 5), @NextPalletNo = RIGHT(CAST(CAST(@NextPalletNo AS int) + 1000001 AS varchar), 5) " + "\r\n";
 
-            queryString = queryString + "       INSERT INTO Batches (EntryDate, Reference, Code, LotNumber, FillingLineID, CommodityID, LocationID, NextPackNo, NextCartonNo, NextPalletNo, Description, Remarks, CreatedDate, EditedDate, IsDefault, InActive, InActiveDate) " + "\r\n";
-            queryString = queryString + "       SELECT      EntryDate, Code + @LotNumber AS Reference, Code, @LotNumber, FillingLineID, CommodityID, LocationID, @NextPackNo, @NextCartonNo, @NextPalletNo, Description, Remarks, GETDATE() AS CreatedDate, GETDATE() AS EditedDate, 0 AS IsDefault, 0 AS InActive, NULL AS InActiveDate " + "\r\n";
+            queryString = queryString + "       INSERT INTO Batches (EntryDate, Reference, Code, LotCode, FillingLineID, CommodityID, LocationID, NextPackNo, NextCartonNo, NextPalletNo, Description, Remarks, CreatedDate, EditedDate, IsDefault, InActive, InActiveDate) " + "\r\n";
+            queryString = queryString + "       SELECT      EntryDate, Code + @LotCode AS Reference, Code, @LotCode, FillingLineID, CommodityID, LocationID, @NextPackNo, @NextCartonNo, @NextPalletNo, Description, Remarks, GETDATE() AS CreatedDate, GETDATE() AS EditedDate, 0 AS IsDefault, 0 AS InActive, NULL AS InActiveDate " + "\r\n";
             queryString = queryString + "       FROM        Batches " + "\r\n";
             queryString = queryString + "       WHERE       BatchID = @BatchID " + "\r\n";
 

@@ -49,7 +49,7 @@
             this.textexNextPalletNo = new CustomControls.TextexBox();
             this.textexRemarks = new CustomControls.TextexBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textexLotNumber = new CustomControls.TextexBox();
+            this.textexLotCode = new CustomControls.TextexBox();
             this.label5 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,7 +66,7 @@
             this.olvID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvLotNumber = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvLotCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -112,7 +112,7 @@
             this.layoutMaster.Controls.Add(this.textexNextPalletNo, 1, 18);
             this.layoutMaster.Controls.Add(this.textexRemarks, 1, 20);
             this.layoutMaster.Controls.Add(this.label3, 1, 9);
-            this.layoutMaster.Controls.Add(this.textexLotNumber, 1, 6);
+            this.layoutMaster.Controls.Add(this.textexLotCode, 1, 6);
             this.layoutMaster.Controls.Add(this.label5, 1, 5);
             this.layoutMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutMaster.Location = new System.Drawing.Point(0, 0);
@@ -363,15 +363,15 @@
             this.label3.Text = "Item Name";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // textexLotNumber
+            // textexLotCode
             // 
-            this.textexLotNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textexLotNumber.Editable = false;
-            this.textexLotNumber.Location = new System.Drawing.Point(33, 169);
-            this.textexLotNumber.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
-            this.textexLotNumber.Name = "textexLotNumber";
-            this.textexLotNumber.Size = new System.Drawing.Size(319, 27);
-            this.textexLotNumber.TabIndex = 71;
+            this.textexLotCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textexLotCode.Editable = false;
+            this.textexLotCode.Location = new System.Drawing.Point(33, 169);
+            this.textexLotCode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexLotCode.Name = "textexLotCode";
+            this.textexLotCode.Size = new System.Drawing.Size(319, 27);
+            this.textexLotCode.TabIndex = 71;
             // 
             // label5
             // 
@@ -514,7 +514,7 @@
             this.fastBatchIndex.AllColumns.Add(this.olvID);
             this.fastBatchIndex.AllColumns.Add(this.olvEntryDate);
             this.fastBatchIndex.AllColumns.Add(this.olvBatchCode);
-            this.fastBatchIndex.AllColumns.Add(this.olvLotNumber);
+            this.fastBatchIndex.AllColumns.Add(this.olvLotCode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityCode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityAPICode);
             this.fastBatchIndex.AllColumns.Add(this.olvCommodityName);
@@ -529,7 +529,7 @@
             this.olvID,
             this.olvEntryDate,
             this.olvBatchCode,
-            this.olvLotNumber,
+            this.olvLotCode,
             this.olvCommodityCode,
             this.olvCommodityAPICode,
             this.olvCommodityName,
@@ -581,13 +581,13 @@
             this.olvBatchCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvBatchCode.Width = 69;
             // 
-            // olvLotNumber
+            // olvLotCode
             // 
-            this.olvLotNumber.AspectName = "LotNumber";
-            this.olvLotNumber.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvLotNumber.Text = "Lot";
-            this.olvLotNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvLotNumber.Width = 30;
+            this.olvLotCode.AspectName = "LotCode";
+            this.olvLotCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Text = "Lot";
+            this.olvLotCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Width = 30;
             // 
             // olvCommodityCode
             // 
@@ -748,10 +748,10 @@
         private CustomControls.TextexBox textexNextPalletNo;
         private CustomControls.TextexBox textexRemarks;
         private System.Windows.Forms.Label label3;
-        private CustomControls.TextexBox textexLotNumber;
+        private CustomControls.TextexBox textexLotCode;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripButton buttonNewLOT;
-        private BrightIdeasSoftware.OLVColumn olvLotNumber;
+        private BrightIdeasSoftware.OLVColumn olvLotCode;
         private BrightIdeasSoftware.OLVColumn olvCommodityAPICode;
         private System.Windows.Forms.ImageList imageList32;
         private BrightIdeasSoftware.OLVColumn olvPackQuantity;

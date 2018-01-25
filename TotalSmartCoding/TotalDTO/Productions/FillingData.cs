@@ -37,7 +37,7 @@ namespace TotalDTO.Productions
         private string batchTypeCode;
 
         private string batchCode;
-        private string lotNumber;
+        private string lotCode;
         private DateTime entryDate;
         private DateTime settingDate;
 
@@ -163,10 +163,10 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<FillingData, string>(ref this.batchCode, o => o.BatchCode, value); }
         }
 
-        public string LotNumber   //ResetSerialNumber
+        public string LotCode   //ResetSerialNumber
         {
-            get { return this.lotNumber; }
-            set { ApplyPropertyChange<FillingData, string>(ref this.lotNumber, o => o.LotNumber, value); }
+            get { return this.lotCode; }
+            set { ApplyPropertyChange<FillingData, string>(ref this.lotCode, o => o.LotCode, value); }
         }
 
         public DateTime EntryDate
@@ -342,7 +342,7 @@ namespace TotalDTO.Productions
 
         public bool DataValidated()
         {
-            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" && this.LotNumber != "" && this.NextPackNo != "" && this.NextCartonNo != "" && this.NextPalletNo != "";
+            return this.FillingLineID != 0 && this.CommodityID != 0 && this.BatchCode != "" && this.LotCode != "" && this.NextPackNo != "" && this.NextCartonNo != "" && this.NextPalletNo != "";
         }
 
 
@@ -417,7 +417,7 @@ namespace TotalDTO.Productions
 
         public string ThirdLineA1(bool isReadableText)
         {
-            return this.BatchCode + this.LotNumber;
+            return this.BatchCode + this.LotCode;
         }
 
     }

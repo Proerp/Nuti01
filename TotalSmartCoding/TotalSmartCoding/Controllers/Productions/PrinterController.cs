@@ -265,7 +265,7 @@ namespace TotalSmartCoding.Controllers.Productions
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
                 return GlobalVariables.charESC + "n/1/H" + (isReadableText ? ":" : "") + GlobalVariables.charESC + "n/1/M";
             else
-                return DateTime.Now.ToString("HH") + ":" + DateTime.Now.ToString("mm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
+                return DateTime.Now.ToString("HH") + (isReadableText ? ":" : "") + DateTime.Now.ToString("mm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
         }
 
 

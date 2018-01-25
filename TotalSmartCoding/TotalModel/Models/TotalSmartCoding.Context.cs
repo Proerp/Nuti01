@@ -2265,5 +2265,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterAddLot", batchMasterIDParameter);
         }
+    
+        public virtual ObjectResult<PendingLot> GetPendingLots(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingLot>("GetPendingLots", locationIDParameter);
+        }
     }
 }

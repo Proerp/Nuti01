@@ -288,6 +288,9 @@
     <Compile Include="Models\PendingGoodsIssueTransferWarehouse.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PendingLot.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PendingPallet.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>

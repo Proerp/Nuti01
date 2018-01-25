@@ -147,7 +147,7 @@
         <EntityTypeShape EntityType="TotalSmartCodingModel.BatchStatus" Width="1.5" PointX="10.375" PointY="42.125" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.BatchType" Width="1.5" PointX="3.375" PointY="7.75" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_BatchMasters_BatchStatuses" />
-        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="15.875" PointY="6.125" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Batch" Width="1.5" PointX="15.875" PointY="6" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_BatchMasters" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_BatchTypes" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />

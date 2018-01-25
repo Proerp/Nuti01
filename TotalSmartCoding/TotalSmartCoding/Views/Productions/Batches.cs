@@ -123,7 +123,7 @@ namespace TotalSmartCoding.Views.Productions
 
         Binding bindingEntryDate;
         Binding bindingCode;
-        Binding bindingLotNumber;
+        Binding bindingLotCode;
 
         Binding bindingNextPackNo;
         Binding bindingNextCartonNo;
@@ -140,7 +140,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.bindingEntryDate = this.dateTimexEntryDate.DataBindings.Add("Value", this.batchViewModel, "EntryDate", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingCode = this.textexCode.DataBindings.Add("Text", this.batchViewModel, "Code", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.bindingLotNumber = this.textexLotNumber.DataBindings.Add("Text", this.batchViewModel, "LotNumber", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.bindingLotCode = this.textexLotCode.DataBindings.Add("Text", this.batchViewModel, "LotCode", true, DataSourceUpdateMode.OnPropertyChanged);
 
             this.bindingNextPackNo = this.textexNextPackNo.DataBindings.Add("Text", this.batchViewModel, "NextPackNo", true, DataSourceUpdateMode.OnPropertyChanged);
             this.bindingNextCartonNo = this.textexNextCartonNo.DataBindings.Add("Text", this.batchViewModel, "NextCartonNo", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -164,7 +164,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.bindingEntryDate.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
-            this.bindingLotNumber.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
+            this.bindingLotCode.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
 
             this.bindingNextPackNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
             this.bindingNextCartonNo.BindingComplete += new BindingCompleteEventHandler(CommonControl_BindingComplete);
@@ -232,7 +232,7 @@ namespace TotalSmartCoding.Views.Productions
 
         protected override DialogResult wizardMaster()
         {
-            BatchWizard batchWizard = new BatchWizard(this.batchViewModel);
+            BatchWizard batchWizard = new BatchWizard(this.batchAPIs, this.batchViewModel);
             DialogResult dialogResult = batchWizard.ShowDialog();
 
             batchWizard.Dispose();

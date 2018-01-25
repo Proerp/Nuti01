@@ -24,9 +24,10 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public string Code { get; set; }
-        public string LotNumber { get; set; }
+        public string LotCode { get; set; }
         public int FillingLineID { get; set; }
         public int BatchMasterID { get; set; }
+        public int LotID { get; set; }
         public int CommodityID { get; set; }
         public int BatchTypeID { get; set; }
         public int LocationID { get; set; }

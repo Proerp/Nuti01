@@ -27,7 +27,7 @@ namespace TotalModel.Models
         public int CommodityID { get; set; }
         public int BatchStatusID { get; set; }
         public int LocationID { get; set; }
-        public Nullable<decimal> PlannedQuantity { get; set; }
+        public decimal PlannedQuantity { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }

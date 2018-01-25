@@ -19,7 +19,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         public void RestoreProcedure()
         {
             this.GetBatchMasterIndexes();
-
+            
             this.BatchMasterApproved();
             this.BatchMasterEditable();
             this.BatchMasterPostSaveValidate();
@@ -56,8 +56,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterIndexes", queryString);
         }
-
-
+        
         private void BatchMasterApproved()
         {
             string[] queryArray = new string[1];

@@ -73,6 +73,10 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
             batchMaster.RestoreProcedure();
 
+            ////return;
+
+            Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
+            batch.RestoreProcedure();
 
             return;
 
@@ -101,11 +105,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Commons.FillingLine fillingLine = new Helpers.SqlProgrammability.Commons.FillingLine(totalSmartCodingEntities);
             fillingLine.RestoreProcedure();
 
-            ////return;
-
-            Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
-            batch.RestoreProcedure();
-
+            
             
             //return;
 
