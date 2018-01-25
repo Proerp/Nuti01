@@ -24,7 +24,7 @@ namespace TotalSmartCoding.Views.Productions
             this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
             this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
-            this.customTabBatch.TabPages.Add("tabPendingLots", "Advice by every sales order    ");
+            this.customTabBatch.TabPages.Add("tabPendingLots", "Available Batches    ");
             this.customTabBatch.TabPages[0].Controls.Add(this.fastPendingLots);
 
 

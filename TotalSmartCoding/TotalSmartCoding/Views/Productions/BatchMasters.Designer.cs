@@ -82,7 +82,7 @@
             // layoutMaster
             // 
             this.layoutMaster.AutoSize = true;
-            this.layoutMaster.BackColor = System.Drawing.Color.Transparent;
+            this.layoutMaster.BackColor = System.Drawing.Color.Ivory;
             this.layoutMaster.ColumnCount = 3;
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -127,7 +127,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(378, 582);
+            this.layoutMaster.Size = new System.Drawing.Size(378, 637);
             this.layoutMaster.TabIndex = 62;
             // 
             // label4
@@ -408,13 +408,13 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(1103, 55);
+            this.naviBarMaster.Location = new System.Drawing.Point(1103, 0);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(380, 630);
+            this.naviBarMaster.Size = new System.Drawing.Size(380, 685);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -426,13 +426,13 @@
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 582);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 637);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(378, 582);
+            this.naviBand1.Size = new System.Drawing.Size(378, 637);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -450,6 +450,7 @@
             this.fastBatchMasterIndex.AllColumns.Add(this.olvPlannedQuantity);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvPackQuantity);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvPackLineVolume);
+            this.fastBatchMasterIndex.BackColor = System.Drawing.Color.Ivory;
             this.fastBatchMasterIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvID,
             this.olvEntryDate,
@@ -469,11 +470,11 @@
             this.fastBatchMasterIndex.GroupImageList = this.imageList32;
             this.fastBatchMasterIndex.HideSelection = false;
             this.fastBatchMasterIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 55);
+            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 0);
             this.fastBatchMasterIndex.Name = "fastBatchMasterIndex";
             this.fastBatchMasterIndex.OwnerDraw = true;
             this.fastBatchMasterIndex.ShowGroups = false;
-            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 630);
+            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 685);
             this.fastBatchMasterIndex.TabIndex = 67;
             this.fastBatchMasterIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchMasterIndex.UseCompatibleStateImageBehavior = false;

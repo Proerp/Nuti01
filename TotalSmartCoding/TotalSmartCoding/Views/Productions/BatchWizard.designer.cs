@@ -33,7 +33,7 @@
             this.buttonOK = new System.Windows.Forms.ToolStripButton();
             this.fastPendingLots = new BrightIdeasSoftware.FastObjectListView();
             this.olvEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvLotCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -54,7 +54,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 548);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip1.Size = new System.Drawing.Size(1147, 55);
+            this.toolStrip1.Size = new System.Drawing.Size(1417, 55);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -83,13 +83,13 @@
             // fastPendingLots
             // 
             this.fastPendingLots.AllColumns.Add(this.olvEntryDate);
-            this.fastPendingLots.AllColumns.Add(this.olvCommodityAPICode);
+            this.fastPendingLots.AllColumns.Add(this.olvCode);
             this.fastPendingLots.AllColumns.Add(this.olvLotCode);
             this.fastPendingLots.AllColumns.Add(this.olvCommodityCode);
             this.fastPendingLots.AllColumns.Add(this.olvCommodityName);
             this.fastPendingLots.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvEntryDate,
-            this.olvCommodityAPICode,
+            this.olvCode,
             this.olvLotCode,
             this.olvCommodityCode,
             this.olvCommodityName});
@@ -98,7 +98,7 @@
             this.fastPendingLots.FullRowSelect = true;
             this.fastPendingLots.HideSelection = false;
             this.fastPendingLots.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPendingLots.Location = new System.Drawing.Point(-3, 313);
+            this.fastPendingLots.Location = new System.Drawing.Point(3, 24);
             this.fastPendingLots.Name = "fastPendingLots";
             this.fastPendingLots.OwnerDraw = true;
             this.fastPendingLots.ShowGroups = false;
@@ -116,25 +116,31 @@
             this.olvEntryDate.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvEntryDate.Text = "Date";
             this.olvEntryDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvEntryDate.Width = 148;
+            this.olvEntryDate.Width = 104;
             // 
-            // olvCommodityAPICode
+            // olvCode
             // 
-            this.olvCommodityAPICode.AspectName = "CommodityAPICode";
-            this.olvCommodityAPICode.Text = "Batch #";
-            this.olvCommodityAPICode.Width = 76;
+            this.olvCode.AspectName = "Code";
+            this.olvCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCode.Text = "Batch #";
+            this.olvCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCode.Width = 99;
             // 
             // olvLotCode
             // 
             this.olvLotCode.AspectName = "LotCode";
+            this.olvLotCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvLotCode.Text = "Lot";
-            this.olvLotCode.Width = 96;
+            this.olvLotCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Width = 70;
             // 
             // olvCommodityCode
             // 
             this.olvCommodityCode.AspectName = "CommodityCode";
+            this.olvCommodityCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityCode.Text = "Item";
-            this.olvCommodityCode.Width = 350;
+            this.olvCommodityCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCommodityCode.Width = 86;
             // 
             // olvCommodityName
             // 
@@ -150,14 +156,14 @@
             this.panelMaster.Location = new System.Drawing.Point(0, 0);
             this.panelMaster.Name = "panelMaster";
             this.panelMaster.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.panelMaster.Size = new System.Drawing.Size(1147, 548);
+            this.panelMaster.Size = new System.Drawing.Size(1417, 548);
             this.panelMaster.TabIndex = 71;
             // 
             // BatchWizard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1147, 603);
+            this.ClientSize = new System.Drawing.Size(1417, 603);
             this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -185,7 +191,7 @@
         private System.Windows.Forms.Panel panelMaster;
         private BrightIdeasSoftware.OLVColumn olvEntryDate;
         private BrightIdeasSoftware.OLVColumn olvCommodityCode;
-        private BrightIdeasSoftware.OLVColumn olvCommodityAPICode;
+        private BrightIdeasSoftware.OLVColumn olvCode;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
         private BrightIdeasSoftware.OLVColumn olvCommodityName;
     }
