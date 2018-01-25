@@ -12,9 +12,9 @@ namespace TotalBase
             switch (nmvnTaskID)
             {
                 case GlobalEnums.NmvnTaskID.Batch:
-                    return "FI";
+                    return "B";
                 case GlobalEnums.NmvnTaskID.BatchMaster:
-                    return "FM";
+                    return "F";
 
                 case GlobalEnums.NmvnTaskID.PurchaseOrder:
                     return "D";

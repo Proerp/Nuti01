@@ -85,7 +85,6 @@ namespace TotalSmartCoding.Views.Productions
 
             if (propertyName == "ReadonlyMode")
             {
-                this.buttonNewLOT.Enabled = this.Newable && this.ReadonlyMode && !this.batchViewModel.InActive;
                 this.buttonApply.Enabled = this.allQueueEmpty && this.ReadonlyMode;
                 this.buttonDiscontinued.Enabled = this.Newable && this.ReadonlyMode;
             }
@@ -254,13 +253,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             if (this.allQueueEmpty) this.Approve();
         }
-
-
-        private void buttonNewLOT_Click(object sender, EventArgs e)
-        {
-            if (this.batchController.AddLot(this.batchViewModel.BatchID)) this.Loading();
-        }
-
+       
         protected override bool ApproveCheck(int id)
         {
             return !this.batchViewModel.IsDefault && !this.batchViewModel.InActive;

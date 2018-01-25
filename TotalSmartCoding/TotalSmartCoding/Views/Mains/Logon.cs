@@ -286,11 +286,17 @@ namespace TotalSmartCoding.Views.Mains
                             this.baseRepository.ExecuteStoreCommand("DELETE FROM     Pallets", new ObjectParameter[] { });
                             this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('Pallets', RESEED, 0)", new ObjectParameter[] { });
 
-                            //this.baseRepository.ExecuteStoreCommand("DELETE FROM     Batches", new ObjectParameter[] { });
-                            //this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('Batches', RESEED, 0)", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("DELETE FROM     Batches", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('Batches', RESEED, 0)", new ObjectParameter[] { });
 
-                            //this.baseRepository.ExecuteStoreCommand("DELETE FROM     Commodities", new ObjectParameter[] { });
-                            //this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('Commodities', RESEED, 0)", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("DELETE FROM     Lots", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('Lots', RESEED, 0)", new ObjectParameter[] { });
+
+                            this.baseRepository.ExecuteStoreCommand("DELETE FROM     BatchMasters", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('BatchMasters', RESEED, 0)", new ObjectParameter[] { });
+
+                            this.baseRepository.ExecuteStoreCommand("DELETE FROM     Commodities", new ObjectParameter[] { });
+                            this.baseRepository.ExecuteStoreCommand("DBCC CHECKIDENT ('Commodities', RESEED, 0)", new ObjectParameter[] { });
                         }
                         #endregion
 

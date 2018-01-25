@@ -37,6 +37,13 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchMasterPrimitiveDTO, int>(ref this.batchMasterID, o => o.BatchMasterID, value); }
         }
 
+        private DateTime plannedDate;
+        public DateTime PlannedDate
+        {
+            get { return this.plannedDate; }
+            set { ApplyPropertyChange<BatchMasterPrimitiveDTO, DateTime>(ref this.plannedDate, o => o.PlannedDate, value); }
+        }
+
         private string code;
         [DefaultValue(null)]
         public string Code

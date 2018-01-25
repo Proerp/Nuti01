@@ -37,6 +37,7 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> InActiveDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public System.DateTime PlannedDate { get; set; }
     
         public virtual BatchStatus BatchStatus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

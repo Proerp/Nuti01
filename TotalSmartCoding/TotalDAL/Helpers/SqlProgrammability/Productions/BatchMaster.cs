@@ -45,8 +45,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      BatchMasters.BatchMasterID, CAST(BatchMasters.EntryDate AS DATE) AS EntryDate, BatchMasters.Reference, BatchMasters.Code AS BatchMasterCode, BatchMasters.BatchStatusID, BatchStatuses.Code AS BatchStatusCode, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
             queryString = queryString + "                   Lots.LotID, Lots.EntryDate AS LotEntryDate, Lots.Code AS LotCode, BatchMasters.Description, BatchMasters.Remarks, BatchMasters.PlannedQuantity, CummulativePacks.PackQuantity, CummulativePacks.PackLineVolume, BatchMasters.CreatedDate, BatchMasters.EditedDate, BatchMasters.IsDefault, BatchMasters.InActive " + "\r\n";
-            queryString = queryString + "       FROM        BatchMasters " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON (@ActiveOption = -1 OR BatchMasters.InActive = @ActiveOption) AND BatchMasters.EntryDate >= @FromDate AND BatchMasters.EntryDate <= @ToDate AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "       FROM        BatchMasters " + "\r\n"; //AND BatchMasters.EntryDate >= @FromDate AND BatchMasters.EntryDate <= @ToDate 
+            queryString = queryString + "                   INNER JOIN Commodities ON (@ActiveOption = -1 OR BatchMasters.InActive = @ActiveOption) AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                   INNER JOIN BatchStatuses ON BatchMasters.BatchStatusID = BatchStatuses.BatchStatusID " + "\r\n";
 
             queryString = queryString + "                   LEFT JOIN Lots ON BatchMasters.BatchMasterID = Lots.BatchMasterID " + "\r\n";

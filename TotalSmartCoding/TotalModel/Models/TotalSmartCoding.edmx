@@ -11,7 +11,7 @@
           </Key>
           <Property Name="BatchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="date" Nullable="false" />
-          <Property Name="Reference" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="30" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="LotCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
@@ -37,6 +37,7 @@
           </Key>
           <Property Name="BatchMasterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="PlannedDate" Type="date" Nullable="false" />
           <Property Name="Reference" Type="nvarchar" MaxLength="30" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
@@ -7446,6 +7447,7 @@
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_BatchMasters" FromRole="BatchMaster" ToRole="Batch" />
+          <Property Name="PlannedDate" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="BatchStatus">
           <Key>
@@ -7543,7 +7545,7 @@
           </Key>
           <Property Name="BatchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Reference" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LotCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="FillingLineID" Type="Int32" Nullable="false" />
@@ -9771,6 +9773,7 @@
           <EntitySetMapping Name="BatchMasters">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.BatchMaster">
               <MappingFragment StoreEntitySet="BatchMasters">
+                <ScalarProperty Name="PlannedDate" ColumnName="PlannedDate" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />

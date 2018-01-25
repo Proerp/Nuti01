@@ -150,7 +150,7 @@ namespace TotalDAL.Repositories
         public DateTime GetEditLockedDate(int? locationID, GlobalEnums.NmvnTaskID nmvnTaskID)
         {
             DateTime? lockedDate = this.TotalSmartCodingEntities.Locations.Where(w => w.LocationID == locationID).FirstOrDefault().LockedDate;
-            if (lockedDate == null || lockedDate <= new DateTime(2016, 1, 1)) lockedDate = new DateTime(2016, 1, 1);
+            if (lockedDate == null || lockedDate <= new DateTime(1999, 1, 1)) lockedDate = new DateTime(1999, 1, 1);
 
             return (DateTime)lockedDate;
         }

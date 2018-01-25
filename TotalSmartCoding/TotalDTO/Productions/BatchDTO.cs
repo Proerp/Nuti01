@@ -33,7 +33,7 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchPrimitiveDTO, int>(ref this.batchMasterID, o => o.BatchMasterID, value); }
         }
 
-        public override string Reference { get { return this.Code + this.LotCode; } set { } }
+        //public override string Reference { get { return this.Code + this.LotCode; } set { } }
 
         private int lotID;
         [DefaultValue(null)]

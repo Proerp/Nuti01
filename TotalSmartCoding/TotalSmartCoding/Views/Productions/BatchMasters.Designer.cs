@@ -49,7 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.addLOT = new System.Windows.Forms.ToolStripButton();
+            this.buttonNewLOT = new System.Windows.Forms.ToolStripButton();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
@@ -60,6 +60,7 @@
             this.olvID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchMasterCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvLotCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchStatusCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -69,7 +70,6 @@
             this.olvPackQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
-            this.olvLotCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.layoutMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPlannedQuantity)).BeginInit();
             this.toolStripChildForm.SuspendLayout();
@@ -127,7 +127,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(378, 637);
+            this.layoutMaster.Size = new System.Drawing.Size(378, 582);
             this.layoutMaster.TabIndex = 62;
             // 
             // label4
@@ -336,7 +336,7 @@
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator2,
-            this.addLOT,
+            this.buttonNewLOT,
             this.buttonDiscontinued,
             this.toolStripLabel1,
             this.comboDiscontinued,
@@ -353,15 +353,15 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
             // 
-            // addLOT
+            // buttonNewLOT
             // 
-            this.addLOT.Image = global::TotalSmartCoding.Properties.Resources.Add_continue;
-            this.addLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.addLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.addLOT.Name = "addLOT";
-            this.addLOT.Size = new System.Drawing.Size(119, 52);
-            this.addLOT.Text = "Add LOT";
-            this.addLOT.Click += new System.EventHandler(this.addLOT_Click);
+            this.buttonNewLOT.Image = global::TotalSmartCoding.Properties.Resources.Add_continue;
+            this.buttonNewLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonNewLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonNewLOT.Name = "buttonNewLOT";
+            this.buttonNewLOT.Size = new System.Drawing.Size(119, 52);
+            this.buttonNewLOT.Text = "Add LOT";
+            this.buttonNewLOT.Click += new System.EventHandler(this.buttonNewLOT_Click);
             // 
             // buttonDiscontinued
             // 
@@ -408,13 +408,13 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(1103, 0);
+            this.naviBarMaster.Location = new System.Drawing.Point(1103, 55);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(380, 685);
+            this.naviBarMaster.Size = new System.Drawing.Size(380, 630);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -426,13 +426,13 @@
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 637);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 582);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(378, 637);
+            this.naviBand1.Size = new System.Drawing.Size(378, 582);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -469,11 +469,11 @@
             this.fastBatchMasterIndex.GroupImageList = this.imageList32;
             this.fastBatchMasterIndex.HideSelection = false;
             this.fastBatchMasterIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 55);
             this.fastBatchMasterIndex.Name = "fastBatchMasterIndex";
             this.fastBatchMasterIndex.OwnerDraw = true;
             this.fastBatchMasterIndex.ShowGroups = false;
-            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 685);
+            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 630);
             this.fastBatchMasterIndex.TabIndex = 67;
             this.fastBatchMasterIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchMasterIndex.UseCompatibleStateImageBehavior = false;
@@ -503,6 +503,14 @@
             this.olvBatchMasterCode.Text = "Batch";
             this.olvBatchMasterCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvBatchMasterCode.Width = 86;
+            // 
+            // olvLotCode
+            // 
+            this.olvLotCode.AspectName = "LotCode";
+            this.olvLotCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Text = "Lot";
+            this.olvLotCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvLotCode.Width = 30;
             // 
             // olvBatchStatusCode
             // 
@@ -583,14 +591,6 @@
             this.imageList32.Images.SetKeyName(7, "Sign_Order_32");
             this.imageList32.Images.SetKeyName(8, "CustomerRed");
             // 
-            // olvLotCode
-            // 
-            this.olvLotCode.AspectName = "LotCode";
-            this.olvLotCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvLotCode.Text = "Lot";
-            this.olvLotCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvLotCode.Width = 30;
-            // 
             // BatchMasters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -659,7 +659,7 @@
         private CustomControls.NumericBox numericPlannedQuantity;
         private System.Windows.Forms.Label label4;
         private CustomControls.TextexBox textexCommodityAPICode;
-        private System.Windows.Forms.ToolStripButton addLOT;
+        private System.Windows.Forms.ToolStripButton buttonNewLOT;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
 
     }

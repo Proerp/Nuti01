@@ -70,6 +70,7 @@ namespace TotalSmartCoding.Views.Productions
 
             if (propertyName == "ReadonlyMode")
             {
+                this.buttonNewLOT.Enabled = this.Newable && this.ReadonlyMode && !this.batchMasterViewModel.InActive;
                 this.buttonDiscontinued.Enabled = this.Newable && this.ReadonlyMode;
             }
         }
@@ -245,10 +246,11 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        private void addLOT_Click(object sender, EventArgs e)
+        private void buttonNewLOT_Click(object sender, EventArgs e)
         {
             try
             {
+                if (this.batchMasterViewModel.EntryDate < DateTime.Today) throw new Exception("Vui lòng nhập ngày sản xuất.");
                 if (this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID)) this.Loading();
             }
             catch (Exception exception)

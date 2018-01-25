@@ -53,7 +53,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonNewLOT = new System.Windows.Forms.ToolStripButton();
             this.buttonApply = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
@@ -150,7 +149,7 @@
             this.combexBatchTypeID.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.combexBatchTypeID.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.combexBatchTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.combexBatchTypeID.Editable = false;
+            this.combexBatchTypeID.Editable = true;
             this.combexBatchTypeID.FormattingEnabled = true;
             this.combexBatchTypeID.Location = new System.Drawing.Point(33, 350);
             this.combexBatchTypeID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
@@ -392,7 +391,6 @@
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator1,
-            this.buttonNewLOT,
             this.buttonApply,
             this.toolStripSeparator2,
             this.buttonDiscontinued,
@@ -410,16 +408,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
-            // 
-            // buttonNewLOT
-            // 
-            this.buttonNewLOT.Image = global::TotalSmartCoding.Properties.Resources.Add_continue;
-            this.buttonNewLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonNewLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonNewLOT.Name = "buttonNewLOT";
-            this.buttonNewLOT.Size = new System.Drawing.Size(121, 52);
-            this.buttonNewLOT.Text = "New LOT";
-            this.buttonNewLOT.Click += new System.EventHandler(this.buttonNewLOT_Click);
             // 
             // buttonApply
             // 
@@ -750,7 +738,6 @@
         private System.Windows.Forms.Label label3;
         private CustomControls.TextexBox textexLotCode;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ToolStripButton buttonNewLOT;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
         private BrightIdeasSoftware.OLVColumn olvCommodityAPICode;
         private System.Windows.Forms.ImageList imageList32;

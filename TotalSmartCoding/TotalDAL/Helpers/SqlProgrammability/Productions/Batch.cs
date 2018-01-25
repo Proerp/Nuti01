@@ -28,7 +28,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchToggleApproved();
             this.BatchToggleVoid();
 
-            //this.BatchInitReference(); NOT USE THIS ANY MORE. NOW: Reference = Code + LotCode
+            this.BatchInitReference(); //NOT USE THIS ANY MORE. NOW: Reference = Code + LotCode
 
             this.BatchAddLot();
             this.BatchCommonUpdate();
