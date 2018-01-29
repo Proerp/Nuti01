@@ -50,6 +50,7 @@
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonNewLOT = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
@@ -337,6 +338,7 @@
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator2,
             this.buttonNewLOT,
+            this.toolStripSeparator1,
             this.buttonDiscontinued,
             this.toolStripLabel1,
             this.comboDiscontinued,
@@ -359,9 +361,14 @@
             this.buttonNewLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonNewLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonNewLOT.Name = "buttonNewLOT";
-            this.buttonNewLOT.Size = new System.Drawing.Size(119, 52);
-            this.buttonNewLOT.Text = "Add LOT";
+            this.buttonNewLOT.Size = new System.Drawing.Size(130, 52);
+            this.buttonNewLOT.Text = "Add Lot    ";
             this.buttonNewLOT.Click += new System.EventHandler(this.buttonNewLOT_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
             // 
             // buttonDiscontinued
             // 
@@ -369,8 +376,8 @@
             this.buttonDiscontinued.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonDiscontinued.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDiscontinued.Name = "buttonDiscontinued";
-            this.buttonDiscontinued.Size = new System.Drawing.Size(148, 52);
-            this.buttonDiscontinued.Text = "Discontinued";
+            this.buttonDiscontinued.Size = new System.Drawing.Size(93, 52);
+            this.buttonDiscontinued.Text = "Hide";
             this.buttonDiscontinued.Click += new System.EventHandler(this.buttonDiscontinued_Click);
             // 
             // toolStripLabel1
@@ -384,8 +391,8 @@
             this.comboDiscontinued.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDiscontinued.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.comboDiscontinued.Items.AddRange(new object[] {
-            "Don\'t show discontinued batches",
-            "Show discontinued batches"});
+            "Don\'t show hidden batches",
+            "Show hidden batches"});
             this.comboDiscontinued.Name = "comboDiscontinued";
             this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
             this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
@@ -601,7 +608,7 @@
             this.Controls.Add(this.naviBarMaster);
             this.Controls.Add(this.toolStripChildForm);
             this.Name = "BatchMasters";
-            this.Text = "Batchs";
+            this.Text = "Quản lý Batch, Lot";
             this.Controls.SetChildIndex(this.toolStripChildForm, 0);
             this.Controls.SetChildIndex(this.naviBarMaster, 0);
             this.Controls.SetChildIndex(this.fastBatchMasterIndex, 0);
@@ -662,6 +669,7 @@
         private CustomControls.TextexBox textexCommodityAPICode;
         private System.Windows.Forms.ToolStripButton buttonNewLOT;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
     }
 }

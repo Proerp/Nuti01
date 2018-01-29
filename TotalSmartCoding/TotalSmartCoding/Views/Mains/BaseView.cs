@@ -291,8 +291,8 @@ namespace TotalSmartCoding.Views.Mains
         public virtual bool Editable { get { return this.baseDTO.Editable; } }
         public virtual bool Deletable { get { return this.baseDTO.Deletable; } }
 
-        public virtual bool Importable { get { return false; } }
-        public virtual bool Exportable { get { return false; } }
+        public virtual bool Importable { get { return this.baseDTO.Importable; } }
+        public virtual bool Exportable { get { return this.baseDTO.Exportable; } }
 
         public virtual bool Approvable { get { return this.baseDTO.Approvable; } }
         public virtual bool Unapprovable { get { return this.baseDTO.UnApprovable; } }

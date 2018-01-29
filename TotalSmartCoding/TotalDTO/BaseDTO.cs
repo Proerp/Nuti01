@@ -95,6 +95,9 @@ namespace TotalDTO
         //    set { ApplyPropertyChange<BaseDTO, bool>(ref this.editable, o => o.Editable, value); }
         //}
 
+        public virtual bool Importable { get { return false; } }
+        public virtual bool Exportable { get { return false; } }
+
         public bool Deletable { get; set; }
 
 

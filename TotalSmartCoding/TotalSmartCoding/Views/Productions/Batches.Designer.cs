@@ -415,8 +415,8 @@
             this.buttonApply.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonApply.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(220, 52);
-            this.buttonApply.Text = "Applying for Production";
+            this.buttonApply.Size = new System.Drawing.Size(240, 52);
+            this.buttonApply.Text = "Applying for Production     ";
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
             // toolStripSeparator2
@@ -430,8 +430,8 @@
             this.buttonDiscontinued.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonDiscontinued.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDiscontinued.Name = "buttonDiscontinued";
-            this.buttonDiscontinued.Size = new System.Drawing.Size(148, 52);
-            this.buttonDiscontinued.Text = "Discontinued";
+            this.buttonDiscontinued.Size = new System.Drawing.Size(93, 52);
+            this.buttonDiscontinued.Text = "Hide";
             this.buttonDiscontinued.Click += new System.EventHandler(this.buttonDiscontinued_Click);
             // 
             // toolStripLabel1
@@ -445,8 +445,8 @@
             this.comboDiscontinued.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDiscontinued.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.comboDiscontinued.Items.AddRange(new object[] {
-            "Don\'t show discontinued batches",
-            "Show discontinued batches"});
+            "Don\'t show hidden lots",
+            "Show hidden lots"});
             this.comboDiscontinued.Name = "comboDiscontinued";
             this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
             this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
@@ -679,7 +679,7 @@
             this.Controls.Add(this.naviBarMaster);
             this.Controls.Add(this.toolStripChildForm);
             this.Name = "Batches";
-            this.Text = "Lots";
+            this.Text = "Mở Lot để sản xuất tại chuyền";
             this.Controls.SetChildIndex(this.toolStripChildForm, 0);
             this.Controls.SetChildIndex(this.naviBarMaster, 0);
             this.Controls.SetChildIndex(this.fastBatchIndex, 0);
