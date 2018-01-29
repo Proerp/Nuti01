@@ -536,9 +536,43 @@ namespace TotalSmartCoding.Views.Mains
 
         protected virtual PrintViewModel InitPrintViewModel() { return new PrintViewModel(); }
 
-        public void Import()
+        public virtual void Import()
         {
-            //this.ImportExcel(OleDbDatabase.MappingTaskID.MarketingProgram);
+            this.ImportExcel(GlobalEnums.MappingTaskID.Commodity);
+        }
+
+
+        private void ImportExcel(GlobalEnums.MappingTaskID mappingTaskID)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Excel File (.xlsx)|*.xlsx";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    MapExcelColumn dialogMapExcelColumn = new MapExcelColumn(mappingTaskID, openFileDialog.FileName);
+
+                    if (dialogMapExcelColumn.ShowDialog() == DialogResult.OK)
+                    {
+                        //CommodityBLL commodityBLL = new CommodityBLL();
+
+                        //if (commodityBLL.ImportExcel(openFileDialog.FileName, dialogMapExcelColumn.IsResetPlanned, dialogMapExcelColumn.IsDeleteAll, this.IsPlannedOnly))
+                        //{
+                        //    this.GetCommodityListing();
+                        //    MessageBox.Show(this, "Thông báo!" + "\r\n" + "\r\n" + "File: " + openFileDialog.FileName + " đã import thành công!" + "\r\n" + "\r\n" + "Vui lòng nhấn OK để hoàn tất.", "Importing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //}
+
+                        dialogMapExcelColumn.Dispose();
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+
         }
 
         public void Export()

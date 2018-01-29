@@ -49,7 +49,7 @@ namespace TotalDAL.Repositories
                 this.totalSmartCodingEntities.ColumnAdd("Configs", "StoredID", "int", "0", true);
             }
 
-            
+
         }
 
         public bool RestoreProcedures()
@@ -68,7 +68,13 @@ namespace TotalDAL.Repositories
 
         public void CreateStoredProcedure()
         {
+
             ////return;
+
+            Helpers.SqlProgrammability.Generals.OleDb oleDb = new Helpers.SqlProgrammability.Generals.OleDb(totalSmartCodingEntities);
+            oleDb.RestoreProcedure();
+
+            return;
 
             Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
             batchMaster.RestoreProcedure();
@@ -88,7 +94,7 @@ namespace TotalDAL.Repositories
 
             Helpers.SqlProgrammability.Commons.CommodityCategory commodityCategory = new Helpers.SqlProgrammability.Commons.CommodityCategory(totalSmartCodingEntities);
             commodityCategory.RestoreProcedure();
-            
+
             ////return;
 
             Helpers.SqlProgrammability.Commons.BinLocation binLocation = new Helpers.SqlProgrammability.Commons.BinLocation(totalSmartCodingEntities);
@@ -105,8 +111,8 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Commons.FillingLine fillingLine = new Helpers.SqlProgrammability.Commons.FillingLine(totalSmartCodingEntities);
             fillingLine.RestoreProcedure();
 
-            
-            
+
+
             //return;
 
             Helpers.SqlProgrammability.Commons.BatchType batchType = new Helpers.SqlProgrammability.Commons.BatchType(totalSmartCodingEntities);
@@ -148,7 +154,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Inventories.GoodsReceipt goodsReceipt = new Helpers.SqlProgrammability.Inventories.GoodsReceipt(totalSmartCodingEntities);
             goodsReceipt.RestoreProcedure();
 
-            
+
             //return;
 
             Helpers.SqlProgrammability.Inventories.GoodsIssue goodsIssue = new Helpers.SqlProgrammability.Inventories.GoodsIssue(totalSmartCodingEntities);
@@ -193,7 +199,7 @@ namespace TotalDAL.Repositories
             warehouse.RestoreProcedure();
 
 
-            
+
 
 
             //return;
@@ -212,7 +218,7 @@ namespace TotalDAL.Repositories
 
             Helpers.SqlProgrammability.Commons.CustomerCategory customerCategory = new Helpers.SqlProgrammability.Commons.CustomerCategory(totalSmartCodingEntities);
             customerCategory.RestoreProcedure();
-            
+
             //return;
 
             Helpers.SqlProgrammability.Commons.CustomerType customerType = new Helpers.SqlProgrammability.Commons.CustomerType(totalSmartCodingEntities);
@@ -224,7 +230,7 @@ namespace TotalDAL.Repositories
             territory.RestoreProcedure();
 
 
-            
+
 
             //return;
 
@@ -244,7 +250,7 @@ namespace TotalDAL.Repositories
             accessControl.RestoreProcedure();
 
 
-            
+
 
 
         }

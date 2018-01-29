@@ -465,6 +465,7 @@
             this.buttonImport.Size = new System.Drawing.Size(90, 52);
             this.buttonImport.Text = "Import";
             this.buttonImport.Visible = false;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // buttonExport
             // 

@@ -115,6 +115,7 @@
     <Compile Include="Controllers\APIs\Commons\WarehouseAdjustmentTypeAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\WarehouseAPIs.cs" />
     <Compile Include="Controllers\APIs\Generals\ModuleAPIs.cs" />
+    <Compile Include="Controllers\APIs\Generals\OleDbAPIs.cs" />
     <Compile Include="Controllers\APIs\Generals\UserAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsIssueAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
@@ -325,6 +326,12 @@
     <Compile Include="Views\Mains\BlankView.Designer.cs">
       <DependentUpon>BlankView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Mains\MapExcelColumn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Mains\MapExcelColumn.designer.cs">
+      <DependentUpon>MapExcelColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Mains\SearchBarcode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -515,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\BlankView.resx">
       <DependentUpon>BlankView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Mains\MapExcelColumn.resx">
+      <DependentUpon>MapExcelColumn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\SearchBarcode.resx">
       <DependentUpon>SearchBarcode.cs</DependentUpon>

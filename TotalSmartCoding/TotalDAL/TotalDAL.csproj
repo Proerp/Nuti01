@@ -66,6 +66,7 @@
     <Compile Include="Helpers\SqlProgrammability\Commons\Warehouse.cs" />
     <Compile Include="Helpers\SqlProgrammability\Commons\WarehouseAdjustmentType.cs" />
     <Compile Include="Helpers\SqlProgrammability\Generals\Module.cs" />
+    <Compile Include="Helpers\SqlProgrammability\Generals\OleDb.cs" />
     <Compile Include="Helpers\SqlProgrammability\Generals\UserReference.cs" />
     <Compile Include="Helpers\SqlProgrammability\InitReference.cs" />
     <Compile Include="Helpers\SqlProgrammability\Inventories\Inventory.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Repositories\Commons\WarehouseAdjustmentTypeRepository.cs" />
     <Compile Include="Repositories\Commons\WarehouseRepository.cs" />
     <Compile Include="Repositories\Generals\ModuleRepository.cs" />
+    <Compile Include="Repositories\Generals\OleDbAPIRepository.cs" />
     <Compile Include="Repositories\Generals\UserRepository.cs" />
     <Compile Include="Repositories\GenericAPIRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />

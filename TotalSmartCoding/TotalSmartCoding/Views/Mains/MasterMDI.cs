@@ -624,7 +624,7 @@ namespace TotalSmartCoding.Views.Mains
         }
 
 
-        private void toolStripButtonImport_Click(object sender, EventArgs e)
+        private void buttonImport_Click(object sender, EventArgs e)
         {
             try
             {

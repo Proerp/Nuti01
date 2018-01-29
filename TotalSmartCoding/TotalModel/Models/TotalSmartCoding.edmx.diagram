@@ -153,6 +153,7 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_Commodities" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Batches_FillingLines" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.ColumnMapping" Width="1.5" PointX="5.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

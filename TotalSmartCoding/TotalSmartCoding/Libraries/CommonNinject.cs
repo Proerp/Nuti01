@@ -107,6 +107,10 @@ namespace TotalSmartCoding.Libraries
 
 
 
+                //Kernel.Bind<IOleDbService>().To<OleDbService>();
+                //Kernel.Bind<IOleDbRepository>().To<OleDbRepository>();
+                Kernel.Bind<IOleDbAPIRepository>().To<OleDbAPIRepository>();
+                //Kernel.Bind<OleDbViewModel>().ToSelf();
 
 
 

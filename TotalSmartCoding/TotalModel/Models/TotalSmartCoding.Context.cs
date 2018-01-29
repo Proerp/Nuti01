@@ -71,6 +71,7 @@ namespace TotalModel.Models
         public virtual DbSet<BatchStatus> BatchStatuses { get; set; }
         public virtual DbSet<BatchType> BatchTypes { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
+        public virtual DbSet<ColumnMapping> ColumnMappings { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -2273,6 +2274,37 @@ namespace TotalModel.Models
                 new ObjectParameter("LocationID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingLot>("GetPendingLots", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<ColumnMapping> GetColumnMappings(Nullable<int> mappingTaskID)
+        {
+            var mappingTaskIDParameter = mappingTaskID.HasValue ?
+                new ObjectParameter("MappingTaskID", mappingTaskID) :
+                new ObjectParameter("MappingTaskID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ColumnMapping>("GetColumnMappings", mappingTaskIDParameter);
+        }
+    
+        public virtual ObjectResult<ColumnMapping> GetColumnMappings(Nullable<int> mappingTaskID, MergeOption mergeOption)
+        {
+            var mappingTaskIDParameter = mappingTaskID.HasValue ?
+                new ObjectParameter("MappingTaskID", mappingTaskID) :
+                new ObjectParameter("MappingTaskID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ColumnMapping>("GetColumnMappings", mergeOption, mappingTaskIDParameter);
+        }
+    
+        public virtual int SaveColumnMapping(Nullable<int> columnMappingID, string columnMappingName)
+        {
+            var columnMappingIDParameter = columnMappingID.HasValue ?
+                new ObjectParameter("ColumnMappingID", columnMappingID) :
+                new ObjectParameter("ColumnMappingID", typeof(int));
+    
+            var columnMappingNameParameter = columnMappingName != null ?
+                new ObjectParameter("ColumnMappingName", columnMappingName) :
+                new ObjectParameter("ColumnMappingName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveColumnMapping", columnMappingIDParameter, columnMappingNameParameter);
         }
     }
 }
