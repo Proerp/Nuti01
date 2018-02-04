@@ -35,6 +35,12 @@ using TotalModel.Interfaces;
 using BrightIdeasSoftware;
 using TotalSmartCoding.Properties;
 using TotalSmartCoding.Views.Commons.Commodities;
+using TotalSmartCoding.Controllers.APIs.Generals;
+using TotalSmartCoding.Controllers.Commons;
+using TotalCore.Services.Commons;
+using TotalCore.Repositories.Generals;
+using TotalSmartCoding.ViewModels.Commons;
+using TotalModel.Helpers;
 
 
 
@@ -46,6 +52,7 @@ namespace TotalSmartCoding.Views.Productions
         private BatchMasterViewModel batchMasterViewModel { get; set; }
 
         private CommodityAPIs commodityAPIs { get; set; }
+        private BatchStatusAPIs batchStatusAPIs { get; set; }
 
         public BatchMasters()
             : base()
@@ -132,8 +139,8 @@ namespace TotalSmartCoding.Views.Productions
             this.combexCommodityID.ValueMember = CommonExpressions.PropertyName<CommodityBase>(p => p.CommodityID);
             this.bindingCommodityID = this.combexCommodityID.DataBindings.Add("SelectedValue", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.CommodityID), true, DataSourceUpdateMode.OnPropertyChanged);
 
-            BatchStatusAPIs batchStatusAPIs = new BatchStatusAPIs(CommonNinject.Kernel.Get<IBatchStatusAPIRepository>());
-            this.combexBatchStatusID.DataSource = batchStatusAPIs.GetBatchStatusBases();
+            this.batchStatusAPIs = new BatchStatusAPIs(CommonNinject.Kernel.Get<IBatchStatusAPIRepository>());
+            this.combexBatchStatusID.DataSource = this.batchStatusAPIs.GetBatchStatusBases();
             this.combexBatchStatusID.DisplayMember = CommonExpressions.PropertyName<BatchStatusBase>(p => p.Code);
             this.combexBatchStatusID.ValueMember = CommonExpressions.PropertyName<BatchStatusBase>(p => p.BatchStatusID);
             this.bindingBatchStatusID = this.combexBatchStatusID.DataBindings.Add("SelectedValue", this.batchMasterViewModel, CommonExpressions.PropertyName<BatchMasterViewModel>(p => p.BatchStatusID), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -201,6 +208,12 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBatchMasterIndex.Sort(this.olvEntryDate, SortOrder.Descending);
         }
 
+        protected override void DoImport(string fileName)
+        {
+            base.DoImport(fileName);
+            this.ImportExcel(fileName);
+        }
+
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.batchMasterAPIs != null) this.Loading();
@@ -259,6 +272,116 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+        #region Import Excel
+
+        public bool ImportExcel(string fileName)
+        {
+            try
+            {
+                OleDbAPIs oleDbAPIs = new OleDbAPIs(CommonNinject.Kernel.Get<IOleDbAPIRepository>(), GlobalEnums.MappingTaskID.BatchMaster);
+
+                CommodityViewModel commodityViewModel = CommonNinject.Kernel.Get<CommodityViewModel>();
+                CommodityController commodityController = new CommodityController(CommonNinject.Kernel.Get<ICommodityService>(), commodityViewModel);
+
+
+                int intValue; decimal decimalValue; DateTime dateTimeValue;
+                ExceptionTable exceptionTable = new ExceptionTable(new string[2, 2] { { "ExceptionCategory", "System.String" }, { "ExceptionDescription", "System.String" } });
+
+                //////////TimeSpan timeout = TimeSpan.FromMinutes(90);
+                //////////using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required, timeout))
+                //////////{
+                //////////if (!this.Editable(this.)) throw new System.ArgumentException("Import", "Permission conflict");
+
+
+                DataTable excelDataTable = oleDbAPIs.OpenExcelSheet(fileName);
+                if (excelDataTable != null && excelDataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow excelDataRow in excelDataTable.Rows)
+                    {
+                        exceptionTable.ClearDirty();
+
+                        BatchMasterBase batchMasterBase = this.batchMasterAPIs.GetBatchMasterBase(excelDataRow["Code"].ToString());
+
+                        if (batchMasterBase == null)
+                        {
+                            this.batchMasterController.Create();
+
+                            this.batchMasterViewModel.EntryDate = new DateTime(2000, 1, 1);
+                            this.batchMasterViewModel.Code = excelDataRow["Code"].ToString();
+
+                            if (DateTime.TryParse(excelDataRow["PlannedDate"].ToString(), out dateTimeValue)) this.batchMasterViewModel.PlannedDate = dateTimeValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu BatchPlanDate", excelDataRow["PlannedDate"].ToString() });
+                            if (decimal.TryParse(excelDataRow["PlannedQuantity"].ToString(), out decimalValue)) this.batchMasterViewModel.PlannedQuantity = decimalValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu PlannedQuantity", excelDataRow["PlannedQuantity"].ToString() });
+
+                            CommodityBase commodityBase = this.commodityAPIs.GetCommodityBase(excelDataRow["CommodityCode"].ToString());
+                            if (commodityBase != null) this.batchMasterViewModel.CommodityID = commodityBase.CommodityID;
+                            else
+                            {
+                                commodityController.Create();
+
+                                commodityViewModel.Code = excelDataRow["CommodityCode"].ToString();
+                                commodityViewModel.APICode = excelDataRow["CommodityAPICode"].ToString().Replace("'", "");
+                                commodityViewModel.CartonCode = excelDataRow["CommodityCartonCode"].ToString().Replace("'", "");
+                                commodityViewModel.Name = excelDataRow["CommodityName"].ToString();
+                                commodityViewModel.OfficialName = excelDataRow["CommodityName"].ToString();
+
+                                commodityViewModel.CommodityCategoryID = 2;
+                                commodityViewModel.FillingLineIDs = "1,2";
+
+                                if (decimal.TryParse(excelDataRow["Volume"].ToString(), out decimalValue)) commodityViewModel.Volume = decimalValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu Trọng lượng", excelDataRow["Volume"].ToString() });
+                                if (int.TryParse(excelDataRow["PackPerCarton"].ToString(), out intValue)) commodityViewModel.PackPerCarton = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["PackPerCarton"].ToString() });
+                                if (int.TryParse(excelDataRow["CartonPerPallet"].ToString(), out intValue)) commodityViewModel.CartonPerPallet = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["CartonPerPallet"].ToString() });
+
+                                commodityViewModel.PackageSize = commodityViewModel.PackPerCarton.ToString("N0") + "x" + commodityViewModel.Volume.ToString("N2") + "kg";
+
+                                if (!commodityViewModel.IsValid) exceptionTable.AddException(new string[] { "Lỗi dữ liệu: Add new item " + excelDataRow["CommodityCode"].ToString(), commodityViewModel.Error });
+                                else
+                                    if (commodityViewModel.IsDirty)
+                                        if (commodityController.Save())
+                                            this.batchMasterViewModel.CommodityID = commodityViewModel.CommodityID;
+                                        else
+                                            exceptionTable.AddException(new string[] { "Lỗi lưu dữ liệu [Add new items]" + commodityController.BaseService.ServiceTag, excelDataRow["CommodityCode"].ToString() });
+                            }
+
+
+                            BatchStatusBase batchStatusBase = this.batchStatusAPIs.GetBatchStatusBase(excelDataRow["BatchStatusCode"].ToString());
+                            if (batchStatusBase != null) this.batchMasterViewModel.BatchStatusID = batchStatusBase.BatchStatusID; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu BatchStatus", excelDataRow["BatchStatusCode"].ToString() });
+
+
+                            if (!this.batchMasterViewModel.IsValid) exceptionTable.AddException(new string[] { "Lỗi dữ liệu: Batch Validation ", this.batchMasterViewModel.Error }); ;
+                            if (!exceptionTable.IsDirty)
+                                if (this.batchMasterViewModel.IsDirty && !this.batchMasterController.Save())
+                                    exceptionTable.AddException(new string[] { "Lỗi lưu dữ liệu " + this.batchMasterController.BaseService.ServiceTag, excelDataRow["Code"].ToString() });
+                        }
+                        else
+                            exceptionTable.AddException(new string[] { "Batch: " + excelDataRow["Code"].ToString() + " đã tồn tại trên hệ thống.", excelDataRow["Code"].ToString() });
+                    }
+                }
+                if (exceptionTable.Table.Rows.Count <= 0)
+                    return true;
+                else
+                    throw new CustomException("Dữ liệu không hợp lệ hoạch không tìm thấy", exceptionTable.Table);
+
+            }
+            catch (System.Exception exception)
+            {
+                throw exception;
+            }
+        }
+
+
+        #endregion Import Excel
 
 
     }

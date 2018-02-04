@@ -81,11 +81,23 @@ namespace TotalSmartCoding.Views.Productions
                         this.DialogResult = DialogResult.OK;
                     }
                     else
-                        CustomMsgBox.Show(this, "Vui lòng chọn phiếu giao thành phẩm sau đóng gói, hoặc kho nhận hàng.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
+                        CustomMsgBox.Show(this, "Vui lòng chọn chọn batch và lot.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
                 }
 
                 if (sender.Equals(this.buttonESC))
                     this.DialogResult = DialogResult.Cancel;
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        private void textexFilters_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                OLVHelpers.ApplyFilters(this.fastPendingLots, this.textexFilters.Text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
             }
             catch (Exception exception)
             {

@@ -31,7 +31,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      ColumnMappingID, MappingTaskID, ColumnID, ColumnName, ColumnDisplayName, ColumnMappingName, SerialID, ImportedDate " + "\r\n";
+            queryString = queryString + "       SELECT      ColumnMappingID, MappingTaskID, ColumnID, ColumnName, ColumnDisplayName, ColumnMappingName, SerialID, OrderBy, ImportedDate " + "\r\n";
             queryString = queryString + "       FROM        ColumnMappings " + "\r\n";
             queryString = queryString + "       WHERE       MappingTaskID = @MappingTaskID" + "\r\n";
             queryString = queryString + "       ORDER BY    SerialID " + "\r\n";

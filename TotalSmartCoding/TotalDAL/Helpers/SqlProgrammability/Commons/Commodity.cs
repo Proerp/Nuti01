@@ -84,21 +84,28 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
 
         private void GetCommodityBases()
+        {            
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetCommodityBases", this.GetCommodityBUILD(0));
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetCommodityBase", this.GetCommodityBUILD(1));
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetCommodityBaseByCode", this.GetCommodityBUILD(2));
+        }
+
+        private string GetCommodityBUILD(int switchID)
         {
             string queryString;
 
-            queryString = " " + "\r\n";
+            queryString = (switchID == 0 ? "" : (switchID == 1 ? "@CommodityID int" : "@Code nvarchar(50)")) + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT      CommodityID, Code, Name, Unit, APICode, Volume, PackageSize, PackageVolume, FillingLineIDs " + "\r\n";
             queryString = queryString + "       FROM        Commodities " + "\r\n";
-            queryString = queryString + "       WHERE       InActive = 0 " + "\r\n";
+            queryString = queryString + "       WHERE       " + (switchID == 0 ? "InActive = 0" : (switchID == 1 ? "CommodityID = @CommodityID" : "Code = @Code")) + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("GetCommodityBases", queryString);
+            return queryString;
         }
 
         private void SearchCommodities()
@@ -116,7 +123,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "                   " + GenerateSQLCommoditiesAvailable.BuildSQL("@SalesOrderDetails", false, false, true, false, false, true, false) + "\r\n";
 
             queryString = queryString + "       INSERT INTO @SearchCommodities SELECT @LocationID, @BatchID, CommodityID, Code, Name, CommodityCategoryID, CommodityTypeID, Unit, PackageSize, Volume, PackageVolume FROM Commodities WHERE CommodityID = @CommodityID " + "\r\n";
-            
+
             queryString = queryString + "       IF (@BatchID > 0) " + "\r\n";
             queryString = queryString + "           " + this.BuildSQLSearchCommodities(true) + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
@@ -173,7 +180,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
             queryString = queryString + "       IF LEN(@Barcode) > 10 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
-            
+
 
             //FIND ID
             queryString = queryString + "               IF SUBSTRING (@Barcode, 7, 1 ) = 'B' " + "\r\n";

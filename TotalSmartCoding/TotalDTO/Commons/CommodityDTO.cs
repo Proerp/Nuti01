@@ -207,6 +207,7 @@ namespace TotalDTO.Commons
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<CommodityPrimitiveDTO>(p => p.CartonCode), "Vui lòng nhập mã carton.", delegate { return (this.CartonCode != null && this.CartonCode.Trim().Length > 0); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<CommodityPrimitiveDTO>(p => p.Name), "Vui lòng nhập tên mặt hàng.", delegate { return (this.Name != null && this.Name.Trim() != ""); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<CommodityPrimitiveDTO>(p => p.OfficialName), "Vui lòng nhập tên đầy đủ.", delegate { return (this.OfficialName != null && this.OfficialName.Trim() != ""); }));
+            
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<CommodityPrimitiveDTO>(p => p.CommodityCategoryID), "Vui lòng chọn phân loại mặt hàng.", delegate { return (this.CommodityCategoryID > 0); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<CommodityPrimitiveDTO>(p => p.PackageSize), "Vui lòng nhập quy cách đóng gói.", delegate { return (this.PackageSize != null && this.PackageSize.Trim() != ""); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<CommodityPrimitiveDTO>(p => p.FillingLineIDs), "Vui lòng nhập mã dây chuyền đóng gói.", delegate { return (this.FillingLineIDs != null && this.FillingLineIDs.Trim() != ""); }));

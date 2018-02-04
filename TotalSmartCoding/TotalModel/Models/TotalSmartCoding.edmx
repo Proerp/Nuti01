@@ -118,6 +118,7 @@
           <Property Name="ColumnDisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ColumnMappingName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SerialID" Type="int" Nullable="false" />
+          <Property Name="OrderBy" Type="int" />
           <Property Name="ImportedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Commodities">
@@ -2265,12 +2266,24 @@
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
           <Parameter Name="ActiveOption" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetBatchMasterBase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchMasterID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBatchMasterBaseByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetBatchMasterBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetBatchMasterIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
           <Parameter Name="ActiveOption" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBatchStatusBase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchStatusID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBatchStatusBaseByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetBatchStatusBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetBatchStatusIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2299,6 +2312,12 @@
         </Function>
         <Function Name="GetColumnMappings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MappingTaskID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCommodityBase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCommodityBaseByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetCommodityBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetCommodityCategoryBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -4347,13 +4366,31 @@
             <End Role="Batch" EntitySet="Batches" />
             <End Role="DeliveryAdviceDetail" EntitySet="DeliveryAdviceDetails" />
           </AssociationSet>
-          <EntitySet Name="ColumnMappings" EntityType="TotalSmartCodingModel.ColumnMapping" />
           <FunctionImport Name="GetColumnMappings" EntitySet="ColumnMappings" ReturnType="Collection(TotalSmartCodingModel.ColumnMapping)">
           <Parameter Name="MappingTaskID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SaveColumnMapping">
             <Parameter Name="ColumnMappingID" Mode="In" Type="Int32" />
             <Parameter Name="ColumnMappingName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="ColumnMappings" EntityType="TotalSmartCodingModel.ColumnMapping" />
+          <FunctionImport Name="GetBatchStatusBase" ReturnType="Collection(TotalSmartCodingModel.BatchStatusBase)">
+          <Parameter Name="BatchStatusID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCommodityBase" ReturnType="Collection(TotalSmartCodingModel.CommodityBase)">
+          <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchStatusBaseByCode" ReturnType="Collection(TotalSmartCodingModel.BatchStatusBase)">
+          <Parameter Name="Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCommodityBaseByCode" ReturnType="Collection(TotalSmartCodingModel.CommodityBase)">
+          <Parameter Name="Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchMasterBase" ReturnType="Collection(TotalSmartCodingModel.BatchMasterBase)">
+            <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchMasterBaseByCode" ReturnType="Collection(TotalSmartCodingModel.BatchMasterBase)">
+            <Parameter Name="Code" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -4505,7 +4542,7 @@
           <Property Type="Decimal" Name="Volume" Nullable="false" Precision="18" Scale="3" />
           <Property Type="String" Name="PackageSize" Nullable="true" MaxLength="60" />
           <Property Type="Decimal" Name="PackageVolume" Nullable="false" Precision="18" Scale="3" />
-          <Property Type="String" Name="APICode" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="FillingLineIDs" Nullable="true" MaxLength="60" />
           </ComplexType>
         <ComplexType Name="PickupIndex">
@@ -7670,6 +7707,7 @@
           <Property Name="ColumnDisplayName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ColumnMappingName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SerialID" Type="Int32" Nullable="false" />
+          <Property Name="OrderBy" Type="Int32" />
           <Property Name="ImportedDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         </Schema>
@@ -9968,10 +10006,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetColumnMappings" FunctionName="TotalSmartCodingModel.Store.GetColumnMappings">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SaveColumnMapping" FunctionName="TotalSmartCodingModel.Store.SaveColumnMapping" />
           <EntitySetMapping Name="ColumnMappings">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.ColumnMapping">
               <MappingFragment StoreEntitySet="ColumnMappings">
                 <ScalarProperty Name="ImportedDate" ColumnName="ImportedDate" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
                 <ScalarProperty Name="SerialID" ColumnName="SerialID" />
                 <ScalarProperty Name="ColumnMappingName" ColumnName="ColumnMappingName" />
                 <ScalarProperty Name="ColumnDisplayName" ColumnName="ColumnDisplayName" />
@@ -9982,9 +10024,100 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetColumnMappings" FunctionName="TotalSmartCodingModel.Store.GetColumnMappings">
+          <FunctionImportMapping FunctionImportName="GetBatchStatusBase" FunctionName="TotalSmartCodingModel.Store.GetBatchStatusBase">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchStatusBase">
+                <ScalarProperty Name="BatchStatusID" ColumnName="BatchStatusID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SaveColumnMapping" FunctionName="TotalSmartCodingModel.Store.SaveColumnMapping" />
+          <FunctionImportMapping FunctionImportName="GetCommodityBase" FunctionName="TotalSmartCodingModel.Store.GetCommodityBase">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.CommodityBase">
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="PackageSize" ColumnName="PackageSize" />
+                <ScalarProperty Name="PackageVolume" ColumnName="PackageVolume" />
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
+                <ScalarProperty Name="FillingLineIDs" ColumnName="FillingLineIDs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchStatusBaseByCode" FunctionName="TotalSmartCodingModel.Store.GetBatchStatusBaseByCode">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchStatusBase">
+                <ScalarProperty Name="BatchStatusID" ColumnName="BatchStatusID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCommodityBaseByCode" FunctionName="TotalSmartCodingModel.Store.GetCommodityBaseByCode">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.CommodityBase">
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="PackageSize" ColumnName="PackageSize" />
+                <ScalarProperty Name="PackageVolume" ColumnName="PackageVolume" />
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
+                <ScalarProperty Name="FillingLineIDs" ColumnName="FillingLineIDs" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchMasterBase" FunctionName="TotalSmartCodingModel.Store.GetBatchMasterBase">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchMasterBase">
+                <ScalarProperty Name="BatchMasterID" ColumnName="BatchMasterID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PlannedQuantity" ColumnName="PlannedQuantity" />
+                <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+                <ScalarProperty Name="PackLineVolume" ColumnName="PackLineVolume" />
+                <ScalarProperty Name="BatchStatusCode" ColumnName="BatchStatusCode" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="CommodityAPICode" ColumnName="CommodityAPICode" />
+                <ScalarProperty Name="CommodityCartonCode" ColumnName="CommodityCartonCode" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
+                <ScalarProperty Name="PackPerCarton" ColumnName="PackPerCarton" />
+                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchMasterBaseByCode" FunctionName="TotalSmartCodingModel.Store.GetBatchMasterBaseByCode">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchMasterBase">
+                <ScalarProperty Name="BatchMasterID" ColumnName="BatchMasterID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PlannedQuantity" ColumnName="PlannedQuantity" />
+                <ScalarProperty Name="PackQuantity" ColumnName="PackQuantity" />
+                <ScalarProperty Name="PackLineVolume" ColumnName="PackLineVolume" />
+                <ScalarProperty Name="BatchStatusCode" ColumnName="BatchStatusCode" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="CommodityAPICode" ColumnName="CommodityAPICode" />
+                <ScalarProperty Name="CommodityCartonCode" ColumnName="CommodityCartonCode" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
+                <ScalarProperty Name="PackPerCarton" ColumnName="PackPerCarton" />
+                <ScalarProperty Name="CartonPerPallet" ColumnName="CartonPerPallet" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

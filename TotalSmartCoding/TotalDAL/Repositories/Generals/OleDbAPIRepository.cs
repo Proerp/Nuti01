@@ -28,17 +28,40 @@ namespace TotalDAL.Repositories.Generals
             this.TotalSmartCodingEntities.SaveColumnMapping(columnMappingID, columnMappingName);
         }
 
+        #region OpenExcelSheet
+
         private string SheetName()
         {
             switch (this.MappingTaskID)
             {
-                case GlobalEnums.MappingTaskID.Commodity:
-                    return "commodities"; //A_ImportBatch
+                case GlobalEnums.MappingTaskID.BatchMaster:
+                    return "NTF___Báo_cáo_Batch_in_nhãn";
 
                 case GlobalEnums.MappingTaskID.Default:
                     return "";
                 default:
                     return "";
+            }
+        }
+
+        public DataTable OpenExcelSheet(string excelFile)
+        {
+            try
+            {
+                string querySelect = " 1 AS NoUseField "; string queryOrderBy = "";
+
+                IList<ColumnMapping> columnMappings = this.GetColumnMappings().OrderBy(o => o.OrderBy).ToList();
+                foreach (ColumnMapping columnMapping in columnMappings)
+                {
+                    querySelect = querySelect + ", " + "[" + columnMapping.ColumnMappingName + "] AS " + columnMapping.ColumnName;
+                    if (columnMapping.OrderBy > 0) queryOrderBy = queryOrderBy + (queryOrderBy == "" ? "" : ", ") + "[" + columnMapping.ColumnMappingName + "]";
+                }
+
+                return this.OpenExcelSheet(excelFile, querySelect, "", queryOrderBy);
+            }
+            catch (Exception exception)
+            {
+                throw exception;
             }
         }
 
@@ -67,29 +90,6 @@ namespace TotalDAL.Repositories.Generals
             }
         }
 
-        public DataTable OpenExcelSheet(string excelFile)
-        {
-            try
-            {
-                string querySelect = " 1 AS NoUseField "; string queryOrderBy = "";
-
-                //DataTable ExcelMapTable = SQLDatabase.GetDataTable("SELECT ColumnName, ColumnMappingName, OrderByID FROM ListColumnMapping WHERE GlobalEnums.MappingTaskID = " + (int)this.MappingTaskID + " ORDER BY OrderByID");
-
-                //if (ExcelMapTable.Rows.Count > 0)
-                //{
-                //    foreach (DataRow dataRow in ExcelMapTable.Rows)
-                //    {
-                //        querySelect = querySelect + ", " + "[" + dataRow["ColumnMappingName"] + "] AS " + dataRow["ColumnName"];
-                //        if ((int)dataRow["OrderByID"] != 0) queryOrderBy = queryOrderBy + (queryOrderBy == "" ? "" : ", ") + dataRow["ColumnName"];
-                //    }
-                //}
-
-                return this.OpenExcelSheet(excelFile, querySelect, "", queryOrderBy);
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
-        }
+        #endregion OpenExcelSheet
     }
 }

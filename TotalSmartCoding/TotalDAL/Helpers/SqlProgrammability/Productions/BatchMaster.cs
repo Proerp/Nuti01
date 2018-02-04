@@ -19,7 +19,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         public void RestoreProcedure()
         {
             this.GetBatchMasterIndexes();
-            
+
             this.BatchMasterApproved();
             this.BatchMasterEditable();
             this.BatchMasterPostSaveValidate();
@@ -56,7 +56,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterIndexes", queryString);
         }
-        
+
         private void BatchMasterApproved()
         {
             string[] queryArray = new string[1];
@@ -150,9 +150,16 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void GetBatchMasterBases()
         {
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterBases", this.GetBatchMasterBUILD(0));
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterBase", this.GetBatchMasterBUILD(1));
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterBaseByCode", this.GetBatchMasterBUILD(2));
+        }
+
+        private string GetBatchMasterBUILD(int switchID)
+        {
             string queryString;
 
-            queryString = " " + "\r\n";
+            queryString = (switchID == 0 ? "" : (switchID == 1 ? "@BatchMasterID int" : "@Code nvarchar(50)")) + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
@@ -160,13 +167,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       SELECT      BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, ISNULL(BatchMasters.PlannedQuantity, 0) AS PlannedQuantity, ISNULL(CummulativePacks.PackQuantity, 0) AS PackQuantity, ISNULL(CummulativePacks.PackLineVolume, 0) AS PackLineVolume, BatchStatuses.Code AS BatchStatusCode, BatchMasters.Remarks, " + "\r\n";
             queryString = queryString + "                   BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.Shelflife, Commodities.PackPerCarton, Commodities.CartonPerPallet " + "\r\n";
             queryString = queryString + "       FROM        BatchMasters " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON BatchMasters.Approved = 1 AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON BatchMasters." + (switchID == 0 ? "Approved = 1" : (switchID == 1 ? "BatchMasterID = @BatchMasterID" : "Code = @Code")) + " AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                   INNER JOIN BatchStatuses ON BatchMasters.BatchStatusID = BatchStatuses.BatchStatusID " + "\r\n";
             queryString = queryString + "                   LEFT JOIN (SELECT Batches.BatchMasterID, SUM(1) AS PackQuantity, SUM(Packs.LineVolume) AS PackLineVolume FROM Packs INNER JOIN Batches ON Packs.BatchID = Batches.BatchID GROUP BY Batches.BatchMasterID) CummulativePacks ON BatchMasters.BatchMasterID = CummulativePacks.BatchMasterID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterBases", queryString);
+            return queryString;
         }
     }
 }

@@ -74,7 +74,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Generals.OleDb oleDb = new Helpers.SqlProgrammability.Generals.OleDb(totalSmartCodingEntities);
             oleDb.RestoreProcedure();
 
-            return;
+            //return;
 
             Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
             batchMaster.RestoreProcedure();
@@ -84,7 +84,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
             batch.RestoreProcedure();
 
-            return;
+            //return;
 
             Helpers.SqlProgrammability.Commons.Commodity commodity = new Helpers.SqlProgrammability.Commons.Commodity(totalSmartCodingEntities);
             commodity.RestoreProcedure();
@@ -123,7 +123,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Commons.BatchStatus batchStatus = new Helpers.SqlProgrammability.Commons.BatchStatus(totalSmartCodingEntities);
             batchStatus.RestoreProcedure();
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Productions.Pack pack = new Helpers.SqlProgrammability.Productions.Pack(totalSmartCodingEntities);
             pack.RestoreProcedure();

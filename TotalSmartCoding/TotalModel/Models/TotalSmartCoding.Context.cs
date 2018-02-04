@@ -2306,5 +2306,59 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveColumnMapping", columnMappingIDParameter, columnMappingNameParameter);
         }
+    
+        public virtual ObjectResult<BatchStatusBase> GetBatchStatusBase(Nullable<int> batchStatusID)
+        {
+            var batchStatusIDParameter = batchStatusID.HasValue ?
+                new ObjectParameter("BatchStatusID", batchStatusID) :
+                new ObjectParameter("BatchStatusID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchStatusBase>("GetBatchStatusBase", batchStatusIDParameter);
+        }
+    
+        public virtual ObjectResult<CommodityBase> GetCommodityBase(Nullable<int> commodityID)
+        {
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityBase>("GetCommodityBase", commodityIDParameter);
+        }
+    
+        public virtual ObjectResult<BatchStatusBase> GetBatchStatusBaseByCode(string code)
+        {
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchStatusBase>("GetBatchStatusBaseByCode", codeParameter);
+        }
+    
+        public virtual ObjectResult<CommodityBase> GetCommodityBaseByCode(string code)
+        {
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityBase>("GetCommodityBaseByCode", codeParameter);
+        }
+    
+        public virtual ObjectResult<BatchMasterBase> GetBatchMasterBase(Nullable<int> batchMasterID)
+        {
+            var batchMasterIDParameter = batchMasterID.HasValue ?
+                new ObjectParameter("BatchMasterID", batchMasterID) :
+                new ObjectParameter("BatchMasterID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterBase>("GetBatchMasterBase", batchMasterIDParameter);
+        }
+    
+        public virtual ObjectResult<BatchMasterBase> GetBatchMasterBaseByCode(string code)
+        {
+            var codeParameter = code != null ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterBase>("GetBatchMasterBaseByCode", codeParameter);
+        }
     }
 }

@@ -88,19 +88,27 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
         private void GetBatchStatusBases()
         {
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchStatusBase", this.GetBatchStatusBUILD(1));
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchStatusBases", this.GetBatchStatusBUILD(0));
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchStatusBaseByCode", this.GetBatchStatusBUILD(2));
+        }
+
+        private string GetBatchStatusBUILD(int switchID)
+        {
             string queryString;
 
-            queryString = " " + "\r\n";
+            queryString = (switchID == 0 ? "" : (switchID == 1 ? "@BatchStatusID int" : "@Code nvarchar(50)")) + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT      BatchStatusID, Code, Name " + "\r\n";
             queryString = queryString + "       FROM        BatchStatuses " + "\r\n";
+            queryString = queryString + (switchID == 0 ? "" : "WHERE " + (switchID == 1 ? "   BatchStatusID = @BatchStatusID " : "Code = @Code")) + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
-            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchStatusBases", queryString);
+            return queryString;
         }
 
     }

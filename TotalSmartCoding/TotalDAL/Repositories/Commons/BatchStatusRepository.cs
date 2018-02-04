@@ -26,6 +26,16 @@ namespace TotalDAL.Repositories.Commons
         {
         }
 
+        public BatchStatusBase GetBatchStatusBase(int batchStatusID)
+        {
+            return this.TotalSmartCodingEntities.GetBatchStatusBase(batchStatusID).FirstOrDefault();
+        }
+
+        public BatchStatusBase GetBatchStatusBase(string code)
+        {
+            return this.TotalSmartCodingEntities.GetBatchStatusBaseByCode(code).FirstOrDefault();
+        }
+
         public IList<BatchStatusBase> GetBatchStatusBases()
         {
             return this.TotalSmartCodingEntities.GetBatchStatusBases().ToList();

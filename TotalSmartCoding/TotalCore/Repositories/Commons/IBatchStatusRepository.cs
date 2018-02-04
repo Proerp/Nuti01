@@ -11,6 +11,8 @@ namespace TotalCore.Repositories.Commons
 
     public interface IBatchStatusAPIRepository : IGenericAPIRepository
     {
+        BatchStatusBase GetBatchStatusBase(string code);
+        BatchStatusBase GetBatchStatusBase(int batchStatusID);
         IList<BatchStatusBase> GetBatchStatusBases();
     }
 }

@@ -29,6 +29,16 @@ namespace TotalSmartCoding.Controllers.APIs.Commons
             return this.batchStatusAPIRepository.GetEntityIndexes<BatchStatusIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate).ToList();
         }
 
+        public BatchStatusBase GetBatchStatusBase(int batchStatusID)
+        {
+            return this.batchStatusAPIRepository.GetBatchStatusBase(batchStatusID);
+        }
+
+        public BatchStatusBase GetBatchStatusBase(string code)
+        {
+            return this.batchStatusAPIRepository.GetBatchStatusBase(code);
+        }
+
         public IList<BatchStatusBase> GetBatchStatusBases()
         {
             return this.batchStatusAPIRepository.GetBatchStatusBases();

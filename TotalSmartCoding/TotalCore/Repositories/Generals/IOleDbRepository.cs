@@ -9,6 +9,7 @@ namespace TotalCore.Repositories.Generals
     {
         GlobalEnums.MappingTaskID MappingTaskID { get; set; }
 
+        DataTable OpenExcelSheet(string excelFile);
         DataTable OpenExcelSheet(string excelFile, string querySelect);
 
         IList<ColumnMapping> GetColumnMappings();

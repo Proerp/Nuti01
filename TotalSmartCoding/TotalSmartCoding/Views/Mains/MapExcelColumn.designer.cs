@@ -32,19 +32,16 @@
             this.ColumnAvailableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnMappingName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridColumnMapping = new System.Windows.Forms.DataGridView();
-            this.buttonMapColumn = new System.Windows.Forms.Button();
-            this.buttonUnMapColumn = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonEscape = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonNext = new System.Windows.Forms.ToolStripButton();
-            this.checkBoxResetPlanned = new System.Windows.Forms.CheckBox();
-            this.checkBoxDeleteAll = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.ColumnDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.buttonCancel = new System.Windows.Forms.ToolStripButton();
+            this.buttonOK = new System.Windows.Forms.ToolStripButton();
+            this.buttonUnMapColumn = new System.Windows.Forms.Button();
+            this.buttonMapColumn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridColumnAvailable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridColumnMapping)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridColumnAvailable
@@ -59,12 +56,12 @@
             this.dataGridColumnAvailable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnAvailableName,
             this.ColumnMappingName});
-            this.dataGridColumnAvailable.Location = new System.Drawing.Point(16, 144);
-            this.dataGridColumnAvailable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridColumnAvailable.Location = new System.Drawing.Point(18, 17);
+            this.dataGridColumnAvailable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridColumnAvailable.Name = "dataGridColumnAvailable";
             this.dataGridColumnAvailable.ReadOnly = true;
             this.dataGridColumnAvailable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridColumnAvailable.Size = new System.Drawing.Size(468, 164);
+            this.dataGridColumnAvailable.Size = new System.Drawing.Size(457, 360);
             this.dataGridColumnAvailable.TabIndex = 11;
             // 
             // ColumnAvailableName
@@ -93,100 +90,13 @@
             this.dataGridColumnMapping.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnDisplayName,
             this.dataGridViewTextBoxColumn1});
-            this.dataGridColumnMapping.Location = new System.Drawing.Point(547, 143);
-            this.dataGridColumnMapping.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridColumnMapping.Location = new System.Drawing.Point(542, 17);
+            this.dataGridColumnMapping.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridColumnMapping.Name = "dataGridColumnMapping";
             this.dataGridColumnMapping.ReadOnly = true;
             this.dataGridColumnMapping.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridColumnMapping.Size = new System.Drawing.Size(468, 165);
+            this.dataGridColumnMapping.Size = new System.Drawing.Size(457, 360);
             this.dataGridColumnMapping.TabIndex = 12;
-            // 
-            // buttonMapColumn
-            // 
-            this.buttonMapColumn.Location = new System.Drawing.Point(492, 202);
-            this.buttonMapColumn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.buttonMapColumn.Name = "buttonMapColumn";
-            this.buttonMapColumn.Size = new System.Drawing.Size(45, 42);
-            this.buttonMapColumn.TabIndex = 13;
-            this.buttonMapColumn.UseVisualStyleBackColor = true;
-            this.buttonMapColumn.Click += new System.EventHandler(this.MappingColumn);
-            // 
-            // buttonUnMapColumn
-            // 
-            this.buttonUnMapColumn.Location = new System.Drawing.Point(492, 245);
-            this.buttonUnMapColumn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.buttonUnMapColumn.Name = "buttonUnMapColumn";
-            this.buttonUnMapColumn.Size = new System.Drawing.Size(45, 42);
-            this.buttonUnMapColumn.TabIndex = 14;
-            this.buttonUnMapColumn.UseVisualStyleBackColor = true;
-            this.buttonUnMapColumn.Click += new System.EventHandler(this.MappingColumn);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonEscape,
-            this.toolStripButtonNext});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1029, 27);
-            this.toolStrip1.TabIndex = 69;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButtonEscape
-            // 
-            this.toolStripButtonEscape.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonEscape.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonEscape.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonEscape.Name = "toolStripButtonEscape";
-            this.toolStripButtonEscape.Size = new System.Drawing.Size(23, 24);
-            this.toolStripButtonEscape.Text = "toolStripButton1";
-            this.toolStripButtonEscape.Click += new System.EventHandler(this.NextCancel_Click);
-            // 
-            // toolStripButtonNext
-            // 
-            this.toolStripButtonNext.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButtonNext.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonNext.Name = "toolStripButtonNext";
-            this.toolStripButtonNext.Size = new System.Drawing.Size(58, 24);
-            this.toolStripButtonNext.Text = "Import";
-            this.toolStripButtonNext.Click += new System.EventHandler(this.NextCancel_Click);
-            // 
-            // checkBoxResetPlanned
-            // 
-            this.checkBoxResetPlanned.AutoSize = true;
-            this.checkBoxResetPlanned.Checked = true;
-            this.checkBoxResetPlanned.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxResetPlanned.Location = new System.Drawing.Point(57, 71);
-            this.checkBoxResetPlanned.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkBoxResetPlanned.Name = "checkBoxResetPlanned";
-            this.checkBoxResetPlanned.Size = new System.Drawing.Size(224, 21);
-            this.checkBoxResetPlanned.TabIndex = 70;
-            this.checkBoxResetPlanned.Text = "Xóa kế hoạch sản xuất hiện tại";
-            this.checkBoxResetPlanned.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxDeleteAll
-            // 
-            this.checkBoxDeleteAll.AutoSize = true;
-            this.checkBoxDeleteAll.Location = new System.Drawing.Point(57, 100);
-            this.checkBoxDeleteAll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.checkBoxDeleteAll.Name = "checkBoxDeleteAll";
-            this.checkBoxDeleteAll.Size = new System.Drawing.Size(314, 21);
-            this.checkBoxDeleteAll.TabIndex = 71;
-            this.checkBoxDeleteAll.Text = "Xóa tất cả mặt hàng hiện có trong phần mềm";
-            this.checkBoxDeleteAll.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.DarkRed;
-            this.label1.Location = new System.Drawing.Point(12, 345);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(798, 17);
-            this.label1.TabIndex = 72;
-            this.label1.Text = "Lưu ý: Vui lòng kiểm tra các cột dữ liệu tương ứng giữa file excel và phần mềm. N" +
-    "hấn Import để bắt đầu import vào phần mềm.";
             // 
             // ColumnDisplayName
             // 
@@ -202,31 +112,88 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonCancel,
+            this.buttonOK});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 381);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStrip2.Size = new System.Drawing.Size(1012, 55);
+            this.toolStrip2.TabIndex = 70;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Image = global::TotalSmartCoding.Properties.Resources.signout_icon_24;
+            this.buttonCancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonCancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonCancel.Size = new System.Drawing.Size(81, 52);
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.Click += new System.EventHandler(this.OKCancel_Click);
+            // 
+            // buttonOK
+            // 
+            this.buttonOK.Image = global::TotalSmartCoding.Properties.Resources.Oxygen_Icons_org_Oxygen_Actions_go_next_view;
+            this.buttonOK.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonOK.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonOK.Size = new System.Drawing.Size(92, 52);
+            this.buttonOK.Text = "Next";
+            this.buttonOK.Click += new System.EventHandler(this.OKCancel_Click);
+            // 
+            // buttonUnMapColumn
+            // 
+            this.buttonUnMapColumn.Image = global::TotalSmartCoding.Properties.Resources.Navigate_left;
+            this.buttonUnMapColumn.Location = new System.Drawing.Point(483, 216);
+            this.buttonUnMapColumn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonUnMapColumn.Name = "buttonUnMapColumn";
+            this.buttonUnMapColumn.Size = new System.Drawing.Size(51, 55);
+            this.buttonUnMapColumn.TabIndex = 14;
+            this.buttonUnMapColumn.UseVisualStyleBackColor = true;
+            this.buttonUnMapColumn.Click += new System.EventHandler(this.MappingColumn);
+            // 
+            // buttonMapColumn
+            // 
+            this.buttonMapColumn.Image = global::TotalSmartCoding.Properties.Resources.Navigate_right;
+            this.buttonMapColumn.Location = new System.Drawing.Point(483, 159);
+            this.buttonMapColumn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonMapColumn.Name = "buttonMapColumn";
+            this.buttonMapColumn.Size = new System.Drawing.Size(51, 55);
+            this.buttonMapColumn.TabIndex = 13;
+            this.buttonMapColumn.UseVisualStyleBackColor = true;
+            this.buttonMapColumn.Click += new System.EventHandler(this.MappingColumn);
+            // 
             // MapExcelColumn
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1029, 383);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkBoxDeleteAll);
-            this.Controls.Add(this.checkBoxResetPlanned);
-            this.Controls.Add(this.toolStrip1);
+            this.ClientSize = new System.Drawing.Size(1012, 436);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.buttonUnMapColumn);
             this.Controls.Add(this.buttonMapColumn);
             this.Controls.Add(this.dataGridColumnMapping);
             this.Controls.Add(this.dataGridColumnAvailable);
+            this.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MapExcelColumn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Import danh mục sản phẩm";
+            this.Text = "Import";
             this.Load += new System.EventHandler(this.DialogMapExcelColumn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridColumnAvailable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridColumnMapping)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,15 +205,12 @@
         private System.Windows.Forms.DataGridView dataGridColumnMapping;
         private System.Windows.Forms.Button buttonMapColumn;
         private System.Windows.Forms.Button buttonUnMapColumn;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButtonEscape;
-        private System.Windows.Forms.ToolStripButton toolStripButtonNext;
-        private System.Windows.Forms.CheckBox checkBoxResetPlanned;
-        private System.Windows.Forms.CheckBox checkBoxDeleteAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnAvailableName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMappingName;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton buttonCancel;
+        private System.Windows.Forms.ToolStripButton buttonOK;
     }
 }

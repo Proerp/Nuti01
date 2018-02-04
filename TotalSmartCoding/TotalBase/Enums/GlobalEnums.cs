@@ -108,7 +108,7 @@
         public enum MappingTaskID : int
         {
             Default = 0,
-            Commodity = 1988
+            BatchMaster = 1888
         }
 
 

@@ -40,6 +40,16 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
             return goodsReceiptIndexes;
         }
 
+        public BatchMasterBase GetBatchMasterBase(string code)
+        {
+            return this.batchMasterAPIRepository.GetBatchMasterBase(code);
+        }
+
+        public BatchMasterBase GetBatchMasterBase(int batchMasterID)
+        {
+            return this.batchMasterAPIRepository.GetBatchMasterBase(batchMasterID);
+        }
+       
         public IList<BatchMasterBase> GetBatchMasterBases()
         {
             return this.batchMasterAPIRepository.GetBatchMasterBases();

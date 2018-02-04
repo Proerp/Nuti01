@@ -12,6 +12,8 @@ namespace TotalCore.Repositories.Productions
 
     public interface IBatchMasterAPIRepository : IGenericAPIRepository
     {
+        BatchMasterBase GetBatchMasterBase(string code);
+        BatchMasterBase GetBatchMasterBase(int batchMasterID);
         IList<BatchMasterBase> GetBatchMasterBases();
     }
 }

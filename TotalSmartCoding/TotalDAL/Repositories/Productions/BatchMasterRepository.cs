@@ -45,6 +45,16 @@ namespace TotalDAL.Repositories.Productions
             return new ObjectParameter[] { baseParameters[0], baseParameters[1], baseParameters[2], new ObjectParameter("ActiveOption", (int)(this.RepositoryBag["ActiveOption"] != null ? this.RepositoryBag["ActiveOption"] : GlobalEnums.ActiveOption.Both)) };
         }
 
+        public BatchMasterBase GetBatchMasterBase(string code)
+        {
+            return this.TotalSmartCodingEntities.GetBatchMasterBaseByCode(code).FirstOrDefault();
+        }
+
+        public BatchMasterBase GetBatchMasterBase(int batchMasterID)
+        {
+            return this.TotalSmartCodingEntities.GetBatchMasterBase(batchMasterID).FirstOrDefault();
+        }
+       
         public IList<BatchMasterBase> GetBatchMasterBases()
         {
             return this.TotalSmartCodingEntities.GetBatchMasterBases().ToList();

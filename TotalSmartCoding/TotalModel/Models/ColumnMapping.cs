@@ -21,6 +21,7 @@ namespace TotalModel.Models
         public string ColumnDisplayName { get; set; }
         public string ColumnMappingName { get; set; }
         public int SerialID { get; set; }
+        public Nullable<int> OrderBy { get; set; }
         public System.DateTime ImportedDate { get; set; }
     }
 }

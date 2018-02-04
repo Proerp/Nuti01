@@ -385,7 +385,7 @@ namespace TotalSmartCoding.Views.Mains
         {
             //this.ControlBox = false;
 
-            //string plainText = "nguyễnđạtphú";
+            //string plainText = "Lê Minh Hiệp";
             //////////// Convert the plain string pwd into bytes
             ////////////byte[] plainTextBytes = UnicodeEncoding.Unicode.GetBytes(plainText);
             ////////////System.Security.Cryptography.HashAlgorithm hashAlgo = new System.Security.Cryptography.SHA256Managed();
@@ -538,7 +538,7 @@ namespace TotalSmartCoding.Views.Mains
 
         public virtual void Import()
         {
-            this.ImportExcel(GlobalEnums.MappingTaskID.Commodity);
+            this.ImportExcel(GlobalEnums.MappingTaskID.BatchMaster);
         }
 
 
@@ -562,6 +562,7 @@ namespace TotalSmartCoding.Views.Mains
                         //    this.GetCommodityListing();
                         //    MessageBox.Show(this, "Thông báo!" + "\r\n" + "\r\n" + "File: " + openFileDialog.FileName + " đã import thành công!" + "\r\n" + "\r\n" + "Vui lòng nhấn OK để hoàn tất.", "Importing", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //}
+                        this.DoImport(openFileDialog.FileName);
 
                         dialogMapExcelColumn.Dispose();
                     }
@@ -574,6 +575,8 @@ namespace TotalSmartCoding.Views.Mains
             }
 
         }
+
+        protected virtual void DoImport(string fileName) { }
 
         public void Export()
         {

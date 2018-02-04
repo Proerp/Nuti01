@@ -129,11 +129,11 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void NextCancel_Click(object sender, EventArgs e)
+        private void OKCancel_Click(object sender, EventArgs e)
         {
             try
             {
-                if (sender.Equals(this.toolStripButtonNext))
+                if (sender.Equals(this.buttonOK))
                 {
                     if (this.ColumnMappingDTOs.Where(w => w.ColumnMappingName == "").FirstOrDefault() != null) throw new System.ArgumentException("All required columns must be mapped in order to continue.");
 
@@ -142,7 +142,7 @@ namespace TotalSmartCoding.Views.Mains
                         this.oleDbAPIs.SaveColumnMapping(columnMappingDTO.ColumnMappingID, columnMappingDTO.ColumnMappingName);
                     }
                 }
-                this.DialogResult = sender.Equals(this.toolStripButtonNext) ? DialogResult.OK : DialogResult.Cancel;
+                this.DialogResult = sender.Equals(this.buttonOK) ? DialogResult.OK : DialogResult.Cancel;
             }
             catch (Exception exception)
             {

@@ -148,7 +148,7 @@ namespace TotalSmartCoding.Views.Productions
                     Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
                     if (this.scannerController != null) this.scannerController.InitializePallet(); //WHEN USER PRESS BUTTON buttonBatches => TO OPEN Batches VIEW => THEN APPLY NEW BATCH FOR PRODUCTION
 
-                    this.labelCommodityName.Text = this.fillingData.CommodityName + "   [Carton code: " + this.fillingData.CommodityCartonCode + "]" + "     [Carton size: " + this.fillingData.PackPerCarton + " packs.     Pallet size: " + this.fillingData.CartonPerPallet + " cartons]" + "          ";
+                    this.labelCommodityName.Text = this.fillingData.CommodityName + "   [Code: " + this.fillingData.CommodityCartonCode + "]" + "     [Carton: " + this.fillingData.PackPerCarton + ". Pallet: " + this.fillingData.CartonPerPallet + "]" + "          ";
                 }
             }
             catch (Exception exception)
