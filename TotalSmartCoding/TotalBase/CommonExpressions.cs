@@ -28,7 +28,7 @@ namespace TotalBase
 
         public static string AlphaNumericStringLOTNUMBER(string normalString)
         {
-            return Regex.Replace(normalString, @"[^1-9A-Z]+", "");
+            return Regex.Replace(normalString, @"[^0-9A-Z]+", "");
         }
 
         public static string ComposeCommodityCode(string code, int commodityTypeID)

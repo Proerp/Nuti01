@@ -77,7 +77,6 @@
             this.olvCartonPerPallet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvShelflife = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvInActive = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvRemarks = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
             this.toolStripChildForm.SuspendLayout();
             this.panelCenter.SuspendLayout();
@@ -233,6 +232,11 @@
             this.numericShelflife.Editable = true;
             this.numericShelflife.Location = new System.Drawing.Point(39, 616);
             this.numericShelflife.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
+            this.numericShelflife.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericShelflife.Name = "numericShelflife";
             this.numericShelflife.Size = new System.Drawing.Size(506, 28);
             this.numericShelflife.TabIndex = 104;
@@ -380,7 +384,7 @@
             this.numericVolume.Location = new System.Drawing.Point(39, 364);
             this.numericVolume.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericVolume.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -397,7 +401,7 @@
             this.numericPackageVolume.Location = new System.Drawing.Point(39, 427);
             this.numericPackageVolume.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
             this.numericPackageVolume.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -412,6 +416,11 @@
             this.numericPackPerCarton.Editable = true;
             this.numericPackPerCarton.Location = new System.Drawing.Point(39, 490);
             this.numericPackPerCarton.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
+            this.numericPackPerCarton.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericPackPerCarton.Name = "numericPackPerCarton";
             this.numericPackPerCarton.Size = new System.Drawing.Size(506, 28);
             this.numericPackPerCarton.TabIndex = 102;
@@ -423,6 +432,11 @@
             this.numericCartonPerPallet.Editable = true;
             this.numericCartonPerPallet.Location = new System.Drawing.Point(39, 553);
             this.numericCartonPerPallet.Margin = new System.Windows.Forms.Padding(9, 1, 1, 1);
+            this.numericCartonPerPallet.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numericCartonPerPallet.Name = "numericCartonPerPallet";
             this.numericCartonPerPallet.Size = new System.Drawing.Size(506, 28);
             this.numericCartonPerPallet.TabIndex = 103;
@@ -585,7 +599,6 @@
             this.fastCommodityIndex.AllColumns.Add(this.olvCartonPerPallet);
             this.fastCommodityIndex.AllColumns.Add(this.olvShelflife);
             this.fastCommodityIndex.AllColumns.Add(this.olvInActive);
-            this.fastCommodityIndex.AllColumns.Add(this.olvRemarks);
             this.fastCommodityIndex.BackColor = System.Drawing.Color.Ivory;
             this.fastCommodityIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvID,
@@ -599,8 +612,7 @@
             this.olvPackPerCarton,
             this.olvCartonPerPallet,
             this.olvShelflife,
-            this.olvInActive,
-            this.olvRemarks});
+            this.olvInActive});
             this.fastCommodityIndex.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastCommodityIndex.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastCommodityIndex.Font = new System.Drawing.Font("Calibri Light", 10.2F);
@@ -642,7 +654,7 @@
             this.olvCommodityCode.AspectToStringFormat = "";
             this.olvCommodityCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityCode.Text = "Code";
-            this.olvCommodityCode.Width = 100;
+            this.olvCommodityCode.Width = 103;
             // 
             // olvCommodityAPICode
             // 
@@ -657,7 +669,7 @@
             this.olvCommodityName.AspectName = "CommodityName";
             this.olvCommodityName.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityName.Text = "Name";
-            this.olvCommodityName.Width = 294;
+            this.olvCommodityName.Width = 395;
             // 
             // olvPackageSize
             // 
@@ -681,7 +693,6 @@
             this.olvPackPerCarton.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvPackPerCarton.Text = "P/C";
             this.olvPackPerCarton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPackPerCarton.Width = 50;
             // 
             // olvCartonPerPallet
             // 
@@ -690,7 +701,6 @@
             this.olvCartonPerPallet.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCartonPerPallet.Text = "C/P";
             this.olvCartonPerPallet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCartonPerPallet.Width = 50;
             // 
             // olvShelflife
             // 
@@ -699,6 +709,7 @@
             this.olvShelflife.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvShelflife.Text = "Shelflife";
             this.olvShelflife.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvShelflife.Width = 80;
             // 
             // olvInActive
             // 
@@ -707,12 +718,6 @@
             this.olvInActive.Text = "";
             this.olvInActive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvInActive.Width = 30;
-            // 
-            // olvRemarks
-            // 
-            this.olvRemarks.AspectName = "Remarks";
-            this.olvRemarks.FillsFreeSpace = true;
-            this.olvRemarks.Text = "Remarks";
             // 
             // imageList32
             // 
@@ -772,7 +777,6 @@
         private BrightIdeasSoftware.OLVColumn olvCommodityName;
         private System.Windows.Forms.ImageList imageList32;
         private BrightIdeasSoftware.OLVColumn olvCommodityCategoryName;
-        private BrightIdeasSoftware.OLVColumn olvRemarks;
         private System.Windows.Forms.Label label3;
         private CustomControls.TextexBox textexPackageSize;
         private CustomControls.TextexBox textexOfficialName;

@@ -13,8 +13,9 @@ namespace TotalDTO.Productions
     public class BatchMasterPrimitiveDTO : BaseDTO, IPrimitiveEntity, IPrimitiveDTO
     {
         public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.BatchMaster; } }
+        public override bool AllowDataInput{ get { return false; } }
         public override bool Importable { get { return true; } }
-        public override bool NoApprovable{ get { return true; } }
+        public override bool NoApprovable { get { return true; } }
         public override bool NoVoidable { get { return false; } }
 
         public override int GetID() { return this.BatchMasterID; }
@@ -107,6 +108,14 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchMasterDTO, string>(ref this.commodityName, o => o.CommodityName, value, false); }
         }
 
+        private string commodityCode;
+        [DefaultValue(null)]
+        public string CommodityCode
+        {
+            get { return this.commodityCode; }
+            set { ApplyPropertyChange<BatchMasterDTO, string>(ref this.commodityCode, o => o.CommodityCode, value, false); }
+        }
+
         private string commodityAPICode;
         [DefaultValue(null)]
         public string CommodityAPICode
@@ -118,6 +127,7 @@ namespace TotalDTO.Productions
         protected override List<ValidationRule> CreateRules()
         {
             List<ValidationRule> validationRules = base.CreateRules();
+            validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<BatchMasterPrimitiveDTO>(p => p.EntryDate), "Vui lòng nhập ngày sản xuất.", delegate { return this.EntryDate > new DateTime(2000, 1, 1); }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<BatchMasterPrimitiveDTO>(p => p.CommodityID), "Vui lòng chọn mã sản phẩm.", delegate { return this.CommodityID > 0; }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<BatchMasterPrimitiveDTO>(p => p.BatchStatusID), "Vui lòng chọn trạng thái.", delegate { return this.BatchStatusID > 0; }));
             validationRules.Add(new SimpleValidationRule(CommonExpressions.PropertyName<BatchMasterPrimitiveDTO>(p => p.Code), "Số batch quy định là 5 ký tự.", delegate { return this.Code != null && this.Code.Length == 5; }));

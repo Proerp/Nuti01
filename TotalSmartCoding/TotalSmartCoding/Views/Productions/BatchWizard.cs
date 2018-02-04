@@ -78,6 +78,8 @@ namespace TotalSmartCoding.Views.Productions
                         this.batchViewModel.BatchStatusCode = pendingLot.BatchStatusCode;
                         this.batchViewModel.Remarks = pendingLot.Remarks;
 
+                        this.batchViewModel.NextPackNo = "000012";
+
                         this.DialogResult = DialogResult.OK;
                     }
                     else

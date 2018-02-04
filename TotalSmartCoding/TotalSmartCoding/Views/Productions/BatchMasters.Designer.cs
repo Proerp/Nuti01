@@ -510,7 +510,7 @@
             this.olvBatchMasterCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvBatchMasterCode.Text = "Batch";
             this.olvBatchMasterCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvBatchMasterCode.Width = 86;
+            this.olvBatchMasterCode.Width = 68;
             // 
             // olvLotCode
             // 

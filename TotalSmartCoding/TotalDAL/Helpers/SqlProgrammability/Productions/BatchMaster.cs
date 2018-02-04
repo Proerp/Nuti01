@@ -68,10 +68,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void BatchMasterEditable()
         {
-            string[] queryArray = new string[2];
+            string[] queryArray = new string[3];
 
             queryArray[0] = " SELECT TOP 1 @FoundEntity = BatchMasterID FROM BatchMasters WHERE BatchMasterID = @EntityID AND InActive = 1 "; //Don't allow edit after void
-            queryArray[1] = " SELECT TOP 1 @FoundEntity = BatchMasterID FROM Batches WHERE BatchMasterID = @EntityID ";
+            queryArray[1] = " SELECT TOP 1 @FoundEntity = BatchMasterID FROM Lots WHERE BatchMasterID = @EntityID ";
+            queryArray[2] = " SELECT TOP 1 @FoundEntity = BatchMasterID FROM Batches WHERE BatchMasterID = @EntityID ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchMasterEditable", queryArray);
         }
@@ -138,7 +139,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       SET         @EntryDate = GetDate() ";
             queryString = queryString + "       SELECT      @Code = MAX(Code) FROM Lots WHERE BatchMasterID = @BatchMasterID ";
 
-            queryString = queryString + "       SELECT      @Code = CHAR(CASE WHEN @Code IS NULL THEN 49 WHEN (ASCII(@Code) >= 49 AND ASCII(@Code) < 57) OR (ASCII(@Code) >= 65 AND ASCII(@Code) < 90) THEN ASCII(@Code) + 1 WHEN ASCII(@Code) = 57 THEN 65 ELSE 97 END) " + "\r\n";
+            queryString = queryString + "       SELECT      @Code = CHAR(CASE WHEN @Code IS NULL THEN 48 WHEN (ASCII(@Code) >= 48 AND ASCII(@Code) < 57) OR (ASCII(@Code) >= 65 AND ASCII(@Code) < 90) THEN ASCII(@Code) + 1 WHEN ASCII(@Code) = 57 THEN 65 ELSE 97 END) " + "\r\n";
 
             queryString = queryString + "       INSERT INTO Lots (EntryDate, Reference, Code, BatchMasterID, LocationID, Description, Remarks, CreatedDate, EditedDate, Approved, ApprovedDate, InActive, InActiveDate) " + "\r\n";
             queryString = queryString + "       SELECT      @EntryDate AS EntryDate, @Code AS Reference, @Code, BatchMasterID, LocationID, NULL AS Description, NULL AS Remarks, @EntryDate AS CreatedDate, @EntryDate AS EditedDate, 0 AS Approved, NULL AS ApprovedDate, 0 AS InActive, NULL AS InActiveDate " + "\r\n";

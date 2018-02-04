@@ -180,6 +180,7 @@ namespace TotalSmartCoding.Views.Productions
                 if (this.combexCommodityID.SelectedItem != null)
                 {
                     CommodityBase commodityBase = (CommodityBase)this.combexCommodityID.SelectedItem;
+                    this.batchMasterViewModel.CommodityCode = commodityBase.Code;
                     this.batchMasterViewModel.CommodityName = commodityBase.Name;
                     this.batchMasterViewModel.CommodityAPICode = commodityBase.APICode;
                 }
@@ -263,8 +264,11 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (this.batchMasterViewModel.EntryDate < DateTime.Today) throw new Exception("Vui lòng nhập ngày sản xuất.");
-                if (this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID)) this.Loading();
+                BatchMasterWizard wizardMaster = new BatchMasterWizard(this.batchMasterController, this.batchMasterViewModel);
+                DialogResult dialogResult = wizardMaster.ShowDialog(); wizardMaster.Dispose();
+
+                this.batchMasterController.CancelDirty(true);
+                if (dialogResult == DialogResult.OK) this.Loading();
             }
             catch (Exception exception)
             {
@@ -365,7 +369,7 @@ namespace TotalSmartCoding.Views.Productions
                                     exceptionTable.AddException(new string[] { "Lỗi lưu dữ liệu " + this.batchMasterController.BaseService.ServiceTag, excelDataRow["Code"].ToString() });
                         }
                         else
-                            exceptionTable.AddException(new string[] { "Batch: " + excelDataRow["Code"].ToString() + " đã tồn tại trên hệ thống.", excelDataRow["Code"].ToString() });
+                            exceptionTable.AddException(new string[] { "Batch đã tồn tại trên hệ thống.", excelDataRow["Code"].ToString() });
                     }
                 }
                 if (exceptionTable.Table.Rows.Count <= 0)
