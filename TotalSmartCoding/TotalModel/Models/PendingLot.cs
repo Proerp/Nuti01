@@ -29,5 +29,8 @@ namespace TotalModel.Models
         public string CommodityCartonCode { get; set; }
         public string Code { get; set; }
         public int CommodityID { get; set; }
+        public string NextPackNo { get; set; }
+        public string NextCartonNo { get; set; }
+        public string NextPalletNo { get; set; }
     }
 }

@@ -2157,6 +2157,9 @@
         <Function Name="BatchMasterPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchMasterRemoveLot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LotID" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchMasterToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
@@ -4387,10 +4390,13 @@
           <Parameter Name="Code" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetBatchMasterBase" ReturnType="Collection(TotalSmartCodingModel.BatchMasterBase)">
-            <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
+          <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetBatchMasterBaseByCode" ReturnType="Collection(TotalSmartCodingModel.BatchMasterBase)">
-            <Parameter Name="Code" Mode="In" Type="String" />
+          <Parameter Name="Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BatchMasterRemoveLot">
+            <Parameter Name="LotID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -7604,6 +7610,9 @@
           <Property Type="String" Name="CommodityCartonCode" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="NextPackNo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NextCartonNo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NextPalletNo" Nullable="true" MaxLength="10" />
         </ComplexType>
         <EntityType Name="Batch">
           <Key>
@@ -9976,6 +9985,9 @@
                 <ScalarProperty Name="CommodityCartonCode" ColumnName="CommodityCartonCode" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="NextPackNo" ColumnName="NextPackNo" />
+                <ScalarProperty Name="NextCartonNo" ColumnName="NextCartonNo" />
+                <ScalarProperty Name="NextPalletNo" ColumnName="NextPalletNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10118,6 +10130,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BatchMasterRemoveLot" FunctionName="TotalSmartCodingModel.Store.BatchMasterRemoveLot" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -63,21 +63,22 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
         private void CommodityEditable()
         {
-            string[] queryArray = new string[13];
+            string[] queryArray = new string[14];
 
             queryArray[0] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Commodities WHERE CommodityID = @EntityID AND InActive = 1 ";
-            queryArray[1] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Batches WHERE CommodityID = @EntityID ";
-            queryArray[2] = " SELECT TOP 1 @FoundEntity = CommodityID FROM TransferOrderDetails WHERE CommodityID = @EntityID ";
-            queryArray[3] = " SELECT TOP 1 @FoundEntity = CommodityID FROM SalesOrderDetails WHERE CommodityID = @EntityID ";
-            queryArray[4] = " SELECT TOP 1 @FoundEntity = CommodityID FROM DeliveryAdviceDetails WHERE CommodityID = @EntityID ";
-            queryArray[5] = " SELECT TOP 1 @FoundEntity = CommodityID FROM WarehouseAdjustmentDetails WHERE CommodityID = @EntityID ";
-            queryArray[6] = " SELECT TOP 1 @FoundEntity = CommodityID FROM PickupDetails WHERE CommodityID = @EntityID ";
-            queryArray[7] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsReceiptDetails WHERE CommodityID = @EntityID ";
-            queryArray[8] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsIssueDetails WHERE CommodityID = @EntityID ";
-            queryArray[9] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsIssueTransferDetails WHERE CommodityID = @EntityID ";
-            queryArray[10] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Pallets WHERE CommodityID = @EntityID ";
-            queryArray[11] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Cartons WHERE CommodityID = @EntityID ";
-            queryArray[12] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Packs WHERE CommodityID = @EntityID ";
+            queryArray[1] = " SELECT TOP 1 @FoundEntity = CommodityID FROM BatchMasters WHERE CommodityID = @EntityID ";
+            queryArray[2] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Batches WHERE CommodityID = @EntityID ";
+            queryArray[3] = " SELECT TOP 1 @FoundEntity = CommodityID FROM TransferOrderDetails WHERE CommodityID = @EntityID ";
+            queryArray[4] = " SELECT TOP 1 @FoundEntity = CommodityID FROM SalesOrderDetails WHERE CommodityID = @EntityID ";
+            queryArray[5] = " SELECT TOP 1 @FoundEntity = CommodityID FROM DeliveryAdviceDetails WHERE CommodityID = @EntityID ";
+            queryArray[6] = " SELECT TOP 1 @FoundEntity = CommodityID FROM WarehouseAdjustmentDetails WHERE CommodityID = @EntityID ";
+            queryArray[7] = " SELECT TOP 1 @FoundEntity = CommodityID FROM PickupDetails WHERE CommodityID = @EntityID ";
+            queryArray[8] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsReceiptDetails WHERE CommodityID = @EntityID ";
+            queryArray[9] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsIssueDetails WHERE CommodityID = @EntityID ";
+            queryArray[10] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsIssueTransferDetails WHERE CommodityID = @EntityID ";
+            queryArray[11] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Pallets WHERE CommodityID = @EntityID ";
+            queryArray[12] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Cartons WHERE CommodityID = @EntityID ";
+            queryArray[13] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Packs WHERE CommodityID = @EntityID ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("CommodityEditable", queryArray);
         }

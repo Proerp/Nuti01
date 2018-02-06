@@ -48,8 +48,10 @@
             this.textexRemarks = new CustomControls.TextexBox();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.separatorNewLOT = new System.Windows.Forms.ToolStripSeparator();
             this.buttonNewLOT = new System.Windows.Forms.ToolStripButton();
+            this.separatorRemoveLOT = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonRemoveLOT = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -64,12 +66,12 @@
             this.olvLotCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchStatusCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityCartonCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPlannedQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackQuantity = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
             this.layoutMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPlannedQuantity)).BeginInit();
@@ -128,7 +130,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(378, 637);
+            this.layoutMaster.Size = new System.Drawing.Size(378, 582);
             this.layoutMaster.TabIndex = 62;
             // 
             // label4
@@ -336,8 +338,10 @@
             this.toolStripChildForm.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator2,
+            this.separatorNewLOT,
             this.buttonNewLOT,
+            this.separatorRemoveLOT,
+            this.buttonRemoveLOT,
             this.toolStripSeparator1,
             this.buttonDiscontinued,
             this.toolStripLabel1,
@@ -350,10 +354,10 @@
             this.toolStripChildForm.Text = "toolStrip1";
             this.toolStripChildForm.Visible = false;
             // 
-            // toolStripSeparator2
+            // separatorNewLOT
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
+            this.separatorNewLOT.Name = "separatorNewLOT";
+            this.separatorNewLOT.Size = new System.Drawing.Size(6, 55);
             // 
             // buttonNewLOT
             // 
@@ -361,9 +365,24 @@
             this.buttonNewLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonNewLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonNewLOT.Name = "buttonNewLOT";
-            this.buttonNewLOT.Size = new System.Drawing.Size(130, 52);
-            this.buttonNewLOT.Text = "Add Lot    ";
+            this.buttonNewLOT.Size = new System.Drawing.Size(114, 52);
+            this.buttonNewLOT.Text = "Add Lot";
             this.buttonNewLOT.Click += new System.EventHandler(this.buttonNewLOT_Click);
+            // 
+            // separatorRemoveLOT
+            // 
+            this.separatorRemoveLOT.Name = "separatorRemoveLOT";
+            this.separatorRemoveLOT.Size = new System.Drawing.Size(6, 55);
+            // 
+            // buttonRemoveLOT
+            // 
+            this.buttonRemoveLOT.Image = global::TotalSmartCoding.Properties.Resources.Void_24;
+            this.buttonRemoveLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRemoveLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemoveLOT.Name = "buttonRemoveLOT";
+            this.buttonRemoveLOT.Size = new System.Drawing.Size(116, 52);
+            this.buttonRemoveLOT.Text = "Remove Lot";
+            this.buttonRemoveLOT.Click += new System.EventHandler(this.buttonRemoveLOT_Click);
             // 
             // toolStripSeparator1
             // 
@@ -415,13 +434,13 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(1103, 0);
+            this.naviBarMaster.Location = new System.Drawing.Point(1103, 55);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(380, 685);
+            this.naviBarMaster.Size = new System.Drawing.Size(380, 630);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -433,13 +452,13 @@
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 637);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 582);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(378, 637);
+            this.naviBand1.Size = new System.Drawing.Size(378, 582);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -451,12 +470,12 @@
             this.fastBatchMasterIndex.AllColumns.Add(this.olvLotCode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvBatchStatusCode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityCode);
-            this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityName);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityAPICode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityCartonCode);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvPlannedQuantity);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvPackQuantity);
             this.fastBatchMasterIndex.AllColumns.Add(this.olvPackLineVolume);
+            this.fastBatchMasterIndex.AllColumns.Add(this.olvCommodityName);
             this.fastBatchMasterIndex.BackColor = System.Drawing.Color.Ivory;
             this.fastBatchMasterIndex.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvID,
@@ -465,23 +484,23 @@
             this.olvLotCode,
             this.olvBatchStatusCode,
             this.olvCommodityCode,
-            this.olvCommodityName,
             this.olvCommodityAPICode,
             this.olvCommodityCartonCode,
             this.olvPlannedQuantity,
             this.olvPackQuantity,
-            this.olvPackLineVolume});
+            this.olvPackLineVolume,
+            this.olvCommodityName});
             this.fastBatchMasterIndex.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastBatchMasterIndex.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastBatchMasterIndex.FullRowSelect = true;
             this.fastBatchMasterIndex.GroupImageList = this.imageList32;
             this.fastBatchMasterIndex.HideSelection = false;
             this.fastBatchMasterIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 55);
             this.fastBatchMasterIndex.Name = "fastBatchMasterIndex";
             this.fastBatchMasterIndex.OwnerDraw = true;
             this.fastBatchMasterIndex.ShowGroups = false;
-            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 685);
+            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 630);
             this.fastBatchMasterIndex.TabIndex = 67;
             this.fastBatchMasterIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchMasterIndex.UseCompatibleStateImageBehavior = false;
@@ -536,12 +555,6 @@
             this.olvCommodityCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCommodityCode.Width = 91;
             // 
-            // olvCommodityName
-            // 
-            this.olvCommodityName.AspectName = "CommodityName";
-            this.olvCommodityName.Text = "Desccription";
-            this.olvCommodityName.Width = 297;
-            // 
             // olvCommodityAPICode
             // 
             this.olvCommodityAPICode.AspectName = "CommodityAPICode";
@@ -584,6 +597,13 @@
             this.olvPackLineVolume.Text = "Volume";
             this.olvPackLineVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvPackLineVolume.Width = 77;
+            // 
+            // olvCommodityName
+            // 
+            this.olvCommodityName.AspectName = "CommodityName";
+            this.olvCommodityName.FillsFreeSpace = true;
+            this.olvCommodityName.Text = "Desccription";
+            this.olvCommodityName.Width = 297;
             // 
             // imageList32
             // 
@@ -647,7 +667,6 @@
         private BrightIdeasSoftware.OLVColumn olvID;
         private BrightIdeasSoftware.OLVColumn olvEntryDate;
         private System.Windows.Forms.ToolStripComboBox comboDiscontinued;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private CustomControls.DateTimexPicker dateTimexEntryDate;
         private CustomControls.TextexBox textexCode;
@@ -670,6 +689,9 @@
         private System.Windows.Forms.ToolStripButton buttonNewLOT;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator separatorNewLOT;
+        private System.Windows.Forms.ToolStripSeparator separatorRemoveLOT;
+        private System.Windows.Forms.ToolStripButton buttonRemoveLOT;
 
     }
 }

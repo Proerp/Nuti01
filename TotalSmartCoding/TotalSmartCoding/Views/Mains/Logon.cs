@@ -186,7 +186,7 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                if (!(GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail))
+                if (!(GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.BatchMaster))
                 {
                     CustomMsgBox.Show(this, "Sorry, can not open this application." + "\r\n" + "\r\n" + "Call 0919 878 329 for more information. Thanks!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     this.DialogResult = DialogResult.Cancel; return; 

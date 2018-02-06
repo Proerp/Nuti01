@@ -56,6 +56,7 @@ namespace TotalBase
             Pail = 2,
             Drum = 3,
 
+            BatchMaster = 18,
 
             Pickup = 68,
             GoodsIssue = 88
@@ -133,7 +134,8 @@ namespace TotalBase
                 return 6;
             else if (configID == (int)GlobalVariables.FillingLine.GoodsIssue)
                 return 6;
-
+            else if (configID == (int)GlobalVariables.FillingLine.BatchMaster)
+                return 6;
 
 
             else if (configID == (int)GlobalVariables.FillingLine.Smallpack || configID == (int)GlobalVariables.FillingLine.Pail || configID == (int)GlobalVariables.FillingLine.Drum)

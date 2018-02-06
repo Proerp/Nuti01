@@ -580,7 +580,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                 if (GlobalEnums.SendToZebra)
                 {
-                    this.ioserialPort.WritetoSerial(this.wholeMessageLine(), 4);
+                    this.ioserialPort.WritetoSerial(this.wholeMessageLine(), 1);
                     this.FillingData.CartonsetQueueZebraStatus = this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? GlobalVariables.ZebraStatus.Printing1 : GlobalVariables.ZebraStatus.Reprinting1; Thread.Sleep(88);
                 }
             }

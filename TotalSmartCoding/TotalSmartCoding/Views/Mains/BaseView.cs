@@ -551,23 +551,16 @@ namespace TotalSmartCoding.Views.Mains
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    MapExcelColumn dialogMapExcelColumn = new MapExcelColumn(mappingTaskID, openFileDialog.FileName);
+                    string fileName = openFileDialog.FileName;
+
+                    MapExcelColumn dialogMapExcelColumn = new MapExcelColumn(mappingTaskID, fileName);
 
                     if (dialogMapExcelColumn.ShowDialog() == DialogResult.OK)
-                    {
-                        //CommodityBLL commodityBLL = new CommodityBLL();
-
-                        //if (commodityBLL.ImportExcel(openFileDialog.FileName, dialogMapExcelColumn.IsResetPlanned, dialogMapExcelColumn.IsDeleteAll, this.IsPlannedOnly))
-                        //{
-                        //    this.GetCommodityListing();
-                        //    MessageBox.Show(this, "Thông báo!" + "\r\n" + "\r\n" + "File: " + openFileDialog.FileName + " đã import thành công!" + "\r\n" + "\r\n" + "Vui lòng nhấn OK để hoàn tất.", "Importing", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //}
-                        this.DoImport(openFileDialog.FileName);
-
-                        dialogMapExcelColumn.Dispose();
-                    }
+                        this.DoImport(fileName);
+                    
+                    dialogMapExcelColumn.Dispose();
                 }
-
+                openFileDialog.Dispose();
             }
             catch (Exception exception)
             {

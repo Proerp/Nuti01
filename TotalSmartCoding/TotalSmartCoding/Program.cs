@@ -47,7 +47,9 @@ namespace TotalSmartCoding
                     Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.SmartCoding, new SmartCoding()));
                 else
                 {
-                    if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pickup)
+                    if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.BatchMaster)
+                        Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.BatchMaster, new BatchMasters()));
+                    else if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pickup)
                         Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.Pickup, new Pickups()));
                     else if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.GoodsIssue)
                         Application.Run(new MasterMDI(GlobalEnums.NmvnTaskID.GoodsIssue, new GoodsIssues()));

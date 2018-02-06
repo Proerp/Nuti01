@@ -22,6 +22,11 @@ namespace TotalDAL.Repositories.Productions
         {
             this.TotalSmartCodingEntities.BatchMasterAddLot(batchMasterID);
         }
+
+        public void RemoveLot(int lotID)
+        {
+            this.TotalSmartCodingEntities.BatchMasterRemoveLot(lotID);
+        }
     }
 
 

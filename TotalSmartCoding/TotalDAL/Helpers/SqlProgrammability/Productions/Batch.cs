@@ -65,11 +65,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          Lots.LotID, Lots.Code AS LotCode, BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, BatchMasters.PlannedQuantity, BatchStatuses.Code AS BatchStatusCode, BatchStatuses.Remarks, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet " + "\r\n";
+            queryString = queryString + "       SELECT          Lots.LotID, Lots.Code AS LotCode, BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, BatchMasters.PlannedQuantity, BatchStatuses.Code AS BatchStatusCode, BatchStatuses.Remarks, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, LastBatches.NextPackNo, LastBatches.NextCartonNo, LastBatches.NextPalletNo " + "\r\n";
             queryString = queryString + "       FROM            Lots " + "\r\n";
             queryString = queryString + "                       INNER JOIN BatchMasters ON Lots.LocationID = @LocationID AND BatchMasters.InActive = 0 AND Lots.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                       INNER JOIN BatchStatuses ON BatchMasters.BatchStatusID = BatchStatuses.BatchStatusID " + "\r\n";
+
+            queryString = queryString + "                       LEFT JOIN (SELECT Batches.LotID, MAX(Batches.NextPackNo) AS NextPackNo, MAX(Batches.NextCartonNo) AS NextCartonNo, MAX(Batches.NextPalletNo) AS NextPalletNo FROM Batches INNER JOIN BatchMasters ON Batches.BatchMasterID = BatchMasters.BatchMasterID WHERE BatchMasters.InActive = 0 GROUP BY Batches.LotID) LastBatches ON Lots.LotID = LastBatches.LotID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetPendingLots", queryString);
         }

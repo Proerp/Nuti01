@@ -19,6 +19,11 @@ namespace TotalSmartCoding.Controllers.Productions
         {
             return this.batchMasterService.AddLot(batchMasterID);
         }
+
+        public bool RemoveLot(int lotID)
+        {
+            return this.batchMasterService.RemoveLot(lotID);
+        }
     }
 }
 

@@ -8,5 +8,6 @@ namespace TotalCore.Services.Productions
     public interface IBatchMasterService : IGenericService<BatchMaster, BatchMasterDTO, BatchMasterPrimitiveDTO>
     {
         bool AddLot(int batchMasterID);
+        bool RemoveLot(int lotID);        
     }
 }

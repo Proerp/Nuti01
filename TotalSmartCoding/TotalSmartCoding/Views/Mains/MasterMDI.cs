@@ -116,9 +116,12 @@ namespace TotalSmartCoding.Views.Mains
                         this.panelTopLeft.Dock = DockStyle.Fill;
                         break;
                     case GlobalEnums.NmvnTaskID.BatchMaster:
-                        this.Size = new Size(1388, 740);
-                        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-                        this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal;
+                        if (GlobalVariables.ConfigID != (int)GlobalVariables.FillingLine.BatchMaster)
+                        {
+                            this.Size = new Size(1388, 740);
+                            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+                            this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal;
+                        }
 
                         this.panelTopRight.Visible = false;
                         this.panelTopLeft.Dock = DockStyle.Fill;

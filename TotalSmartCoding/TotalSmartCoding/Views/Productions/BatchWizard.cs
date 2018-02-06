@@ -78,7 +78,9 @@ namespace TotalSmartCoding.Views.Productions
                         this.batchViewModel.BatchStatusCode = pendingLot.BatchStatusCode;
                         this.batchViewModel.Remarks = pendingLot.Remarks;
 
-                        this.batchViewModel.NextPackNo = "000012";
+                        this.batchViewModel.NextPackNo = this.getNextNo(pendingLot.NextPackNo);
+                        this.batchViewModel.NextCartonNo = this.getNextNo(pendingLot.NextCartonNo);
+                        this.batchViewModel.NextPalletNo = this.getNextNo(pendingLot.NextPalletNo);
 
                         this.DialogResult = DialogResult.OK;
                     }
@@ -93,6 +95,11 @@ namespace TotalSmartCoding.Views.Productions
             {
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private string getNextNo(string nextNo)
+        {
+            return (int.Parse(nextNo == null ? "0" : nextNo) + 1).ToString("0000000").Substring(1);
         }
 
         private void textexFilters_TextChanged(object sender, EventArgs e)

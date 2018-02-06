@@ -158,6 +158,9 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBatchMasterIndex.AboutToCreateGroups += fastBatchMasterIndex_AboutToCreateGroups;
 
             this.fastBatchMasterIndex.ShowGroups = true;
+
+            this.buttonNewLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; this.separatorNewLOT.Visible = this.buttonNewLOT.Visible;
+            this.buttonRemoveLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; this.separatorRemoveLOT.Visible = this.buttonRemoveLOT.Visible;
         }
 
         private void fastBatchMasterIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
@@ -213,6 +216,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             base.DoImport(fileName);
             this.ImportExcel(fileName);
+            this.Loading();
         }
 
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
@@ -277,6 +281,27 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
+        private void buttonRemoveLOT_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.fastBatchMasterIndex.SelectedObject != null)
+                {
+                    BatchMasterIndex batchMasterIndex = (BatchMasterIndex)this.fastBatchMasterIndex.SelectedObject;
+                    if (batchMasterIndex != null && batchMasterIndex.LotID != null)
+                    {
+                        DialogResult dialogResult = CustomMsgBox.Show(this, "Vui lòng xác nhận xóa LOT đang chọn?" + "\r\n" + "\r\n" + "Batch: " + batchMasterIndex.BatchMasterCode + ", LOT: " + batchMasterIndex.LotCode, "Warning", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                            if (this.batchMasterController.RemoveLot((int)batchMasterIndex.LotID)) this.Loading();
+
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
 
 
 
@@ -316,14 +341,18 @@ namespace TotalSmartCoding.Views.Productions
                     {
                         exceptionTable.ClearDirty();
 
-                        BatchMasterBase batchMasterBase = this.batchMasterAPIs.GetBatchMasterBase(excelDataRow["Code"].ToString());
+                        string code = excelDataRow["Code"].ToString().Trim();
+                        if (code.Length < 5) code = new String('0', 5 - code.Length) + code;
+
+                        BatchMasterBase batchMasterBase = this.batchMasterAPIs.GetBatchMasterBase(code);
 
                         if (batchMasterBase == null)
                         {
                             this.batchMasterController.Create();
 
                             this.batchMasterViewModel.EntryDate = new DateTime(2000, 1, 1);
-                            this.batchMasterViewModel.Code = excelDataRow["Code"].ToString();
+                            this.batchMasterViewModel.Code = code;
+
 
                             if (DateTime.TryParse(excelDataRow["PlannedDate"].ToString(), out dateTimeValue)) this.batchMasterViewModel.PlannedDate = dateTimeValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu BatchPlanDate", excelDataRow["PlannedDate"].ToString() });
                             if (decimal.TryParse(excelDataRow["PlannedQuantity"].ToString(), out decimalValue)) this.batchMasterViewModel.PlannedQuantity = decimalValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu PlannedQuantity", excelDataRow["PlannedQuantity"].ToString() });
@@ -343,11 +372,13 @@ namespace TotalSmartCoding.Views.Productions
                                 commodityViewModel.CommodityCategoryID = 2;
                                 commodityViewModel.FillingLineIDs = "1,2";
 
-                                if (decimal.TryParse(excelDataRow["Volume"].ToString(), out decimalValue)) commodityViewModel.Volume = decimalValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu Trọng lượng", excelDataRow["Volume"].ToString() });
+                                if (decimal.TryParse(excelDataRow["Volume"].ToString(), out decimalValue)) commodityViewModel.Volume = decimalValue / 1000; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu Trọng lượng", excelDataRow["Volume"].ToString() });
                                 if (int.TryParse(excelDataRow["PackPerCarton"].ToString(), out intValue)) commodityViewModel.PackPerCarton = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["PackPerCarton"].ToString() });
                                 if (int.TryParse(excelDataRow["CartonPerPallet"].ToString(), out intValue)) commodityViewModel.CartonPerPallet = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["CartonPerPallet"].ToString() });
 
                                 commodityViewModel.PackageSize = commodityViewModel.PackPerCarton.ToString("N0") + "x" + commodityViewModel.Volume.ToString("N2") + "kg";
+
+                                if (int.TryParse(excelDataRow["Shelflife"].ToString(), out intValue)) commodityViewModel.Shelflife = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu Expiration months", excelDataRow["Shelflife"].ToString() });
 
                                 if (!commodityViewModel.IsValid) exceptionTable.AddException(new string[] { "Lỗi dữ liệu: Add new item " + excelDataRow["CommodityCode"].ToString(), commodityViewModel.Error });
                                 else
@@ -366,10 +397,10 @@ namespace TotalSmartCoding.Views.Productions
                             if (!this.batchMasterViewModel.IsValid) exceptionTable.AddException(new string[] { "Lỗi dữ liệu: Batch Validation ", this.batchMasterViewModel.Error }); ;
                             if (!exceptionTable.IsDirty)
                                 if (this.batchMasterViewModel.IsDirty && !this.batchMasterController.Save())
-                                    exceptionTable.AddException(new string[] { "Lỗi lưu dữ liệu " + this.batchMasterController.BaseService.ServiceTag, excelDataRow["Code"].ToString() });
+                                    exceptionTable.AddException(new string[] { "Lỗi lưu dữ liệu " + this.batchMasterController.BaseService.ServiceTag, code });
                         }
                         else
-                            exceptionTable.AddException(new string[] { "Batch đã tồn tại trên hệ thống.", excelDataRow["Code"].ToString() });
+                            exceptionTable.AddException(new string[] { "Batch đã tồn tại trên hệ thống.", code });
                     }
                 }
                 if (exceptionTable.Table.Rows.Count <= 0)
@@ -386,6 +417,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
         #endregion Import Excel
+
 
 
     }

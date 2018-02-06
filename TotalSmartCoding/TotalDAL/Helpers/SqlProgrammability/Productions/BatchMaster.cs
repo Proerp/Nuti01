@@ -29,6 +29,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.BatchMasterInitReference();
             this.BatchMasterAddLot();
+            this.BatchMasterRemoveLot();
 
             this.GetBatchMasterBases();
         }
@@ -147,6 +148,26 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       WHERE       BatchMasterID = @BatchMasterID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterAddLot", queryString);
+        }
+
+        private void BatchMasterRemoveLot()
+        {
+            string queryString = " @LotID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       DECLARE @FoundBatchID int " + "\r\n";
+            queryString = queryString + "       SELECT TOP 1 @FoundBatchID = BatchID FROM Batches WHERE LotID = @LotID " + "\r\n";
+
+            queryString = queryString + "       IF NOT @FoundBatchID IS NULL " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Lot này đã sản xuất rồi, vui lòng kiểm tra lại' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "               DELETE FROM Lots WHERE LotID = @LotID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterRemoveLot", queryString);
         }
 
         private void GetBatchMasterBases()

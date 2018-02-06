@@ -21,5 +21,12 @@ namespace TotalService.Productions
             this.batchMasterRepository.AddLot(batchMasterID);
             return true;
         }
+
+        public bool RemoveLot(int lotID)
+        {
+            this.batchMasterRepository.RemoveLot(lotID);
+            return true;
+        }
+
     }
 }

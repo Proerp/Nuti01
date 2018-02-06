@@ -2360,5 +2360,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterBase>("GetBatchMasterBaseByCode", codeParameter);
         }
+    
+        public virtual int BatchMasterRemoveLot(Nullable<int> lotID)
+        {
+            var lotIDParameter = lotID.HasValue ?
+                new ObjectParameter("LotID", lotID) :
+                new ObjectParameter("LotID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterRemoveLot", lotIDParameter);
+        }
     }
 }
