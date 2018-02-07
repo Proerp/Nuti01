@@ -1773,6 +1773,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Delivery_box {
+            get {
+                object obj = ResourceManager.GetObject("Delivery-box", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Designbolts_Free_Shaded_Social_Email {
             get {
                 object obj = ResourceManager.GetObject("Designbolts-Free-Shaded-Social-Email", resourceCulture);

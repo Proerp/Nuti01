@@ -913,6 +913,11 @@ namespace TotalSmartCoding.Controllers.Productions
         ///IMPORTANT: SHOULD IMPLEMENT LATER: TO PREVENT UN-PREDICTABLE FOR UN PROPER EXITING SOFTWARE WHEN HANDLE EXCEPTION (EXIT IMMEDIATELY), WE ONLY ALLOW HANDLE EXCEPYION WHEN THE SYSTEM PAUSE (NO ITEM WAS ADDED AT THE TIME WE EXIT THE SYSTEM)
         #region Handle Exception
 
+        public void ToggleLastPackset(bool lastsetProcessing)
+        { //HERE WE ONLY HAVE ToggleLastPackset. LATER: WE CAN HAVE ToggleLastPackset EASYLY, BY ADD THE SAME METHOD HERE WITHOUT ANY CODE SOMEWHERE ELSE
+            this.packQueue.LastsetProcessing = lastsetProcessing;
+        }
+
         public void ToggleLastCartonset(bool lastsetProcessing)
         { //HERE WE ONLY HAVE ToggleLastCartonset. LATER: WE CAN HAVE ToggleLastPackset EASYLY, BY ADD THE SAME METHOD HERE WITHOUT ANY CODE SOMEWHERE ELSE
             this.cartonQueue.LastsetProcessing = lastsetProcessing;

@@ -1166,6 +1166,7 @@
     <None Include="Resources\canned-food.png" />
     <None Include="Resources\Navigate-right.ico" />
     <None Include="Resources\Navigate-left.ico" />
+    <None Include="Resources\Delivery-box.ico" />
     <Content Include="SmartCodingSolution.ico" />
     <None Include="Resources\Yellow-cross.ico" />
     <None Include="Resources\White-Pallet.ico" />

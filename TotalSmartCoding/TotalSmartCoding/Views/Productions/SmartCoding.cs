@@ -525,7 +525,7 @@ namespace TotalSmartCoding.Views.Productions
                         this.labelLEDPack.Text = this.scannerController.PackQueueCount.ToString("N0");
                     }
 
-                    if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); this.buttonPacksetQueueCount.Text = "[" + this.scannerController.PacksetQueueCount.ToString("N0") + "]"; }
+                    if (e.PropertyName == "PacksetQueue") { this.dgvPacksetQueue.DataSource = this.scannerController.GetPacksetQueue(); this.buttonToggleLastPackset.Text = "[" + this.scannerController.PacksetQueueCount.ToString("N0") + "]"; }
 
                     if (e.PropertyName == "PackIgnoreCount") { this.labelLEDPackIgnore.Text = this.scannerController.PackIgnoreCount != 0 ? this.scannerController.PackIgnoreCount.ToString("N0") : "   "; }
                     if (e.PropertyName == "CartonIgnoreCount") { this.labelLEDCartonIgnore.Text = this.scannerController.CartonIgnoreCount != 0 ? this.scannerController.CartonIgnoreCount.ToString("N0") : "   "; }
@@ -916,6 +916,19 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        private void buttonToggleLastPackset_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.scannerController.PackQueueCount > 0 && this.scannerController.PackQueueCount < this.fillingData.PackPerCarton && this.scannerController.PacksetQueueCount == 0 && CustomMsgBox.Show(this, "Số lượng hộp ít hơn số lượng cần đóng carton.\r\n\r\nBạn có muốn đóng carton ngay bây giờ không?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    this.scannerController.ToggleLastPackset(true);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
         private void buttonCartonQueueCount_Click(object sender, EventArgs e)
         {
             try
@@ -980,6 +993,8 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+
+
 
 
 

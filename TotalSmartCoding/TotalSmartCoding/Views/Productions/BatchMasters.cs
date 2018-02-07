@@ -374,7 +374,7 @@ namespace TotalSmartCoding.Views.Productions
 
                                 if (decimal.TryParse(excelDataRow["Volume"].ToString(), out decimalValue)) commodityViewModel.Volume = decimalValue / 1000; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu Trọng lượng", excelDataRow["Volume"].ToString() });
                                 if (int.TryParse(excelDataRow["PackPerCarton"].ToString(), out intValue)) commodityViewModel.PackPerCarton = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["PackPerCarton"].ToString() });
-                                if (int.TryParse(excelDataRow["CartonPerPallet"].ToString(), out intValue)) commodityViewModel.CartonPerPallet = intValue; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["CartonPerPallet"].ToString() });
+                                if (int.TryParse(excelDataRow["CartonPerPallet"].ToString(), out intValue)) commodityViewModel.CartonPerPallet = intValue / commodityViewModel.PackPerCarton; else exceptionTable.AddException(new string[] { "Lỗi cột dữ liệu QC thùng", excelDataRow["CartonPerPallet"].ToString() });
 
                                 commodityViewModel.PackageSize = commodityViewModel.PackPerCarton.ToString("N0") + "x" + commodityViewModel.Volume.ToString("N2") + "kg";
 
