@@ -37,7 +37,7 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public int BatchStatusID { get; set; }
         public string BatchStatusCode { get; set; }
-        public Nullable<decimal> PlannedQuantity { get; set; }
+        public decimal PlannedQuantity { get; set; }
         public Nullable<int> LotID { get; set; }
         public Nullable<System.DateTime> LotEntryDate { get; set; }
         public string LotCode { get; set; }
