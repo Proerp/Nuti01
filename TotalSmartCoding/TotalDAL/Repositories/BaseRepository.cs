@@ -69,7 +69,7 @@ namespace TotalDAL.Repositories
         public void CreateStoredProcedure()
         {
 
-            ////return;
+            return;
 
             Helpers.SqlProgrammability.Generals.OleDb oleDb = new Helpers.SqlProgrammability.Generals.OleDb(totalSmartCodingEntities);
             oleDb.RestoreProcedure();

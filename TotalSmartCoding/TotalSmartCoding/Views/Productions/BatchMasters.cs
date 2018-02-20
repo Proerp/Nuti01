@@ -290,7 +290,7 @@ namespace TotalSmartCoding.Views.Productions
                     BatchMasterIndex batchMasterIndex = (BatchMasterIndex)this.fastBatchMasterIndex.SelectedObject;
                     if (batchMasterIndex != null && batchMasterIndex.LotID != null)
                     {
-                        DialogResult dialogResult = CustomMsgBox.Show(this, "Vui lòng xác nhận xóa LOT đang chọn?" + "\r\n" + "\r\n" + "Batch: " + batchMasterIndex.BatchMasterCode + ", LOT: " + batchMasterIndex.LotCode, "Warning", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = CustomMsgBox.Show(this, "Vui lòng xác nhận xóa LOT đang chọn?" + "\r\n" + "\r\n" + "Batch: " + batchMasterIndex.BatchMasterCode + ", Lot: " + batchMasterIndex.LotCode, "Warning", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                             if (this.batchMasterController.RemoveLot((int)batchMasterIndex.LotID)) this.Loading();
 
