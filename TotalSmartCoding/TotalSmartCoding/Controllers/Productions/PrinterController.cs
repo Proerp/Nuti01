@@ -188,7 +188,8 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 int serialNumber = 0;
                 if (int.TryParse(receivedFeedback.Substring(6, 6), out serialNumber))
-                    nextNo = serialNumber.ToString("0000000").Substring(1);//SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??): TEST AT DATMY: FOR AX350: NO NEED, BUCAUSE: AX350 RETURN THE NEXT VALUE. BUT FOR A200+: RETURN THE PRINTED VALUE
+                    nextNo = (serialNumber + 1).ToString("0000000").Substring(1);
+                //!!!IMPORTANT!!! SHOULD OR NOT: Increase serialNumber by 1 (BECAUSE: nextNo MUST GO AHEAD BY 1??): TEST AT DATMY: FOR AX350: NO NEED, BUCAUSE: AX350 RETURN THE NEXT VALUE. BUT FOR A200+: RETURN THE PRINTED VALUE
             }
 
             if (nextNo != "")

@@ -388,10 +388,20 @@ namespace TotalDTO.Productions
 
 
 
-
+        /// <summary>
+        /// Cách  tính: ngày/ tháng/ năm sx  + Expiration Months.  
+        /// Trong trườn hợp  ngày hết HSD cùa SP vào những ngày không có trong lịch như ngày 30, 31 của tháng 02 hay vào ngày 29/02 của năm không nhuận , hoặc ngày 31 của tháng 4,6,9, 11: thực hiện HSD sẽ là ngày đầu của tháng  tiếp theo.  
+        /// Ví dụ  : 
+        /// Ngày sx : 29/02/2016  ;   Hạn sử dụng : ( 24 tháng) : 01/03/2018
+        /// Ngày sx : 31/05/2016 ;    Hạn sử dụng : (18 tháng) : 01/12/2018
+        /// </summary>
+        /// <param name="isReadableText"></param>
+        /// <param name="yyyy"></param>
+        /// <returns></returns>
         public string FirstLineA1(bool isReadableText, bool yyyy)
         {
-            return isReadableText ? this.EntryDate.AddMonths(this.Shelflife).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
+            //return isReadableText ? this.EntryDate.AddMonths(this.Shelflife).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
+            return isReadableText ? this.EntryDate.AddDays(1 - this.EntryDate.Day).AddMonths(this.Shelflife).AddDays(-1 + this.EntryDate.Day).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
         }
 
         public string FirstLineA2(bool isReadableText)
