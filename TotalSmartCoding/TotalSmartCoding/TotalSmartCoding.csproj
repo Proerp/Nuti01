@@ -326,11 +326,11 @@
     <Compile Include="Views\Mains\BlankView.Designer.cs">
       <DependentUpon>BlankView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Mains\MapExcelColumn.cs">
+    <Compile Include="Views\Mains\ColumnMappings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Mains\MapExcelColumn.designer.cs">
-      <DependentUpon>MapExcelColumn.cs</DependentUpon>
+    <Compile Include="Views\Mains\ColumnMappings.designer.cs">
+      <DependentUpon>ColumnMappings.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Mains\SearchBarcode.cs">
       <SubType>Form</SubType>
@@ -529,8 +529,8 @@
     <EmbeddedResource Include="Views\Mains\BlankView.resx">
       <DependentUpon>BlankView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Mains\MapExcelColumn.resx">
-      <DependentUpon>MapExcelColumn.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Mains\ColumnMappings.resx">
+      <DependentUpon>ColumnMappings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Mains\SearchBarcode.resx">
       <DependentUpon>SearchBarcode.cs</DependentUpon>
@@ -1169,6 +1169,11 @@
     <None Include="Resources\Delivery-box.ico" />
     <None Include="Resources\Carton-1-14-32.png" />
     <None Include="Resources\Carton-14-32.png" />
+    <None Include="Resources\Close1.ico" />
+    <None Include="Resources\exit-to-app-button-green.png" />
+    <None Include="Resources\exit-to-app-button-magenta.png" />
+    <None Include="Resources\exit-to-app-button-green-24.png" />
+    <None Include="Resources\exit-to-app-button-magenta-24.png" />
     <Content Include="SmartCodingSolution.ico" />
     <None Include="Resources\Yellow-cross.ico" />
     <None Include="Resources\White-Pallet.ico" />

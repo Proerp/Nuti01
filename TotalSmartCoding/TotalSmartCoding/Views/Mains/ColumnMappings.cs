@@ -17,7 +17,7 @@ using TotalSmartCoding.Controllers.APIs.Generals;
 
 namespace TotalSmartCoding.Views.Mains
 {
-    public partial class MapExcelColumn : Form
+    public partial class ColumnMappings : Form
     {
         private string excelFile;
         private GlobalEnums.MappingTaskID mappingTaskID;
@@ -27,7 +27,7 @@ namespace TotalSmartCoding.Views.Mains
         BindingList<ColumnAvailableDTO> ColumnAvailableDTOs;
         BindingList<ColumnMappingDTO> ColumnMappingDTOs;
 
-        public MapExcelColumn(GlobalEnums.MappingTaskID mappingTaskID, string excelFile)
+        public ColumnMappings(GlobalEnums.MappingTaskID mappingTaskID, string excelFile)
         {
             InitializeComponent();
             try
@@ -37,8 +37,7 @@ namespace TotalSmartCoding.Views.Mains
                 this.excelFile = excelFile;
                 this.mappingTaskID = mappingTaskID;
 
-                //StackedHeaderDecorator stackedHeaderDecoratorAvailable = new StackedHeaderDecorator(this.dataGridColumnAvailable);
-                //StackedHeaderDecorator stackedHeaderDecoratorMapping = new StackedHeaderDecorator(this.dataGridColumnMapping);
+                this.Text = "Mapping for " + this.excelFile;
             }
             catch (Exception exception)
             {
@@ -46,7 +45,7 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void DialogMapExcelColumn_Load(object sender, EventArgs e)
+        private void ColumnMappings_Load(object sender, EventArgs e)
         {
             try
             {
@@ -75,10 +74,8 @@ namespace TotalSmartCoding.Views.Mains
                     }
 
 
-                this.dataGridColumnAvailable.AutoGenerateColumns = false;
-                this.dataGridColumnMapping.AutoGenerateColumns = false;
-                this.dataGridColumnAvailable.DataSource = this.ColumnAvailableDTOs;
-                this.dataGridColumnMapping.DataSource = this.ColumnMappingDTOs;
+                this.fastColumnAvailable.SetObjects(this.ColumnAvailableDTOs);
+                this.fastColumnMapping.SetObjects(this.ColumnMappingDTOs);
             }
             catch (Exception exception)
             {
@@ -86,40 +83,52 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
-        private void MappingColumn(object sender, EventArgs e)
+        private void Mapping_Click(object sender, EventArgs e)
         {
             try
             {
-                bool doMapping = sender.Equals(this.buttonMapColumn) ? true : false;
+                bool doMapping = sender.Equals(this.buttonMap) ? true : false;
 
-                if (this.dataGridColumnMapping.CurrentRow != null)
+                if (this.fastColumnMapping.SelectedObject != null)
                 {
-                    ColumnMappingDTO columnMappingDTO = this.dataGridColumnMapping.CurrentRow.DataBoundItem as ColumnMappingDTO;
+                    ColumnMappingDTO columnMappingDTO = this.fastColumnMapping.SelectedObject as ColumnMappingDTO;
                     if (columnMappingDTO != null)//Check for a valid selected row
                     {
                         ColumnAvailableDTO columnAvailableDTO = null;
                         if (doMapping)
                         {
-                            if (this.dataGridColumnAvailable.CurrentRow == null) return;
-                            columnAvailableDTO = this.dataGridColumnAvailable.CurrentRow.DataBoundItem as ColumnAvailableDTO;
+                            if (this.fastColumnAvailable.SelectedObject == null) return;
+                            columnAvailableDTO = this.fastColumnAvailable.SelectedObject as ColumnAvailableDTO;
                             if (columnAvailableDTO == null) return; //Check for a valid selected row
 
                             List<ColumnMappingDTO> foundColumnMappingDTOs = this.ColumnMappingDTOs.Where(w => w.ColumnMappingName == columnAvailableDTO.ColumnAvailableName).ToList();
                             foreach (ColumnMappingDTO foundColumnMappingDTO in foundColumnMappingDTOs) //Clear current mapping foundColumnMappingDTOs
+                            {
                                 foundColumnMappingDTO.ColumnMappingName = "";
+                                fastColumnMapping.RefreshObject(foundColumnMappingDTO);
+                            }
                         }
 
                         List<ColumnAvailableDTO> foundColumnAvailableDTOs = this.ColumnAvailableDTOs.Where(w => w.ColumnMappingName == columnMappingDTO.ColumnDisplayName).ToList();
                         foreach (ColumnAvailableDTO foundColumnAvailableDTO in foundColumnAvailableDTOs)//Clear current mapping foundColumnAvailableDTOs
+                        {
                             foundColumnAvailableDTO.ColumnMappingName = "";
+                            fastColumnAvailable.RefreshObject(foundColumnAvailableDTO);
+                        }
 
                         if (doMapping)
                         {//Make a collumn mapping: columnMappingDTO => columnAvailableDTO
                             columnMappingDTO.ColumnMappingName = columnAvailableDTO.ColumnAvailableName;
                             columnAvailableDTO.ColumnMappingName = columnMappingDTO.ColumnDisplayName;
+
+                            fastColumnMapping.RefreshObject(columnMappingDTO);
+                            fastColumnAvailable.RefreshObject(columnAvailableDTO);
                         }
                         else//Clear current mapping columnMappingDTO
+                        {
                             columnMappingDTO.ColumnMappingName = "";
+                            fastColumnMapping.RefreshObject(columnMappingDTO);
+                        }
                     }
                 }
             }

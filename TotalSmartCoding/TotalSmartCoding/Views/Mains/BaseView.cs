@@ -536,13 +536,9 @@ namespace TotalSmartCoding.Views.Mains
 
         protected virtual PrintViewModel InitPrintViewModel() { return new PrintViewModel(); }
 
-        public virtual void Import()
-        {
-            this.ImportExcel(GlobalEnums.MappingTaskID.BatchMaster);
-        }
+        public virtual void Import() { }
 
-
-        private void ImportExcel(GlobalEnums.MappingTaskID mappingTaskID)
+        protected virtual void ImportExcel(GlobalEnums.MappingTaskID mappingTaskID)
         {
             try
             {
@@ -553,12 +549,12 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     string fileName = openFileDialog.FileName;
 
-                    MapExcelColumn dialogMapExcelColumn = new MapExcelColumn(mappingTaskID, fileName);
+                    ColumnMappings columnMappings = new ColumnMappings(mappingTaskID, fileName);
 
-                    if (dialogMapExcelColumn.ShowDialog() == DialogResult.OK)
-                        this.DoImport(fileName);
-                    
-                    dialogMapExcelColumn.Dispose();
+                    if (columnMappings.ShowDialog() == DialogResult.OK)
+                        this.DoImportExcel(fileName);
+
+                    columnMappings.Dispose();
                 }
                 openFileDialog.Dispose();
             }
@@ -566,10 +562,9 @@ namespace TotalSmartCoding.Views.Mains
             {
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
-
         }
 
-        protected virtual void DoImport(string fileName) { }
+        protected virtual void DoImportExcel(string fileName) { }
 
         public void Export()
         {

@@ -1513,6 +1513,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Close1 {
+            get {
+                object obj = ResourceManager.GetObject("Close1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap connect__2_ {
             get {
                 object obj = ResourceManager.GetObject("connect (2)", resourceCulture);
@@ -1986,6 +1996,46 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap exit_gray_32 {
             get {
                 object obj = ResourceManager.GetObject("exit-gray-32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exit_to_app_button_green {
+            get {
+                object obj = ResourceManager.GetObject("exit-to-app-button-green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exit_to_app_button_green_24 {
+            get {
+                object obj = ResourceManager.GetObject("exit-to-app-button-green-24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exit_to_app_button_magenta {
+            get {
+                object obj = ResourceManager.GetObject("exit-to-app-button-magenta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exit_to_app_button_magenta_24 {
+            get {
+                object obj = ResourceManager.GetObject("exit-to-app-button-magenta-24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
