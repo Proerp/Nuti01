@@ -486,7 +486,8 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.ioserialPort.Disconnect();
 
                     this.MainStatus = "Đã ngắt kết nối ...";
-                    this.setLED();
+
+                    this.setLED(false, false, this.LedRedOn);
                 }
                 return true;
             }

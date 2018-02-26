@@ -439,7 +439,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.ionetSocketCarton.Disconnect();
                 this.ionetSocketPallet.Disconnect();
 
-                this.setLED();
+                this.setLED(false, false, this.LedRedOn);
 
                 return true;
             }

@@ -62,6 +62,10 @@ namespace TotalDAL.Repositories
             //this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.BatchMaster + ", 108, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
             //this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.BatchMaster + " AS NMVNTaskID, OrganizationalUnitID, 2 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster + ") = 0", new ObjectParameter[] { }); 
 
+            ////this.ExecuteStoreCommand(" DELETE FROM  Packs   WHERE (EntryDate < CONVERT(DATETIME, '2018-07-02 00:00:00', 102)) ", new ObjectParameter[] { });
+            ////this.ExecuteStoreCommand(" DELETE FROM  Cartons WHERE (EntryDate < CONVERT(DATETIME, '2018-07-02 00:00:00', 102)) ", new ObjectParameter[] { });
+            ////this.ExecuteStoreCommand(" DELETE FROM  Pallets WHERE (EntryDate < CONVERT(DATETIME, '2018-07-02 00:00:00', 102)) ", new ObjectParameter[] { });
+
             return true;
         }
 
@@ -69,7 +73,7 @@ namespace TotalDAL.Repositories
         public void CreateStoredProcedure()
         {
 
-            return;
+            //return;
 
             Helpers.SqlProgrammability.Generals.OleDb oleDb = new Helpers.SqlProgrammability.Generals.OleDb(totalSmartCodingEntities);
             oleDb.RestoreProcedure();
