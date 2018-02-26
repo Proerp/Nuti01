@@ -13,7 +13,7 @@ namespace TotalDTO.Productions
     public class BatchMasterPrimitiveDTO : BaseDTO, IPrimitiveEntity, IPrimitiveDTO
     {
         public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.BatchMaster; } }
-        public override bool AllowDataInput { get { return false; } }
+        public override bool AllowDataInput { get { return GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.BatchMaster; } }
         public override bool Importable { get { return GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.BatchMaster; } }
         public override bool NoApprovable { get { return true; } }
         public override bool NoVoidable { get { return false; } }
