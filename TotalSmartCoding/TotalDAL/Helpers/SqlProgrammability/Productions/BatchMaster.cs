@@ -147,6 +147,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       FROM        BatchMasters " + "\r\n";
             queryString = queryString + "       WHERE       BatchMasterID = @BatchMasterID " + "\r\n";
 
+            queryString = queryString + "       UPDATE      BatchMasters SET BatchStatusID = " + (int)GlobalVariables.BatchStatuses.WIP + " WHERE BatchMasterID = @BatchMasterID " + "\r\n";
+            
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterAddLot", queryString);
         }
 
@@ -165,7 +167,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
             queryString = queryString + "           END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
             queryString = queryString + "               DELETE FROM Lots WHERE LotID = @LotID " + "\r\n";
+            queryString = queryString + "               UPDATE BatchMasters SET BatchStatusID = " + (int)GlobalVariables.BatchStatuses.Pending + " WHERE BatchMasterID NOT IN (SELECT BatchMasterID FROM Lots)" + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterRemoveLot", queryString);
         }

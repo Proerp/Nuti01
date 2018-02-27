@@ -416,7 +416,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                 stringMessageEnd = stringMessageEnd + "^XZ"; //[^XZ - Indicates end of label format.]
 
-                if (!this.OnPrinting)
+                if (this.OnPrinting)
                 {
                     stringMessage = stringMessage + stringMessageBegin;
                     stringMessage = stringMessage + "^FO0,20  ^BC,360,N  ^FD" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 0, false) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]

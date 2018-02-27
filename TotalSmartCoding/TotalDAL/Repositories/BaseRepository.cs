@@ -61,6 +61,11 @@ namespace TotalDAL.Repositories
 
             //this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.BatchMaster + ", 108, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
             //this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.BatchMaster + " AS NMVNTaskID, OrganizationalUnitID, 2 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster + ") = 0", new ObjectParameter[] { }); 
+
+
+
+            this.ExecuteStoreCommand("UPDATE BatchMasters SET BatchStatusID = " + (int)GlobalVariables.BatchStatuses.WIP + " WHERE BatchMasterID IN (SELECT BatchMasterID FROM Lots)", new ObjectParameter[] { });
+
             return true;
         }
 
