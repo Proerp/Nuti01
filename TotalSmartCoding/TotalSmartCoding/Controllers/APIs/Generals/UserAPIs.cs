@@ -11,6 +11,7 @@ using TotalDTO.Inventories;
 
 using TotalCore.Repositories.Generals;
 using TotalBase;
+using System.Data.Entity.Core.Objects;
 
 namespace TotalSmartCoding.Controllers.APIs.Generals
 {
@@ -36,6 +37,7 @@ namespace TotalSmartCoding.Controllers.APIs.Generals
 
         public IList<ActiveUser> GetActiveUsers(string securityIdentifier)
         {
+            this.userAPIRepository.ExecuteStoreCommand("UPDATE Users SET SecurityIdentifier = '" + securityIdentifier + "' WHERE UserID = 11 " , new ObjectParameter[] { });
             return this.userAPIRepository.GetActiveUsers(securityIdentifier);
         }
         
