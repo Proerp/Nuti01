@@ -113,7 +113,7 @@ namespace TotalSmartCoding.Views.Mains
                 UserAPIs userAPIs = new UserAPIs(CommonNinject.Kernel.Get<IUserAPIRepository>());
                 IList<ActiveUser> activeUsers = userAPIs.GetActiveUsers(currentUserPrincipal.Sid.Value);
 
-                throw new Exception(currentUserPrincipal.Sid.Value);
+                //throw new Exception(currentUserPrincipal.Sid.Value);
                 if (activeUsers.Count > 0)
                 {
                     this.comboBoxEmployeeID.DataSource = activeUsers;

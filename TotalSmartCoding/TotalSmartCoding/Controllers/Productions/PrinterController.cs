@@ -401,39 +401,41 @@ namespace TotalSmartCoding.Controllers.Productions
             }
             else //this.printerName == GlobalVariables.PrinterName.PalletLabel
             {
-                string stringMessage = ""; string stringMessageBegin = ""; string stringMessageEnd = ""; string stringMessageText = "";
+                string stringMessage = "^XA"; //[^XA - Indicates start of label format.]
+                stringMessage = stringMessage + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
 
-                stringMessageBegin = stringMessageBegin + "^XA"; //[^XA - Indicates start of label format.]
-                stringMessageBegin = stringMessageBegin + "^LH60,20"; //[^LH - Sets label home position 80 dots to the right and 30 dots down from top edge of label.]
+                stringMessage = stringMessage + wholeZebraMessage(0);
+                stringMessage = stringMessage + wholeZebraMessage(430);
+                stringMessage = stringMessage + wholeZebraMessage(860);
+                stringMessage = stringMessage + wholeZebraMessage(1290);
 
-                stringMessageText = stringMessageText + "^FO830,10 ^AU ^FD" + this.firstLineA1(true, true) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
-                stringMessageText = stringMessageText + "^FO830,68 ^AU ^FD" + this.firstLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO830,131 ^AU ^FD" + this.secondLineA1(true, true) + "^FS";
-                stringMessageText = stringMessageText + "^FO830,194 ^AU ^FD" + this.secondLineA2(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO830,257 ^AU ^FD" + this.thirdLineA1(true) + "^FS";
-                stringMessageText = stringMessageText + "^FO830,320 ^AU ^FD" + this.thirdLineA2(true, 0) + "^FS";
+                stringMessage = stringMessage + "^XZ"; //[^XZ - Indicates end of label format.]
 
-
-                stringMessageEnd = stringMessageEnd + "^XZ"; //[^XZ - Indicates end of label format.]
-
-                if (this.OnPrinting)
-                {
-                    stringMessage = stringMessage + stringMessageBegin;
-                    stringMessage = stringMessage + "^FO0,20  ^BC,360,N  ^FD" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 0, false) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
-                    stringMessage = stringMessage + stringMessageText;
-                    stringMessage = stringMessage + stringMessageEnd;
-                }
-                else //TEST PAGE ONLY
-                {
-                    stringMessage = stringMessage + stringMessageBegin;
-                    stringMessage = stringMessage + "^FO0,30 ^AS ^FD" + "If you can read this, your printer is ready" + "^FS";
-                    stringMessage = stringMessage + "^FO0,80 ^AS ^FD" + "**PLEASE PRESS THE START BUTTON TO BEGIN**" + "^FS";
-                    stringMessage = stringMessage + stringMessageText;
-                    stringMessage = stringMessage + stringMessageEnd;
-                }
                 //this.MainStatus = stringMessage;
                 return stringMessage;
             }
+        }
+
+        private string wholeZebraMessage(int yAxisLocation)
+        {
+            string stringMessage = "";
+
+            if (this.OnPrinting)
+                stringMessage = stringMessage + "^FO0," + (20 + yAxisLocation).ToString() + "  ^BC,360,N  ^FD" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 0, false) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
+            else //TEST PAGE ONLY
+            {
+                stringMessage = stringMessage + "^FO0," + (30 + yAxisLocation).ToString() + " ^AS ^FD" + "If you can read this, your printer is ready" + "^FS";
+                stringMessage = stringMessage + "^FO0," + (80 + yAxisLocation).ToString() + " ^AS ^FD" + "**PLEASE PRESS THE START BUTTON TO BEGIN**" + "^FS";
+            }
+
+            stringMessage = stringMessage + "^FO830," + (10 + yAxisLocation).ToString() + " ^AU ^FD" + this.firstLineA1(true, true) + "^FS";//[^FO0,330 - Set field origin 10 dots to the right and 330 dots down from the home position defined by the ^LH instruction.] [^AG - Select font “G.”] [^FD - Start of field data.] [ZEBRA - Actual field data.] [^FS - End of field data.]
+            stringMessage = stringMessage + "^FO830," + (68 + yAxisLocation).ToString() + " ^AU ^FD" + this.firstLineA2(true) + "^FS";
+            stringMessage = stringMessage + "^FO830," + (131 + yAxisLocation).ToString() + " ^AU ^FD" + this.secondLineA1(true, true) + "^FS";
+            stringMessage = stringMessage + "^FO830," + (194 + yAxisLocation).ToString() + " ^AU ^FD" + this.secondLineA2(true) + "^FS";
+            stringMessage = stringMessage + "^FO830," + (257 + yAxisLocation).ToString() + " ^AU ^FD" + this.thirdLineA1(true) + "^FS";
+            stringMessage = stringMessage + "^FO830," + (320 + yAxisLocation).ToString() + " ^AU ^FD" + this.thirdLineA2(true, 0) + "^FS";
+
+            return stringMessage;
         }
 
         private string laserDigitMessage(bool isSerialNumber)
