@@ -14,7 +14,7 @@ namespace TotalService.Productions
     {
         IPalletRepository palletRepository;
         public PalletService(IPalletRepository palletRepository)
-            : base(palletRepository, null, "PalletSaveRelative")
+            : base(palletRepository, "PalletPostSaveValidate", "PalletSaveRelative")
         {
             this.palletRepository = palletRepository;
         }

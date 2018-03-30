@@ -19,6 +19,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         public void RestoreProcedure()
         {
             this.CartonSaveRelative();
+            this.CartonPostSaveValidate();
 
             this.CartonEditable();
 
@@ -68,6 +69,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateStoredProcedure("CartonSaveRelative", queryString);
         }
 
+        private void CartonPostSaveValidate()
+        {
+            string[] queryArray = new string[1];
+
+            string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
+            queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Cartons WHERE CartonID = @EntityID " + "\r\n";
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng barcode carton: ' + @Code + ', Ngày: ' + CAST(EntryDate AS nvarchar) FROM Cartons WHERE CartonID <> @EntityID AND Code = @Code ";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("CartonPostSaveValidate", queryArray, queryString);
+        }
 
         private void CartonEditable()
         {

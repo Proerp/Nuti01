@@ -2369,5 +2369,32 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterRemoveLot", lotIDParameter);
         }
+    
+        public virtual ObjectResult<string> CartonPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CartonPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> PackPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PackPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> PalletPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PalletPostSaveValidate", entityIDParameter);
+        }
     }
 }

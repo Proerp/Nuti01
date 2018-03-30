@@ -133,17 +133,17 @@ namespace TotalBase
         public static int ConfigVersionID(int configID)
         {
             if (configID == (int)GlobalVariables.FillingLine.None)
-                return 16;
+                return 17;
             else if (configID == (int)GlobalVariables.FillingLine.Pickup)
-                return 16;
+                return 17;
             else if (configID == (int)GlobalVariables.FillingLine.GoodsIssue)
-                return 16;
+                return 17;
             else if (configID == (int)GlobalVariables.FillingLine.BatchMaster)
-                return 16;
+                return 17;
 
 
             else if (configID == (int)GlobalVariables.FillingLine.Smallpack || configID == (int)GlobalVariables.FillingLine.Pail || configID == (int)GlobalVariables.FillingLine.Drum)
-                return 16; //PAY ATTENTION WHEN CHANGE THIS VALUE BECAUSE: THIS IS USING ON THE FILLING LINES
+                return 17; //PAY ATTENTION WHEN CHANGE THIS VALUE BECAUSE: THIS IS USING ON THE FILLING LINES
             else
                 return -1;
         }

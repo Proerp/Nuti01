@@ -14,7 +14,7 @@ namespace TotalService.Productions
     {
         ICartonRepository cartonRepository;
         public CartonService(ICartonRepository cartonRepository)
-            : base(cartonRepository, null, "CartonSaveRelative")
+            : base(cartonRepository, "CartonPostSaveValidate", "CartonSaveRelative")
         {
             this.cartonRepository = cartonRepository;
         }

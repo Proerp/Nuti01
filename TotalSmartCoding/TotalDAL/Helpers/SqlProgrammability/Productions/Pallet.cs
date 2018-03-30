@@ -19,6 +19,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         public void RestoreProcedure()
         {
             this.PalletSaveRelative();
+            this.PalletPostSaveValidate();
 
             this.PalletEditable();
 
@@ -64,6 +65,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateStoredProcedure("PalletSaveRelative", queryString);
         }
 
+        private void PalletPostSaveValidate()
+        {
+            string[] queryArray = new string[1];
+
+            string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
+            queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng barcode pallet: ' + @Code + ', Ngày: ' + CAST(EntryDate AS nvarchar) FROM Pallets WHERE PalletID <> @EntityID AND Code = @Code ";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PalletPostSaveValidate", queryArray, queryString);
+        }
 
         private void PalletEditable()
         {

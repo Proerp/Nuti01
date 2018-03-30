@@ -2194,6 +2194,9 @@
         <Function Name="CartonEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="CartonPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
         <Function Name="CartonSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
@@ -2657,6 +2660,9 @@
         <Function Name="PackEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="PackPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
         <Function Name="PackUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PackIDs" Type="varchar" Mode="In" />
           <Parameter Name="EntryStatusID" Type="int" Mode="In" />
@@ -2666,6 +2672,9 @@
           <Parameter Name="QueueID" Type="int" Mode="In" />
         </Function>
         <Function Name="PalletEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PalletPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
         <Function Name="PalletSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -4397,6 +4406,15 @@
           </FunctionImport>
           <FunctionImport Name="BatchMasterRemoveLot">
           <Parameter Name="LotID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CartonPostSaveValidate" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PackPostSaveValidate" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PalletPostSaveValidate" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -10131,6 +10149,9 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BatchMasterRemoveLot" FunctionName="TotalSmartCodingModel.Store.BatchMasterRemoveLot" />
+          <FunctionImportMapping FunctionImportName="CartonPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.CartonPostSaveValidate" />
+          <FunctionImportMapping FunctionImportName="PackPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.PackPostSaveValidate" />
+          <FunctionImportMapping FunctionImportName="PalletPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.PalletPostSaveValidate" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
