@@ -101,6 +101,12 @@ namespace TotalDAL.Repositories
 
             ////return;
 
+            Helpers.SqlProgrammability.Commons.CommodityType commodityType = new Helpers.SqlProgrammability.Commons.CommodityType(totalSmartCodingEntities);
+            commodityType.RestoreProcedure();
+
+
+            ////return;
+
             Helpers.SqlProgrammability.Commons.BinLocation binLocation = new Helpers.SqlProgrammability.Commons.BinLocation(totalSmartCodingEntities);
             binLocation.RestoreProcedure();
 

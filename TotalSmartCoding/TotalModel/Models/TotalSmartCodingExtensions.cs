@@ -7,6 +7,32 @@ using TotalModel.Interfaces;
 
 namespace TotalModel.Models
 {
+    #region Interface for report
+    public interface IFilterTree
+    {
+        Nullable<int> NodeID { get; set; }
+        Nullable<int> ParentNodeID { get; set; }
+
+        Nullable<int> PrimaryID { get; set; }
+        Nullable<int> AncestorID { get; set; }
+
+        string Code { get; set; }
+        string Name { get; set; }
+
+        string ParameterName { get; set; }
+        Nullable<bool> Selected { get; set; }
+    }
+
+    public partial class WarehouseTree : IFilterTree { }
+    public partial class CommodityTree : IFilterTree { }
+    public partial class CommodityTypeTree : IFilterTree { }
+    public partial class CustomerTree : IFilterTree { }
+    public partial class EmployeeTree : IFilterTree { }
+    public partial class WarehouseAdjustmentTypeTree : IFilterTree { }
+
+    #endregion Interface for report
+
+
     #region Interface for goods receipt
 
     #region master

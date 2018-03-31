@@ -2396,5 +2396,61 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PalletPostSaveValidate", entityIDParameter);
         }
+    
+        public virtual ObjectResult<CommodityTree> GetCommodityTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityTree>("GetCommodityTrees");
+        }
+    
+        public virtual ObjectResult<CustomerTree> GetCustomerTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CustomerTree>("GetCustomerTrees");
+        }
+    
+        public virtual int GetEmployeeTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEmployeeTrees");
+        }
+    
+        public virtual ObjectResult<WarehouseAdjustmentTypeTree> GetWarehouseAdjustmentTypeTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseAdjustmentTypeTree>("GetWarehouseAdjustmentTypeTrees");
+        }
+    
+        public virtual ObjectResult<WarehouseTree> GetWarehouseTrees(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseTree>("GetWarehouseTrees", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<CommodityTypeBase> GetCommodityTypeBases()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityTypeBase>("GetCommodityTypeBases");
+        }
+    
+        public virtual ObjectResult<CommodityTypeIndex> GetCommodityTypeIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityTypeIndex>("GetCommodityTypeIndexes", userIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<CommodityTypeTree> GetCommodityTypeTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityTypeTree>("GetCommodityTypeTrees");
+        }
     }
 }
