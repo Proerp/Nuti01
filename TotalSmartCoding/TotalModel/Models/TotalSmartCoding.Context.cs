@@ -2407,11 +2407,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CustomerTree>("GetCustomerTrees");
         }
     
-        public virtual int GetEmployeeTrees()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetEmployeeTrees");
-        }
-    
         public virtual ObjectResult<WarehouseAdjustmentTypeTree> GetWarehouseAdjustmentTypeTrees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseAdjustmentTypeTree>("GetWarehouseAdjustmentTypeTrees");
@@ -2451,6 +2446,11 @@ namespace TotalModel.Models
         public virtual ObjectResult<CommodityTypeTree> GetCommodityTypeTrees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityTypeTree>("GetCommodityTypeTrees");
+        }
+    
+        public virtual ObjectResult<EmployeeTree> GetEmployeeTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeTree>("GetEmployeeTrees");
         }
     }
 }

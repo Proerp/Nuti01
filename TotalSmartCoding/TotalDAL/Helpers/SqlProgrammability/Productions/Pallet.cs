@@ -72,7 +72,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
             queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng barcode pallet: ' + @Code + ', Ngày: ' + CAST(EntryDate AS nvarchar) FROM Pallets WHERE PalletID <> @EntityID AND Code = @Code ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng pallet: ' + @Code + ', Ngày: ' + CONVERT(varchar(215), EntryDate, 113) FROM Pallets WHERE PalletID <> @EntityID AND Code = @Code ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PalletPostSaveValidate", queryArray, queryString);
         }

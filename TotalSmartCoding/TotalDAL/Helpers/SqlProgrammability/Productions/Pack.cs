@@ -33,14 +33,19 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void PackPostSaveValidate()
         {
-            string[] queryArray = new string[1];
+            //string[] queryArray = new string[1];
 
-            string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
-            queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Packs WHERE PackID = @EntityID " + "\r\n";
+            //string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
+            //queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Packs WHERE PackID = @EntityID " + "\r\n";
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng barcode lon: ' + @Code + ', Ngày: ' + CAST(EntryDate AS nvarchar) FROM Packs WHERE PackID <> @EntityID AND Code = @Code ";
+            //queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng lon: ' + @Code + ', Ngày: ' + CONVERT(varchar(215), EntryDate, 113) FROM Packs WHERE PackID <> @EntityID AND Code = @Code ";
 
-            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray, queryString);
+            //this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray, queryString);
+
+
+            string[] queryArray = new string[0];
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray);
         }
 
         private void PackEditable()

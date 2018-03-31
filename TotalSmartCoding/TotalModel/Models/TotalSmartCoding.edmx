@@ -278,6 +278,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="EmployeeTypeID" Type="int" Nullable="false" />
+          <Property Name="TeamID" Type="int" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="nvarchar" MaxLength="60" />
           <Property Name="Telephone" Type="nvarchar" MaxLength="60" />
@@ -4432,7 +4433,6 @@
           </FunctionImport>
           <FunctionImport Name="GetCommodityTrees" ReturnType="Collection(TotalSmartCodingModel.CommodityTree)" />
           <FunctionImport Name="GetCustomerTrees" ReturnType="Collection(TotalSmartCodingModel.CustomerTree)" />
-          <FunctionImport Name="GetEmployeeTrees" />
           <FunctionImport Name="GetWarehouseAdjustmentTypeTrees" ReturnType="Collection(TotalSmartCodingModel.WarehouseAdjustmentTypeTree)" />
           <FunctionImport Name="GetWarehouseTrees" ReturnType="Collection(TotalSmartCodingModel.WarehouseTree)">
           <Parameter Name="LocationID" Mode="In" Type="Int32" />
@@ -4444,6 +4444,7 @@
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetCommodityTypeTrees" ReturnType="Collection(TotalSmartCodingModel.CommodityTypeTree)" />
+          <FunctionImport Name="GetEmployeeTrees" ReturnType="Collection(TotalSmartCodingModel.EmployeeTree)" />
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -4714,6 +4715,7 @@
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customers" Relationship="TotalSmartCodingModel.FK_Customers_Employees" FromRole="Employee" ToRole="Customer" />
           <NavigationProperty Name="Location" Relationship="TotalSmartCodingModel.FK_Employees_Locations" FromRole="Employee" ToRole="Location" />
+          <Property Name="TeamID" Type="Int32" />
         </EntityType>
         <EntityType Name="FillingLine">
           <Key>
@@ -7823,6 +7825,16 @@
           <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="15" />
           <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="EmployeeTree">
+          <Property Type="Int32" Name="NodeID" Nullable="true" />
+          <Property Type="Int32" Name="ParentNodeID" Nullable="true" />
+          <Property Type="Int32" Name="PrimaryID" Nullable="true" />
+          <Property Type="Int32" Name="AncestorID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8182,6 +8194,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
@@ -10266,7 +10279,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetEmployeeTrees" FunctionName="TotalSmartCodingModel.Store.GetEmployeeTrees" />
           <FunctionImportMapping FunctionImportName="GetWarehouseAdjustmentTypeTrees" FunctionName="TotalSmartCodingModel.Store.GetWarehouseAdjustmentTypeTrees">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TotalSmartCodingModel.WarehouseAdjustmentTypeTree">
@@ -10314,6 +10326,20 @@
           <FunctionImportMapping FunctionImportName="GetCommodityTypeTrees" FunctionName="TotalSmartCodingModel.Store.GetCommodityTypeTrees">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TotalSmartCodingModel.CommodityTypeTree">
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="ParentNodeID" ColumnName="ParentNodeID" />
+                <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
+                <ScalarProperty Name="AncestorID" ColumnName="AncestorID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetEmployeeTrees" FunctionName="TotalSmartCodingModel.Store.GetEmployeeTrees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.EmployeeTree">
                 <ScalarProperty Name="NodeID" ColumnName="NodeID" />
                 <ScalarProperty Name="ParentNodeID" ColumnName="ParentNodeID" />
                 <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
