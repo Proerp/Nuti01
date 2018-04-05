@@ -104,6 +104,7 @@
     <Compile Include="Controllers\APIs\Commons\BatchTypeAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\BinLocationAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\CommodityCategoryAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\CommodityTypeAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\CustomerAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\CustomerCategoryAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\CustomerTypeAPIs.cs" />

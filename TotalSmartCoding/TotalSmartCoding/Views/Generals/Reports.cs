@@ -151,9 +151,9 @@ namespace TotalSmartCoding.Views.Generals
             this.commodityTrees = commodityAPIs.GetCommodityTrees();
             this.treeCommodityID.DataSource = new BindingSource(this.commodityTrees, "");
 
-            //CommodityTypeAPIs commodityTypeAPIs = new CommodityTypeAPIs(CommonNinject.Kernel.Get<ICommodityTypeAPIRepository>());
-            //this.commodityTypeTrees = commodityTypeAPIs.GetCommodityTypeTrees();
-            //this.treeCommodityTypeID.DataSource = new BindingSource(this.commodityTypeTrees, "");
+            CommodityTypeAPIs commodityTypeAPIs = new CommodityTypeAPIs(CommonNinject.Kernel.Get<ICommodityTypeAPIRepository>());
+            this.commodityTypeTrees = commodityTypeAPIs.GetCommodityTypeTrees();
+            this.treeCommodityTypeID.DataSource = new BindingSource(this.commodityTypeTrees, "");
 
             CustomerAPIs customerAPIs = new CustomerAPIs(CommonNinject.Kernel.Get<ICustomerAPIRepository>());
             this.customerTrees = customerAPIs.GetCustomerTrees();
