@@ -4433,6 +4433,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ReportAnalytics {
+            get {
+                object obj = ResourceManager.GetObject("ReportAnalytics", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Robsonbillponte_IRob_Folder_Utilities_Folder {
             get {
                 object obj = ResourceManager.GetObject("Robsonbillponte-IRob-Folder-Utilities-Folder", resourceCulture);

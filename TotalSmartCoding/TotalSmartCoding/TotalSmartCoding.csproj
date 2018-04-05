@@ -1199,6 +1199,7 @@
     <None Include="Resources\check_Circle_20.png" />
     <None Include="Resources\Empty_20.png" />
     <None Include="Resources\backspace_l_R_16.png" />
+    <None Include="Resources\ReportAnalytics.png" />
     <Content Include="SmartCodingSolution.ico" />
     <None Include="Resources\Yellow-cross.ico" />
     <None Include="Resources\White-Pallet.ico" />

@@ -664,10 +664,10 @@ namespace TotalModel.Models
     //    public System.DateTime EditedDate { get; set; }
     //}
 
-    //public partial class ReportIndex : IBaseIndex
-    //{
-    //    public int Id { get { return this.ReportID; } }
-    //}
+    public partial class ReportIndex : IBaseIndex
+    {
+        public int Id { get { return this.ReportID; } }
+    }
 
     public partial class Report : IPrimitiveEntity, IBaseEntity
     {

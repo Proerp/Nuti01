@@ -41,6 +41,7 @@ using TotalSmartCoding.Views.Commons.Customers;
 using TotalSmartCoding.Views.Commons.BinLocations;
 using TotalSmartCoding.ViewModels.Helpers;
 using TotalSmartCoding.Views.Commons.Commodities;
+using TotalSmartCoding.Views.Generals;
 
 
 namespace TotalSmartCoding.Views.Mains
@@ -331,68 +332,84 @@ namespace TotalSmartCoding.Views.Mains
                             }
                         }
 
+                        this.OpenModuleDetail(taskID);
                     }
 
-                    //Open new form
-                    Form openingView;
-                    switch (taskID)
-                    {
-                        case (int)GlobalEnums.NmvnTaskID.Customer:
-                            openingView = new Customers();
-                            break;
 
-                        case (int)GlobalEnums.NmvnTaskID.Commodity:
-                            openingView = new Commodities();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.BinLocation:
-                            openingView = new BinLocations();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.Pickup:
-                            openingView = new Pickups();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.GoodsReceipt:
-                            openingView = new GoodsReceipts();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.SalesOrder:
-                            openingView = new SalesOrders();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.DeliveryAdvice:
-                            openingView = new DeliveryAdvices();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.TransferOrder:
-                            openingView = new TransferOrders();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.GoodsIssue:
-                            openingView = new GoodsIssues();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.WarehouseAdjustment:
-                            openingView = new WarehouseAdjustments();
-                            break;
-
-                        case (int)GlobalEnums.NmvnTaskID.GoodsReceiptDetailAvailable:
-                            openingView = new GoodsReceiptDetailAvailables();
-                            break;
-
-                        default:
-                            openingView = new BlankView();
-                            break;
-                    }
-
-                    if (openingView != null) this.OpenView(openingView);
                 }
             }
             catch (Exception exception)
             {
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private void buttonReports_Click(object sender, EventArgs e)
+        {
+            this.OpenModuleDetail((int)GlobalEnums.NmvnTaskID.Report);
+        }
+
+
+        private void OpenModuleDetail(int taskID)
+        {
+            //Open new form
+            Form openingView;
+            switch (taskID)
+            {
+                case (int)GlobalEnums.NmvnTaskID.Customer:
+                    openingView = new Customers();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.Commodity:
+                    openingView = new Commodities();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.BinLocation:
+                    openingView = new BinLocations();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.Pickup:
+                    openingView = new Pickups();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.GoodsReceipt:
+                    openingView = new GoodsReceipts();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.SalesOrder:
+                    openingView = new SalesOrders();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.DeliveryAdvice:
+                    openingView = new DeliveryAdvices();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.TransferOrder:
+                    openingView = new TransferOrders();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.GoodsIssue:
+                    openingView = new GoodsIssues();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.WarehouseAdjustment:
+                    openingView = new WarehouseAdjustments();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.GoodsReceiptDetailAvailable:
+                    openingView = new GoodsReceiptDetailAvailables();
+                    break;
+
+                case (int)GlobalEnums.NmvnTaskID.Report:
+                    openingView = new Reports();
+                    break;
+
+                default:
+                    openingView = new BlankView();
+                    break;
+            }
+
+            if (openingView != null) this.OpenView(openingView);
         }
 
         private void OpenView(Form openingView)
@@ -762,6 +779,7 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
         #endregion Search barcode
+
 
 
 

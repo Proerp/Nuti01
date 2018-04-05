@@ -371,7 +371,7 @@ namespace TotalSmartCoding.Views.Mains
                     this.CancelDirty(false);
             }
             else
-                if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.None)
+                if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.None || this.NMVNTaskID == GlobalEnums.NmvnTaskID.Report)
                     this.Close(); //Unload this module
         }
 

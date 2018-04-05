@@ -35,6 +35,9 @@ using TotalCore.Services.Commons;
 using TotalSmartCoding.ViewModels.Commons;
 using TotalService.Commons;
 using TotalDTO.Inventories;
+using TotalCore.Services.Generals;
+using TotalService.Generals;
+using TotalSmartCoding.ViewModels.Generals;
 //using TotalDAL.Repositories.Inventories;
 
 //using TotalService.Inventories;
@@ -125,6 +128,11 @@ namespace TotalSmartCoding.Libraries
                 Kernel.Bind<IModuleAPIRepository>().To<ModuleAPIRepository>();
                 //Kernel.Bind<ModuleViewModel>().ToSelf();
 
+                Kernel.Bind<IReportService>().To<ReportService>();
+                Kernel.Bind<IReportRepository>().To<ReportRepository>();
+                Kernel.Bind<IReportAPIRepository>().To<ReportAPIRepository>();
+                Kernel.Bind<ReportViewModel>().ToSelf();
+
                 Kernel.Bind<ICustomerService>().To<CustomerService>();
                 Kernel.Bind<ICustomerRepository>().To<CustomerRepository>();
                 Kernel.Bind<ICustomerAPIRepository>().To<CustomerAPIRepository>();
@@ -145,6 +153,10 @@ namespace TotalSmartCoding.Libraries
                 Kernel.Bind<ICommodityCategoryAPIRepository>().To<CommodityCategoryAPIRepository>();
                 //Kernel.Bind<CommodityCategoryViewModel>().ToSelf();
 
+                //Kernel.Bind<ICommodityTypeService>().To<CommodityTypeService>();
+                Kernel.Bind<ICommodityTypeRepository>().To<CommodityTypeRepository>();
+                Kernel.Bind<ICommodityTypeAPIRepository>().To<CommodityTypeAPIRepository>();
+                //Kernel.Bind<CommodityTypeViewModel>().ToSelf();
 
                 //Kernel.Bind<IEmployeeService>().To<EmployeeService>();
                 Kernel.Bind<IEmployeeRepository>().To<EmployeeRepository>();
