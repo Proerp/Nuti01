@@ -43,9 +43,16 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             //this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray, queryString);
 
 
+            //string[] queryArray = new string[0];
+
+            //this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray);
+
+
             string[] queryArray = new string[0];
 
-            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray);
+            string queryString = "  INSERT INTO UniquePacks (Code, EntryDate) SELECT Code, EntryDate FROM Packs WHERE PackID = @EntityID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PackPostSaveValidate", queryArray, queryString);
         }
 
         private void PackEditable()

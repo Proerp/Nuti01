@@ -67,12 +67,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void PalletPostSaveValidate()
         {
-            string[] queryArray = new string[1];
+            //string[] queryArray = new string[1];
 
-            string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
-            queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
+            //string queryString = "              DECLARE @Code varchar(50) " + "\r\n";
+            //queryString = queryString + "       SELECT TOP 1 @Code = Code FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng pallet: ' + @Code + ', Ngày: ' + CONVERT(varchar(215), EntryDate, 113) FROM Pallets WHERE PalletID <> @EntityID AND Code = @Code ";
+            //queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Trùng pallet: ' + @Code + ', Ngày: ' + CONVERT(varchar(215), EntryDate, 113) FROM Pallets WHERE PalletID <> @EntityID AND Code = @Code ";
+
+            //this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PalletPostSaveValidate", queryArray, queryString);
+
+            string[] queryArray = new string[0];
+
+            string queryString = "  INSERT INTO UniquePallets (Code, EntryDate) SELECT Code, EntryDate FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PalletPostSaveValidate", queryArray, queryString);
         }
