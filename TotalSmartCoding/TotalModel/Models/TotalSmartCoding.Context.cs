@@ -72,6 +72,7 @@ namespace TotalModel.Models
         public virtual DbSet<BatchType> BatchTypes { get; set; }
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ColumnMapping> ColumnMappings { get; set; }
+        public virtual DbSet<Report> Reports { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -2451,6 +2452,23 @@ namespace TotalModel.Models
         public virtual ObjectResult<EmployeeTree> GetEmployeeTrees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeTree>("GetEmployeeTrees");
+        }
+    
+        public virtual ObjectResult<GetReportIndexes_Result> GetReportIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetReportIndexes_Result>("GetReportIndexes", userIDParameter, fromDateParameter, toDateParameter);
         }
     }
 }

@@ -11,12 +11,17 @@ namespace TotalBase
         private DateTime lowerFillterDate;
         private DateTime upperFillterDate;
 
-        public OptionSetting() : this(DateTime.Today.AddDays(-45), new DateTime(2017, 12, 31)) { }
+        public OptionSetting() : this(DateTime.Today.AddDays(-10), DateTime.Today.AddDays(30).AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(999)) { }
 
         public OptionSetting(DateTime lowerFillterDate, DateTime upperFillterDate)
         {
             this.LowerFillterDate = lowerFillterDate;
             this.UpperFillterDate = upperFillterDate;
+
+            this.FromDate = DateTime.Today;
+            this.FromDate = new DateTime(this.FromDate.Year, this.FromDate.Month, 1);
+            this.ToDate = this.FromDate.AddDays(-1).AddHours(23).AddMinutes(59).AddSeconds(59).AddMilliseconds(999);
+            this.FromDate = this.FromDate.AddMonths(-1);
         }
 
         public DateTime LowerFillterDate
@@ -30,6 +35,9 @@ namespace TotalBase
             get { return this.upperFillterDate; }
             set { this.upperFillterDate = value; }
         }
+
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
 
     }
 }

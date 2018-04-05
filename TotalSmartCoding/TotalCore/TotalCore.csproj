@@ -68,6 +68,7 @@
     <Compile Include="Repositories\Commons\TransferOrderTypeRepository.cs" />
     <Compile Include="Repositories\Generals\IModuleRepository.cs" />
     <Compile Include="Repositories\Generals\IOleDbRepository.cs" />
+    <Compile Include="Repositories\Generals\IReportRepository.cs" />
     <Compile Include="Repositories\Generals\IUserRepository.cs" />
     <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Repositories\IGenericAPIRepository.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Services\Commons\IBinLocationService.cs" />
     <Compile Include="Services\Commons\ICommodityService.cs" />
     <Compile Include="Services\Commons\ICustomerService.cs" />
+    <Compile Include="Services\Generals\IReportService.cs" />
     <Compile Include="Services\IBaseService.cs" />
     <Compile Include="Services\IGenericService.cs" />
     <Compile Include="Services\IGenericWithDetailService.cs" />

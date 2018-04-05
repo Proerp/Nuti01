@@ -659,6 +659,22 @@
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="ApprovedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Reports">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportUniqueID" Type="int" Nullable="false" />
+          <Property Name="ReportGroupID" Type="int" Nullable="false" />
+          <Property Name="ReportGroupName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReportName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReportURL" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ReportTypeID" Type="int" Nullable="false" />
+          <Property Name="SerialID" Type="int" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReportTabPageIDs" Type="nvarchar" MaxLength="100" />
+          <Property Name="OptionBoxIDs" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="SalesOrderDetails">
           <Key>
             <PropertyRef Name="SalesOrderDetailID" />
@@ -2546,6 +2562,11 @@
         <Function Name="GetPickupViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PickupID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetReportIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="GetSalesOrderIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
@@ -2859,6 +2880,7 @@
           <EntitySet Name="Pallets" EntityType="Self.Pallets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PickupDetails" EntityType="Self.PickupDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pickups" EntityType="Self.Pickups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Territories" EntityType="Self.Territories" Schema="dbo" store:Type="Tables" />
@@ -4445,6 +4467,12 @@
           </FunctionImport>
           <FunctionImport Name="GetCommodityTypeTrees" ReturnType="Collection(TotalSmartCodingModel.CommodityTypeTree)" />
           <FunctionImport Name="GetEmployeeTrees" ReturnType="Collection(TotalSmartCodingModel.EmployeeTree)" />
+          <EntitySet Name="Reports" EntityType="TotalSmartCodingModel.Report" />
+          <FunctionImport Name="GetReportIndexes" ReturnType="Collection(TotalSmartCodingModel.GetReportIndexes_Result)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -7835,6 +7863,31 @@
           <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="10" />
           <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportUniqueID" Type="Int32" Nullable="false" />
+          <Property Name="ReportGroupID" Type="Int32" Nullable="false" />
+          <Property Name="ReportGroupName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportURL" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ReportTypeID" Type="Int32" Nullable="false" />
+          <Property Name="SerialID" Type="Int32" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReportTabPageIDs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OptionBoxIDs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="GetReportIndexes_Result">
+          <Property Type="Int32" Name="ReportID" Nullable="false" />
+          <Property Type="Int32" Name="ReportUniqueID" Nullable="false" />
+          <Property Type="Int32" Name="ReportGroupID" Nullable="false" />
+          <Property Type="String" Name="ReportGroupName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ReportTabPageIDs" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ReportName" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="ReportTypeID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10348,6 +10401,36 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
                 <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Report">
+              <MappingFragment StoreEntitySet="Reports">
+                <ScalarProperty Name="OptionBoxIDs" ColumnName="OptionBoxIDs" />
+                <ScalarProperty Name="ReportTabPageIDs" ColumnName="ReportTabPageIDs" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+                <ScalarProperty Name="ReportURL" ColumnName="ReportURL" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="ReportGroupName" ColumnName="ReportGroupName" />
+                <ScalarProperty Name="ReportGroupID" ColumnName="ReportGroupID" />
+                <ScalarProperty Name="ReportUniqueID" ColumnName="ReportUniqueID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetReportIndexes" FunctionName="TotalSmartCodingModel.Store.GetReportIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.GetReportIndexes_Result">
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="ReportUniqueID" ColumnName="ReportUniqueID" />
+                <ScalarProperty Name="ReportGroupID" ColumnName="ReportGroupID" />
+                <ScalarProperty Name="ReportGroupName" ColumnName="ReportGroupName" />
+                <ScalarProperty Name="ReportTabPageIDs" ColumnName="ReportTabPageIDs" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

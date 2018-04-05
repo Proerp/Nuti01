@@ -100,7 +100,9 @@
 
             TransferOrder = 8071,
 
-            Pickup = 8068
+            Pickup = 8068,
+
+            Report = 91976999
 
         };
 
@@ -288,6 +290,90 @@
 
 
 
+        public enum ReportTypeID
+        {
+            GoodsReceiptPivot = 1,
+            GoodsIssuePivot = 2,
+
+            GoodsReceiptJournal = 21,
+            GoodsIssueJournal = 22,
+
+            WarehouseForecast = 686,
+
+            WarehouseJournal = 800
+        }
+
+        public enum ReportTabPageID
+        {
+            TabPageWarehouses = 1,
+            TabPageCommodities = 2,
+            TabPageCustomers = 3,
+            TabPageWarehouseIssues = 4,
+            TabPageWarehouseReceipts = 5,
+            TabPageWarehouseAdjustmentTypes = 6
+        }
+
+        public enum OptionBoxID
+        {
+            FromDate = 1,
+            ToDate = 2,
+            SummaryVersusDetail = 10,
+            QuantityVersusVolume = 20,
+            DateVersusMonth = 30,
+            SalesVersusPromotion = 50,
+            ForecastFilters = 60,
+            SlowMoving = 70
+        }//NOTES: OBx(OptionBoxID optionBoxID): MUST BE NOT DUPLICATE ANY PART
+
+        public static string OBx(OptionBoxID optionBoxID)
+        {
+            return ((int)optionBoxID).ToString() + "X";
+        }
+
+        public enum ReportID
+        {
+            GoodsReceiptPivot = 1,
+            ProductionReceiptPivot = 2,
+            TransferReceiptPivot = 5,
+            AdjustmentReceiptPivot = 6,
+
+            GoodsIssuePivot = 11,
+            SalesIssuePivot = 12,
+            SalesIssuePivotbyCustomers = 17,
+            TransferIssuePivot = 15,
+            AdjustmentIssuePivot = 16,
+
+            GoodsReceiptJournal = 21,
+            ProductionReceiptJournal = 22,
+            TransferReceiptJournal = 25,
+            AdjustmentReceiptJournal = 26,
+
+            GoodsIssueJournal = 31,
+            SalesIssueJournal = 32,
+            TransferIssueJournal = 35,
+            AdjustmentIssueJournal = 36,
+
+
+
+            PivotStockDIOH3M = 812,
+            PivotStockDRP = 815,
+            PivotStockDIOH3MAndDRP = 817,
+
+            CurrentWarehouse = 832,
+
+
+            SaleAndProduction = 868,
+            OldAndSlowMoving = 869,
+
+            WarehouseJournal = 888
+        }
+
+        public enum ForecastFilterID
+        {
+            None = -1,
+            SlowMoving = 999999,
+            SlowMovingNoForecast = 888888
+        }
 
 
 
@@ -309,10 +395,25 @@
         };
 
         public enum GoodsIssueTypeID
-        {
+        {//AT NOW, IN REPORT FILTER, WE CHECK: @LocalGoodsIssueTypeIDs LIKE '%" + (int)GlobalEnums.GoodsIssueTypeID.WarehouseAdjustment + "%'
+            //SO: THIS ENUM NUMBER MUST BE SEPARATELY. IT SHOULD NOT CONTAIN EACH OTHERS (EX: SHOULD NOT BE: 1 Vs 199/ 9 Vs 199)
             DeliveryAdvice = 1,
-            TransferOrder = 2
+            TransferOrder = 2,
+
+            WarehouseAdjustment = 99
         };
+
+        public enum GoodsIssueTypeID_REPORTONLY
+        { //THIS GoodsIssueTypeID_REPORTONLY IS MAPPED FROM GoodsIssueTypeID FOR REPORT FILTER ONLY
+            //IMPORTANT: SOMETIME WE USE goodsIssueTypeID_REPORTONLY.ToString().Substring(0, 1) => SO: SHOULD NAME WITH THE FIRST CHAR DIFFERENTLY!!!
+            Alls = 1976999,
+            CombineSelectedAlls = 1976888,
+            GoodsIssues = 19761,
+            SelectedGoodsIssues = 19762,
+            WarehouseAdjustments = 197699
+        };
+
+
 
         public enum WarehouseAdjustmentTypeID
         {

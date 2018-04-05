@@ -116,6 +116,7 @@
     <Compile Include="Controllers\APIs\Commons\WarehouseAPIs.cs" />
     <Compile Include="Controllers\APIs\Generals\ModuleAPIs.cs" />
     <Compile Include="Controllers\APIs\Generals\OleDbAPIs.cs" />
+    <Compile Include="Controllers\APIs\Generals\ReportAPIs.cs" />
     <Compile Include="Controllers\APIs\Generals\UserAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\GoodsIssueAPIs.cs" />
     <Compile Include="Controllers\APIs\Inventories\PickupAPIs.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Controllers\Commons\BinLocationController.cs" />
     <Compile Include="Controllers\Commons\CommodityController.cs" />
     <Compile Include="Controllers\Commons\CustomerController.cs" />
+    <Compile Include="Controllers\Generals\ReportController.cs" />
     <Compile Include="Controllers\Inventories\GoodsIssueController.cs" />
     <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Controllers\Inventories\WarehouseAdjustmentController.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="ViewModels\Commons\BinLocationViewModel.cs" />
     <Compile Include="ViewModels\Commons\CommodityViewModel.cs" />
     <Compile Include="ViewModels\Commons\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Generals\ReportViewModel.cs" />
     <Compile Include="ViewModels\Helpers\IBaseViewModel.cs" />
     <Compile Include="ViewModels\Helpers\PrintViewModel.cs" />
     <Compile Include="ViewModels\Inventories\GoodsIssueViewModel.cs" />
@@ -226,6 +229,12 @@
     </Compile>
     <Compile Include="Views\Commons\CustomMessageBox.Designer.cs">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Generals\Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Generals\Reports.designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Inventories\GoodsIssues\GoodsIssues.cs">
       <SubType>Form</SubType>
@@ -477,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Commons\CustomMessageBox.resx">
       <DependentUpon>CustomMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Generals\Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Inventories\GoodsIssues\GoodsIssues.resx">
       <DependentUpon>GoodsIssues.cs</DependentUpon>
@@ -1174,6 +1186,18 @@
     <None Include="Resources\exit-to-app-button-magenta.png" />
     <None Include="Resources\exit-to-app-button-green-24.png" />
     <None Include="Resources\exit-to-app-button-magenta-24.png" />
+    <None Include="Resources\xxx042-24.png" />
+    <None Include="Resources\calendar24.png" />
+    <None Include="Resources\Calendar-Icon-Yellow.ico" />
+    <None Include="Resources\Energy_24.png" />
+    <None Include="Resources\Calendar-2.ico" />
+    <None Include="Resources\Calendar-icon.ico" />
+    <None Include="Resources\GoUp_16.png" />
+    <None Include="Resources\godown_14.png" />
+    <None Include="Resources\check_Ok_16.png" />
+    <None Include="Resources\check_Circle_20.png" />
+    <None Include="Resources\Empty_20.png" />
+    <None Include="Resources\backspace_l_R_16.png" />
     <Content Include="SmartCodingSolution.ico" />
     <None Include="Resources\Yellow-cross.ico" />
     <None Include="Resources\White-Pallet.ico" />
