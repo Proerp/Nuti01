@@ -133,35 +133,35 @@ namespace TotalSmartCoding.Views.Generals
             this.treeWarehouseReceiptID.RootKeyValue = 0;
             this.treeWarehouseAdjustmentTypeID.RootKeyValue = 0;
 
-            //WarehouseAPIs warehouseAPIs = new WarehouseAPIs(CommonNinject.Kernel.Get<IWarehouseAPIRepository>());
-            //this.warehouseTrees = warehouseAPIs.GetWarehouseTrees(ContextAttributes.User.LocationID);
-            //this.treeWarehouseID.DataSource = new BindingSource(this.warehouseTrees, "");
+            WarehouseAPIs warehouseAPIs = new WarehouseAPIs(CommonNinject.Kernel.Get<IWarehouseAPIRepository>());
+            this.warehouseTrees = warehouseAPIs.GetWarehouseTrees(ContextAttributes.User.LocationID);
+            this.treeWarehouseID.DataSource = new BindingSource(this.warehouseTrees, "");
 
-            //this.warehouseIssueTrees = warehouseAPIs.GetWarehouseTrees(null);
-            //this.treeWarehouseIssueID.DataSource = new BindingSource(this.warehouseIssueTrees, "");
+            this.warehouseIssueTrees = warehouseAPIs.GetWarehouseTrees(null);
+            this.treeWarehouseIssueID.DataSource = new BindingSource(this.warehouseIssueTrees, "");
 
-            //this.warehouseReceiptTrees = warehouseAPIs.GetWarehouseTrees(null);
-            //this.treeWarehouseReceiptID.DataSource = new BindingSource(this.warehouseReceiptTrees, "");
+            this.warehouseReceiptTrees = warehouseAPIs.GetWarehouseTrees(null);
+            this.treeWarehouseReceiptID.DataSource = new BindingSource(this.warehouseReceiptTrees, "");
 
-            //WarehouseAdjustmentTypeAPIs warehouseAdjustmentTypeAPIs = new WarehouseAdjustmentTypeAPIs(CommonNinject.Kernel.Get<IWarehouseAdjustmentTypeAPIRepository>());
-            //this.warehouseAdjustmentTypeTrees = warehouseAdjustmentTypeAPIs.GetWarehouseAdjustmentTypeTrees();
-            //this.treeWarehouseAdjustmentTypeID.DataSource = new BindingSource(this.warehouseAdjustmentTypeTrees, "");
+            WarehouseAdjustmentTypeAPIs warehouseAdjustmentTypeAPIs = new WarehouseAdjustmentTypeAPIs(CommonNinject.Kernel.Get<IWarehouseAdjustmentTypeAPIRepository>());
+            this.warehouseAdjustmentTypeTrees = warehouseAdjustmentTypeAPIs.GetWarehouseAdjustmentTypeTrees();
+            this.treeWarehouseAdjustmentTypeID.DataSource = new BindingSource(this.warehouseAdjustmentTypeTrees, "");
 
-            //CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
-            //this.commodityTrees = commodityAPIs.GetCommodityTrees();
-            //this.treeCommodityID.DataSource = new BindingSource(this.commodityTrees, "");
+            CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
+            this.commodityTrees = commodityAPIs.GetCommodityTrees();
+            this.treeCommodityID.DataSource = new BindingSource(this.commodityTrees, "");
 
             //CommodityTypeAPIs commodityTypeAPIs = new CommodityTypeAPIs(CommonNinject.Kernel.Get<ICommodityTypeAPIRepository>());
             //this.commodityTypeTrees = commodityTypeAPIs.GetCommodityTypeTrees();
             //this.treeCommodityTypeID.DataSource = new BindingSource(this.commodityTypeTrees, "");
 
-            //CustomerAPIs customerAPIs = new CustomerAPIs(CommonNinject.Kernel.Get<ICustomerAPIRepository>());
-            //this.customerTrees = customerAPIs.GetCustomerTrees();
-            //this.treeCustomerID.DataSource = new BindingSource(this.customerTrees, "");
+            CustomerAPIs customerAPIs = new CustomerAPIs(CommonNinject.Kernel.Get<ICustomerAPIRepository>());
+            this.customerTrees = customerAPIs.GetCustomerTrees();
+            this.treeCustomerID.DataSource = new BindingSource(this.customerTrees, "");
 
-            //EmployeeAPIs employeeAPIs = new EmployeeAPIs(CommonNinject.Kernel.Get<IEmployeeAPIRepository>());
-            //this.employeeTrees = employeeAPIs.GetEmployeeTrees();
-            //this.treeEmployeeID.DataSource = new BindingSource(this.employeeTrees, "");
+            EmployeeAPIs employeeAPIs = new EmployeeAPIs(CommonNinject.Kernel.Get<IEmployeeAPIRepository>());
+            this.employeeTrees = employeeAPIs.GetEmployeeTrees();
+            this.treeEmployeeID.DataSource = new BindingSource(this.employeeTrees, "");
 
             this.comboSummaryVersusDetail.ComboBox.Items.AddRange(new string[] { "Summary only", "Show detail" });
             this.comboSummaryVersusDetail.ComboBox.SelectedIndex = 0;

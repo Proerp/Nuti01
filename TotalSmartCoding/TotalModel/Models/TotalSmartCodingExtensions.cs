@@ -666,7 +666,7 @@ namespace TotalModel.Models
 
     //public partial class ReportIndex : IBaseIndex
     //{
-    //    //public int Id { get { return this.ReportID; } }
+    //    public int Id { get { return this.ReportID; } }
     //}
 
     public partial class Report : IPrimitiveEntity, IBaseEntity

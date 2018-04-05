@@ -13,5 +13,7 @@ namespace TotalCore.Repositories.Commons
     {
         IList<WarehouseBase> GetWarehouseBases();
         int? GetWarehouseLocationID(int? warehouseID);
+
+        IList<WarehouseTree> GetWarehouseTrees(int? locationID);
     }
 }

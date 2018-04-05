@@ -11,7 +11,7 @@ namespace TotalModel.Models
 {
     using System;
     
-    public partial class GetReportIndexes_Result
+    public partial class ReportIndex
     {
         public int ReportID { get; set; }
         public int ReportUniqueID { get; set; }

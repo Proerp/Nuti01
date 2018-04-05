@@ -2454,7 +2454,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeTree>("GetEmployeeTrees");
         }
     
-        public virtual ObjectResult<GetReportIndexes_Result> GetReportIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        public virtual ObjectResult<ReportIndex> GetReportIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
@@ -2468,7 +2468,16 @@ namespace TotalModel.Models
                 new ObjectParameter("ToDate", toDate) :
                 new ObjectParameter("ToDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetReportIndexes_Result>("GetReportIndexes", userIDParameter, fromDateParameter, toDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportIndex>("GetReportIndexes", userIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<UserTree> GetUserTrees(Nullable<int> activeOption)
+        {
+            var activeOptionParameter = activeOption.HasValue ?
+                new ObjectParameter("ActiveOption", activeOption) :
+                new ObjectParameter("ActiveOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserTree>("GetUserTrees", activeOptionParameter);
         }
     }
 }

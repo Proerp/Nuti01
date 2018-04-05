@@ -28,6 +28,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
 
             this.GetUserAccessControls();
             this.SaveUserAccessControls();
+
+            this.GetUserTrees();
         }
 
 
@@ -170,5 +172,29 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
             this.totalSmartCodingEntities.CreateStoredProcedure("SaveUserAccessControls", queryString);
         }
 
+        private void GetUserTrees()
+        {
+            string queryString;
+
+            queryString = " @ActiveOption int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       SELECT      " + GlobalEnums.RootNode + " + LocationID AS NodeID, 0 AS ParentNodeID, LocationID AS PrimaryID, NULL AS AncestorID, Code, Name, 'LocationID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       FROM        Locations " + "\r\n";
+
+            queryString = queryString + "       UNION ALL " + "\r\n";
+            queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " + OrganizationalUnitID AS NodeID, " + GlobalEnums.RootNode + " + LocationID AS ParentNodeID, OrganizationalUnitID AS PrimaryID, LocationID AS AncestorID, Code, Name, 'OrganizationalUnitID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       FROM        OrganizationalUnits " + "\r\n";
+            queryString = queryString + "       UNION ALL " + "\r\n";
+            queryString = queryString + "       SELECT      UserID AS NodeID, " + GlobalEnums.AncestorNode + " + OrganizationalUnitID AS ParentNodeID, UserID AS PrimaryID, OrganizationalUnitID AS AncestorID, SecurityIdentifier AS Code, UserName AS Name, 'UserID' AS ParameterName, InActive AS Selected " + "\r\n";
+            queryString = queryString + "       FROM        Users " + "\r\n";
+            queryString = queryString + "       WHERE       (@ActiveOption = " + (int)GlobalEnums.ActiveOption.Both + " OR Users.InActive = @ActiveOption) " + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetUserTrees", queryString);
+        }
     }
 }

@@ -216,9 +216,6 @@
     <Compile Include="Models\FillingLineIndex.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GetReportIndexes_Result.cs">
-      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GoodsIssue.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
@@ -363,6 +360,9 @@
     <Compile Include="Models\Report.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReportIndex.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SalesOrder.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
@@ -435,6 +435,9 @@
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserOrganizationalUnit.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserTree.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Warehouse.cs">

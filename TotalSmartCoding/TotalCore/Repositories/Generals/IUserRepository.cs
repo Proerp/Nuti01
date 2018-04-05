@@ -4,7 +4,7 @@ using TotalModel.Models;
 
 namespace TotalCore.Repositories.Generals
 {
-    public interface IUserRepository
+    public interface IUserRepository : IGenericRepository<User>
     {
 
     }
@@ -12,6 +12,8 @@ namespace TotalCore.Repositories.Generals
     public interface IUserAPIRepository : IGenericAPIRepository
     {
         IList<OrganizationalUnitIndex> GetOrganizationalUnitIndexes();
+
+        List<UserTree> GetUserTrees(int? activeOption);
 
         IList<ActiveUser> GetActiveUsers(string securityIdentifier);
 

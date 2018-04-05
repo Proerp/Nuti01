@@ -2624,6 +2624,9 @@
         <Function Name="GetUserOrganizationalUnit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="GetUserTrees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActiveOption" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetVersionID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ConfigID" Type="int" Mode="In" />
         </Function>
@@ -4468,10 +4471,13 @@
           <FunctionImport Name="GetCommodityTypeTrees" ReturnType="Collection(TotalSmartCodingModel.CommodityTypeTree)" />
           <FunctionImport Name="GetEmployeeTrees" ReturnType="Collection(TotalSmartCodingModel.EmployeeTree)" />
           <EntitySet Name="Reports" EntityType="TotalSmartCodingModel.Report" />
-          <FunctionImport Name="GetReportIndexes" ReturnType="Collection(TotalSmartCodingModel.GetReportIndexes_Result)">
+          <FunctionImport Name="GetReportIndexes" ReturnType="Collection(TotalSmartCodingModel.ReportIndex)">
             <Parameter Name="UserID" Mode="In" Type="Int32" />
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserTrees" ReturnType="Collection(TotalSmartCodingModel.UserTree)">
+            <Parameter Name="ActiveOption" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -7879,7 +7885,7 @@
           <Property Name="ReportTabPageIDs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="OptionBoxIDs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="GetReportIndexes_Result">
+        <ComplexType Name="ReportIndex">
           <Property Type="Int32" Name="ReportID" Nullable="false" />
           <Property Type="Int32" Name="ReportUniqueID" Nullable="false" />
           <Property Type="Int32" Name="ReportGroupID" Nullable="false" />
@@ -7887,6 +7893,16 @@
           <Property Type="String" Name="ReportTabPageIDs" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="ReportName" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="ReportTypeID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="UserTree">
+          <Property Type="Int32" Name="NodeID" Nullable="true" />
+          <Property Type="Int32" Name="ParentNodeID" Nullable="true" />
+          <Property Type="Int32" Name="PrimaryID" Nullable="false" />
+          <Property Type="Int32" Name="AncestorID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="ParameterName" Nullable="false" MaxLength="20" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10423,7 +10439,7 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetReportIndexes" FunctionName="TotalSmartCodingModel.Store.GetReportIndexes">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalSmartCodingModel.GetReportIndexes_Result">
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.ReportIndex">
                 <ScalarProperty Name="ReportID" ColumnName="ReportID" />
                 <ScalarProperty Name="ReportUniqueID" ColumnName="ReportUniqueID" />
                 <ScalarProperty Name="ReportGroupID" ColumnName="ReportGroupID" />
@@ -10431,6 +10447,20 @@
                 <ScalarProperty Name="ReportTabPageIDs" ColumnName="ReportTabPageIDs" />
                 <ScalarProperty Name="ReportName" ColumnName="ReportName" />
                 <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserTrees" FunctionName="TotalSmartCodingModel.Store.GetUserTrees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.UserTree">
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="ParentNodeID" ColumnName="ParentNodeID" />
+                <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
+                <ScalarProperty Name="AncestorID" ColumnName="AncestorID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

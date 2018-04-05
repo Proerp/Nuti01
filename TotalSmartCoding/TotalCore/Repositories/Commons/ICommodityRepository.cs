@@ -13,6 +13,8 @@ namespace TotalCore.Repositories.Commons
         CommodityBase GetCommodityBase(string code);
         CommodityBase GetCommodityBase(int commodityID);
         IList<CommodityBase> GetCommodityBases(bool withNullRow);
+        IList<CommodityTree> GetCommodityTrees();
+
         IList<SearchCommodity> SearchCommodities(int? commodityID, int? locationID, int? batchID, int? deliveryAdviceID, int? transferOrderID);
     }
 }
