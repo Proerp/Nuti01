@@ -2479,5 +2479,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserTree>("GetUserTrees", activeOptionParameter);
         }
+    
+        public virtual ObjectResult<BatchRepack> GetBatchRepacks(Nullable<int> batchID)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("GetBatchRepacks", batchIDParameter);
+        }
     }
 }

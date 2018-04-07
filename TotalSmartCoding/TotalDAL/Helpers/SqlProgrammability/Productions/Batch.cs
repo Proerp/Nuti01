@@ -21,6 +21,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.GetBatchIndexes();
 
             this.GetPendingLots();
+            this.GetBatchRepacks();
 
             this.BatchEditable();
             this.BatchPostSaveValidate();
@@ -52,7 +53,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN BatchTypes ON Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
 
             queryString = queryString + "                   LEFT JOIN (SELECT BatchID, SUM(1) AS PackQuantity, SUM(LineVolume) AS PackLineVolume FROM Packs GROUP BY BatchID) CummulativePacks ON Batches.BatchID = CummulativePacks.BatchID " + "\r\n";
-            
+
 
             queryString = queryString + "    END " + "\r\n";
 
@@ -74,6 +75,21 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                       LEFT JOIN (SELECT Batches.LotID, MAX(Batches.NextPackNo) AS NextPackNo, MAX(Batches.NextCartonNo) AS NextCartonNo, MAX(Batches.NextPalletNo) AS NextPalletNo FROM Batches INNER JOIN BatchMasters ON Batches.BatchMasterID = BatchMasters.BatchMasterID WHERE BatchMasters.InActive = 0 GROUP BY Batches.LotID) LastBatches ON Lots.LotID = LastBatches.LotID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetPendingLots", queryString);
+        }
+
+        private void GetBatchRepacks()
+        {
+            string queryString = " @BatchID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       SELECT          Repacks.PackID, Batches.BatchID, Batches.EntryDate, Batches.Reference, Batches.Code, Batches.LotCode, Packs.FillingLineID, Packs.CommodityID, Commodities.Code AS Expr1, Commodities.APICode, Commodities.Shelflife " + "\r\n";
+            queryString = queryString + "       FROM            Repacks " + "\r\n"; //Packs.BatchID: SAVED BATCH; Repacks.BatchID: REPACK BATCH
+            queryString = queryString + "                       INNER JOIN Packs ON Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON Packs.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchRepacks", queryString);
         }
 
         private void BatchEditable()

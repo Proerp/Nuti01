@@ -2302,6 +2302,9 @@
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
           <Parameter Name="ActiveOption" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetBatchRepacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetBatchStatusBase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchStatusID" Type="int" Mode="In" />
         </Function>
@@ -4477,7 +4480,10 @@
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetUserTrees" ReturnType="Collection(TotalSmartCodingModel.UserTree)">
-            <Parameter Name="ActiveOption" Mode="In" Type="Int32" />
+          <Parameter Name="ActiveOption" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBatchRepacks" ReturnType="Collection(TotalSmartCodingModel.BatchRepack)">
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -7904,6 +7910,19 @@
           <Property Type="String" Name="ParameterName" Nullable="false" MaxLength="20" />
           <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="BatchRepack">
+          <Property Type="Int32" Name="PackID" Nullable="false" />
+          <Property Type="Int32" Name="BatchID" Nullable="false" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="FillingLineID" Nullable="false" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="Expr1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="Shelflife" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10461,6 +10480,23 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
                 <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchRepacks" FunctionName="TotalSmartCodingModel.Store.GetBatchRepacks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchRepack">
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="LotCode" ColumnName="LotCode" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
+                <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -84,6 +84,9 @@
     <Compile Include="Models\BatchMasterIndex.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BatchRepack.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BatchStatus.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
