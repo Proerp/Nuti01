@@ -20,6 +20,7 @@ using TotalSmartCoding.Libraries;
 using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.Views.Commons;
 using TotalSmartCoding.Views.Mains;
+using System.Collections.Generic;
 //using System.Diagnostics;
 
 
@@ -142,13 +143,16 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                BatchIndex batchIndex = (new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>())).GetActiveBatchIndex();
+                BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                BatchIndex batchIndex = batchAPIs.GetActiveBatchIndex();
                 if (batchIndex != null)
                 {
                     Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
                     if (this.scannerController != null) this.scannerController.InitializePallet(); //WHEN USER PRESS BUTTON buttonBatches => TO OPEN Batches VIEW => THEN APPLY NEW BATCH FOR PRODUCTION
 
-                    this.labelCommodityName.Text = this.fillingData.CommodityName + "   [Code: " + this.fillingData.CommodityCartonCode + "]" + "     [Carton: " + this.fillingData.PackPerCarton + ". Pallet: " + this.fillingData.CartonPerPallet + "]" + "          ";
+                    this.Text = this.fillingData.CommodityName + "[Code: " + this.fillingData.CommodityCartonCode + "]" + "     [Carton: " + this.fillingData.PackPerCarton + ". Pallet: " + this.fillingData.CartonPerPallet + "]"; this.labelCommodityName.Text = "";
+
+                    this.InitializeRepack(batchAPIs);
                 }
             }
             catch (Exception exception)
@@ -156,6 +160,33 @@ namespace TotalSmartCoding.Views.Productions
                 throw exception;
             }
         }
+
+
+        public void InitializeRepack(BatchAPIs batchAPIs)
+        {
+            try
+            {
+                this.fillingData.BatchRepacks.Clear();
+
+                if (this.fillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                {
+                    List<BatchRepack> batchRepacks = batchAPIs.GetBatchRepacks(this.fillingData.BatchID);
+                    if (batchRepacks.Count > 0)
+                    {
+                        batchRepacks.Each(batchRepack =>
+                        {
+                            BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(batchRepack);
+                            this.fillingData.BatchRepacks.Add(batchRepackDTO);
+                        });
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
+        }
+
 
         private void SmartCoding_Load(object sender, EventArgs e)
         {

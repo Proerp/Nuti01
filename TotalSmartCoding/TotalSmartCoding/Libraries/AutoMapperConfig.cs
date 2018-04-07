@@ -92,6 +92,7 @@ namespace TotalSmartCoding.Libraries
                 cfg.CreateMap<BatchMaster, BatchMasterDTO>();
                 cfg.CreateMap<BatchMasterPrimitiveDTO, BatchMaster>();
 
+                cfg.CreateMap<BatchRepack, BatchRepackDTO>();
 
                 cfg.CreateMap<Pack, PackViewModel>();
                 cfg.CreateMap<Pack, PackDTO>();

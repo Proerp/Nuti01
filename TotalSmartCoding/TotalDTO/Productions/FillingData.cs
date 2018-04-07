@@ -54,6 +54,8 @@ namespace TotalDTO.Productions
         public FillingData()
         {
             this.settingDate = DateTime.Now;
+
+            this.BatchRepacks = new List<BatchRepackDTO>();
         }
 
         #endregion Contructor
@@ -141,7 +143,7 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<FillingData, bool>(ref this.isPailLabel, o => o.IsPailLabel, value); }
         }
 
-
+        public int BatchTypeID { get; set; }
         public string BatchTypeCode
         {
             get { return this.batchTypeCode; }
@@ -429,6 +431,9 @@ namespace TotalDTO.Productions
         {
             return this.BatchCode + this.LotCode;
         }
+
+
+        public List<BatchRepackDTO> BatchRepacks { get; set; }
 
     }
 }

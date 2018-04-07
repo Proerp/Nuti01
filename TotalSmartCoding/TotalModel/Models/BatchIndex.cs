@@ -42,5 +42,6 @@ namespace TotalModel.Models
         public string BatchTypeCode { get; set; }
         public string BatchTypeCodeName { get; set; }
         public string LotCode { get; set; }
+        public int BatchTypeID { get; set; }
     }
 }

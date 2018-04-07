@@ -15,14 +15,10 @@ namespace TotalModel.Models
     {
         public int PackID { get; set; }
         public int BatchID { get; set; }
-        public System.DateTime EntryDate { get; set; }
-        public string Reference { get; set; }
-        public string Code { get; set; }
         public string LotCode { get; set; }
         public int FillingLineID { get; set; }
-        public int CommodityID { get; set; }
-        public string Expr1 { get; set; }
-        public string APICode { get; set; }
-        public int Shelflife { get; set; }
+        public System.DateTime BatchEntryDate { get; set; }
+        public string BatchCode { get; set; }
+        public int PrintedTimes { get; set; }
     }
 }

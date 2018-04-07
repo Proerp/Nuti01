@@ -4483,7 +4483,7 @@
           <Parameter Name="ActiveOption" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetBatchRepacks" ReturnType="Collection(TotalSmartCodingModel.BatchRepack)">
-            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+          <Parameter Name="BatchID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -4584,7 +4584,7 @@
         <ComplexType Name="BatchIndex">
           <Property Type="Int32" Name="BatchID" Nullable="false" />
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
-          <Property Type="String" Name="Reference" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Reference" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="FillingLineID" Nullable="false" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
           <Property Type="Int32" Name="CartonPerPallet" Nullable="false" />
@@ -4611,6 +4611,7 @@
           <Property Type="String" Name="BatchTypeCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="BatchTypeCodeName" Nullable="false" MaxLength="151" />
           <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="BatchTypeID" Nullable="false" />
           </ComplexType>
         <ComplexType Name="CommodityIndex">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -7913,16 +7914,12 @@
         <ComplexType Name="BatchRepack">
           <Property Type="Int32" Name="PackID" Nullable="false" />
           <Property Type="Int32" Name="BatchID" Nullable="false" />
-          <Property Type="DateTime" Name="EntryDate" Nullable="false" />
-          <Property Type="String" Name="Reference" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="FillingLineID" Nullable="false" />
-          <Property Type="Int32" Name="CommodityID" Nullable="false" />
-          <Property Type="String" Name="Expr1" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
-          <Property Type="Int32" Name="Shelflife" Nullable="false" />
-        </ComplexType>
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" />
+          <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PrintedTimes" Nullable="false" />
+          </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8088,6 +8085,7 @@
                 <ScalarProperty Name="BatchTypeCode" ColumnName="BatchTypeCode" />
                 <ScalarProperty Name="BatchTypeCodeName" ColumnName="BatchTypeCodeName" />
                 <ScalarProperty Name="LotCode" ColumnName="LotCode" />
+                <ScalarProperty Name="BatchTypeID" ColumnName="BatchTypeID" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10488,16 +10486,12 @@
               <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchRepack">
                 <ScalarProperty Name="PackID" ColumnName="PackID" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="LotCode" ColumnName="LotCode" />
                 <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-                <ScalarProperty Name="APICode" ColumnName="APICode" />
-                <ScalarProperty Name="Shelflife" ColumnName="Shelflife" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
+                <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+                <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           </EntityContainerMapping>

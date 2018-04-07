@@ -56,6 +56,11 @@ namespace TotalDAL.Repositories.Productions
             return base.TotalSmartCodingEntities.GetPendingLots(locationID).ToList();
         }
 
+        public List<BatchRepack> GetBatchRepacks(int? batchID)
+        {
+            return base.TotalSmartCodingEntities.GetBatchRepacks(batchID).ToList();
+        }        
+
         public List<BatchAvailable> GetBatchAvailables(int? locationID, int? deliveryAdviceID, int? transferOrderID, int? commodityID, bool withNullRow)
         {
             List<BatchAvailable> batchAvailables = base.TotalSmartCodingEntities.GetBatchAvailables(locationID, deliveryAdviceID, transferOrderID, commodityID).ToList();

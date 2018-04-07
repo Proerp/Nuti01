@@ -100,6 +100,7 @@
     <Compile Include="Productions\BarcodeQueue.cs" />
     <Compile Include="Productions\BatchDTO.cs" />
     <Compile Include="Productions\BatchMasterDTO.cs" />
+    <Compile Include="Productions\BatchRepackDTO.cs" />
     <Compile Include="Productions\CartonDTO.cs" />
     <Compile Include="Productions\FillingData.cs" />
     <Compile Include="Productions\PackDTO.cs" />

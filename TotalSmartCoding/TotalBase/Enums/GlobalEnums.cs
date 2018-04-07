@@ -443,6 +443,12 @@
 
 
 
+        public enum BatchTypeID
+        {
+            New = 1,
+            Repack = 2,
+            Trial = 3
+        }
 
         public enum SalesInvoiceTypeID
         {
