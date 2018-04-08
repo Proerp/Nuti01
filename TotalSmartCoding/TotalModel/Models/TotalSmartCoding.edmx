@@ -7922,10 +7922,11 @@
           <Property Type="Int32" Name="BatchID" Nullable="false" />
           <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="FillingLineID" Nullable="false" />
-          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" />
           <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="PrintedTimes" Nullable="false" />
           <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" />
+          <Property Type="String" Name="FillingLineCode" Nullable="false" MaxLength="10" />
           </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10495,10 +10496,11 @@
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="LotCode" ColumnName="LotCode" />
                 <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
-                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
                 <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
                 <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="FillingLineCode" ColumnName="FillingLineCode" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -17,9 +17,10 @@ namespace TotalModel.Models
         public int BatchID { get; set; }
         public string LotCode { get; set; }
         public int FillingLineID { get; set; }
-        public System.DateTime BatchEntryDate { get; set; }
         public string BatchCode { get; set; }
         public int PrintedTimes { get; set; }
         public string Code { get; set; }
+        public System.DateTime EntryDate { get; set; }
+        public string FillingLineCode { get; set; }
     }
 }

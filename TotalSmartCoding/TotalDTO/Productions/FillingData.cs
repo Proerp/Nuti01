@@ -7,6 +7,7 @@ using TotalModel.Helpers;
 
 using TotalBase;
 using System.ComponentModel;
+using TotalBase.Enums;
 
 namespace TotalDTO.Productions
 {
@@ -391,6 +392,30 @@ namespace TotalDTO.Productions
 
 
 
+
+
+        public BatchRepackDTO printedBatchRepackDTO
+        {
+            get { return this.BatchRepacks.Where(w => w.LineIndex == (this.RepackSentIndex + 1)).FirstOrDefault(); }
+        }
+
+        private DateTime printedEntryDate
+        {
+            get
+            {
+                if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                    return (DateTime)this.printedBatchRepackDTO.EntryDate;
+                else
+                    return this.EntryDate;
+            }
+        }
+
+
+
+
+
+
+
         /// <summary>
         /// Cách  tính: ngày/ tháng/ năm sx  + Expiration Months.  
         /// Trong trườn hợp  ngày hết HSD cùa SP vào những ngày không có trong lịch như ngày 30, 31 của tháng 02 hay vào ngày 29/02 của năm không nhuận , hoặc ngày 31 của tháng 4,6,9, 11: thực hiện HSD sẽ là ngày đầu của tháng  tiếp theo.  
@@ -403,13 +428,15 @@ namespace TotalDTO.Productions
         /// <returns></returns>
         public string FirstLineA1(bool isReadableText, bool yyyy)
         {
-            //return isReadableText ? this.EntryDate.AddMonths(this.Shelflife).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
-            return isReadableText ? this.EntryDate.AddDays(1 - this.EntryDate.Day).AddMonths(this.Shelflife).AddDays(-1 + this.EntryDate.Day).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
+            return isReadableText ? this.printedEntryDate.AddDays(1 - this.printedEntryDate.Day).AddMonths(this.Shelflife).AddDays(-1 + this.printedEntryDate.Day).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
         }
 
         public string FirstLineA2(bool isReadableText)
         {
-            return this.FillingLineCode + this.FillingLineFactoryCode;
+            if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                return this.printedBatchRepackDTO.FillingLineCode + this.FillingLineFactoryCode;
+            else
+                return this.FillingLineCode + this.FillingLineFactoryCode;
         }
 
         public string FirstLineA2B(bool isReadableText)
@@ -420,7 +447,7 @@ namespace TotalDTO.Productions
 
         public string SecondLineA1(bool isReadableText)
         {
-            return this.EntryDate.ToString("ddMMyy");
+            return this.printedEntryDate.ToString("ddMMyy");
         }
 
         public string SecondLineA2(bool isReadableText)
@@ -430,11 +457,25 @@ namespace TotalDTO.Productions
 
         public string ThirdLineA1(bool isReadableText)
         {
-            return this.BatchCode + this.LotCode;
+            if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+            {
+                BatchRepackDTO batchRepackDTO = this.printedBatchRepackDTO;
+                return batchRepackDTO.BatchCode + batchRepackDTO.LotCode;            
+            }
+            else
+                return this.BatchCode + this.LotCode;            
         }
 
 
+
+
+
+
+        public GlobalVariables.PrinterName printerName;
         public BindingList<BatchRepackDTO> BatchRepacks { get; set; }
+
+        public int RepackSentIndex { get; set; }
+        public int RepackPrintedIndex { get; set; }
 
     }
 }

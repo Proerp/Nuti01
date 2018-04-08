@@ -185,7 +185,7 @@ namespace TotalSmartCoding.Views.Productions
                         batchRepacks.Each(batchRepack =>
                         {
                             BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(batchRepack);
-                            batchRepackDTO.LineNo = ++lineNo;
+                            batchRepackDTO.LineIndex = ++lineNo;
                             this.fillingData.BatchRepacks.Add(batchRepackDTO);
                         });
                     }

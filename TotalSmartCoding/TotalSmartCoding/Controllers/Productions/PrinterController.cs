@@ -34,6 +34,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
         private string lastNACKCode;
+        private int lastProductCounting = 0;
 
         #endregion Storage
 
@@ -248,7 +249,12 @@ namespace TotalSmartCoding.Controllers.Productions
         private string dominoSerialNumber(int serialNumberIndentity)
         {
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
-                return GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/000000/00000/N/";
+
+                if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                    return this.privateFillingData.printedBatchRepackDTO.SerialNumber;
+                else
+                    return GlobalVariables.charESC + "/j/" + serialNumberIndentity.ToString() + "/N/06/000001/999999/000001/Y/N/0/000000/00000/N/";
+
             else
                 return this.privateFillingData.NextPalletNo; //---Dont use counter (This will be updated MANUALLY for each pallet)
         }
@@ -256,7 +262,10 @@ namespace TotalSmartCoding.Controllers.Productions
         private string systemDate()
         {
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
-                return GlobalVariables.charESC + "n/1/A";
+                if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                    return this.privateFillingData.printedBatchRepackDTO.dd;
+                else
+                    return GlobalVariables.charESC + "n/1/A";
             else
                 return DateTime.Now.ToString("dd"); //---Dont use system time (This will be updated MANUALLY for each pallet)
         }
@@ -264,7 +273,10 @@ namespace TotalSmartCoding.Controllers.Productions
         private string systemTime(bool isReadableText)
         {
             if (this.printerName != GlobalVariables.PrinterName.PalletLabel)
-                return GlobalVariables.charESC + "n/1/H" + (isReadableText ? ":" : "") + GlobalVariables.charESC + "n/1/M";
+                if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                    return this.privateFillingData.printedBatchRepackDTO.HH + (isReadableText ? ":" : "") + this.privateFillingData.printedBatchRepackDTO.mm;
+                else
+                    return GlobalVariables.charESC + "n/1/H" + (isReadableText ? ":" : "") + GlobalVariables.charESC + "n/1/M";
             else
                 return DateTime.Now.ToString("HH") + (isReadableText ? ":" : "") + DateTime.Now.ToString("mm"); //---Dont use system time (This will be updated MANUALLY for each pallet)
         }
@@ -568,8 +580,39 @@ namespace TotalSmartCoding.Controllers.Productions
 
         }
 
+        private bool getRepackPrintedIndex(ref string receivedFeedback)
+        {
+            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/T/1/?/" + GlobalVariables.charEOT);//T: READ Product Counting
+            this.waitforDomino(ref receivedFeedback, false);
+
+            if (receivedFeedback.Length < 9)
+                throw new System.InvalidOperationException("Lỗi đọc bộ đếm (len < 9): " + receivedFeedback);
+            else
+            {
+                receivedFeedback = receivedFeedback.Substring(3, 10);//Response to ?: Esc/T/A/NNNNNNNNNN/Eot (Return counter value): Return 10 digit: NEW PROTOCOL: FILE WORD: [Connecting A-Series plus to the world.doc]
+
+                int newProductCounting;
+                if (int.TryParse(receivedFeedback, out  newProductCounting))
+                {
+                    if (newProductCounting > this.lastProductCounting) //this.lastProductCounting != newProductCounting
+                    {
+                        this.privateFillingData.RepackPrintedIndex = this.privateFillingData.RepackPrintedIndex + (newProductCounting - this.lastProductCounting);
+                        this.lastProductCounting = newProductCounting; return true;
+                    }
+                }
+            }
+            return false;
+        }
 
 
+        private bool sendtoBuffer()
+        {
+            string receivedFeedback = "";
+
+            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/O/E/0009/" + "this.WholeMessageLine()" + " /" + GlobalVariables.charEOT); Thread.Sleep(20);//OE (4Fh 45h): Streaming the data to the printer
+
+            return this.waitforDomino(ref receivedFeedback, true);
+        }
 
 
         /// <summary>
@@ -717,6 +760,7 @@ namespace TotalSmartCoding.Controllers.Productions
         public void ThreadRoutine()
         {
             this.privateFillingData = this.FillingData.ShallowClone(); //WE NEED TO CLONE FillingData, BECAUSE: IN THIS CONTROLLER: WE HAVE TO UPDATE THE NEW PRINTED BARCODE NUMBER TO FillingData, WHICH IS CREATED IN ANOTHER THREAD (FillingData IS CREATED IN VIEW: SmartCoding). SO THAT: WE CAN NOT UPDATE FillingData DIRECTLY, INSTEAD: WE REAISE EVENT ProertyChanged => THEN: WE CATCH THE EVENT IN SmartCoding VIEW AND UPDATE BACK TO THE ORIGINAL FillingData, BECAUSE: THE ORIGINAL FillingData IS CREATED AND BINDED IN THE VIEW: SmartCoding
+            this.privateFillingData.printerName = this.printerName;//SHOULD SET AFTER CLONE. BECAUSE this.FillingData IS USED ACROSS ALL PRINTERS
 
             string receivedFeedback = ""; bool printerReady = false; bool readytoPrint = false; bool headEnable = false;
 
@@ -950,15 +994,35 @@ namespace TotalSmartCoding.Controllers.Productions
                                 }
                                 else
                                 {
-                                    this.storeMessage(this.wholeMessageLine()); //SHOULD Update serial number: - Note: Some DOMINO firmware version does not need to update serial number. Just set startup serial number only when insert serial number. BUT: FOR SURE, It will be updated FOR ALL
+                                    if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                                    {
+                                        this.lastProductCounting = 0;//VARIBLE PLAY A RULE OF POINTER TO THE BUFFERS
+                                        this.privateFillingData.RepackSentIndex = this.privateFillingData.RepackPrintedIndex;
 
-                                    //    U: UPDATE SERIAL NUMBER - Counter 1
-                                    this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
-                                    if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                        //P: Message To Head Assignment 
+                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/P/1/002/" + GlobalVariables.charEOT); //USING UI TO SETUP MSG 002: USING UPDATABLE FIELDS FOR BOTH TEXT + BARCODE
+                                        if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi bản tin repack 002: " + receivedFeedback);
 
-                                    //    U: UPDATE SERIAL NUMBER - Counter 2
-                                    this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
-                                    if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                        //O/E:----- //Esc/O/E/0000/0/Eot: EMPTY DATA QUEUE
+                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/O/E/0000/0/" + GlobalVariables.charEOT);
+                                        if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(30); else throw new System.InvalidOperationException("Lỗi xóa buffer: " + receivedFeedback);
+
+                                        //T: Reset Product Counting
+                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/T/1/0/" + GlobalVariables.charEOT); //THIS VERY IMPORTANT TO GET TO KNOW HOW MANY DATA ENTRY IS PRINTED
+                                        if (!this.waitforDomino(ref receivedFeedback, true)) throw new System.InvalidOperationException("Lỗi cài đặt bộ đếm số lần in phun: " + receivedFeedback);
+                                    }
+                                    else
+                                    {
+                                        this.storeMessage(this.wholeMessageLine()); //SHOULD Update serial number: - Note: Some DOMINO firmware version does not need to update serial number. Just set startup serial number only when insert serial number. BUT: FOR SURE, It will be updated FOR ALL
+
+                                        //    U: UPDATE SERIAL NUMBER - Counter 1
+                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
+                                        if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+
+                                        //    U: UPDATE SERIAL NUMBER - Counter 2
+                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
+                                        if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                    }
                                 }
                                 #endregion SETUP MESSAGE
 
@@ -970,7 +1034,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                             #region Read counter: printerName == DigitInkjet || printerName == PackInkjet || printerName == CartonInkjet
-                            if (this.printerName == GlobalVariables.PrinterName.DigitInkjet || this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
+                            if (this.printerName == GlobalVariables.PrinterName.DigitInkjet || (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID != (int)GlobalEnums.BatchTypeID.Repack) || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
                             {
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/?/" + GlobalVariables.charEOT);//    U: Read Counter 1 (ONLY COUNTER 1---COUNTER 2: THE SAME COUNTER 1: Principlely)
                                 if (this.waitforDomino(ref receivedFeedback, false, "U", 13))
@@ -987,6 +1051,14 @@ namespace TotalSmartCoding.Controllers.Productions
 
                                 this.sendtoZebra();
                                 this.waitforZebra();
+                            }
+
+                            if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                            {
+                                if (this.privateFillingData.RepackSentIndex - this.privateFillingData.RepackPrintedIndex < 25 && this.privateFillingData.RepackSentIndex < this.privateFillingData.BatchRepacks.Count)
+                                { if (this.sendtoBuffer()) this.privateFillingData.RepackSentIndex++; }
+                                else
+                                    this.getRepackPrintedIndex(ref receivedFeedback);
                             }
                             #endregion setup for every message: printerName == PalletLabel
                         }
