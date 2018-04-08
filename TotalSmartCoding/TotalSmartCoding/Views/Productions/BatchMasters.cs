@@ -63,6 +63,8 @@ namespace TotalSmartCoding.Views.Productions
             this.toolstripChild = this.toolStripChildForm;
             this.fastListIndex = this.fastBatchMasterIndex;
 
+            this.comboDiscontinued.SelectedIndex = 0;
+            this.comboShowCummulativePacks.SelectedIndex = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.BatchMaster ? 0 : 0;
 
             this.batchMasterAPIs = new BatchMasterAPIs(CommonNinject.Kernel.Get<IBatchMasterAPIRepository>());
 
@@ -86,8 +88,6 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.comboDiscontinued.SelectedIndex = 0;
-
                 CustomTabControl customTabBatchMaster = new CustomTabControl();
                 //customTabControlCustomerChannel.ImageList = this.imageListTabControl;
 
@@ -202,7 +202,7 @@ namespace TotalSmartCoding.Views.Productions
 
         public override void Loading()
         {
-            this.fastBatchMasterIndex.SetObjects(this.batchMasterAPIs.GetBatchMasterIndexes(false, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
+            this.fastBatchMasterIndex.SetObjects(this.batchMasterAPIs.GetBatchMasterIndexes(this.comboShowCummulativePacks.SelectedIndex == 0 ? false : true, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
             base.Loading();
         }
 
@@ -225,6 +225,11 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.batchMasterAPIs != null) this.Loading();
+        }
+
+        private void comboShowCummulativePacks_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.batchMasterAPIs != null) this.Loading();
         }
@@ -423,6 +428,7 @@ namespace TotalSmartCoding.Views.Productions
 
 
         #endregion Import Excel
+
 
 
 

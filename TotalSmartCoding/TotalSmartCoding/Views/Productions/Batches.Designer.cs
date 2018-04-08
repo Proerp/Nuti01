@@ -57,6 +57,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.comboShowCummulativePacks = new System.Windows.Forms.ToolStripComboBox();
             this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
             this.buttonItems = new System.Windows.Forms.ToolStripButton();
             this.naviBarMaster = new Guifreaks.Navisuite.NaviBar(this.components);
@@ -141,7 +142,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(378, 637);
+            this.layoutMaster.Size = new System.Drawing.Size(378, 582);
             this.layoutMaster.TabIndex = 62;
             // 
             // combexBatchTypeID
@@ -395,6 +396,7 @@
             this.toolStripSeparator2,
             this.buttonDiscontinued,
             this.toolStripLabel1,
+            this.comboShowCummulativePacks,
             this.comboDiscontinued,
             this.buttonItems});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
@@ -440,6 +442,17 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(33, 52);
             this.toolStripLabel1.Text = "      ";
             // 
+            // comboShowCummulativePacks
+            // 
+            this.comboShowCummulativePacks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboShowCummulativePacks.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboShowCummulativePacks.Items.AddRange(new object[] {
+            "Don\'t show cummulative packs",
+            "Show cummulative packs"});
+            this.comboShowCummulativePacks.Name = "comboShowCummulativePacks";
+            this.comboShowCummulativePacks.Size = new System.Drawing.Size(260, 55);
+            this.comboShowCummulativePacks.SelectedIndexChanged += new System.EventHandler(this.comboShowCummulativePacks_SelectedIndexChanged);
+            // 
             // comboDiscontinued
             // 
             this.comboDiscontinued.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -448,7 +461,7 @@
             "Don\'t show hidden lots",
             "Show hidden lots"});
             this.comboDiscontinued.Name = "comboDiscontinued";
-            this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
+            this.comboDiscontinued.Size = new System.Drawing.Size(196, 55);
             this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
             // 
             // buttonItems
@@ -469,13 +482,13 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(1103, 0);
+            this.naviBarMaster.Location = new System.Drawing.Point(1103, 55);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(380, 685);
+            this.naviBarMaster.Size = new System.Drawing.Size(380, 630);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -487,13 +500,13 @@
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 637);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 582);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(378, 637);
+            this.naviBand1.Size = new System.Drawing.Size(378, 582);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -534,11 +547,11 @@
             this.fastBatchIndex.GroupImageList = this.imageList32;
             this.fastBatchIndex.HideSelection = false;
             this.fastBatchIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastBatchIndex.Location = new System.Drawing.Point(0, 55);
             this.fastBatchIndex.Name = "fastBatchIndex";
             this.fastBatchIndex.OwnerDraw = true;
             this.fastBatchIndex.ShowGroups = false;
-            this.fastBatchIndex.Size = new System.Drawing.Size(1103, 685);
+            this.fastBatchIndex.Size = new System.Drawing.Size(1103, 630);
             this.fastBatchIndex.TabIndex = 67;
             this.fastBatchIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchIndex.UseCompatibleStateImageBehavior = false;
@@ -746,6 +759,7 @@
         private System.Windows.Forms.ToolStripButton buttonItems;
         private CustomControls.CombexBox combexBatchTypeID;
         private BrightIdeasSoftware.OLVColumn olvBatchTypeCodeName;
+        private System.Windows.Forms.ToolStripComboBox comboShowCummulativePacks;
 
     }
 }

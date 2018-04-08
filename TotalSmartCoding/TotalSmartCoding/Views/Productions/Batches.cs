@@ -59,6 +59,7 @@ namespace TotalSmartCoding.Views.Productions
             this.smartCoding = smartCoding;
             this.allQueueEmpty = allQueueEmpty;
             this.comboDiscontinued.SelectedIndex = 0;
+            this.comboShowCummulativePacks.SelectedIndex = 0;
 
             this.toolstripChild = this.toolStripChildForm;
             this.fastListIndex = this.fastBatchIndex;
@@ -216,7 +217,7 @@ namespace TotalSmartCoding.Views.Productions
 
         public override void Loading()
         {
-            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(false, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both, false));
+            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(this.comboShowCummulativePacks.SelectedIndex == 0 ? false: true, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both, false));
             base.Loading();
 
             this.smartCoding.Initialize();
@@ -238,6 +239,11 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         private void comboDiscontinued_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.batchAPIs != null) this.Loading();
+        }
+
+        private void comboShowCummulativePacks_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.batchAPIs != null) this.Loading();
         }
@@ -288,6 +294,8 @@ namespace TotalSmartCoding.Views.Productions
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
+
+        
 
 
 

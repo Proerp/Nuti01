@@ -55,6 +55,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.comboShowCummulativePacks = new System.Windows.Forms.ToolStripComboBox();
             this.comboDiscontinued = new System.Windows.Forms.ToolStripComboBox();
             this.buttonItems = new System.Windows.Forms.ToolStripButton();
             this.naviBarMaster = new Guifreaks.Navisuite.NaviBar(this.components);
@@ -345,6 +346,7 @@
             this.toolStripSeparator1,
             this.buttonDiscontinued,
             this.toolStripLabel1,
+            this.comboShowCummulativePacks,
             this.comboDiscontinued,
             this.buttonItems});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
@@ -405,6 +407,17 @@
             this.toolStripLabel1.Size = new System.Drawing.Size(33, 52);
             this.toolStripLabel1.Text = "      ";
             // 
+            // comboShowCummulativePacks
+            // 
+            this.comboShowCummulativePacks.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboShowCummulativePacks.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboShowCummulativePacks.Items.AddRange(new object[] {
+            "Don\'t show cummulative packs",
+            "Show cummulative packs"});
+            this.comboShowCummulativePacks.Name = "comboShowCummulativePacks";
+            this.comboShowCummulativePacks.Size = new System.Drawing.Size(260, 55);
+            this.comboShowCummulativePacks.SelectedIndexChanged += new System.EventHandler(this.comboShowCummulativePacks_SelectedIndexChanged);
+            // 
             // comboDiscontinued
             // 
             this.comboDiscontinued.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -413,7 +426,7 @@
             "Don\'t show hidden batches",
             "Show hidden batches"});
             this.comboDiscontinued.Name = "comboDiscontinued";
-            this.comboDiscontinued.Size = new System.Drawing.Size(270, 55);
+            this.comboDiscontinued.Size = new System.Drawing.Size(227, 55);
             this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
             // 
             // buttonItems
@@ -692,6 +705,7 @@
         private System.Windows.Forms.ToolStripSeparator separatorNewLOT;
         private System.Windows.Forms.ToolStripSeparator separatorRemoveLOT;
         private System.Windows.Forms.ToolStripButton buttonRemoveLOT;
+        private System.Windows.Forms.ToolStripComboBox comboShowCummulativePacks;
 
     }
 }
