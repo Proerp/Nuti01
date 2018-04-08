@@ -102,6 +102,11 @@ namespace TotalSmartCoding.Views.Productions
                 this.textNextCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextCartonNo");
                 this.textNextPalletNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextPalletNo");
 
+                this.dgvRepacks.AutoGenerateColumns = false;
+                this.dgvRepacks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                this.dgvRepacks.DataSource = this.fillingData.BatchRepacks;
+
+
                 this.comboBoxEmptyCarton.ComboBox.Items.AddRange(new string[] { "Ignore empty carton", "Keep empty carton" });
                 this.comboBoxEmptyCarton.ComboBox.SelectedIndex = GlobalVariables.IgnoreEmptyCarton ? 0 : 1;
 
@@ -150,7 +155,7 @@ namespace TotalSmartCoding.Views.Productions
                     Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
                     if (this.scannerController != null) this.scannerController.InitializePallet(); //WHEN USER PRESS BUTTON buttonBatches => TO OPEN Batches VIEW => THEN APPLY NEW BATCH FOR PRODUCTION
 
-                    this.Text = this.fillingData.CommodityName + "[Code: " + this.fillingData.CommodityCartonCode + "]" + "     [Carton: " + this.fillingData.PackPerCarton + ". Pallet: " + this.fillingData.CartonPerPallet + "]"; this.labelCommodityName.Text = "";
+                    this.Text = this.fillingData.CommodityName + " [Carton Code: " + this.fillingData.CommodityCartonCode + "] " + "     [Pack per Carton: " + this.fillingData.PackPerCarton + ". Carton per Pallet: " + this.fillingData.CartonPerPallet + "]"; this.labelCommodityName.Text = "";
 
                     this.InitializeRepack(batchAPIs);
                 }
@@ -166,6 +171,9 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
+                this.panelRepack.Visible = this.fillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack;
+
+                this.fillingData.BatchRepacks.RaiseListChangedEvents = false;
                 this.fillingData.BatchRepacks.Clear();
 
                 if (this.fillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
@@ -183,7 +191,8 @@ namespace TotalSmartCoding.Views.Productions
                     }
                 }
 
-                this.dgvRepacksBinding();
+                this.fillingData.BatchRepacks.RaiseListChangedEvents = true;
+                this.fillingData.BatchRepacks.ResetBindings();
             }
             catch (Exception exception)
             {
@@ -191,22 +200,14 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        public void dgvRepacksBinding()
-        {
-            this.dgvRepacks.AutoGenerateColumns = false;
-            this.dgvRepacks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            this.dgvRepacks.DataSource = this.fillingData.BatchRepacks;
-        }
-
         private void dgvRepacks_Enter(object sender, EventArgs e)
         {
-            this.dgvRepacks.ScrollBars = ScrollBars.Vertical;
+            //this.dgvRepacks.ScrollBars = ScrollBars.Vertical;
         }
 
         private void dgvRepacks_Leave(object sender, EventArgs e)
         {
-            this.dgvRepacks.ScrollBars = ScrollBars.None;
+            //this.dgvRepacks.ScrollBars = ScrollBars.None;
         }
 
         private void SmartCoding_Load(object sender, EventArgs e)
@@ -1045,7 +1046,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
-        
+
 
 
 

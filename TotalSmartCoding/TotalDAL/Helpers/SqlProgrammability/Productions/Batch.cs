@@ -40,24 +40,67 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString;
 
-            queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @FillingLineID int, @ActiveOption int " + "\r\n";
+            queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @FillingLineID int, @ShowCummulativePacks bit, @ActiveOption int, @DefaultOnly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.LotCode, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
-            queryString = queryString + "                   Batches.BatchTypeID, BatchTypes.Code AS BatchTypeCode, BatchTypes.Code + '-' + BatchTypes.Name AS BatchTypeCodeName, Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, CummulativePacks.PackQuantity, CummulativePacks.PackLineVolume, Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault, Batches.InActive " + "\r\n";
-            queryString = queryString + "       FROM        Batches " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON Batches.FillingLineID = @FillingLineID AND (@ActiveOption = -1 OR Batches.InActive = @ActiveOption) AND ((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN BatchMasters ON BatchMasters.InActive = 0 AND Batches.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN BatchTypes ON Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
-
-            queryString = queryString + "                   LEFT JOIN (SELECT BatchID, SUM(1) AS PackQuantity, SUM(LineVolume) AS PackLineVolume FROM Packs GROUP BY BatchID) CummulativePacks ON Batches.BatchID = CummulativePacks.BatchID " + "\r\n";
-
+            queryString = queryString + "       IF  (@ActiveOption <> -1) " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(false) + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchIndexes", queryString);
+        }
+
+        private string GetBatchIndexSQL(bool isActiveOption)
+        {
+            string queryString = "";
+
+            queryString = queryString + "   BEGIN " + "\r\n";
+            queryString = queryString + "       IF  (@DefaultOnly = 1) " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(isActiveOption, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(isActiveOption, false) + "\r\n";
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string GetBatchIndexSQL(bool isActiveOption, bool defaultOnly)
+        {
+            string queryString = "";
+
+            queryString = queryString + "   BEGIN " + "\r\n";
+            queryString = queryString + "       IF  (@ShowCummulativePacks = 1) " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(isActiveOption, defaultOnly, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(isActiveOption, defaultOnly, false) + "\r\n";
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string GetBatchIndexSQL(bool isActiveOption, bool defaultOnly, bool showCummulativePacks)
+        {
+            string queryString = "";
+
+            queryString = queryString + "   BEGIN " + "\r\n";
+            queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.LotCode, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
+            queryString = queryString + "                   Batches.BatchTypeID, BatchTypes.Code AS BatchTypeCode, BatchTypes.Code + '-' + BatchTypes.Name AS BatchTypeCodeName, Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, " + (showCummulativePacks ? "CummulativePacks.PackQuantity" : "CAST(0 AS int) AS PackQuantity") + ", " + (showCummulativePacks ? "CummulativePacks.PackLineVolume" : "CAST(0 AS decimal(18, 2)) AS PackLineVolume") + ", Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault, Batches.InActive " + "\r\n";
+            queryString = queryString + "       FROM        Batches " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON Batches.FillingLineID = @FillingLineID " + (isActiveOption ? "AND Batches.InActive = @ActiveOption" : "") + " AND " + (defaultOnly ? "Batches.IsDefault = 1" : "((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) ") + " AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN BatchMasters ON BatchMasters.InActive = 0 AND Batches.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN BatchTypes ON Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
+
+            if (showCummulativePacks)
+                queryString = queryString + "               LEFT JOIN (SELECT BatchID, SUM(1) AS PackQuantity, SUM(LineVolume) AS PackLineVolume FROM Packs GROUP BY BatchID) CummulativePacks ON Batches.BatchID = CummulativePacks.BatchID " + "\r\n";
+
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
         }
 
         private void GetPendingLots()

@@ -25,8 +25,9 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
         }
 
 
-        public ICollection<BatchMasterIndex> GetBatchMasterIndexes(GlobalEnums.ActiveOption activeOption)
+        public ICollection<BatchMasterIndex> GetBatchMasterIndexes(bool showCummulativePacks, GlobalEnums.ActiveOption activeOption)
         {
+            this.batchMasterAPIRepository.RepositoryBag["ShowCummulativePacks"] = showCummulativePacks ? 1 : 0;
             this.batchMasterAPIRepository.RepositoryBag["ActiveOption"] = (int)activeOption;
             ICollection<BatchMasterIndex> goodsReceiptIndexes = this.batchMasterAPIRepository.GetEntityIndexes<BatchMasterIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
 
@@ -35,7 +36,7 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
 
         public BatchMasterIndex GetActiveBatchMasterIndex()
         {
-            BatchMasterIndex goodsReceiptIndexes = this.GetBatchMasterIndexes(GlobalEnums.ActiveOption.Active).Where(w => w.IsDefault).FirstOrDefault();
+            BatchMasterIndex goodsReceiptIndexes = this.GetBatchMasterIndexes(false, GlobalEnums.ActiveOption.Active).Where(w => w.IsDefault).FirstOrDefault();
 
             return goodsReceiptIndexes;
         }

@@ -47,7 +47,7 @@ namespace TotalDAL.Repositories.Productions
         {
             ObjectParameter[] baseParameters = base.GetEntityIndexParameters(userID, fromDate, toDate);
 
-            return new ObjectParameter[] { baseParameters[0], baseParameters[1], baseParameters[2], new ObjectParameter("ActiveOption", (int)(this.RepositoryBag["ActiveOption"] != null ? this.RepositoryBag["ActiveOption"] : GlobalEnums.ActiveOption.Both)) };
+            return new ObjectParameter[] { baseParameters[0], baseParameters[1], baseParameters[2], new ObjectParameter("ShowCummulativePacks", (int)(this.RepositoryBag["ShowCummulativePacks"] != null ? this.RepositoryBag["ShowCummulativePacks"] : 0)), new ObjectParameter("ActiveOption", (int)(this.RepositoryBag["ActiveOption"] != null ? this.RepositoryBag["ActiveOption"] : GlobalEnums.ActiveOption.Both)) };
         }
 
         public BatchMasterBase GetBatchMasterBase(string code)

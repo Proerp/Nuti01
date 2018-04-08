@@ -202,7 +202,7 @@ namespace TotalSmartCoding.Views.Productions
 
         public override void Loading()
         {
-            this.fastBatchMasterIndex.SetObjects(this.batchMasterAPIs.GetBatchMasterIndexes(this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
+            this.fastBatchMasterIndex.SetObjects(this.batchMasterAPIs.GetBatchMasterIndexes(false, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
             base.Loading();
         }
 

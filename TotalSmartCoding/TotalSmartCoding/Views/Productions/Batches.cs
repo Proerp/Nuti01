@@ -58,6 +58,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.smartCoding = smartCoding;
             this.allQueueEmpty = allQueueEmpty;
+            this.comboDiscontinued.SelectedIndex = 0;
 
             this.toolstripChild = this.toolStripChildForm;
             this.fastListIndex = this.fastBatchIndex;
@@ -93,9 +94,7 @@ namespace TotalSmartCoding.Views.Productions
         protected override void InitializeTabControl()
         {
             try
-            {
-                this.comboDiscontinued.SelectedIndex = 0;
-
+            {                
                 if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum) { this.labelNextPackNo.Visible = false; this.textexNextPackNo.Visible = false; }
                 if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum) { this.labelNextCartonNo.Visible = false; this.labelNextCartonNo.Visible = false; }
 
@@ -217,7 +216,7 @@ namespace TotalSmartCoding.Views.Productions
 
         public override void Loading()
         {
-            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both));
+            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(false, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both, false));
             base.Loading();
 
             this.smartCoding.Initialize();

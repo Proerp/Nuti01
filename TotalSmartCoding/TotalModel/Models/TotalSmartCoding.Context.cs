@@ -307,7 +307,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchEditable", entityIDParameter);
         }
     
-        public virtual ObjectResult<BatchIndex> GetBatchIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> fillingLineID, Nullable<int> activeOption)
+        public virtual ObjectResult<BatchIndex> GetBatchIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> fillingLineID, Nullable<bool> showCummulativePacks, Nullable<int> activeOption, Nullable<bool> defaultOnly)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
@@ -325,11 +325,19 @@ namespace TotalModel.Models
                 new ObjectParameter("FillingLineID", fillingLineID) :
                 new ObjectParameter("FillingLineID", typeof(int));
     
+            var showCummulativePacksParameter = showCummulativePacks.HasValue ?
+                new ObjectParameter("ShowCummulativePacks", showCummulativePacks) :
+                new ObjectParameter("ShowCummulativePacks", typeof(bool));
+    
             var activeOptionParameter = activeOption.HasValue ?
                 new ObjectParameter("ActiveOption", activeOption) :
                 new ObjectParameter("ActiveOption", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchIndex>("GetBatchIndexes", userIDParameter, fromDateParameter, toDateParameter, fillingLineIDParameter, activeOptionParameter);
+            var defaultOnlyParameter = defaultOnly.HasValue ?
+                new ObjectParameter("DefaultOnly", defaultOnly) :
+                new ObjectParameter("DefaultOnly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchIndex>("GetBatchIndexes", userIDParameter, fromDateParameter, toDateParameter, fillingLineIDParameter, showCummulativePacksParameter, activeOptionParameter, defaultOnlyParameter);
         }
     
         public virtual int BatchCommonUpdate(Nullable<int> batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
@@ -2167,7 +2175,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterToggleVoid", entityIDParameter, inActiveParameter, voidTypeIDParameter);
         }
     
-        public virtual ObjectResult<BatchMasterIndex> GetBatchMasterIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> activeOption)
+        public virtual ObjectResult<BatchMasterIndex> GetBatchMasterIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<bool> showCummulativePacks, Nullable<int> activeOption)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
@@ -2181,11 +2189,15 @@ namespace TotalModel.Models
                 new ObjectParameter("ToDate", toDate) :
                 new ObjectParameter("ToDate", typeof(System.DateTime));
     
+            var showCummulativePacksParameter = showCummulativePacks.HasValue ?
+                new ObjectParameter("ShowCummulativePacks", showCummulativePacks) :
+                new ObjectParameter("ShowCummulativePacks", typeof(bool));
+    
             var activeOptionParameter = activeOption.HasValue ?
                 new ObjectParameter("ActiveOption", activeOption) :
                 new ObjectParameter("ActiveOption", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterIndex>("GetBatchMasterIndexes", userIDParameter, fromDateParameter, toDateParameter, activeOptionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterIndex>("GetBatchMasterIndexes", userIDParameter, fromDateParameter, toDateParameter, showCummulativePacksParameter, activeOptionParameter);
         }
     
         public virtual ObjectResult<BatchStatusBase> GetBatchStatusBases()

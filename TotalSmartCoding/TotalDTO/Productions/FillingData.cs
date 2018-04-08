@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TotalModel.Helpers;
 
 using TotalBase;
+using System.ComponentModel;
 
 namespace TotalDTO.Productions
 {
@@ -55,7 +56,7 @@ namespace TotalDTO.Productions
         {
             this.settingDate = DateTime.Now;
 
-            this.BatchRepacks = new List<BatchRepackDTO>();
+            this.BatchRepacks = new BindingList<BatchRepackDTO>();
         }
 
         #endregion Contructor
@@ -433,7 +434,7 @@ namespace TotalDTO.Productions
         }
 
 
-        public List<BatchRepackDTO> BatchRepacks { get; set; }
+        public BindingList<BatchRepackDTO> BatchRepacks { get; set; }
 
     }
 }
