@@ -2703,6 +2703,16 @@ namespace TotalSmartCoding.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Icons8_Windows_8_Numbers_7 {
+            get {
+                object obj = ResourceManager.GetObject("Icons8-Windows-8-Numbers-7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Iconshock_Perspective_General_Administrator {
             get {
                 object obj = ResourceManager.GetObject("Iconshock-Perspective-General-Administrator", resourceCulture);
@@ -3236,6 +3246,16 @@ namespace TotalSmartCoding.Properties {
         internal static System.Drawing.Bitmap letter_p {
             get {
                 object obj = ResourceManager.GetObject("letter-p", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Letter_Powerpoint {
+            get {
+                object obj = ResourceManager.GetObject("Letter-Powerpoint", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

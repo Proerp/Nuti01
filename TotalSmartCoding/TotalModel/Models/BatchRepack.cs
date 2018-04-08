@@ -20,5 +20,6 @@ namespace TotalModel.Models
         public System.DateTime BatchEntryDate { get; set; }
         public string BatchCode { get; set; }
         public int PrintedTimes { get; set; }
+        public string Code { get; set; }
     }
 }

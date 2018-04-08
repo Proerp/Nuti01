@@ -83,11 +83,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          Repacks.PackID, Batches.BatchID, Batches.EntryDate AS BatchEntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.FillingLineID, Repacks.PrintedTimes " + "\r\n";
+            queryString = queryString + "       SELECT          Repacks.PackID, Batches.BatchID, Batches.EntryDate AS BatchEntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, Repacks.PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Repacks " + "\r\n"; //Packs.BatchID: SAVED BATCH; Repacks.BatchID: REPACK BATCH
             queryString = queryString + "                       INNER JOIN Packs ON Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON Packs.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "       ORDER BY        Repacks.RepackID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchRepacks", queryString);
         }

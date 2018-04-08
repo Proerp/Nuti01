@@ -173,13 +173,17 @@ namespace TotalSmartCoding.Views.Productions
                     List<BatchRepack> batchRepacks = batchAPIs.GetBatchRepacks(this.fillingData.BatchID);
                     if (batchRepacks.Count > 0)
                     {
+                        int lineNo = 0;
                         batchRepacks.Each(batchRepack =>
                         {
                             BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(batchRepack);
+                            batchRepackDTO.LineNo = ++lineNo;
                             this.fillingData.BatchRepacks.Add(batchRepackDTO);
                         });
                     }
                 }
+
+                this.dgvRepacksBinding();
             }
             catch (Exception exception)
             {
@@ -187,6 +191,23 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+        public void dgvRepacksBinding()
+        {
+            this.dgvRepacks.AutoGenerateColumns = false;
+            this.dgvRepacks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            this.dgvRepacks.DataSource = this.fillingData.BatchRepacks;
+        }
+
+        private void dgvRepacks_Enter(object sender, EventArgs e)
+        {
+            this.dgvRepacks.ScrollBars = ScrollBars.Vertical;
+        }
+
+        private void dgvRepacks_Leave(object sender, EventArgs e)
+        {
+            this.dgvRepacks.ScrollBars = ScrollBars.None;
+        }
 
         private void SmartCoding_Load(object sender, EventArgs e)
         {
@@ -1024,6 +1045,8 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         #endregion Backup
+        
+
 
 
 

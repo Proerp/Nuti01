@@ -7919,6 +7919,7 @@
           <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" />
           <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
           <Property Type="Int32" Name="PrintedTimes" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
           </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10491,6 +10492,7 @@
                 <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
                 <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
                 <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
