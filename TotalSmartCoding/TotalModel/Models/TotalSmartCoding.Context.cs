@@ -2500,5 +2500,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("GetBatchRepacks", batchIDParameter);
         }
+    
+        public virtual int BatchRepackUpdate(Nullable<int> batchID, Nullable<int> repackID)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            var repackIDParameter = repackID.HasValue ?
+                new ObjectParameter("RepackID", repackID) :
+                new ObjectParameter("RepackID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchRepackUpdate", batchIDParameter, repackIDParameter);
+        }
     }
 }

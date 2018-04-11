@@ -2189,6 +2189,10 @@
         <Function Name="BatchPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchRepackUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+          <Parameter Name="RepackID" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
@@ -4490,6 +4494,10 @@
           </FunctionImport>
           <FunctionImport Name="GetBatchRepacks" ReturnType="Collection(TotalSmartCodingModel.BatchRepack)">
           <Parameter Name="BatchID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchRepackUpdate">
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="RepackID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -7927,6 +7935,7 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="EntryDate" Nullable="false" />
           <Property Type="String" Name="FillingLineCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="RepackID" Nullable="false" />
           </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10501,9 +10510,11 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="FillingLineCode" ColumnName="FillingLineCode" />
+                <ScalarProperty Name="RepackID" ColumnName="RepackID" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BatchRepackUpdate" FunctionName="TotalSmartCodingModel.Store.BatchRepackUpdate" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -32,7 +32,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchInitReference(); //NOT USE THIS ANY MORE. NOW: Reference = Code + LotCode
 
             this.BatchAddLot();
+
             this.BatchCommonUpdate();
+            this.BatchRepackUpdate();
         }
 
 
@@ -126,17 +128,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          Repacks.PackID, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, Repacks.PrintedTimes " + "\r\n";
+            queryString = queryString + "       SELECT          Repacks.RepackID, Repacks.PackID, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, Repacks.PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Repacks " + "\r\n"; //Packs.BatchID: SAVED BATCH; Repacks.BatchID: REPACK BATCH
-            queryString = queryString + "                       INNER JOIN Packs ON Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Packs ON Repacks.PrintedTimes = 0 AND Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
             queryString = queryString + "                       INNER JOIN FillingLines ON Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n"; 
             queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON Packs.CommodityID = Commodities.CommodityID " + "\r\n";
-            queryString = queryString + "       ORDER BY        Repacks.RepackID " + "\r\n";
+            queryString = queryString + "       ORDER BY        Repacks.RepackID " + "\r\n"; //!!!!VERY IMPORTANT: BECAUSE: WE TREAT THIS ORDER WHEN PRINTING. SEE BatchRepackUpdate!!!!
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchRepacks", queryString);
         }
 
+        
         private void BatchEditable()
         {
             string[] queryArray = new string[4];
@@ -238,6 +241,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchCommonUpdate", queryString);
         }
 
+        private void BatchRepackUpdate()
+        {
+            string queryString = " @BatchID int, @RepackID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       UPDATE      Repacks" + "\r\n";
+            queryString = queryString + "       SET         PrintedTimes = 1 " + "\r\n";
+            queryString = queryString + "       WHERE       BatchID = @BatchID AND RepackID <= @RepackID AND PrintedTimes = 0 " + "\r\n";
 
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchRepackUpdate", queryString);
+        }
+        
     }
 }

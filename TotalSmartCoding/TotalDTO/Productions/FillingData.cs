@@ -8,6 +8,7 @@ using TotalModel.Helpers;
 using TotalBase;
 using System.ComponentModel;
 using TotalBase.Enums;
+using Equin.ApplicationFramework;
 
 namespace TotalDTO.Productions
 {
@@ -58,6 +59,9 @@ namespace TotalDTO.Productions
             this.settingDate = DateTime.Now;
 
             this.BatchRepacks = new BindingList<BatchRepackDTO>();
+
+            this.BatchRepackViews = new BindingListView<BatchRepackDTO>(this.BatchRepacks);
+            this.BatchRepackViews.ApplyFilter(f => f.PrintedTimes == 0);
         }
 
         #endregion Contructor
@@ -396,7 +400,7 @@ namespace TotalDTO.Productions
 
         public BatchRepackDTO printedBatchRepackDTO
         {
-            get { return this.BatchRepacks.Where(w => w.LineIndex == (this.RepackSentIndex + 1)).FirstOrDefault(); }
+            get { return this.BatchRepacks.Where(w => w.LineIndex == (this.RepackSentIndex == this.BatchRepacks.Count ? this.RepackSentIndex : this.RepackSentIndex + 1)).FirstOrDefault(); } //SEND DOUBLE TIME FOR THE LAST
         }
 
         private DateTime printedEntryDate
@@ -460,10 +464,10 @@ namespace TotalDTO.Productions
             if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
             {
                 BatchRepackDTO batchRepackDTO = this.printedBatchRepackDTO;
-                return batchRepackDTO.BatchCode + batchRepackDTO.LotCode;            
+                return batchRepackDTO.BatchCode + batchRepackDTO.LotCode;
             }
             else
-                return this.BatchCode + this.LotCode;            
+                return this.BatchCode + this.LotCode;
         }
 
 
@@ -473,9 +477,19 @@ namespace TotalDTO.Productions
 
         public GlobalVariables.PrinterName printerName;
         public BindingList<BatchRepackDTO> BatchRepacks { get; set; }
+        public BindingListView<BatchRepackDTO> BatchRepackViews { get; private set; }
 
         public int RepackSentIndex { get; set; }
         public int RepackPrintedIndex { get; set; }
+
+
+        public int RepackPrintedID
+        {
+            get { return this.BatchRepacks.Where(w => w.LineIndex == this.RepackPrintedIndex).FirstOrDefault().RepackID; }
+        }
+
+
+
 
     }
 }

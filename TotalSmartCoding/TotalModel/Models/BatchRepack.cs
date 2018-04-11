@@ -22,5 +22,6 @@ namespace TotalModel.Models
         public string Code { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string FillingLineCode { get; set; }
+        public int RepackID { get; set; }
     }
 }

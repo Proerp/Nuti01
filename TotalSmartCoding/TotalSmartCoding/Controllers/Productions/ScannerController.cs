@@ -400,7 +400,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 this.PackIgnoreCount = 0;
                 this.CartonIgnoreCount = 0;
-                if (GlobalEnums.OnTestScanner)
+                if (GlobalEnums.OnTestScanner || GlobalEnums.OnTestRepackWithoutScanner)
                 {
                     //this.StartScanner();
                 }
@@ -521,49 +521,50 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     this.MainStatus = this.OnScanning ? "Đang đọc mã vạch ..." : "Sẳn sàng đọc mã vạch";
 
-                    if (this.OnScanning && this.FillingData.HasPack)
+                    if (!GlobalEnums.OnTestRepackWithoutScanner)
                     {
-                        if (this.waitforPack(ref stringReceived))
-                            packQueueChanged = this.ReceivePack(stringReceived) || packQueueChanged;
-
-                        packsetQueueChanged = this.MakePackset(); packQueueChanged = packQueueChanged || packsetQueueChanged;
-                    }
-
-                    if (this.OnScanning && this.FillingData.HasCarton)
-                    {
-                        if (this.waitforCarton(ref stringReceived))
+                        if (this.OnScanning && this.FillingData.HasPack)
                         {
-                            cartonQueueChanged = this.ReceiveCarton(stringReceived) || cartonQueueChanged;
-                            packsetQueueChanged = packsetQueueChanged || cartonQueueChanged; cartonPendingQueueChanged = cartonQueueChanged;
-                        }
-                        cartonsetQueueChanged = this.MakeCartonset(); cartonQueueChanged = cartonQueueChanged || cartonsetQueueChanged;
-                    }
+                            if (this.waitforPack(ref stringReceived))
+                                packQueueChanged = this.ReceivePack(stringReceived) || packQueueChanged;
 
-                    if (this.FillingData.HasPallet)
-                    {
-                        if (this.OnScanning && this.waitforPallet(ref stringReceived))
+                            packsetQueueChanged = this.MakePackset(); packQueueChanged = packQueueChanged || packsetQueueChanged;
+                        }
+
+                        if (this.OnScanning && this.FillingData.HasCarton)
                         {
-                            palletQueueChanged = this.ReceivePallet(stringReceived) || palletQueueChanged;
-                            cartonsetQueueChanged = cartonsetQueueChanged || palletQueueChanged;
+                            if (this.waitforCarton(ref stringReceived))
+                            {
+                                cartonQueueChanged = this.ReceiveCarton(stringReceived) || cartonQueueChanged;
+                                packsetQueueChanged = packsetQueueChanged || cartonQueueChanged; cartonPendingQueueChanged = cartonQueueChanged;
+                            }
+                            cartonsetQueueChanged = this.MakeCartonset(); cartonQueueChanged = cartonQueueChanged || cartonsetQueueChanged;
                         }
-                        else
-                            if (this.palletController.palletService.GetPalletChanged(this.FillingData.FillingLineID))
-                                this.InitializePallet();
+
+                        if (this.FillingData.HasPallet)
+                        {
+                            if (this.OnScanning && this.waitforPallet(ref stringReceived))
+                            {
+                                palletQueueChanged = this.ReceivePallet(stringReceived) || palletQueueChanged;
+                                cartonsetQueueChanged = cartonsetQueueChanged || palletQueueChanged;
+                            }
+                            else
+                                if (this.palletController.palletService.GetPalletChanged(this.FillingData.FillingLineID))
+                                    this.InitializePallet();
+                        }
+
+
+                        if (packQueueChanged) { this.NotifyPropertyChanged("PackQueue"); packQueueChanged = false; }
+                        if (packsetQueueChanged) { this.NotifyPropertyChanged("PacksetQueue"); packsetQueueChanged = false; }
+
+                        if (cartonPendingQueueChanged) { this.NotifyPropertyChanged("CartonPendingQueue"); cartonPendingQueueChanged = false; }
+                        if (cartonQueueChanged) { this.NotifyPropertyChanged("CartonQueue"); cartonQueueChanged = false; }
+                        if (cartonsetQueueChanged) { this.NotifyPropertyChanged("CartonsetQueue"); cartonsetQueueChanged = false; }
+
+                        if (palletQueueChanged) { this.NotifyPropertyChanged("PalletQueue"); palletQueueChanged = false; }
+
                     }
-
-
-                    if (packQueueChanged) { this.NotifyPropertyChanged("PackQueue"); packQueueChanged = false; }
-                    if (packsetQueueChanged) { this.NotifyPropertyChanged("PacksetQueue"); packsetQueueChanged = false; }
-
-                    if (cartonPendingQueueChanged) { this.NotifyPropertyChanged("CartonPendingQueue"); cartonPendingQueueChanged = false; }
-                    if (cartonQueueChanged) { this.NotifyPropertyChanged("CartonQueue"); cartonQueueChanged = false; }
-                    if (cartonsetQueueChanged) { this.NotifyPropertyChanged("CartonsetQueue"); cartonsetQueueChanged = false; }
-
-                    if (palletQueueChanged) { this.NotifyPropertyChanged("PalletQueue"); palletQueueChanged = false; }
-
-
-                    Thread.Sleep(100);
-
+                    Thread.Sleep(100);                    
                 } //End while this.LoopRoutine
             }
             catch (Exception exception)

@@ -23,6 +23,11 @@ namespace TotalDAL.Repositories.Productions
             this.TotalSmartCodingEntities.BatchCommonUpdate(batchID, nextPackNo, nextCartonNo, nextPalletNo);
         }
 
+        public void RepackUpdate(int batchID, int repackID)
+        {
+            this.TotalSmartCodingEntities.BatchRepackUpdate(batchID, repackID);
+        }
+
         public void AddLot(int batchID)
         {
             this.TotalSmartCodingEntities.BatchAddLot(batchID);

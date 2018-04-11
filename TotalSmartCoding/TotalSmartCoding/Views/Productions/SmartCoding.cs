@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
@@ -104,7 +105,7 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.dgvRepacks.AutoGenerateColumns = false;
                 this.dgvRepacks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                this.dgvRepacks.DataSource = this.fillingData.BatchRepacks;
+                this.dgvRepacks.DataSource = this.fillingData.BatchRepackViews;
 
 
                 this.comboBoxEmptyCarton.ComboBox.Items.AddRange(new string[] { "Ignore empty carton", "Keep empty carton" });
@@ -198,16 +199,6 @@ namespace TotalSmartCoding.Views.Productions
             {
                 throw exception;
             }
-        }
-
-        private void dgvRepacks_Enter(object sender, EventArgs e)
-        {
-            //this.dgvRepacks.ScrollBars = ScrollBars.Vertical;
-        }
-
-        private void dgvRepacks_Leave(object sender, EventArgs e)
-        {
-            //this.dgvRepacks.ScrollBars = ScrollBars.None;
         }
 
         private void SmartCoding_Load(object sender, EventArgs e)
@@ -538,6 +529,22 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "LedStatus") { this.packLEDGreen.Enabled = this.packController.LedGreenOn; this.packLEDAmber.Enabled = this.packController.LedAmberOn; this.packLEDRed.Enabled = this.packController.LedRedOn; if (this.packController.LedRedOn) this.StopPrint(true, true, false, false); return; }
 
                     if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.packController.NextPackNo; return; }
+
+
+                    if (e.PropertyName == "RepackPrintedIndex")
+                    {
+                        this.fillingData.BatchRepacks.RaiseListChangedEvents = false;
+
+                        this.fillingData.BatchRepacks.Where(w => w.LineIndex <= this.packController.RepackPrintedIndex && w.PrintedTimes == 0).Each(batchRepackDTO =>
+                        {
+                            batchRepackDTO.PrintedTimes = 1;
+                        });
+
+                        this.fillingData.BatchRepacks.RaiseListChangedEvents = true;
+                        this.fillingData.BatchRepacks.ResetBindings();
+
+                        return;
+                    }
                 }
                 else if (sender.Equals(this.cartonController))
                 {

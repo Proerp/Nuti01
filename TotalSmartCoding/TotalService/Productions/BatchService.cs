@@ -30,6 +30,20 @@ namespace TotalService.Productions
             }
         }
 
+        public bool RepackUpdate(int batchID, int repackID)
+        {
+            try
+            {
+                this.batchRepository.RepackUpdate(batchID, repackID);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                this.ServiceTag = ex.Message;
+                return false;
+            }
+        }
+
         public bool AddLot(int batchID)
         {
             try

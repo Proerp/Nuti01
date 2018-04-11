@@ -6,6 +6,8 @@ namespace TotalDTO.Productions
 {
     public class BatchRepackDTO : BaseDTO
     {
+        public int RepackID { get; set; }
+
         public int LineIndex { get; set; }
 
         public int PackID { get; set; }

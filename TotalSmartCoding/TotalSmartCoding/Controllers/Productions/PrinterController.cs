@@ -327,6 +327,12 @@ namespace TotalSmartCoding.Controllers.Productions
             return (serialIndentity == 1 || serialIndentity == 2 ? this.dominoSerialNumber(serialIndentity) : (this.FillingData.CartonsetQueueZebraStatus == GlobalVariables.ZebraStatus.Freshnew ? this.getNextNo() : this.getPreviousNo()));
         }
 
+
+        private string wholeBarcode(int serialIndentity)
+        {
+            return this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, serialIndentity, false);
+        }
+
         private string EANInitialize(string twelveDigitCode)
         {
 
@@ -406,7 +412,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 return ".              . " + this.firstLineA2(true) + " " + this.thirdLine(true, 1, false) + " .              ."; //GlobalVariables.charESC + "u/1/" + 
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
-                return (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? GlobalVariables.charESC + "u/3/" + "HSD:  " + this.privateFillingData.FirstLineA1(true, true) + (GlobalEnums.PrintLOT ? "    " + this.thirdLineA1(true) : "         ") + "                       " : "") + GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 2, false) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
+                return (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? GlobalVariables.charESC + "u/3/" + "HSD:  " + this.privateFillingData.FirstLineA1(true, true) + (GlobalEnums.PrintLOT ? "    " + this.thirdLineA1(true) : "         ") + "                       " : "") + GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.wholeBarcode(2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
                        GlobalVariables.charESC + "u/1/" + " " + this.firstLine(true, true) + "/" +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true, true) +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1, true);
@@ -433,7 +439,7 @@ namespace TotalSmartCoding.Controllers.Productions
             string stringMessage = "";
 
             if (this.OnPrinting)
-                stringMessage = stringMessage + "^FO0," + (20 + yAxisLocation).ToString() + "  ^BC,360,N  ^FD" + this.firstLine(false, false) + this.secondLine(false, false) + this.thirdLine(false, 0, false) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
+                stringMessage = stringMessage + "^FO0," + (20 + yAxisLocation).ToString() + "  ^BC,360,N  ^FD" + this.wholeBarcode(0) + "^FS";// [^FO0,10 - Set field origin 10 dots to the right and 10 dots down from the home position defined by the ^LH instruction.] [^BC - Select Code 128 bar code.] [^FD - Start of field data for the bar code.] [AAA001 - Actual field data.] [^FS - End of field data.]
             else //TEST PAGE ONLY
             {
                 stringMessage = stringMessage + "^FO0," + (30 + yAxisLocation).ToString() + " ^AS ^FD" + "If you can read this, your printer is ready" + "^FS";
@@ -583,7 +589,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private bool getRepackPrintedIndex(ref string receivedFeedback)
         {
             this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/T/1/?/" + GlobalVariables.charEOT);//T: READ Product Counting
-            this.waitforDomino(ref receivedFeedback, false);
+            this.waitforDomino(ref receivedFeedback, true);
 
             if (receivedFeedback.Length < 9)
                 throw new System.InvalidOperationException("Lỗi đọc bộ đếm (len < 9): " + receivedFeedback);
@@ -596,7 +602,18 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     if (newProductCounting > this.lastProductCounting) //this.lastProductCounting != newProductCounting
                     {
-                        this.privateFillingData.RepackPrintedIndex = this.privateFillingData.RepackPrintedIndex + (newProductCounting - this.lastProductCounting);
+                        if (this.privateFillingData.BatchRepacks.Count >= (this.privateFillingData.RepackPrintedIndex + (newProductCounting - this.lastProductCounting)))
+                        {
+                            this.privateFillingData.RepackPrintedIndex = this.privateFillingData.RepackPrintedIndex + (newProductCounting - this.lastProductCounting);
+
+                            lock (this.batchService) //ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
+                            {
+                                if (!this.batchService.RepackUpdate(this.FillingData.BatchID, this.privateFillingData.RepackPrintedID))
+                                    this.MainStatus = this.batchService.ServiceTag;
+                            }
+
+                            this.NotifyPropertyChanged("RepackPrintedIndex");
+                        }
                         this.lastProductCounting = newProductCounting; return true;
                     }
                 }
@@ -605,11 +622,17 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
+        public int RepackPrintedIndex
+        {
+            get { return this.privateFillingData.RepackPrintedIndex; }
+        }
+
+
         private bool sendtoBuffer()
         {
-            string receivedFeedback = "";
+            string receivedFeedback = ""; //TOTAL LEN: 0083 (INCLUDE 3 Delimiter: ';') BARCODE: INDEX: 1, LEN: 31;         TEXT LINE 1: INDEX: 2, LEN: 16;         TEXT LINE 3: INDEX: 3, LEN: 16;         TEXT LINE 4: INDEX: 4, LEN: 17
 
-            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/O/E/0009/" + "this.WholeMessageLine()" + " /" + GlobalVariables.charEOT); Thread.Sleep(20);//OE (4Fh 45h): Streaming the data to the printer
+            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/O/E/0083/" + this.wholeBarcode(2) + ";" + this.firstLine(true, true) + ";" + this.secondLine(true, true) + ";" + this.thirdLine(true, 1, true) + " /" + GlobalVariables.charEOT); Thread.Sleep(20);//OE (4Fh 45h): Streaming the data to the printer
 
             return this.waitforDomino(ref receivedFeedback, true);
         }
@@ -772,6 +795,12 @@ namespace TotalSmartCoding.Controllers.Productions
 
             //This command line is specific to: PalletLabel ON FillingLine.Drum || CartonInkjet ON FillingLine.Pail (Just here only for this specific)
             if (GlobalEnums.OnTestPrinter || (GlobalEnums.OnTestZebra && this.printerName == GlobalVariables.PrinterName.PalletLabel) || (this.FillingData.FillingLineID == GlobalVariables.FillingLine.Drum && this.printerName != GlobalVariables.PrinterName.PalletLabel) || (this.printerName == GlobalVariables.PrinterName.DigitInkjet && GlobalEnums.OnTestDigit)) { this.LedGreenOn = true; return; } //DO NOTHING
+
+
+
+
+            //TEST REPACK, TEST ONLY WITH PackInkjet
+            if (this.printerName != GlobalVariables.PrinterName.PackInkjet && GlobalEnums.OnTestRepackWithoutScanner) { this.LedGreenOn = true; return; } //DO NOTHING
 
 
             try
@@ -1003,6 +1032,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                         this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/P/1/002/" + GlobalVariables.charEOT); //USING UI TO SETUP MSG 002: USING UPDATABLE FIELDS FOR BOTH TEXT + BARCODE
                                         if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi bản tin repack 002: " + receivedFeedback);
 
+
                                         //O/E:----- //Esc/O/E/0000/0/Eot: EMPTY DATA QUEUE
                                         this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/O/E/0000/0/" + GlobalVariables.charEOT);
                                         if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(30); else throw new System.InvalidOperationException("Lỗi xóa buffer: " + receivedFeedback);
@@ -1054,11 +1084,15 @@ namespace TotalSmartCoding.Controllers.Productions
                             }
 
                             if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
-                            {
-                                if (this.privateFillingData.RepackSentIndex - this.privateFillingData.RepackPrintedIndex < 25 && this.privateFillingData.RepackSentIndex < this.privateFillingData.BatchRepacks.Count)
-                                { if (this.sendtoBuffer()) this.privateFillingData.RepackSentIndex++; }
+                            {//RepackSentIndex: MEANS: HAS BEEN SENT ALREADY. HERE RepackSentIndex MUST LESS (<) THAN this.privateFillingData.BatchRepacks.Count. BUT HERE: WE USE '<=': THE PUPOSE IS: TO SENT THE LAST BARCODE TWICE ==> TO PREVENT THE PRINNTER PRINT BLANK BARCODE IF THIS SOFTWARE CAN NOT CLEAR THE MESSAGE RIGHT AFTER (IMMEDIATELY) THE LAST MSG HAS BEEN PRINTED (THE RULE IS: WHEN TWO MESSAGE PRINT TWICE, THE SCANNER WILL DETECT DUPLICATE BARCODE TO STOP PRINTER)
+                                if (this.privateFillingData.RepackSentIndex - this.privateFillingData.RepackPrintedIndex < 25 && this.privateFillingData.RepackSentIndex <= this.privateFillingData.BatchRepacks.Count) //SEND DOUBLE TIME FOR THE LAST
+                                { if (this.sendtoBuffer()) this.privateFillingData.RepackSentIndex++; } //25: MEAN: WE USE MAXIMUN 25 BUFFER ENTRY FOR CACHED DATA (THE MAX CAPACITY OF BUFFER ARE 32 ENTRY)
                                 else
                                     this.getRepackPrintedIndex(ref receivedFeedback);
+
+                                if (this.privateFillingData.RepackPrintedIndex >= this.privateFillingData.BatchRepacks.Count)
+                                    this.StopPrint();
+
                             }
                             #endregion setup for every message: printerName == PalletLabel
                         }
