@@ -9,8 +9,9 @@ namespace TotalCore.Repositories.Productions
     {
         IList<Pack> GetPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? cartonID);
         IList<Pack> SearchPacks(string barcode);
+        int? GetRelatedPackID(int batchID, string barcode);
 
         void UpdateQueueID(string packIDs, int queueID);
-        void UpdateEntryStatus(string packIDs, GlobalVariables.BarcodeStatus barcodeStatus);        
+        void UpdateEntryStatus(string packIDs, GlobalVariables.BarcodeStatus barcodeStatus);
     }
 }

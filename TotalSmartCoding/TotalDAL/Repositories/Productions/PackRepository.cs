@@ -24,6 +24,11 @@ namespace TotalDAL.Repositories.Productions
             return this.TotalSmartCodingEntities.SearchPacks(barcode).ToList();
         }
 
+        public int? GetRelatedPackID(int batchID, string barcode)
+        {
+            return this.TotalSmartCodingEntities.GetRelatedPackID(batchID, barcode).FirstOrDefault();
+        }
+
         public void UpdateQueueID(string packIDs, int queueID)
         {
             this.TotalSmartCodingEntities.PackUpdateQueueID(packIDs, queueID);

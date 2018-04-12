@@ -581,6 +581,7 @@
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="QueueID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
+          <Property Name="RelatedPackID" Type="int" />
           <Property Name="CartonID" Type="int" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LineVolume" Type="decimal" Precision="18" Scale="3" Nullable="false" />
@@ -667,6 +668,7 @@
           <Property Name="EntryDate" Type="date" Nullable="false" />
           <Property Name="BatchID" Type="int" Nullable="false" />
           <Property Name="PackID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PrintedTimes" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Reports">
@@ -2612,6 +2614,10 @@
         </Function>
         <Function Name="GetPickupViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PickupID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetRelatedPackID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
         </Function>
         <Function Name="GetReportIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
@@ -4591,6 +4597,10 @@
           <FunctionImport Name="BatchRepackReprint">
           <Parameter Name="RepackID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetRelatedPackID" ReturnType="Collection(Int32)">
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="Barcode" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -5495,6 +5505,7 @@
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="Pack" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Packs" FromRole="Pack" ToRole="WarehouseAdjustmentDetail" />
           <NavigationProperty Name="Repacks" Relationship="TotalSmartCodingModel.FK_Repacks_Packs" FromRole="Pack" ToRole="Repack" />
+          <Property Name="RelatedPackID" Type="Int32" />
         </EntityType>
         <EntityType Name="Pallet">
           <Key>
@@ -8045,6 +8056,7 @@
           <Property Name="PrintedTimes" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Batch" Relationship="TotalSmartCodingModel.FK_Repacks_Batches" FromRole="Repack" ToRole="Batch" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_Repacks_Packs" FromRole="Repack" ToRole="Pack" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Repacks_Batches">
           <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="1" />
@@ -9090,6 +9102,7 @@
           <EntitySetMapping Name="Packs">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pack">
               <MappingFragment StoreEntitySet="Packs">
+                <ScalarProperty Name="RelatedPackID" ColumnName="RelatedPackID" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="LineVolume" ColumnName="LineVolume" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -10654,6 +10667,7 @@
           <EntitySetMapping Name="Repacks">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Repack">
               <MappingFragment StoreEntitySet="Repacks">
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
                 <ScalarProperty Name="PackID" ColumnName="PackID" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
@@ -10686,6 +10700,7 @@
           <FunctionImportMapping FunctionImportName="RepackRollback" FunctionName="TotalSmartCodingModel.Store.RepackRollback" />
           <FunctionImportMapping FunctionImportName="BatchRepackDelete" FunctionName="TotalSmartCodingModel.Store.BatchRepackDelete" />
           <FunctionImportMapping FunctionImportName="BatchRepackReprint" FunctionName="TotalSmartCodingModel.Store.BatchRepackReprint" />
+          <FunctionImportMapping FunctionImportName="GetRelatedPackID" FunctionName="TotalSmartCodingModel.Store.GetRelatedPackID" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

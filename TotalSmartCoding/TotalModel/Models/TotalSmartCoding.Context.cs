@@ -2576,5 +2576,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchRepackReprint", repackIDParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> GetRelatedPackID(Nullable<int> batchID, string barcode)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetRelatedPackID", batchIDParameter, barcodeParameter);
+        }
     }
 }

@@ -146,6 +146,7 @@ namespace TotalSmartCoding.Views.Productions
                         RepackDTO repackDTO = new RepackDTO();
                         repackDTO.BatchID = this.fillingData.BatchID;
                         repackDTO.PackID = batchRepack.PackID;
+                        repackDTO.Code = batchRepack.Code;
 
                         if (!repackController.repackService.Save(repackDTO))
                             throw new Exception(lastSavedBarcode);

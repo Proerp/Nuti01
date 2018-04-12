@@ -29,6 +29,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.PackUpdateEntryStatus();
 
             this.SearchPacks();
+            this.GetRelatedPackID();
         }
 
         private void PackPostSaveValidate()
@@ -134,5 +135,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateStoredProcedure("SearchPacks", queryString);
         }
+
+        private void GetRelatedPackID()
+        {
+            string queryString;
+
+            queryString = " @BatchID int, @Barcode varchar(50) " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+            queryString = queryString + "       DECLARE     @RelatedPackID int ";
+            queryString = queryString + "       DECLARE     @Barcode1 varchar(50) = LEFT(@Barcode, 4) + 'N' + RIGHT(@Barcode, 26), @Barcode2 varchar(50) = LEFT(@Barcode, 4) + 'R' + RIGHT(@Barcode, 26), @Barcode3 varchar(50)  = LEFT(@Barcode, 4) + 'T' + RIGHT(@Barcode, 26)";
+            queryString = queryString + "       SELECT      TOP 1 @RelatedPackID = PackID FROM Repacks WHERE BatchID = @BatchID AND (Code = @Barcode1 OR Code = @Barcode2 OR Code = @Barcode3) ";
+            queryString = queryString + "       SELECT      @RelatedPackID " + "\r\n";
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetRelatedPackID", queryString);
+        }
+
     }
 }

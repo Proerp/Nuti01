@@ -26,6 +26,7 @@ namespace TotalDTO.Productions
 
         public int PackID { get; set; }
         public Nullable<int> CartonID { get; set; }
+        public Nullable<int> RelatedPackID { get; set; }
 
         public override int PackCounts { get { return 1; } set { } }
     }

@@ -10,6 +10,7 @@ namespace TotalCore.Services.Productions
     public interface IPackService : IGenericService<Pack, PackDTO, PackPrimitiveDTO>
     {
         IList<Pack> GetPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? cartonID);
+        int? GetRelatedPackID(int batchID, string barcode);
 
         bool UpdateEntryStatus(string packIDs, GlobalVariables.BarcodeStatus barcodeStatus);
 

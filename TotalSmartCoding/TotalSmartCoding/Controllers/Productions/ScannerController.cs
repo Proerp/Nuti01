@@ -564,7 +564,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         if (palletQueueChanged) { this.NotifyPropertyChanged("PalletQueue"); palletQueueChanged = false; }
 
                     }
-                    Thread.Sleep(100);                    
+                    Thread.Sleep(100);
                 } //End while this.LoopRoutine
             }
             catch (Exception exception)
@@ -633,6 +633,12 @@ namespace TotalSmartCoding.Controllers.Productions
 
                 lock (this.packController)
                 {
+                    if (this.FillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                    {
+                        packDTO.RelatedPackID = this.packController.packService.GetRelatedPackID(this.FillingData.BatchID, packDTO.Code);
+                        if (packDTO.RelatedPackID == null) throw new Exception("Mã vạch lon " + packDTO.Code + " không nằm trong dữ liệu repack");
+                    }
+
                     PackController freshPackController = new PackController(CommonNinject.Kernel.Get<IPackService>(), this.packViewModel);
                     if (freshPackController.packService.Save(packDTO))
                         return packDTO;

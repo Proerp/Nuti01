@@ -24,6 +24,11 @@ namespace TotalService.Productions
             return this.packRepository.GetPacks(fillingLineID, entryStatusIDs, cartonID);
         }
 
+        public int? GetRelatedPackID(int batchID, string barcode)
+        {
+            return this.packRepository.GetRelatedPackID(batchID, barcode);
+        }
+
         public bool UpdateEntryStatus(string packIDs, GlobalVariables.BarcodeStatus barcodeStatus)
         {
             try
