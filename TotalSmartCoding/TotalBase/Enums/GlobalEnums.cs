@@ -73,6 +73,7 @@
             Carton = 686868,
             Pallet = 686868,
             SmartCoding = 888888,
+            Repack = 68686811,
 
             Customer = 8001,
             Commodity = 8002,

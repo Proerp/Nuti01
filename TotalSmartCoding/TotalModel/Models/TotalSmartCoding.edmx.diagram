@@ -155,6 +155,9 @@
         <AssociationConnector Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.ColumnMapping" Width="1.5" PointX="5.375" PointY="7.75" />
         <EntityTypeShape EntityType="TotalSmartCodingModel.Report" Width="1.5" PointX="12.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.Repack" Width="1.5" PointX="22.125" PointY="11.125" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Repacks_Batches" />
+        <AssociationConnector Association="TotalSmartCodingModel.FK_Repacks_Packs" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

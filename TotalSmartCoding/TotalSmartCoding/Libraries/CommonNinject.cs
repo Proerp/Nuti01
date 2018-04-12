@@ -248,6 +248,10 @@ namespace TotalSmartCoding.Libraries
                 Kernel.Bind<PalletViewModel>().ToSelf();
 
 
+                Kernel.Bind<IRepackService>().To<RepackService>();
+                Kernel.Bind<IRepackRepository>().To<RepackRepository>();
+                Kernel.Bind<RepackViewModel>().ToSelf();
+
 
                 Kernel.Bind<FillingData>().ToSelf();
 

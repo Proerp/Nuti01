@@ -84,6 +84,7 @@
     <Compile Include="Repositories\Productions\ICartonRepository.cs" />
     <Compile Include="Repositories\Productions\IPackRepository.cs" />
     <Compile Include="Repositories\Productions\IPalletRepository.cs" />
+    <Compile Include="Repositories\Productions\IRepackRepository.cs" />
     <Compile Include="Repositories\Sales\IDeliveryAdviceRepository.cs" />
     <Compile Include="Repositories\Sales\ISalesOrderRepository.cs" />
     <Compile Include="Repositories\Sales\ITransferOrderRepository.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Services\Productions\ICartonService.cs" />
     <Compile Include="Services\Productions\IPackService.cs" />
     <Compile Include="Services\Productions\IPalletService.cs" />
+    <Compile Include="Services\Productions\IRepackService.cs" />
     <Compile Include="Services\Sales\IDeliveryAdviceService.cs" />
     <Compile Include="Services\Sales\ISalesOrderService.cs" />
     <Compile Include="Services\Sales\ITransferOrderService.cs" />

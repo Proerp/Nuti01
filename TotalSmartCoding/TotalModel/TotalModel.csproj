@@ -264,6 +264,9 @@
     <Compile Include="Models\LocationIndex.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LookupPack.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Module.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
@@ -358,6 +361,9 @@
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PickupViewDetail.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Repack.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Report.cs">

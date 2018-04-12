@@ -136,6 +136,7 @@
     <Compile Include="Controllers\Inventories\PickupController.cs" />
     <Compile Include="Controllers\Inventories\WarehouseAdjustmentController.cs" />
     <Compile Include="Controllers\Productions\BatchMasterController.cs" />
+    <Compile Include="Controllers\Productions\RepackController.cs" />
     <Compile Include="Controllers\Sales\DeliveryAdviceController.cs" />
     <Compile Include="Controllers\Sales\SalesOrderController.cs" />
     <Compile Include="Controllers\Sales\TransferOrderController.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="ViewModels\Productions\CartonViewModel.cs" />
     <Compile Include="ViewModels\Productions\PackViewModel.cs" />
     <Compile Include="ViewModels\Productions\PalletViewModel.cs" />
+    <Compile Include="ViewModels\Productions\RepackViewModel.cs" />
     <Compile Include="ViewModels\Sales\DeliveryAdviceViewModel.cs" />
     <Compile Include="ViewModels\Sales\SalesOrderViewModel.cs" />
     <Compile Include="ViewModels\Sales\TransferOrderViewModel.cs" />
@@ -402,6 +404,12 @@
     <Compile Include="Views\Productions\BatchMasterWizard.designer.cs">
       <DependentUpon>BatchMasterWizard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Productions\BatchRepackWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Productions\BatchRepackWizard.designer.cs">
+      <DependentUpon>BatchRepackWizard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Productions\BatchWizard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -574,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Productions\BatchMasterWizard.resx">
       <DependentUpon>BatchMasterWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Productions\BatchRepackWizard.resx">
+      <DependentUpon>BatchRepackWizard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Productions\BatchWizard.resx">
       <DependentUpon>BatchWizard.cs</DependentUpon>
@@ -1202,6 +1213,8 @@
     <None Include="Resources\ReportAnalytics.png" />
     <None Include="Resources\Letter-Powerpoint.ico" />
     <None Include="Resources\Icons8-Windows-8-Numbers-7.ico" />
+    <None Include="Resources\textfile.ico" />
+    <None Include="Resources\text32.png" />
     <Content Include="SmartCodingSolution.ico" />
     <None Include="Resources\Yellow-cross.ico" />
     <None Include="Resources\White-Pallet.ico" />

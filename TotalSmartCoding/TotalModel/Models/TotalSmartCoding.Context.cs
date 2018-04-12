@@ -73,6 +73,7 @@ namespace TotalModel.Models
         public virtual DbSet<Batch> Batches { get; set; }
         public virtual DbSet<ColumnMapping> ColumnMappings { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<Repack> Repacks { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -2512,6 +2513,15 @@ namespace TotalModel.Models
                 new ObjectParameter("RepackID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchRepackUpdate", batchIDParameter, repackIDParameter);
+        }
+    
+        public virtual ObjectResult<LookupPack> LookupPacks(string barcode)
+        {
+            var barcodeParameter = barcode != null ?
+                new ObjectParameter("Barcode", barcode) :
+                new ObjectParameter("Barcode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LookupPack>("LookupPacks", barcodeParameter);
         }
     }
 }

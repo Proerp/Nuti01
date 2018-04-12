@@ -659,6 +659,16 @@
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="ApprovedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Repacks">
+          <Key>
+            <PropertyRef Name="RepackID" />
+          </Key>
+          <Property Name="RepackID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="BatchID" Type="int" Nullable="false" />
+          <Property Name="PackID" Type="int" Nullable="false" />
+          <Property Name="PrintedTimes" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Reports">
           <Key>
             <PropertyRef Name="ReportID" />
@@ -1826,6 +1836,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Repacks_Batches">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="Repacks" Type="Self.Repacks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="Repacks">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repacks_Packs">
+          <End Role="Packs" Type="Self.Packs" Multiplicity="1" />
+          <End Role="Repacks" Type="Self.Repacks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packs">
+              <PropertyRef Name="PackID" />
+            </Principal>
+            <Dependent Role="Repacks">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SalesOrderDetails_Commodities">
           <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
           <End Role="SalesOrderDetails" Type="Self.SalesOrderDetails" Multiplicity="*" />
@@ -2706,6 +2740,9 @@
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
         </Function>
+        <Function Name="LookupPacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Barcode" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="PackEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -2893,6 +2930,7 @@
           <EntitySet Name="Pallets" EntityType="Self.Pallets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PickupDetails" EntityType="Self.PickupDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pickups" EntityType="Self.Pickups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repacks" EntityType="Self.Repacks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reports" EntityType="Self.Reports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesOrderDetails" EntityType="Self.SalesOrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesOrders" EntityType="Self.SalesOrders" Schema="dbo" store:Type="Tables" />
@@ -3212,6 +3250,14 @@
           <AssociationSet Name="FK_Pickups_Warehouses" Association="Self.FK_Pickups_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="Pickups" EntitySet="Pickups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repacks_Batches" Association="Self.FK_Repacks_Batches">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Repacks" EntitySet="Repacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repacks_Packs" Association="Self.FK_Repacks_Packs">
+            <End Role="Packs" EntitySet="Packs" />
+            <End Role="Repacks" EntitySet="Repacks" />
           </AssociationSet>
           <AssociationSet Name="FK_SalesOrderDetails_Commodities" Association="Self.FK_SalesOrderDetails_Commodities">
             <End Role="Commodities" EntitySet="Commodities" />
@@ -4499,6 +4545,18 @@
             <Parameter Name="BatchID" Mode="In" Type="Int32" />
             <Parameter Name="RepackID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Repacks" EntityType="TotalSmartCodingModel.Repack" />
+          <AssociationSet Name="FK_Repacks_Batches" Association="TotalSmartCodingModel.FK_Repacks_Batches">
+            <End Role="Batch" EntitySet="Batches" />
+            <End Role="Repack" EntitySet="Repacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repacks_Packs" Association="TotalSmartCodingModel.FK_Repacks_Packs">
+            <End Role="Pack" EntitySet="Packs" />
+            <End Role="Repack" EntitySet="Repacks" />
+          </AssociationSet>
+          <FunctionImport Name="LookupPacks" ReturnType="Collection(TotalSmartCodingModel.LookupPack)">
+          <Parameter Name="Barcode" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -5402,6 +5460,7 @@
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Pack" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="Pack" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Packs" FromRole="Pack" ToRole="WarehouseAdjustmentDetail" />
+          <NavigationProperty Name="Repacks" Relationship="TotalSmartCodingModel.FK_Repacks_Packs" FromRole="Pack" ToRole="Repack" />
         </EntityType>
         <EntityType Name="Pallet">
           <Key>
@@ -7747,6 +7806,7 @@
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Batch" ToRole="Commodity" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="Batch" ToRole="DeliveryAdviceDetail" />
+          <NavigationProperty Name="Repacks" Relationship="TotalSmartCodingModel.FK_Repacks_Batches" FromRole="Batch" ToRole="Repack" />
         </EntityType>
         <Association Name="FK_Batches_BatchMasters">
           <End Type="TotalSmartCodingModel.BatchMaster" Role="BatchMaster" Multiplicity="1" />
@@ -7937,6 +7997,53 @@
           <Property Type="String" Name="FillingLineCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="RepackID" Nullable="false" />
           </ComplexType>
+        <EntityType Name="Repack">
+          <Key>
+            <PropertyRef Name="RepackID" />
+          </Key>
+          <Property Name="RepackID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
+          <Property Name="PackID" Type="Int32" Nullable="false" />
+          <Property Name="PrintedTimes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="TotalSmartCodingModel.FK_Repacks_Batches" FromRole="Repack" ToRole="Batch" />
+          <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_Repacks_Packs" FromRole="Repack" ToRole="Pack" />
+        </EntityType>
+        <Association Name="FK_Repacks_Batches">
+          <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Repack" Role="Repack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batch">
+              <PropertyRef Name="BatchID" />
+            </Principal>
+            <Dependent Role="Repack">
+              <PropertyRef Name="BatchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repacks_Packs">
+          <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Repack" Role="Repack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="PackID" />
+            </Principal>
+            <Dependent Role="Repack">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="LookupPack">
+          <Property Type="Int32" Name="PackID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="BatchID" Nullable="false" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" />
+          <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10515,6 +10622,32 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BatchRepackUpdate" FunctionName="TotalSmartCodingModel.Store.BatchRepackUpdate" />
+          <EntitySetMapping Name="Repacks">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Repack">
+              <MappingFragment StoreEntitySet="Repacks">
+                <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="RepackID" ColumnName="RepackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LookupPacks" FunctionName="TotalSmartCodingModel.Store.LookupPacks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.LookupPack">
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
+                <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+                <ScalarProperty Name="LotCode" ColumnName="LotCode" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

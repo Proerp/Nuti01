@@ -859,6 +859,18 @@ namespace TotalModel.Models
 
 
 
+    public partial class Repack : IPrimitiveEntity, IBaseEntity
+    {
+        public int GetID() { return this.RepackID; }
+
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+        public int LocationID { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
+    }
 
 
 

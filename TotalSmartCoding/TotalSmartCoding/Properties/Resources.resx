@@ -148,8 +148,8 @@
   <data name="letter-d-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-d-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Play-Normal-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Play-Normal-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Fatcow-Farm-Fresh-Key-escape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Fatcow-Farm-Fresh-Key-escape.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Placeholder16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Placeholder16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -186,9 +186,6 @@
   </data>
   <data name="sign-out-black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sign-out-black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Numbers-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Numbers-2.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1-icon642" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1-icon642.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,9 +229,6 @@
   <data name="Forklift48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Forklift48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder-printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder-printer.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="o-zero-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\o-zero-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -247,8 +241,8 @@
   <data name="sign-out-light-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sign-out-light-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Number-Keys-8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Number-Keys-8.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Icons8-Windows-8-Numbers-7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Icons8-Windows-8-Numbers-7.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Download.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -388,14 +382,14 @@
   <data name="letter-j" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-j.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Fatcow-Farm-Fresh-Key-escape" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Fatcow-Farm-Fresh-Key-escape.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="backspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backspace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="letter-f" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Letter-uppercase-T" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Letter-uppercase-T.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="star161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\star161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\printer.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -423,6 +417,9 @@
   </data>
   <data name="Delacro-Id-Recent-Documents" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delacro-Id-Recent-Documents.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="textfile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\textfile.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="letter-i" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-i.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -493,9 +490,6 @@
   <data name="Key (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Key (2).ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="letter-u" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\letter-u.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Energy_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Energy_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -505,8 +499,8 @@
   <data name="Ok-Saki-Snowish" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Ok-Saki-Snowish.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="barcode_scan_mobile_hand-30" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\barcode_scan_mobile_hand-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Play_Normal_Red_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Play_Normal_Red_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Alarm-Warning1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Alarm-Warning1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -514,8 +508,8 @@
   <data name="DataEdit-1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataEdit-1.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ToolbarImageStretch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ToolbarImageStretch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="letter-uppercase-D-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\letter-uppercase-D-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="box-full-40" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\box-full-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -582,6 +576,9 @@
   </data>
   <data name="Actions-NOTok-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Actions-NOTok-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="barcode_scan_mobile_hand-30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\barcode_scan_mobile_hand-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="canned-food" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\canned-food.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -724,6 +721,9 @@
   <data name="Bookmark-add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bookmark-add.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Facsimile-Fax" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Facsimile-Fax.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="alert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\alert.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -747,6 +747,9 @@
   </data>
   <data name="connect (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\connect (2).ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Letter-uppercase-T" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Letter-uppercase-T.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="4-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -853,9 +856,6 @@
   <data name="DataNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataNew.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="2-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\2-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Antrepo-Cargo-Boxes-Palet-01" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Antrepo-Cargo-Boxes-Palet-01.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -889,11 +889,11 @@
   <data name="1-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="letter-x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\letter-x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Letter-Powerpoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Letter-Powerpoint.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play_Normal_Red_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Play_Normal_Red_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="sign-out-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sign-out-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -918,9 +918,6 @@
   </data>
   <data name="20130106011449193_easyicon_cn_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\20130106011449193_easyicon_cn_32.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="letter-uppercase-F-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\letter-uppercase-F-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="letter-g" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-g.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -954,6 +951,9 @@
   </data>
   <data name="Letter-uppercase-Q" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Letter-uppercase-Q.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Edit-clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Edit-clear.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="printer (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\printer (2).ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -994,8 +994,8 @@
   <data name="letter-uppercase-M-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-uppercase-M-icon.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="backspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\backspace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="connect_creating" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connect_creating.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Numbers-1-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Numbers-1-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1015,6 +1015,9 @@
   <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Settings.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ToolbarImageStretch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ToolbarImageStretch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sign-out-magenta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sign-out-magenta.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1030,8 +1033,11 @@
   <data name="Everaldo-Crystal-Clear-App-key-bindings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Everaldo-Crystal-Clear-App-key-bindings.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="connect_creating" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\connect_creating.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="2-icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2-icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Green-cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Green-cross.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Warehouse-Full-20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Warehouse-Full-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1087,6 +1093,9 @@
   <data name="letter-a-inside-a-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-a-inside-a-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Play-Normal-16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Play-Normal-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="exit-to-app-button-magenta-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exit-to-app-button-magenta-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1111,8 +1120,8 @@
   <data name="Sign_Order_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sign_Order_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Facsimile-Fax" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Facsimile-Fax.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder-printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-printer.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="letter-l" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\letter-l.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1273,8 +1282,8 @@
   <data name="sign-out-very-light-gray" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sign-out-very-light-gray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="letter-x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\letter-x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Letter-uppercase-Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Letter-uppercase-Y.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bar-code" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bar-code.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1324,8 +1333,8 @@
   <data name="sign-out-option" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sign-out-option.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="star161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\star161.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="letter-u" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\letter-u.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8-esc-32-Ios" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-esc-32-Ios.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1531,11 +1540,11 @@
   <data name="five" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\five.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Green-cross" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Green-cross.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="letter-uppercase-F-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\letter-uppercase-F-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="letter-uppercase-D-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\letter-uppercase-D-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Numbers-2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Numbers-2.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Fuel-icon-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fuel-icon-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1549,8 +1558,8 @@
   <data name="Chromatix-Keyboard-Keys-0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chromatix-Keyboard-Keys-0.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Edit-clear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Edit-clear.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Number-Keys-8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Number-Keys-8.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="barcode_scan_mobile_hand-28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\barcode_scan_mobile_hand-28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1669,16 +1678,13 @@
   <data name="blank-keyboard-key-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\blank-keyboard-key-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Letter-uppercase-Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Letter-uppercase-Y.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Dario-Arnaez-Genesis-3G-User-Files" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Dario-Arnaez-Genesis-3G-User-Files.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="2D-Barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2D-Barcode.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Icons8-Windows-8-Numbers-7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons8-Windows-8-Numbers-7.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="text32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\text32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -20,6 +20,7 @@ namespace TotalModel.Models
             this.PickupDetails = new HashSet<PickupDetail>();
             this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
             this.WarehouseAdjustmentDetails = new HashSet<WarehouseAdjustmentDetail>();
+            this.Repacks = new HashSet<Repack>();
         }
     
         public int PackID { get; set; }
@@ -43,5 +44,7 @@ namespace TotalModel.Models
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseAdjustmentDetail> WarehouseAdjustmentDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Repack> Repacks { get; set; }
     }
 }

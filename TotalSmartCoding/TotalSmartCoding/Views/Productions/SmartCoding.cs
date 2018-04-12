@@ -632,9 +632,14 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
+        private bool AnyLoopRoutine()
+        {
+            return digitController.LoopRoutine | packController.LoopRoutine | cartonController.LoopRoutine | palletController.LoopRoutine | scannerController.LoopRoutine;
+        }
+
         private void setToolStripActive()
         {
-            bool anyLoopRoutine = digitController.LoopRoutine | packController.LoopRoutine | cartonController.LoopRoutine | palletController.LoopRoutine | scannerController.LoopRoutine;
+            bool anyLoopRoutine = this.AnyLoopRoutine();
             bool allLoopRoutine = digitController.LoopRoutine && packController.LoopRoutine && cartonController.LoopRoutine && palletController.LoopRoutine && scannerController.LoopRoutine;
 
             bool anyOnPrinting = digitController.OnPrinting | packController.OnPrinting | cartonController.OnPrinting | palletController.OnPrinting | scannerController.OnScanning;
@@ -650,7 +655,7 @@ namespace TotalSmartCoding.Views.Productions
             this.buttonReprint.Enabled = this.palletController.LedGreenOn && palletController.OnPrinting;
 
             this.buttonBatches.Enabled = !anyLoopRoutine;
-
+            this.buttonRepackImport.Enabled = !anyLoopRoutine;
 
 
             this.digitLEDGreen.Enabled = digitController.LoopRoutine && this.digitController.LedGreenOn;
@@ -1054,6 +1059,38 @@ namespace TotalSmartCoding.Views.Productions
 
         #endregion Backup
 
+
+        #region Repacks
+        private void buttonRepackImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!this.AnyLoopRoutine())
+                {
+                    IPendingPrimaryDetail pendingPrimaryDetail = null; string fileName = null;
+
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Text Document (.txt)|*.txt";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.FileName != "") fileName = openFileDialog.FileName;
+                    
+                    if (fileName != null)
+                    {
+                        bool dialogResultOK;
+                        BatchRepackWizard batchRepackWizard = new BatchRepackWizard(this.fillingData, fileName);
+                        
+                            dialogResultOK = batchRepackWizard.ShowDialog() == System.Windows.Forms.DialogResult.OK;
+                            batchRepackWizard.Dispose();
+                        
+                        //if (dialogResultOK) this.callAutoSave();
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+        #endregion Repacks
 
 
 

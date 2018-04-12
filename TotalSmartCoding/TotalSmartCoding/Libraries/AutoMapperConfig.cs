@@ -93,6 +93,7 @@ namespace TotalSmartCoding.Libraries
                 cfg.CreateMap<BatchMasterPrimitiveDTO, BatchMaster>();
 
                 cfg.CreateMap<BatchRepack, BatchRepackDTO>();
+                cfg.CreateMap<LookupPack, BatchRepackDTO>();
 
                 cfg.CreateMap<Pack, PackViewModel>();
                 cfg.CreateMap<Pack, PackDTO>();
@@ -108,6 +109,10 @@ namespace TotalSmartCoding.Libraries
                 cfg.CreateMap<Pallet, PalletDTO>();
                 cfg.CreateMap<PalletPrimitiveDTO, Pallet>();
 
+
+                cfg.CreateMap<Repack, RepackViewModel>();
+                cfg.CreateMap<Repack, RepackDTO>();
+                cfg.CreateMap<RepackPrimitiveDTO, Repack>();
 
                 cfg.CreateMap<Commodity, CommodityViewModel>();
                 cfg.CreateMap<Commodity, CommodityDTO>();
