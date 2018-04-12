@@ -47,9 +47,9 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
             return this.batchAPIRepository.GetPendingLots(locationID);
         }
 
-        public List<BatchRepack> GetBatchRepacks(int? batchID)
+        public List<BatchRepack> GetBatchRepacks(int? batchID, bool notPrintedOnly)
         {
-            return this.batchAPIRepository.GetBatchRepacks(batchID);
+            return this.batchAPIRepository.GetBatchRepacks(batchID, notPrintedOnly);
         }
 
         public IList<BatchAvailable> GetBatchAvailables(int? locationID, int? deliveryAdviceID, int? transferOrderID, int? commodityID, bool withNullRow)

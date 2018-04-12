@@ -2493,13 +2493,17 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserTree>("GetUserTrees", activeOptionParameter);
         }
     
-        public virtual ObjectResult<BatchRepack> GetBatchRepacks(Nullable<int> batchID)
+        public virtual ObjectResult<BatchRepack> GetBatchRepacks(Nullable<int> batchID, Nullable<bool> notPrintedOnly)
         {
             var batchIDParameter = batchID.HasValue ?
                 new ObjectParameter("BatchID", batchID) :
                 new ObjectParameter("BatchID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("GetBatchRepacks", batchIDParameter);
+            var notPrintedOnlyParameter = notPrintedOnly.HasValue ?
+                new ObjectParameter("NotPrintedOnly", notPrintedOnly) :
+                new ObjectParameter("NotPrintedOnly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("GetBatchRepacks", batchIDParameter, notPrintedOnlyParameter);
         }
     
         public virtual int BatchRepackUpdate(Nullable<int> batchID, Nullable<int> repackID)
@@ -2553,6 +2557,24 @@ namespace TotalModel.Models
                 new ObjectParameter("RepackID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RepackRollback", batchIDParameter, repackIDParameter);
+        }
+    
+        public virtual int BatchRepackDelete(Nullable<int> batchID)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchRepackDelete", batchIDParameter);
+        }
+    
+        public virtual int BatchRepackReprint(Nullable<int> repackID)
+        {
+            var repackIDParameter = repackID.HasValue ?
+                new ObjectParameter("RepackID", repackID) :
+                new ObjectParameter("RepackID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchRepackReprint", repackIDParameter);
         }
     }
 }

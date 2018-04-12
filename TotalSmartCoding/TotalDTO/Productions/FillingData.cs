@@ -61,7 +61,7 @@ namespace TotalDTO.Productions
             this.BatchRepacks = new BindingList<BatchRepackDTO>();
 
             this.BatchRepackViews = new BindingListView<BatchRepackDTO>(this.BatchRepacks);
-            this.BatchRepackViews.ApplyFilter(f => f.PrintedTimes == 0);
+            //this.BatchRepackViews.ApplyFilter(f => f.PrintedTimes == 0);
         }
 
         #endregion Contructor

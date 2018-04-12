@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Threading;
 
+using Equin.ApplicationFramework;
+
 using Ninject;
 using AutoMapper;
 
@@ -35,6 +37,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private readonly FillingData fillingData;
 
+        private IBatchService batchService;
 
         private PrinterController digitController;
         private PrinterController packController;
@@ -75,12 +78,12 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.scannerAPIs = new ScannerAPIs(CommonNinject.Kernel.Get<IPackRepository>(), CommonNinject.Kernel.Get<ICartonRepository>(), CommonNinject.Kernel.Get<IPalletRepository>());
 
-                IBatchService batchService = CommonNinject.Kernel.Get<IBatchService>();//ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
+                this.batchService = CommonNinject.Kernel.Get<IBatchService>();//ALL PrinterController MUST SHARE THE SAME IBatchService, BECAUSE WE NEED TO LOCK IBatchService IN ORDER TO CORRECTED UPDATE DATA BY IBatchService
 
-                digitController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
-                packController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.PackInkjet);
-                cartonController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
-                palletController = new PrinterController(batchService, this.fillingData, GlobalVariables.PrinterName.PalletLabel);
+                digitController = new PrinterController(this.batchService, this.fillingData, GlobalVariables.PrinterName.DigitInkjet);
+                packController = new PrinterController(this.batchService, this.fillingData, GlobalVariables.PrinterName.PackInkjet);
+                cartonController = new PrinterController(this.batchService, this.fillingData, GlobalVariables.PrinterName.CartonInkjet);
+                palletController = new PrinterController(this.batchService, this.fillingData, GlobalVariables.PrinterName.PalletLabel);
 
                 this.scannerController = new ScannerController(this.fillingData);
 
@@ -158,7 +161,7 @@ namespace TotalSmartCoding.Views.Productions
 
                     this.Text = this.fillingData.CommodityName + " [Carton Code: " + this.fillingData.CommodityCartonCode + "] " + "     [Pack per Carton: " + this.fillingData.PackPerCarton + ". Carton per Pallet: " + this.fillingData.CartonPerPallet + "]"; this.labelCommodityName.Text = "";
 
-                    this.InitializeRepack(batchAPIs);
+                    this.InitializeRepack(this.AnyLoopRoutine());
                 }
             }
             catch (Exception exception)
@@ -168,7 +171,7 @@ namespace TotalSmartCoding.Views.Productions
         }
 
 
-        public void InitializeRepack(BatchAPIs batchAPIs)
+        public void InitializeRepack(bool notPrintedOnly)
         {
             try
             {
@@ -179,7 +182,8 @@ namespace TotalSmartCoding.Views.Productions
 
                 if (this.fillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                 {
-                    List<BatchRepack> batchRepacks = batchAPIs.GetBatchRepacks(this.fillingData.BatchID);
+                    BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                    List<BatchRepack> batchRepacks = batchAPIs.GetBatchRepacks(this.fillingData.BatchID, notPrintedOnly);
                     if (batchRepacks.Count > 0)
                     {
                         int lineNo = 0;
@@ -354,6 +358,8 @@ namespace TotalSmartCoding.Views.Productions
                     cartonThread.Start();
                     palletThread.Start();
                     scannerThread.Start();
+
+                    this.InitializeRepack(true);
                 }
             }
             catch (Exception exception)
@@ -374,6 +380,8 @@ namespace TotalSmartCoding.Views.Productions
                 scannerController.LoopRoutine = false;
 
                 this.setToolStripActive();
+
+                this.InitializeRepack(false);
             }
             catch (Exception exception)
             {
@@ -634,7 +642,10 @@ namespace TotalSmartCoding.Views.Productions
 
         private bool AnyLoopRoutine()
         {
-            return digitController.LoopRoutine | packController.LoopRoutine | cartonController.LoopRoutine | palletController.LoopRoutine | scannerController.LoopRoutine;
+            if (digitController != null && packController != null && cartonController != null && palletController != null && scannerController.LoopRoutine != null)
+                return digitController.LoopRoutine | packController.LoopRoutine | cartonController.LoopRoutine | palletController.LoopRoutine | scannerController.LoopRoutine;
+            else
+                return false;
         }
 
         private void setToolStripActive()
@@ -1067,21 +1078,21 @@ namespace TotalSmartCoding.Views.Productions
             {
                 if (!this.AnyLoopRoutine())
                 {
-                    IPendingPrimaryDetail pendingPrimaryDetail = null; string fileName = null;
+                    string fileName = null;
 
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Filter = "Text Document (.txt)|*.txt";
                     if (openFileDialog.ShowDialog() == DialogResult.OK && openFileDialog.FileName != "") fileName = openFileDialog.FileName;
-                    
+
                     if (fileName != null)
                     {
                         bool dialogResultOK;
                         BatchRepackWizard batchRepackWizard = new BatchRepackWizard(this.fillingData, fileName);
-                        
-                            dialogResultOK = batchRepackWizard.ShowDialog() == System.Windows.Forms.DialogResult.OK;
-                            batchRepackWizard.Dispose();
-                        
-                        //if (dialogResultOK) this.callAutoSave();
+
+                        dialogResultOK = batchRepackWizard.ShowDialog() == System.Windows.Forms.DialogResult.OK;
+                        batchRepackWizard.Dispose();
+
+                        if (dialogResultOK) this.InitializeRepack(this.AnyLoopRoutine());
                     }
                 }
             }
@@ -1090,11 +1101,46 @@ namespace TotalSmartCoding.Views.Productions
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
         }
+
+        private void buttonRepackRemove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!this.AnyLoopRoutine() && CustomMsgBox.Show(this, "Xóa toàn bộ mã vạch lon đã import?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                    if (CustomMsgBox.Show(this, "Vui lòng xác nhận xóa toàn bộ mã vạch lon đã import!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                        if (this.batchService.RepackDelete(this.fillingData.BatchID)) this.InitializeRepack(this.AnyLoopRoutine());
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+
+        private void buttonRepackReprint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ObjectView<BatchRepackDTO> batchRepackDTOView = this.dgvRepacks.CurrentRow.DataBoundItem as ObjectView<BatchRepackDTO>;
+                if (batchRepackDTOView != null)
+                {
+                    BatchRepackDTO batchRepackDTO = (BatchRepackDTO)batchRepackDTOView;
+
+                    if (batchRepackDTO != null && batchRepackDTO.PrintedTimes != 0)
+                    {
+                        if (!this.AnyLoopRoutine() && CustomMsgBox.Show(this, "In lại mã vạch này: " + "\r\n" + "\r\n" + batchRepackDTO.Code + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                            if (CustomMsgBox.Show(this, "Vui lòng xác nhận sẽ in lại mã vạch này: " + "\r\n" + "\r\n" + batchRepackDTO.Code, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
+                                if (this.batchService.RepackReprint(batchRepackDTO.RepackID)) batchRepackDTO.PrintedTimes = 0;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
         #endregion Repacks
-
-
-
-
 
 
     }

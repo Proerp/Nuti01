@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 using TotalBase;
 
@@ -28,6 +29,13 @@ namespace TotalDTO.Productions
         public string APICode { get; set; }
         public string CommodityName { get; set; }
 
-        public int PrintedTimes { get; set; }
+        private int printedTimes;
+        [DefaultValue(0)]
+        public int PrintedTimes
+        {
+            get { return this.printedTimes; }
+            set { ApplyPropertyChange<BatchRepackDTO, int>(ref this.printedTimes, o => o.PrintedTimes, value); }
+        }
+
     }
 }

@@ -2223,6 +2223,12 @@
         <Function Name="BatchPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchRepackDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BatchRepackReprint" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RepackID" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchRepackUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
           <Parameter Name="RepackID" Type="int" Mode="In" />
@@ -2345,6 +2351,7 @@
         </Function>
         <Function Name="GetBatchRepacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
+          <Parameter Name="NotPrintedOnly" Type="bit" Mode="In" />
         </Function>
         <Function Name="GetBatchStatusBase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchStatusID" Type="int" Mode="In" />
@@ -4549,7 +4556,8 @@
           <Parameter Name="ActiveOption" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetBatchRepacks" ReturnType="Collection(TotalSmartCodingModel.BatchRepack)">
-          <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="NotPrintedOnly" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="BatchRepackUpdate">
             <Parameter Name="BatchID" Mode="In" Type="Int32" />
@@ -4568,14 +4576,20 @@
           <Parameter Name="Barcode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="RepackEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RepackPostSaveValidate" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RepackRollback">
             <Parameter Name="BatchID" Mode="In" Type="Int32" />
             <Parameter Name="RepackID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchRepackDelete">
+          <Parameter Name="BatchID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchRepackReprint">
+          <Parameter Name="RepackID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -10670,6 +10684,8 @@
           <FunctionImportMapping FunctionImportName="RepackEditable" FunctionName="TotalSmartCodingModel.Store.RepackEditable" />
           <FunctionImportMapping FunctionImportName="RepackPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.RepackPostSaveValidate" />
           <FunctionImportMapping FunctionImportName="RepackRollback" FunctionName="TotalSmartCodingModel.Store.RepackRollback" />
+          <FunctionImportMapping FunctionImportName="BatchRepackDelete" FunctionName="TotalSmartCodingModel.Store.BatchRepackDelete" />
+          <FunctionImportMapping FunctionImportName="BatchRepackReprint" FunctionName="TotalSmartCodingModel.Store.BatchRepackReprint" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

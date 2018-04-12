@@ -8,7 +8,9 @@ namespace TotalCore.Repositories.Productions
     public interface IBatchRepository : IGenericRepository<Batch>
     {
         void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo);
+        void RepackDelete(int batchID);
         void RepackUpdate(int batchID, int repackID);
+        bool RepackReprint(int repackID);
 
         void AddLot(int batchID);
     }
@@ -16,7 +18,7 @@ namespace TotalCore.Repositories.Productions
     public interface IBatchAPIRepository : IGenericAPIRepository
     {
         List<PendingLot> GetPendingLots(int? locationID);
-        List<BatchRepack> GetBatchRepacks(int? batchID);
+        List<BatchRepack> GetBatchRepacks(int? batchID, bool notPrintedOnly);
 
         List<BatchAvailable> GetBatchAvailables(int? locationID, int? deliveryAdviceID, int? transferOrderID, int? commodityID, bool withNullRow);
     }

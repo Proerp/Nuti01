@@ -11,7 +11,7 @@ namespace TotalService.Productions
     {
         private IBatchRepository batchRepository;
         public BatchService(IBatchRepository batchRepository)
-            : base(batchRepository, "BatchPostSaveValidate", null, "BatchToggleApproved", "BatchToggleVoid")        
+            : base(batchRepository, "BatchPostSaveValidate", null, "BatchToggleApproved", "BatchToggleVoid")
         {
             this.batchRepository = batchRepository;
         }
@@ -30,12 +30,31 @@ namespace TotalService.Productions
             }
         }
 
+        public bool RepackDelete(int batchID)
+        {
+            this.batchRepository.RepackDelete(batchID);
+            return true;
+        }
+
         public bool RepackUpdate(int batchID, int repackID)
         {
             try
             {
                 this.batchRepository.RepackUpdate(batchID, repackID);
                 return true;
+            }
+            catch (Exception ex)
+            {
+                this.ServiceTag = ex.Message;
+                return false;
+            }
+        }
+
+        public bool RepackReprint(int repackID)
+        {
+            try
+            {
+                return this.batchRepository.RepackReprint(repackID);
             }
             catch (Exception ex)
             {

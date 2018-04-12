@@ -23,15 +23,25 @@ namespace TotalDAL.Repositories.Productions
             this.TotalSmartCodingEntities.BatchCommonUpdate(batchID, nextPackNo, nextCartonNo, nextPalletNo);
         }
 
+        public void RepackDelete(int batchID)
+        {
+            this.TotalSmartCodingEntities.BatchRepackDelete(batchID);
+        }
+
         public void RepackUpdate(int batchID, int repackID)
         {
             this.TotalSmartCodingEntities.BatchRepackUpdate(batchID, repackID);
         }
 
+        public bool RepackReprint(int repackID)
+        {
+            return this.TotalSmartCodingEntities.BatchRepackReprint(repackID) == 1;
+        }
+
         public void AddLot(int batchID)
         {
             this.TotalSmartCodingEntities.BatchAddLot(batchID);
-        }        
+        }
     }
 
 
@@ -61,10 +71,10 @@ namespace TotalDAL.Repositories.Productions
             return base.TotalSmartCodingEntities.GetPendingLots(locationID).ToList();
         }
 
-        public List<BatchRepack> GetBatchRepacks(int? batchID)
+        public List<BatchRepack> GetBatchRepacks(int? batchID, bool notPrintedOnly)
         {
-            return base.TotalSmartCodingEntities.GetBatchRepacks(batchID).ToList();
-        }        
+            return base.TotalSmartCodingEntities.GetBatchRepacks(batchID, notPrintedOnly).ToList();
+        }
 
         public List<BatchAvailable> GetBatchAvailables(int? locationID, int? deliveryAdviceID, int? transferOrderID, int? commodityID, bool withNullRow)
         {

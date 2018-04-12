@@ -34,7 +34,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchAddLot();
 
             this.BatchCommonUpdate();
+            this.BatchRepackDelete();
             this.BatchRepackUpdate();
+            this.BatchRepackReprint();
         }
 
 
@@ -124,13 +126,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void GetBatchRepacks()
         {
-            string queryString = " @BatchID int " + "\r\n";
+            string queryString = " @BatchID int, @NotPrintedOnly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       SELECT          Repacks.RepackID, Repacks.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, Repacks.PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Repacks " + "\r\n"; //Packs.BatchID: SAVED BATCH; Repacks.BatchID: REPACK BATCH
-            queryString = queryString + "                       INNER JOIN Packs ON Repacks.PrintedTimes = 0 AND Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Packs ON (@NotPrintedOnly = 0 OR Repacks.PrintedTimes = 0) AND Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
             queryString = queryString + "                       INNER JOIN FillingLines ON Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n"; 
             queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON Packs.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -258,6 +260,26 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchCommonUpdate", queryString);
         }
 
+        private void BatchRepackDelete()
+        {
+            string queryString = " @BatchID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       DECLARE @FoundEntity int " + "\r\n";
+            queryString = queryString + "       SELECT TOP 1 @FoundEntity = BatchID FROM Packs WHERE BatchID = @BatchID ";
+
+            queryString = queryString + "       IF (@FoundEntity IS NULL) " + "\r\n";
+            queryString = queryString + "           DELETE FROM Repacks WHERE BatchID = @BatchID " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Không thể xóa, vì đã in và lưu vào cơ sở dữ liệu' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchRepackDelete", queryString);
+        }
+
         private void BatchRepackUpdate()
         {
             string queryString = " @BatchID int, @RepackID int " + "\r\n";
@@ -269,6 +291,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchRepackUpdate", queryString);
         }
-        
+
+        private void BatchRepackReprint()
+        {
+            string queryString = " @RepackID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       UPDATE      Repacks" + "\r\n";
+            queryString = queryString + "       SET         PrintedTimes = 0 " + "\r\n";
+            queryString = queryString + "       WHERE       RepackID = @RepackID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchRepackReprint", queryString);
+        }
+
     }
 }
