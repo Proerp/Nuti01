@@ -35,18 +35,9 @@ namespace TotalSmartCoding.Views.Productions
 
         private FillingData fillingData;
         private RepackViewModel repackViewModel;
-        private RepackController repackController;
+        
+        private List<BatchRepackDTO> batchRepacks;
 
-        /// <summary>
-        /// GoodsIssueViewModel goodsIssueViewModel: CURRENT DETAILS OF GOODSISSUE
-        /// List<IPendingPrimaryDetail> pendingPrimaryDetails: COLLECTION OF PENDING ITEMS REQUESTED FOR DELIVERY (HERE WE USE IPendingPrimaryDetail FOR TWO CASE: PendingDeliveryAdviceDetail AND PendingTransferOrderDetail WHICH ARE IMPLEMENTED interface IPendingPrimaryDetail
-        /// IPendingPrimaryDetail pendingPrimaryDetail: CURRENT SELECTED PENDING ITEM (CURRENT SELECTED OF PendingDeliveryAdviceDetail OR PendingTransferOrderDetail). THIS PARAMETER IS REQUIRED BY TABLET MODE: MEANS: WHEN USING BY THE FORFLIFT DRIVER TO MANUAL SELECT BY BARCODE OR BIN LOCATION
-        /// string fileName: WHEN IMPORTED FORM TEXT FILE
-        /// </summary>
-        /// <param name="goodsIssueViewModel"></param>
-        /// <param name="pendingPrimaryDetails"></param>
-        /// <param name="pendingPrimaryDetail"></param>
-        /// <param name="fileName"></param>
         public BatchRepackWizard(FillingData fillingData, string fileName)
         {
             InitializeComponent();
@@ -58,63 +49,78 @@ namespace TotalSmartCoding.Views.Productions
             this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
             this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
-            this.customTabBatch.TabPages.Add("tabAvailablePallets", "Available pallets");
+            this.customTabBatch.TabPages.Add("tabAvailablePallets", "Packs found");
+            this.customTabBatch.TabPages.Add("tabMismatchedBarcodes", "Mismatched barcodes");
             this.customTabBatch.TabPages[0].Controls.Add(this.fastAvailablePallets);
+            this.customTabBatch.TabPages[this.customTabBatch.TabPages.Count - 1].Controls.Add(this.fastMismatchedBarcodes);
 
-
-            this.customTabBatch.Dock = DockStyle.Fill;
             this.fastAvailablePallets.Dock = DockStyle.Fill;
+            this.fastMismatchedBarcodes.Dock = DockStyle.Fill;
+            this.customTabBatch.Dock = DockStyle.Fill;
             this.panelMaster.Controls.Add(this.customTabBatch);
 
-            if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.GoodsIssue) ViewHelpers.SetFont(this, new Font("Calibri", 11), new Font("Calibri", 11), new Font("Calibri", 11));
-
-
+            this.fileName = fileName;
             this.fillingData = fillingData;
             this.repackViewModel = CommonNinject.Kernel.Get<RepackViewModel>();
-            this.repackController = new RepackController(CommonNinject.Kernel.Get<IRepackService>(), this.repackViewModel);
-            this.fileName = fileName;
+            
+            this.fastMismatchedBarcodes.AboutToCreateGroups += fastMismatchedBarcodes_AboutToCreateGroups;
+            this.fastMismatchedBarcodes.ShowGroups = true;
+        }
 
-
-            this.toolStripBottom.Visible = true;
-            this.fastMismatchedBarcodes.Visible = true;
-            this.customTabBatch.TabPages.Add("tabMismatchedBarcodes", "Mismatched Barcodes");
-            this.customTabBatch.TabPages[this.customTabBatch.TabPages.Count - 1].Controls.Add(this.fastMismatchedBarcodes);
-            this.fastMismatchedBarcodes.Dock = DockStyle.Fill;
+        private void fastMismatchedBarcodes_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
+        {
+            if (e.Groups != null && e.Groups.Count > 0)
+            {
+                foreach (OLVGroup olvGroup in e.Groups)
+                {
+                    //olvGroup.TitleImage = "Storage32";
+                    olvGroup.Subtitle = olvGroup.Contents.Count.ToString() + " Pack(s)";
+                }
+            }
         }
 
         private void BatchRepackWizard_Load(object sender, EventArgs e)
         {
             try
             {
-                List<BatchRepackDTO> batchRepacks = new List<BatchRepackDTO>();
+                this.batchRepacks = new List<BatchRepackDTO>();
                 List<MismatchedBarcode> mismatchedBarcodes = new List<MismatchedBarcode>();
 
-                string[] barcodes = System.IO.File.ReadAllLines(fileName);
+                string[] barcodes = System.IO.File.ReadAllLines(fileName); int lineNo = 0; int mismatchedLineNo = 0;
                 if (barcodes.Count() > 0)
                 {
+                    RepackController repackController = new RepackController(CommonNinject.Kernel.Get<IRepackService>(), this.repackViewModel);
                     foreach (string barcode in barcodes)
                     {
-                        IList<LookupPack> lookupPacks = this.repackController.repackService.LookupPacks(barcode);
-                        if (lookupPacks != null && lookupPacks.Count > 0)
+                        IList<BatchRepack> lookupRepacks = repackController.repackService.LookupRepacks(barcode);
+                        if (lookupRepacks != null && lookupRepacks.Count > 0)
                         {
-                            LookupPack lookupPack = lookupPacks.Where(w => w.CommodityID == this.fillingData.CommodityID).First();
-                            if (lookupPack != null)
+                            BatchRepack batchRepack = lookupRepacks.First();
+                            BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(batchRepack);
+
+                            if (this.batchRepacks.Where(w => w.Code == batchRepackDTO.Code).Count() == 0)
                             {
-                                BatchRepackDTO batchRepackDTO = Mapper.Map<LookupPack, BatchRepackDTO>(lookupPack);
-                                batchRepacks.Add(batchRepackDTO);
+                                if (batchRepackDTO.CommodityID == this.fillingData.CommodityID)
+                                {
+                                    batchRepackDTO.LineIndex = ++lineNo;
+                                    this.batchRepacks.Add(batchRepackDTO);
+                                }
+                                else
+                                    mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, Barcode = barcode, APICode = batchRepackDTO.APICode, CommodityName = batchRepackDTO.CommodityName, Description = "Không cùng mã sản phẩm." });
                             }
                             else
-                                mismatchedBarcodes.Add(new MismatchedBarcode() { Barcode = barcode + " [" + lookupPacks.First().APICode + "] " + lookupPacks.First().CommodityName, Description = "Không cùng mã sản phẩm." });
+                                mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, Barcode = barcode, APICode = batchRepackDTO.APICode, CommodityName = batchRepackDTO.CommodityName, Description = "Trùng mã vạch lon." });
                         }
                         else
-                            mismatchedBarcodes.Add(new MismatchedBarcode() { Barcode = barcode, Description = "Không tìm thấy mã vạch." });
+                            mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, Barcode = barcode, Description = "Không tìm thấy mã vạch." });
                     }
                 }
 
-                this.fastAvailablePallets.SetObjects(batchRepacks);
-                if (this.fileName != null) this.fastMismatchedBarcodes.SetObjects(mismatchedBarcodes);
+                this.fastAvailablePallets.SetObjects(this.batchRepacks);
+                this.fastMismatchedBarcodes.SetObjects(mismatchedBarcodes);
+                if (mismatchedBarcodes.Count > 0) this.fastMismatchedBarcodes.Sort(this.olvDescription, SortOrder.Descending);
 
-                this.customTabBatch.TabPages[0].Text = "Available " + this.fastAvailablePallets.GetItemCount().ToString("N0") + " pallet" + (this.fastAvailablePallets.GetItemCount() > 1 ? "s      " : "      ");
+                this.customTabBatch.TabPages[0].Text = this.fastAvailablePallets.GetItemCount().ToString("N0") + " Pack" + (this.fastAvailablePallets.GetItemCount() > 1 ? "s" : "") + " found            ";
                 this.customTabBatch.TabPages[this.customTabBatch.TabPages.Count - 1].Text = this.fastMismatchedBarcodes.GetItemCount().ToString("N0") + " Mismatched Barcode" + (this.fastMismatchedBarcodes.GetItemCount() > 1 ? "s      " : "      ");
             }
             catch (Exception exception)
@@ -123,113 +129,45 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-
-
         private void buttonAddESC_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (sender.Equals(this.buttonAddExit))
-            //    {
-            //        FastObjectListView fastAvailableGoodsReceiptDetails = this.fastAvailablePallets;
+            int firstSavedRepackID = 0; string lastSavedBarcode = "";
+            RepackController repackController = new RepackController(CommonNinject.Kernel.Get<IRepackService>(), this.repackViewModel);
+            try
+            {
+                if (sender.Equals(this.buttonAddExit))
+                {
+                    foreach (var batchRepack in this.batchRepacks)
+                    {
+                        lastSavedBarcode = batchRepack.Code;
+                        RepackDTO repackDTO = new RepackDTO();
+                        repackDTO.BatchID = this.fillingData.BatchID;
+                        repackDTO.PackID = batchRepack.PackID;
 
-            //        if (fastAvailableGoodsReceiptDetails != null)
-            //        {
-            //            if (fastAvailableGoodsReceiptDetails.CheckedObjects.Count > 0)
-            //            {
-            //                this.goodsIssueViewModel.ViewDetails.RaiseListChangedEvents = false;
-            //                foreach (var checkedObjects in fastAvailableGoodsReceiptDetails.CheckedObjects)
-            //                {
-            //                    GoodsReceiptDetailAvailable goodsReceiptDetailAvailable = (GoodsReceiptDetailAvailable)checkedObjects;
-            //                    GoodsIssueDetailDTO goodsIssueDetailDTO = new GoodsIssueDetailDTO()
-            //                    {
-            //                        GoodsIssueID = this.goodsIssueViewModel.GoodsIssueID,
-
-            //                        DeliveryAdviceID = goodsReceiptDetailAvailable.DeliveryAdviceID > 0 ? goodsReceiptDetailAvailable.DeliveryAdviceID : (int?)null,
-            //                        DeliveryAdviceDetailID = goodsReceiptDetailAvailable.DeliveryAdviceDetailID > 0 ? goodsReceiptDetailAvailable.DeliveryAdviceDetailID : (int?)null,
-            //                        DeliveryAdviceReference = goodsReceiptDetailAvailable.PrimaryReference,
-            //                        DeliveryAdviceEntryDate = goodsReceiptDetailAvailable.PrimaryEntryDate,
-
-            //                        TransferOrderID = goodsReceiptDetailAvailable.TransferOrderID > 0 ? goodsReceiptDetailAvailable.TransferOrderID : (int?)null,
-            //                        TransferOrderDetailID = goodsReceiptDetailAvailable.TransferOrderDetailID > 0 ? goodsReceiptDetailAvailable.TransferOrderDetailID : (int?)null,
-            //                        TransferOrderReference = goodsReceiptDetailAvailable.PrimaryReference,
-            //                        TransferOrderEntryDate = goodsReceiptDetailAvailable.PrimaryEntryDate,
-
-            //                        CommodityID = goodsReceiptDetailAvailable.CommodityID,
-            //                        CommodityCode = goodsReceiptDetailAvailable.CommodityCode,
-            //                        CommodityName = goodsReceiptDetailAvailable.CommodityName,
-
-            //                        PackageSize = goodsReceiptDetailAvailable.PackageSize,
-
-            //                        Volume = goodsReceiptDetailAvailable.Volume,
-            //                        PackageVolume = goodsReceiptDetailAvailable.PackageVolume,
-
-            //                        GoodsReceiptID = goodsReceiptDetailAvailable.GoodsReceiptID,
-            //                        GoodsReceiptDetailID = goodsReceiptDetailAvailable.GoodsReceiptDetailID,
-
-            //                        GoodsReceiptReference = goodsReceiptDetailAvailable.GoodsReceiptReference,
-            //                        GoodsReceiptEntryDate = goodsReceiptDetailAvailable.GoodsReceiptEntryDate,
-
-            //                        BatchID = goodsReceiptDetailAvailable.BatchID,
-            //                        BatchEntryDate = goodsReceiptDetailAvailable.BatchEntryDate,
-
-            //                        BinLocationID = goodsReceiptDetailAvailable.BinLocationID,
-            //                        BinLocationCode = goodsReceiptDetailAvailable.BinLocationCode,
-
-            //                        WarehouseID = goodsReceiptDetailAvailable.WarehouseID,
-            //                        WarehouseCode = goodsReceiptDetailAvailable.WarehouseCode,
-
-            //                        PackID = goodsReceiptDetailAvailable.PackID,
-            //                        PackCode = goodsReceiptDetailAvailable.PackCode,
-            //                        CartonID = goodsReceiptDetailAvailable.CartonID,
-            //                        CartonCode = goodsReceiptDetailAvailable.CartonCode,
-            //                        PalletID = goodsReceiptDetailAvailable.PalletID,
-            //                        PalletCode = goodsReceiptDetailAvailable.PalletCode,
-
-            //                        PackCounts = goodsReceiptDetailAvailable.PackCounts,
-            //                        CartonCounts = goodsReceiptDetailAvailable.CartonCounts,
-            //                        PalletCounts = goodsReceiptDetailAvailable.PalletCounts,
-
-            //                        QuantityAvailable = (decimal)goodsReceiptDetailAvailable.QuantityAvailable,
-            //                        LineVolumeAvailable = (decimal)goodsReceiptDetailAvailable.LineVolumeAvailable,
-
-            //                        QuantityRemains = goodsReceiptDetailAvailable.QuantityRemains,
-            //                        LineVolumeRemains = goodsReceiptDetailAvailable.LineVolumeRemains,
-
-            //                        Quantity = (decimal)goodsReceiptDetailAvailable.QuantityAvailable, //SHOULD: Quantity = QuantityAvailable (ALSO: LineVolume = LineVolumeAvailable): BECAUSE: WE ISSUE BY WHOLE UNIT OF PALLET/ OR CARTON/ OR PACK
-            //                        LineVolume = (decimal)goodsReceiptDetailAvailable.LineVolumeAvailable //IF Quantity > QuantityRemains (OR LineVolume > LineVolumeRemains) => THE GoodsIssueDetailDTO WILL BREAK THE ValidationRule => CAN NOT SAVE => USER MUST SELECT OTHER APPROPRIATE UNIT OF PALLET/ OR CARTON/ OR PACK WHICH MATCH THE Quantity/ LineVolume                                
-            //                    };
-            //                    this.goodsIssueViewModel.ViewDetails.Insert(0, goodsIssueDetailDTO);
-            //                }
-            //            }
-            //        }
-
-            //        if (this.MdiParent != null) this.MdiParent.DialogResult = DialogResult.OK; else this.DialogResult = DialogResult.OK;
-            //    }
-
-            //    if (sender.Equals(this.buttonESC))
-            //        if (this.MdiParent != null) this.MdiParent.DialogResult = DialogResult.Cancel; else this.DialogResult = DialogResult.Cancel;
-
-            //}
-            //catch (Exception exception)
-            //{
-            //    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
-            //}
-            //finally
-            //{
-            //    if (!this.goodsIssueViewModel.ViewDetails.RaiseListChangedEvents)
-            //    {
-            //        this.goodsIssueViewModel.ViewDetails.RaiseListChangedEvents = true;
-            //        this.goodsIssueViewModel.ViewDetails.ResetBindings();
-            //    }
-            //}
+                        if (!repackController.repackService.Save(repackDTO))
+                            throw new Exception(lastSavedBarcode);
+                        else
+                            if (firstSavedRepackID == 0) firstSavedRepackID = repackDTO.RepackID;
+                    }
+                    this.DialogResult = DialogResult.OK;
+                }
+                if (sender.Equals(this.buttonESC))
+                    this.DialogResult = DialogResult.Cancel;
+            }
+            catch (Exception exception)
+            {
+                if (firstSavedRepackID > 0) repackController.repackService.RepackRollback(this.fillingData.BatchID, firstSavedRepackID);
+                ExceptionHandlers.ShowExceptionMessageBox(this, new Exception("Lỗi lưu barcode: " + lastSavedBarcode, exception));
+            }
         }
-
     }
 
     public class MismatchedBarcode
     {
+        public int LineIndex { get; set; }
         public string Barcode { get; set; }
+        public string APICode { get; set; }
+        public string CommodityName { get; set; }
         public string Description { get; set; }
     }
 }

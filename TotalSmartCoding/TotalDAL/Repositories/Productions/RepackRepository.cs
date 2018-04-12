@@ -14,9 +14,15 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
-        public IList<LookupPack> LookupPacks(string barcode)
+        public IList<BatchRepack> LookupRepacks(string barcode)
         {
-            return this.TotalSmartCodingEntities.LookupPacks(barcode).ToList();
+            return this.TotalSmartCodingEntities.LookupRepacks(barcode).ToList();
         }
+
+        public void RepackRollback(int batchID, int repackID)
+        {
+            this.TotalSmartCodingEntities.RepackRollback(batchID, repackID);
+        }
+        
     }
 }

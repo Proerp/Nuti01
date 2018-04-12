@@ -9,6 +9,8 @@ namespace TotalCore.Services.Productions
 {
     public interface IRepackService : IGenericService<Repack, RepackDTO, RepackPrimitiveDTO>
     {
-        IList<LookupPack> LookupPacks(string barcode);
+        IList<BatchRepack> LookupRepacks(string barcode);
+
+        bool RepackRollback(int batchID, int repackID);
     }
 }

@@ -7,6 +7,8 @@ namespace TotalCore.Repositories.Productions
 {
     public interface IRepackRepository : IGenericRepository<Repack>
     {
-        IList<LookupPack> LookupPacks(string barcode);
+        IList<BatchRepack> LookupRepacks(string barcode);
+
+        void RepackRollback(int batchID, int repackID);
     }
 }

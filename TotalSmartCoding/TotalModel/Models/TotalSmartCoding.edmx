@@ -2740,7 +2740,7 @@
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
         </Function>
-        <Function Name="LookupPacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="LookupRepacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Barcode" Type="varchar" Mode="In" />
         </Function>
         <Function Name="PackEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -2788,6 +2788,16 @@
         <Function Name="PickupToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="RepackEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RepackPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RepackRollback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+          <Parameter Name="RepackID" Type="int" Mode="In" />
         </Function>
         <Function Name="SalesOrderApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -4554,8 +4564,18 @@
             <End Role="Pack" EntitySet="Packs" />
             <End Role="Repack" EntitySet="Repacks" />
           </AssociationSet>
-          <FunctionImport Name="LookupPacks" ReturnType="Collection(TotalSmartCodingModel.LookupPack)">
+          <FunctionImport Name="LookupRepacks" ReturnType="Collection(TotalSmartCodingModel.BatchRepack)">
           <Parameter Name="Barcode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RepackEditable" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RepackPostSaveValidate" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RepackRollback">
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="RepackID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -7996,6 +8016,9 @@
           <Property Type="DateTime" Name="EntryDate" Nullable="false" />
           <Property Type="String" Name="FillingLineCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="RepackID" Nullable="false" />
+          <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
           </ComplexType>
         <EntityType Name="Repack">
           <Key>
@@ -8033,17 +8056,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="LookupPack">
-          <Property Type="Int32" Name="PackID" Nullable="false" />
-          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="BatchID" Nullable="false" />
-          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" />
-          <Property Type="String" Name="BatchCode" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
-          <Property Type="Int32" Name="CommodityID" Nullable="false" />
-          <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
-          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10618,6 +10630,9 @@
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="FillingLineCode" ColumnName="FillingLineCode" />
                 <ScalarProperty Name="RepackID" ColumnName="RepackID" />
+                <ScalarProperty Name="APICode" ColumnName="APICode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10633,21 +10648,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="LookupPacks" FunctionName="TotalSmartCodingModel.Store.LookupPacks">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalSmartCodingModel.LookupPack">
+          <FunctionImportMapping FunctionImportName="LookupRepacks" FunctionName="TotalSmartCodingModel.Store.LookupRepacks">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchRepack">
                 <ScalarProperty Name="PackID" ColumnName="PackID" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
-                <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
                 <ScalarProperty Name="LotCode" ColumnName="LotCode" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="BatchCode" ColumnName="BatchCode" />
+                <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="FillingLineCode" ColumnName="FillingLineCode" />
+                <ScalarProperty Name="RepackID" ColumnName="RepackID" />
                 <ScalarProperty Name="APICode" ColumnName="APICode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RepackEditable" FunctionName="TotalSmartCodingModel.Store.RepackEditable" />
+          <FunctionImportMapping FunctionImportName="RepackPostSaveValidate" FunctionName="TotalSmartCodingModel.Store.RepackPostSaveValidate" />
+          <FunctionImportMapping FunctionImportName="RepackRollback" FunctionName="TotalSmartCodingModel.Store.RepackRollback" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

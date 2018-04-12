@@ -23,5 +23,8 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public string FillingLineCode { get; set; }
         public int RepackID { get; set; }
+        public string APICode { get; set; }
+        public string CommodityName { get; set; }
+        public int CommodityID { get; set; }
     }
 }

@@ -19,12 +19,24 @@ namespace TotalService.Productions
             this.repackRepository = repackRepository;
         }
 
-        public IList<LookupPack> LookupPacks(string barcode)
+        public IList<BatchRepack> LookupRepacks(string barcode)
         {
-            return this.repackRepository.LookupPacks(barcode);
+            return this.repackRepository.LookupRepacks(barcode);
         }
 
-
+        public bool RepackRollback(int batchID, int repackID)
+        {
+            try
+            {
+                this.repackRepository.RepackRollback(batchID, repackID);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                this.ServiceTag = ex.Message;
+                return false;
+            }
+        }
 
         protected override bool TryValidateModel(RepackDTO dto, ref StringBuilder invalidMessage)
         {

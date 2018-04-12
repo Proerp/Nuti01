@@ -24,7 +24,10 @@ namespace TotalDTO.Productions
         public int FillingLineID { get; set; }
         public string FillingLineCode { get; set; }
 
+        public int CommodityID { get; set; }
         public string APICode { get; set; }
+        public string CommodityName { get; set; }
+
         public int PrintedTimes { get; set; }
     }
 }

@@ -2515,13 +2515,44 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchRepackUpdate", batchIDParameter, repackIDParameter);
         }
     
-        public virtual ObjectResult<LookupPack> LookupPacks(string barcode)
+        public virtual ObjectResult<BatchRepack> LookupRepacks(string barcode)
         {
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LookupPack>("LookupPacks", barcodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("LookupRepacks", barcodeParameter);
+        }
+    
+        public virtual ObjectResult<string> RepackEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("RepackEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> RepackPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("RepackPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int RepackRollback(Nullable<int> batchID, Nullable<int> repackID)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            var repackIDParameter = repackID.HasValue ?
+                new ObjectParameter("RepackID", repackID) :
+                new ObjectParameter("RepackID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RepackRollback", batchIDParameter, repackIDParameter);
         }
     }
 }
