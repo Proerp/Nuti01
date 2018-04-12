@@ -45,16 +45,16 @@ namespace TotalSmartCoding.Views.Productions
             this.toolstripChild = this.toolStripBottom;
             this.customTabBatch = new CustomTabControl();
 
-            this.customTabBatch.Font = this.fastAvailablePallets.Font;
+            this.customTabBatch.Font = this.fastBatchRepacks.Font;
             this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
             this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
             this.customTabBatch.TabPages.Add("tabAvailablePallets", "Packs found");
             this.customTabBatch.TabPages.Add("tabMismatchedBarcodes", "Mismatched barcodes");
-            this.customTabBatch.TabPages[0].Controls.Add(this.fastAvailablePallets);
+            this.customTabBatch.TabPages[0].Controls.Add(this.fastBatchRepacks);
             this.customTabBatch.TabPages[this.customTabBatch.TabPages.Count - 1].Controls.Add(this.fastMismatchedBarcodes);
 
-            this.fastAvailablePallets.Dock = DockStyle.Fill;
+            this.fastBatchRepacks.Dock = DockStyle.Fill;
             this.fastMismatchedBarcodes.Dock = DockStyle.Fill;
             this.customTabBatch.Dock = DockStyle.Fill;
             this.panelMaster.Controls.Add(this.customTabBatch);
@@ -62,12 +62,14 @@ namespace TotalSmartCoding.Views.Productions
             this.fileName = fileName;
             this.fillingData = fillingData;
             this.repackViewModel = CommonNinject.Kernel.Get<RepackViewModel>();
-            
-            this.fastMismatchedBarcodes.AboutToCreateGroups += fastMismatchedBarcodes_AboutToCreateGroups;
+
+            this.fastBatchRepacks.AboutToCreateGroups += fastBarcodes_AboutToCreateGroups;
+            this.fastMismatchedBarcodes.AboutToCreateGroups += fastBarcodes_AboutToCreateGroups;
+            this.fastBatchRepacks.ShowGroups = true;
             this.fastMismatchedBarcodes.ShowGroups = true;
         }
 
-        private void fastMismatchedBarcodes_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
+        private void fastBarcodes_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
         {
             if (e.Groups != null && e.Groups.Count > 0)
             {
@@ -116,11 +118,12 @@ namespace TotalSmartCoding.Views.Productions
                     }
                 }
 
-                this.fastAvailablePallets.SetObjects(this.batchRepacks);
+                this.fastBatchRepacks.SetObjects(this.batchRepacks);
+                if (this.batchRepacks.Count > 0) this.fastBatchRepacks.Sort(this.olvBatchCode, SortOrder.Descending);
                 this.fastMismatchedBarcodes.SetObjects(mismatchedBarcodes);
                 if (mismatchedBarcodes.Count > 0) this.fastMismatchedBarcodes.Sort(this.olvDescription, SortOrder.Descending);
 
-                this.customTabBatch.TabPages[0].Text = this.fastAvailablePallets.GetItemCount().ToString("N0") + " Pack" + (this.fastAvailablePallets.GetItemCount() > 1 ? "s" : "") + " found            ";
+                this.customTabBatch.TabPages[0].Text = this.fastBatchRepacks.GetItemCount().ToString("N0") + " Pack" + (this.fastBatchRepacks.GetItemCount() > 1 ? "s" : "") + " found            ";
                 this.customTabBatch.TabPages[this.customTabBatch.TabPages.Count - 1].Text = this.fastMismatchedBarcodes.GetItemCount().ToString("N0") + " Mismatched Barcode" + (this.fastMismatchedBarcodes.GetItemCount() > 1 ? "s      " : "      ");
             }
             catch (Exception exception)

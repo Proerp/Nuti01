@@ -31,7 +31,7 @@
             this.toolStripBottom = new System.Windows.Forms.ToolStrip();
             this.buttonESC = new System.Windows.Forms.ToolStripButton();
             this.buttonAddExit = new System.Windows.Forms.ToolStripButton();
-            this.fastAvailablePallets = new BrightIdeasSoftware.FastObjectListView();
+            this.fastBatchRepacks = new BrightIdeasSoftware.FastObjectListView();
             this.olvLineIndex = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -45,10 +45,10 @@
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScannedBarcode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvItemAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvItemName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvDescription = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvItemName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.toolStripBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastAvailablePallets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastBatchRepacks)).BeginInit();
             this.panelMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastMismatchedBarcodes)).BeginInit();
             this.SuspendLayout();
@@ -90,18 +90,18 @@
             this.buttonAddExit.Text = "Add and Close";
             this.buttonAddExit.Click += new System.EventHandler(this.buttonAddESC_Click);
             // 
-            // fastAvailablePallets
+            // fastBatchRepacks
             // 
-            this.fastAvailablePallets.AllColumns.Add(this.olvLineIndex);
-            this.fastAvailablePallets.AllColumns.Add(this.olvPackCode);
-            this.fastAvailablePallets.AllColumns.Add(this.olvBatchCode);
-            this.fastAvailablePallets.AllColumns.Add(this.olvBatchEntryDate);
-            this.fastAvailablePallets.AllColumns.Add(this.olvLotCode);
-            this.fastAvailablePallets.AllColumns.Add(this.olvPrintedDate);
-            this.fastAvailablePallets.AllColumns.Add(this.olvPrintedHour);
-            this.fastAvailablePallets.AllColumns.Add(this.olvPrintedMinute);
-            this.fastAvailablePallets.CheckedAspectName = "";
-            this.fastAvailablePallets.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fastBatchRepacks.AllColumns.Add(this.olvLineIndex);
+            this.fastBatchRepacks.AllColumns.Add(this.olvPackCode);
+            this.fastBatchRepacks.AllColumns.Add(this.olvBatchCode);
+            this.fastBatchRepacks.AllColumns.Add(this.olvBatchEntryDate);
+            this.fastBatchRepacks.AllColumns.Add(this.olvLotCode);
+            this.fastBatchRepacks.AllColumns.Add(this.olvPrintedDate);
+            this.fastBatchRepacks.AllColumns.Add(this.olvPrintedHour);
+            this.fastBatchRepacks.AllColumns.Add(this.olvPrintedMinute);
+            this.fastBatchRepacks.CheckedAspectName = "";
+            this.fastBatchRepacks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvLineIndex,
             this.olvPackCode,
             this.olvBatchCode,
@@ -110,24 +110,24 @@
             this.olvPrintedDate,
             this.olvPrintedHour,
             this.olvPrintedMinute});
-            this.fastAvailablePallets.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fastAvailablePallets.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fastAvailablePallets.FullRowSelect = true;
-            this.fastAvailablePallets.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.fastAvailablePallets.HideSelection = false;
-            this.fastAvailablePallets.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastAvailablePallets.Location = new System.Drawing.Point(0, 25);
-            this.fastAvailablePallets.Name = "fastAvailablePallets";
-            this.fastAvailablePallets.OwnerDraw = true;
-            this.fastAvailablePallets.ShowGroups = false;
-            this.fastAvailablePallets.ShowImagesOnSubItems = true;
-            this.fastAvailablePallets.Size = new System.Drawing.Size(1079, 198);
-            this.fastAvailablePallets.TabIndex = 69;
-            this.fastAvailablePallets.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastAvailablePallets.UseCompatibleStateImageBehavior = false;
-            this.fastAvailablePallets.UseFiltering = true;
-            this.fastAvailablePallets.View = System.Windows.Forms.View.Details;
-            this.fastAvailablePallets.VirtualMode = true;
+            this.fastBatchRepacks.Cursor = System.Windows.Forms.Cursors.Default;
+            this.fastBatchRepacks.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fastBatchRepacks.FullRowSelect = true;
+            this.fastBatchRepacks.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.fastBatchRepacks.HideSelection = false;
+            this.fastBatchRepacks.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastBatchRepacks.Location = new System.Drawing.Point(0, 25);
+            this.fastBatchRepacks.Name = "fastBatchRepacks";
+            this.fastBatchRepacks.OwnerDraw = true;
+            this.fastBatchRepacks.ShowGroups = false;
+            this.fastBatchRepacks.ShowImagesOnSubItems = true;
+            this.fastBatchRepacks.Size = new System.Drawing.Size(1079, 198);
+            this.fastBatchRepacks.TabIndex = 69;
+            this.fastBatchRepacks.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.fastBatchRepacks.UseCompatibleStateImageBehavior = false;
+            this.fastBatchRepacks.UseFiltering = true;
+            this.fastBatchRepacks.View = System.Windows.Forms.View.Details;
+            this.fastBatchRepacks.VirtualMode = true;
             // 
             // olvLineIndex
             // 
@@ -205,7 +205,7 @@
             // panelMaster
             // 
             this.panelMaster.Controls.Add(this.fastMismatchedBarcodes);
-            this.panelMaster.Controls.Add(this.fastAvailablePallets);
+            this.panelMaster.Controls.Add(this.fastBatchRepacks);
             this.panelMaster.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMaster.Location = new System.Drawing.Point(0, 0);
             this.panelMaster.Name = "panelMaster";
@@ -272,6 +272,12 @@
             this.olvItemAPICode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvItemAPICode.Width = 98;
             // 
+            // olvDescription
+            // 
+            this.olvDescription.AspectName = "Description";
+            this.olvDescription.Text = "Description";
+            this.olvDescription.Width = 0;
+            // 
             // olvItemName
             // 
             this.olvItemName.AspectName = "CommodityName";
@@ -280,12 +286,6 @@
             this.olvItemName.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvItemName.Text = "Name";
             this.olvItemName.Width = 308;
-            // 
-            // olvDescription
-            // 
-            this.olvDescription.AspectName = "Description";
-            this.olvDescription.Text = "Description";
-            this.olvDescription.Width = 0;
             // 
             // BatchRepackWizard
             // 
@@ -301,7 +301,7 @@
             this.Load += new System.EventHandler(this.BatchRepackWizard_Load);
             this.toolStripBottom.ResumeLayout(false);
             this.toolStripBottom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fastAvailablePallets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fastBatchRepacks)).EndInit();
             this.panelMaster.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastMismatchedBarcodes)).EndInit();
             this.ResumeLayout(false);
@@ -314,7 +314,7 @@
         private System.Windows.Forms.ToolStrip toolStripBottom;
         private System.Windows.Forms.ToolStripButton buttonESC;
         private System.Windows.Forms.ToolStripButton buttonAddExit;
-        private BrightIdeasSoftware.FastObjectListView fastAvailablePallets;
+        private BrightIdeasSoftware.FastObjectListView fastBatchRepacks;
         private System.Windows.Forms.Panel panelMaster;
         private BrightIdeasSoftware.OLVColumn olvPackCode;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
