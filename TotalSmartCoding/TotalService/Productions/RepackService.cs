@@ -24,6 +24,11 @@ namespace TotalService.Productions
             return this.repackRepository.LookupRepacks(barcode);
         }
 
+        public IList<BatchRepack> LookupRecartons(int cartonID)
+        {
+            return this.repackRepository.LookupRecartons(cartonID);
+        }
+
         public bool RepackRollback(int batchID, int repackID)
         {
             try

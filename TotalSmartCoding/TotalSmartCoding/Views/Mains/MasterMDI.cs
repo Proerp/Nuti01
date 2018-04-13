@@ -771,6 +771,10 @@ namespace TotalSmartCoding.Views.Mains
 
                     SearchBarcode quickView = new SearchBarcode(this.comboSearchBarcode.Text);
                     quickView.ShowDialog(); quickView.Dispose();
+
+                    SmartCoding activeSmartCoding = ActiveMdiChild as SmartCoding;
+                    if (activeSmartCoding != null)
+                        activeSmartCoding.ReprintCarton(28123);
                 }
             }
             catch (Exception exception)

@@ -4,9 +4,9 @@
     {
         public static bool PrintLOT = false;
 
-        public static bool OnTestRepackWithoutScanner = true; //4
+        public static bool OnTestRepackWithoutScanner = false; //4
 
-        public static bool OnTestScanner = true; //1
+        public static bool OnTestScanner = false; //1
         public static bool OnTestPalletScanner = false; //3 //WHEN REAL TEST WITHOUT PalletScanner
 
         public static bool OnTestPrinter = false; //2

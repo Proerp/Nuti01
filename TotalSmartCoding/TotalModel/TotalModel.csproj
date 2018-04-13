@@ -264,6 +264,9 @@
     <Compile Include="Models\LocationIndex.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LookupRecartons_Result.cs">
+      <DependentUpon>TotalSmartCoding.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Module.cs">
       <DependentUpon>TotalSmartCoding.tt</DependentUpon>
     </Compile>

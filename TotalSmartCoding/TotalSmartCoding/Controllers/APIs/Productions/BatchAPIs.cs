@@ -25,8 +25,9 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
         }
 
 
-        public ICollection<BatchIndex> GetBatchIndexes(bool showCummulativePacks, GlobalEnums.ActiveOption activeOption, bool defaultOnly)
+        public ICollection<BatchIndex> GetBatchIndexes(int batchID, bool showCummulativePacks, GlobalEnums.ActiveOption activeOption, bool defaultOnly)
         {
+            this.batchAPIRepository.RepositoryBag["BatchID"] = batchID;
             this.batchAPIRepository.RepositoryBag["ShowCummulativePacks"] = showCummulativePacks ? 1 : 0;
             this.batchAPIRepository.RepositoryBag["ActiveOption"] = (int)activeOption;
             this.batchAPIRepository.RepositoryBag["DefaultOnly"] = defaultOnly ? 1 : 0;
@@ -37,7 +38,14 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
 
         public BatchIndex GetActiveBatchIndex()
         {
-            BatchIndex goodsReceiptIndexes = this.GetBatchIndexes(false, GlobalEnums.ActiveOption.Active, true).Where(w => w.IsDefault).FirstOrDefault();
+            BatchIndex goodsReceiptIndexes = this.GetBatchIndexes(0, false, GlobalEnums.ActiveOption.Active, true).Where(w => w.IsDefault).FirstOrDefault();
+
+            return goodsReceiptIndexes;
+        }
+
+        public BatchIndex GetBatchByID(int batchID)
+        {
+            BatchIndex goodsReceiptIndexes = this.GetBatchIndexes(batchID, false, GlobalEnums.ActiveOption.Both, false).FirstOrDefault();
 
             return goodsReceiptIndexes;
         }

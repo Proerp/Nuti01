@@ -308,7 +308,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchEditable", entityIDParameter);
         }
     
-        public virtual ObjectResult<BatchIndex> GetBatchIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> fillingLineID, Nullable<bool> showCummulativePacks, Nullable<int> activeOption, Nullable<bool> defaultOnly)
+        public virtual ObjectResult<BatchIndex> GetBatchIndexes(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> batchID, Nullable<int> fillingLineID, Nullable<bool> showCummulativePacks, Nullable<int> activeOption, Nullable<bool> defaultOnly)
         {
             var userIDParameter = userID.HasValue ?
                 new ObjectParameter("UserID", userID) :
@@ -321,6 +321,10 @@ namespace TotalModel.Models
             var toDateParameter = toDate.HasValue ?
                 new ObjectParameter("ToDate", toDate) :
                 new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
     
             var fillingLineIDParameter = fillingLineID.HasValue ?
                 new ObjectParameter("FillingLineID", fillingLineID) :
@@ -338,7 +342,7 @@ namespace TotalModel.Models
                 new ObjectParameter("DefaultOnly", defaultOnly) :
                 new ObjectParameter("DefaultOnly", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchIndex>("GetBatchIndexes", userIDParameter, fromDateParameter, toDateParameter, fillingLineIDParameter, showCummulativePacksParameter, activeOptionParameter, defaultOnlyParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchIndex>("GetBatchIndexes", userIDParameter, fromDateParameter, toDateParameter, batchIDParameter, fillingLineIDParameter, showCummulativePacksParameter, activeOptionParameter, defaultOnlyParameter);
         }
     
         public virtual int BatchCommonUpdate(Nullable<int> batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
@@ -2588,6 +2592,15 @@ namespace TotalModel.Models
                 new ObjectParameter("Barcode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetRelatedPackID", batchIDParameter, barcodeParameter);
+        }
+    
+        public virtual ObjectResult<BatchRepack> LookupRecartons(Nullable<int> cartonID)
+        {
+            var cartonIDParameter = cartonID.HasValue ?
+                new ObjectParameter("CartonID", cartonID) :
+                new ObjectParameter("CartonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("LookupRecartons", cartonIDParameter);
         }
     }
 }

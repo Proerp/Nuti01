@@ -95,7 +95,7 @@ namespace TotalSmartCoding.Views.Productions
         protected override void InitializeTabControl()
         {
             try
-            {                
+            {
                 if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum) { this.labelNextPackNo.Visible = false; this.textexNextPackNo.Visible = false; }
                 if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum) { this.labelNextCartonNo.Visible = false; this.labelNextCartonNo.Visible = false; }
 
@@ -217,7 +217,7 @@ namespace TotalSmartCoding.Views.Productions
 
         public override void Loading()
         {
-            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(this.comboShowCummulativePacks.SelectedIndex == 0 ? false: true, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both, false));
+            this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(0, this.comboShowCummulativePacks.SelectedIndex == 0 ? false : true, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both, false));
             base.Loading();
 
             this.smartCoding.Initialize();
@@ -258,7 +258,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             if (this.allQueueEmpty) this.Approve();
         }
-       
+
         protected override bool ApproveCheck(int id)
         {
             return !this.batchViewModel.IsDefault && !this.batchViewModel.InActive;
@@ -295,7 +295,7 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        
+
 
 
 

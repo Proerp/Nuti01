@@ -24,6 +24,7 @@ using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.Views.Commons;
 using TotalSmartCoding.Views.Mains;
 using System.Collections.Generic;
+using TotalSmartCoding.ViewModels.Productions;
 //using System.Diagnostics;
 
 
@@ -149,11 +150,20 @@ namespace TotalSmartCoding.Views.Productions
         }
 
         public void Initialize()
+        { this.Initialize(null, null); }
+        public void Initialize(BatchIndex recartonBatchIndex, BatchRepack recartonbatchRepack)
         {
             try
             {
-                BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
-                BatchIndex batchIndex = batchAPIs.GetActiveBatchIndex();
+                BatchIndex batchIndex;
+                if (recartonBatchIndex != null)
+                    batchIndex = recartonBatchIndex;
+                else
+                {
+                    BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                    batchIndex = batchAPIs.GetActiveBatchIndex();
+                }
+
                 if (batchIndex != null)
                 {
                     Mapper.Map<BatchIndex, FillingData>(batchIndex, this.fillingData);
@@ -161,7 +171,7 @@ namespace TotalSmartCoding.Views.Productions
 
                     this.Text = this.fillingData.CommodityName + " [Carton Code: " + this.fillingData.CommodityCartonCode + "] " + "     [Pack per Carton: " + this.fillingData.PackPerCarton + ". Carton per Pallet: " + this.fillingData.CartonPerPallet + "]"; this.labelCommodityName.Text = "";
 
-                    this.InitializeRepack(this.AnyLoopRoutine());
+                    this.InitializeRepack(this.AnyLoopRoutine(), recartonbatchRepack);
                 }
             }
             catch (Exception exception)
@@ -170,8 +180,9 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-
         public void InitializeRepack(bool notPrintedOnly)
+        { this.InitializeRepack(notPrintedOnly, null); }
+        public void InitializeRepack(bool notPrintedOnly, BatchRepack recartonbatchRepack)
         {
             try
             {
@@ -182,17 +193,26 @@ namespace TotalSmartCoding.Views.Productions
 
                 if (this.fillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                 {
-                    BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
-                    List<BatchRepack> batchRepacks = batchAPIs.GetBatchRepacks(this.fillingData.BatchID, notPrintedOnly);
-                    if (batchRepacks.Count > 0)
+                    if (recartonbatchRepack != null)
                     {
-                        int lineNo = 0;
-                        batchRepacks.Each(batchRepack =>
+                        BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(recartonbatchRepack);
+                        batchRepackDTO.LineIndex = 1;
+                        this.fillingData.BatchRepacks.Add(batchRepackDTO);
+                    }
+                    else
+                    {
+                        BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                        List<BatchRepack> batchRepacks = batchAPIs.GetBatchRepacks(this.fillingData.BatchID, notPrintedOnly);
+                        if (batchRepacks.Count > 0)
                         {
-                            BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(batchRepack);
-                            batchRepackDTO.LineIndex = ++lineNo;
-                            this.fillingData.BatchRepacks.Add(batchRepackDTO);
-                        });
+                            int lineNo = 0;
+                            batchRepacks.Each(batchRepack =>
+                            {
+                                BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(batchRepack);
+                                batchRepackDTO.LineIndex = ++lineNo;
+                                this.fillingData.BatchRepacks.Add(batchRepackDTO);
+                            });
+                        }
                     }
                 }
 
@@ -381,7 +401,13 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.setToolStripActive();
 
-                this.InitializeRepack(false);
+                if (GlobalEnums.OnTestRepackWithoutScanner)
+                {
+                    GlobalEnums.OnTestRepackWithoutScanner = false;
+                    this.Initialize();
+                }
+                else
+                    this.InitializeRepack(false);
             }
             catch (Exception exception)
             {
@@ -1140,8 +1166,44 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
-        #endregion Repacks
+        public void ReprintCarton(int cartonID)
+        {
+            try
+            {
+                if (this.scannerController.AllQueueEmpty)
+                {
+                    RepackController repackController = new RepackController(CommonNinject.Kernel.Get<IRepackService>(), CommonNinject.Kernel.Get<RepackViewModel>());
 
+                    IList<BatchRepack> lookupRepacks = repackController.repackService.LookupRecartons(cartonID);
+                    if (lookupRepacks != null && lookupRepacks.Count > 0)
+                    {
+                        BatchRepack batchRepack = lookupRepacks.First();
+
+                        BatchAPIs batchAPIs = new BatchAPIs(CommonNinject.Kernel.Get<IBatchAPIRepository>());
+                        BatchIndex batchIndex = batchAPIs.GetBatchByID(batchRepack.BatchID);
+
+                        if (batchIndex != null)
+                        {
+                            batchIndex.BatchTypeID = (int)GlobalEnums.BatchTypeID.Repack;
+
+                            GlobalEnums.OnTestRepackWithoutScanner = true;
+
+                            this.Initialize(batchIndex, batchRepack);
+                        }
+                        else
+                            throw new Exception("Không tìm thấy batch của carton cần preprint");
+                    }
+                    else
+                        throw new Exception("Không tìm thấy carton cần preprint");
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        #endregion Repacks
 
     }
 }

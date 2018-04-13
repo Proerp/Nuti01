@@ -44,7 +44,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString;
 
-            queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @FillingLineID int, @ShowCummulativePacks bit, @ActiveOption int, @DefaultOnly bit " + "\r\n";
+            queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @BatchID int, @FillingLineID int, @ShowCummulativePacks bit, @ActiveOption int, @DefaultOnly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
@@ -92,11 +92,25 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = "";
 
             queryString = queryString + "   BEGIN " + "\r\n";
+            queryString = queryString + "       IF  (@BatchID > 0) " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(isActiveOption, defaultOnly, showCummulativePacks, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.GetBatchIndexSQL(isActiveOption, defaultOnly, showCummulativePacks, false) + "\r\n";
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string GetBatchIndexSQL(bool isActiveOption, bool defaultOnly, bool showCummulativePacks, bool isBatchID)
+        {
+            string queryString = "";
+
+            queryString = queryString + "   BEGIN " + "\r\n";
             queryString = queryString + "       SELECT      Batches.BatchID, CAST(Batches.EntryDate AS DATE) AS EntryDate, Batches.Reference, Batches.Code AS BatchCode, Batches.LotCode, Batches.FillingLineID, Batches.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
             queryString = queryString + "                   Batches.BatchTypeID, BatchTypes.Code AS BatchTypeCode, BatchTypes.Code + '-' + BatchTypes.Name AS BatchTypeCodeName, Batches.NextPackNo, Batches.NextCartonNo, Batches.NextPalletNo, Batches.Description, Batches.Remarks, " + (showCummulativePacks ? "CummulativePacks.PackQuantity" : "CAST(0 AS int) AS PackQuantity") + ", " + (showCummulativePacks ? "CummulativePacks.PackLineVolume" : "CAST(0 AS decimal(18, 2)) AS PackLineVolume") + ", Batches.CreatedDate, Batches.EditedDate, Batches.IsDefault, Batches.InActive " + "\r\n";
             queryString = queryString + "       FROM        Batches " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON Batches.FillingLineID = @FillingLineID " + (isActiveOption ? "AND Batches.InActive = @ActiveOption" : "") + " AND " + (defaultOnly ? "Batches.IsDefault = 1" : "((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) ") + " AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN BatchMasters ON BatchMasters.InActive = 0 AND Batches.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON " + (isBatchID ? " Batches.BatchID = @BatchID " : (" Batches.FillingLineID = @FillingLineID " + (isActiveOption ? "AND Batches.InActive = @ActiveOption" : "") + " AND " + (defaultOnly ? "Batches.IsDefault = 1" : "((Batches.EntryDate >= @FromDate AND Batches.EntryDate <= @ToDate) OR Batches.IsDefault = 1) "))) + " AND Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN BatchMasters ON " + (isBatchID ? "" : "BatchMasters.InActive = 0 AND ") + " Batches.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
             queryString = queryString + "                   INNER JOIN BatchTypes ON Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
 
             if (showCummulativePacks)
@@ -133,7 +147,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       SELECT          Repacks.RepackID, Repacks.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, Repacks.PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Repacks " + "\r\n"; //Packs.BatchID: SAVED BATCH; Repacks.BatchID: REPACK BATCH
             queryString = queryString + "                       INNER JOIN Packs ON (@NotPrintedOnly = 0 OR Repacks.PrintedTimes = 0) AND Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
-            queryString = queryString + "                       INNER JOIN FillingLines ON Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n"; 
+            queryString = queryString + "                       INNER JOIN FillingLines ON Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON Packs.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "       ORDER BY        Repacks.RepackID " + "\r\n"; //!!!!VERY IMPORTANT: BECAUSE: WE TREAT THIS ORDER WHEN PRINTING. SEE BatchRepackUpdate!!!!
@@ -141,6 +155,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchRepacks", queryString);
 
             this.LookupRepacks();
+            this.LookupRecartons();
         }
 
         private void LookupRepacks()
@@ -151,14 +166,28 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT          TOP 1 -1 AS RepackID, Packs.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, 0 AS PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Packs " + "\r\n";
-            queryString = queryString + "                       INNER JOIN FillingLines ON Packs.Code = @Barcode AND Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n"; 
+            queryString = queryString + "                       INNER JOIN FillingLines ON Packs.Code = @Barcode AND Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON Packs.CommodityID = Commodities.CommodityID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("LookupRepacks", queryString);
         }
 
-        
+        private void LookupRecartons()
+        {
+            string queryString = " @CartonID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       SELECT          TOP 1 -1 AS RepackID, Cartons.CartonID AS PackID, Cartons.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Cartons.Code, Cartons.FillingLineID, FillingLines.Code AS FillingLineCode, 0 AS PrintedTimes " + "\r\n";
+            queryString = queryString + "       FROM            Cartons " + "\r\n";
+            queryString = queryString + "                       INNER JOIN FillingLines ON Cartons.CartonID = @CartonID AND Cartons.FillingLineID = FillingLines.FillingLineID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Batches ON Cartons.BatchID = Batches.BatchID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON Cartons.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("LookupRecartons", queryString);
+        }
+
         private void BatchEditable()
         {
             string[] queryArray = new string[4];
