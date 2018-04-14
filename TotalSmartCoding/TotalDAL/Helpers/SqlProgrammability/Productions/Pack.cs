@@ -141,7 +141,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString;
 
             queryString = " @BatchID int, @Barcode varchar(50) " + "\r\n";
-            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
             queryString = queryString + "       DECLARE     @RelatedPackID int ";

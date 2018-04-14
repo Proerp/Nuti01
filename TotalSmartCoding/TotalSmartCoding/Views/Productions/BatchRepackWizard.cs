@@ -65,7 +65,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.fastBatchRepacks.AboutToCreateGroups += fastBarcodes_AboutToCreateGroups;
             this.fastMismatchedBarcodes.AboutToCreateGroups += fastBarcodes_AboutToCreateGroups;
-            this.fastBatchRepacks.ShowGroups = true;
+            //this.fastBatchRepacks.ShowGroups = true;
             this.fastMismatchedBarcodes.ShowGroups = true;
         }
 
@@ -119,7 +119,7 @@ namespace TotalSmartCoding.Views.Productions
                 }
 
                 this.fastBatchRepacks.SetObjects(this.batchRepacks);
-                if (this.batchRepacks.Count > 0) this.fastBatchRepacks.Sort(this.olvBatchCode, SortOrder.Descending);
+                //if (this.batchRepacks.Count > 0) this.fastBatchRepacks.Sort(this.olvBatchCode, SortOrder.Descending);
                 this.fastMismatchedBarcodes.SetObjects(mismatchedBarcodes);
                 if (mismatchedBarcodes.Count > 0) this.fastMismatchedBarcodes.Sort(this.olvDescription, SortOrder.Descending);
 

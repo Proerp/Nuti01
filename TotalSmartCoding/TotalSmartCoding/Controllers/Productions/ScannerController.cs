@@ -636,7 +636,7 @@ namespace TotalSmartCoding.Controllers.Productions
                     if (this.FillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                     {
                         packDTO.RelatedPackID = this.packController.packService.GetRelatedPackID(this.FillingData.BatchID, packDTO.Code);
-                        if (packDTO.RelatedPackID == null) throw new Exception("Mã vạch lon " + packDTO.Code + " không nằm trong dữ liệu repack");
+                        if (packDTO.RelatedPackID == null) throw new Exception("Mã vạch lon " + this.FillingData.BatchID.ToString() + "\r\n" + packDTO.Code + "\r\n" + " không nằm trong dữ liệu repack");
                     }
 
                     PackController freshPackController = new PackController(CommonNinject.Kernel.Get<IPackService>(), this.packViewModel);
