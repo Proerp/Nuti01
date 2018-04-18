@@ -18,7 +18,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         public void RestoreProcedure()
         {
-            this.WarehouseJournals();
+            this.ProductionJournals();
+            //this.WarehouseJournals();
         }
 
         private void WarehouseJournals()
@@ -194,6 +195,115 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             return queryString;
 
+        }
+
+        private void ProductionJournals()
+        {
+            string queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @FillingLineIDs varchar(3999), @BatchMasterIDs varchar(3999), @CommodityCategoryIDs varchar(3999), @CommodityTypeIDs varchar(3999), @CommodityIDs varchar(3999) " + "\r\n";
+
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+
+            queryString = queryString + "       DECLARE     @LocalUserID Int, @LocalFromDate DateTime, @LocalToDate DateTime, @LocalFillingLineIDs varchar(3999), @LocalBatchMasterIDs varchar(3999), @LocalCommodityCategoryIDs varchar(3999), @LocalCommodityTypeIDs varchar(3999), @LocalCommodityIDs varchar(3999) " + "\r\n";
+
+            queryString = queryString + "       SET         @LocalUserID = @UserID          SET @LocalFromDate = @FromDate          SET @LocalToDate = @ToDate  " + "\r\n";
+            queryString = queryString + "       SET         @LocalFillingLineIDs = @FillingLineIDs                                  SET @LocalBatchMasterIDs = @BatchMasterIDs " + "\r\n";
+            queryString = queryString + "       SET         @LocalCommodityCategoryIDs = @CommodityCategoryIDs                      SET @LocalCommodityTypeIDs = @CommodityTypeIDs              SET @LocalCommodityIDs = @CommodityIDs " + "\r\n";
+
+
+            queryString = queryString + "       IF         (@LocalFillingLineIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("ProductionJournals", queryString);
+
+        }
+
+        private string ProductionJournalSQL(bool isFillingLineID)
+        {
+            string queryString = "";
+
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF         (@LocalBatchMasterIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string ProductionJournalSQL(bool isFillingLineID, bool isBatchMasterID)
+        {
+            string queryString = "";
+
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF         (@LocalCommodityCategoryIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, isBatchMasterID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, isBatchMasterID, false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string ProductionJournalSQL(bool isFillingLineID, bool isBatchMasterID, bool isCommodityCategoryID)
+        {
+            string queryString = "";
+
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF         (@LocalCommodityTypeIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, isBatchMasterID, isCommodityCategoryID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, isBatchMasterID, isCommodityCategoryID, false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string ProductionJournalSQL(bool isFillingLineID, bool isBatchMasterID, bool isCommodityCategoryID, bool isCommodityTypeID)
+        {
+            string queryString = "";
+
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF         (@LocalCommodityIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, isBatchMasterID, isCommodityCategoryID, isCommodityTypeID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.ProductionJournalSQL(isFillingLineID, isBatchMasterID, isCommodityCategoryID, isCommodityTypeID, false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string ProductionJournalSQL(bool isFillingLineID, bool isBatchMasterID, bool isCommodityCategoryID, bool isCommodityTypeID, bool isCommodityID)
+        {
+            string queryString = " " + "\r\n";
+
+            queryString = queryString + "   SELECT      Batches.BatchMasterID, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotID, Batches.LotCode, BatchTypes.BatchTypeID, BatchTypes.Code AS BatchTypeCode, Batches.FillingLineID, FillingLines.Code AS FillingLineCode, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode, Commodities.PackageSize, " + "\r\n";
+            queryString = queryString + "               Pallets.PalletID, Pallets.EntryDate AS PalletDate, Pallets.Code AS PalletCode, Cartons.CartonID, Cartons.EntryDate AS CartonDate, Cartons.Code AS CartonCode, Packs.PackID, Packs.EntryDate AS PackDate, Packs.Code AS PackCode " + "\r\n";
+            queryString = queryString + "   FROM        Batches " + "\r\n";
+            queryString = queryString + "               INNER JOIN BatchTypes ON " + (isBatchMasterID ? "Batches.BatchMasterID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchMasterIDs)) " : "Batches.EntryDate >= @LocalFromDate AND Batches.EntryDate <= @LocalToDate") + " AND Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
+            queryString = queryString + "               INNER JOIN FillingLines ON " + (isFillingLineID ? "Batches.FillingLineID IN (SELECT Id FROM dbo.SplitToIntList (@LocalFillingLineIDs)) AND " : "") + " Batches.FillingLineID = FillingLines.FillingLineID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Commodities ON " + (isCommodityID ? "Commodities.CommodityID IN (SELECT Id FROM dbo.SplitToIntList (@LocalCommodityIDs)) AND " : "") + (isCommodityTypeID ? "Commodities.CommodityTypeID IN (SELECT Id FROM dbo.SplitToIntList (@CommodityTypeIDs)) AND " : "") + " Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "               INNER JOIN CommodityCategories ON " + (isCommodityCategoryID ? "Commodities.CommodityCategoryID IN (SELECT Id FROM dbo.SplitToIntList (@LocalCommodityCategoryIDs)) AND " : "") + " Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Pallets ON Batches.BatchID = Pallets.BatchID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Cartons ON Pallets.PalletID = Cartons.PalletID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Packs ON Cartons.CartonID = Packs.CartonID " + "\r\n";
+
+            return queryString;
         }
 
     }
