@@ -82,7 +82,7 @@ namespace TotalSmartCoding.Views.Generals
                 this.tabPageBatchTypes = new TabPage("Batch Types"); this.tabPageBatchTypes.Tag = (int)GlobalEnums.ReportTabPageID.TabPageBatchTypes;
                 this.tabPageFillingLines = new TabPage("Filling Lines"); this.tabPageFillingLines.Tag = (int)GlobalEnums.ReportTabPageID.TabPageFillingLines;
 
-                this.tabPages = new TabPage[] { this.tabPageWarehouses, this.tabPageCommodities, this.tabPageCustomers, this.tabPageWarehouseIssues, this.tabPageWarehouseReceipts, this.tabPageWarehouseAdjustmentTypes, this.tabPageBatchMasters, this.tabPageBatchTypes, this.tabPageFillingLines };
+                this.tabPages = new TabPage[] { this.tabPageFillingLines, this.tabPageBatchMasters, this.tabPageBatchTypes, this.tabPageWarehouses, this.tabPageCommodities, this.tabPageCustomers, this.tabPageWarehouseIssues, this.tabPageWarehouseReceipts, this.tabPageWarehouseAdjustmentTypes };
 
                 this.customTabMaster = new CustomTabControl();
                 this.customTabMaster.Font = this.treeWarehouseID.Font;
@@ -307,7 +307,7 @@ namespace TotalSmartCoding.Views.Generals
                     if (this.reportViewModel.ReportTabPageIDs.IndexOf(tabpage.Tag.ToString()) != -1 && !this.customTabMaster.TabPages.Contains(tabpage))
                         this.customTabMaster.TabPages.Add(tabpage);
                 }
-                if (this.customTabMaster.TabPages.Contains(this.tabPageCommodities)) this.customTabMaster.SelectedTab = this.tabPageCommodities;
+                //if (this.customTabMaster.TabPages.Contains(this.tabPageCommodities)) this.customTabMaster.SelectedTab = this.tabPageCommodities;
             }
             catch (Exception exception)
             {
@@ -564,7 +564,7 @@ namespace TotalSmartCoding.Views.Generals
                     }
                 }
             }
-            catch { }
+            catch (Exception exception) { ExceptionHandlers.ShowExceptionMessageBox(this, exception); }
         }
 
         private void textFILTER_TextChanged(object sender, EventArgs e)
@@ -598,7 +598,7 @@ namespace TotalSmartCoding.Views.Generals
                     }
                 }
             }
-            catch { }
+            catch (Exception exception) { ExceptionHandlers.ShowExceptionMessageBox(this, exception); }
         }
     }
 

@@ -125,7 +125,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " + CommodityCategoryID AS NodeID, " + GlobalEnums.RootNode + " AS ParentNodeID, CommodityCategoryID AS PrimaryID, NULL AS AncestorID, Name AS Code, NULL AS Name, 'CommodityCategoryID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
             queryString = queryString + "       FROM        CommodityCategories " + "\r\n";
             queryString = queryString + "       UNION ALL " + "\r\n";
-            queryString = queryString + "       SELECT      CommodityID AS NodeID, " + GlobalEnums.AncestorNode + " + CommodityCategoryID AS ParentNodeID, CommodityID AS PrimaryID, CommodityCategoryID AS AncestorID, Code, Name, 'CommodityID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       SELECT      CommodityID AS NodeID, " + GlobalEnums.AncestorNode + " + CommodityCategoryID AS ParentNodeID, CommodityID AS PrimaryID, CommodityCategoryID AS AncestorID, '[' + APICode + ']  ' + Code AS Code, Name, 'CommodityID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
             queryString = queryString + "       FROM        Commodities " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";

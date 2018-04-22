@@ -851,6 +851,7 @@
             this.textFillingLine.Name = "textFillingLine";
             this.textFillingLine.Size = new System.Drawing.Size(1081, 28);
             this.textFillingLine.TabIndex = 70;
+            this.textFillingLine.TextChanged += new System.EventHandler(this.textFILTER_TextChanged);
             // 
             // panel29
             // 
@@ -891,6 +892,7 @@
             this.buttonFillingLineCollapse.Tag = "COLLAPSE";
             this.buttonFillingLineCollapse.Text = "toolStripButton4";
             this.buttonFillingLineCollapse.ToolTipText = "Collapse All";
+            this.buttonFillingLineCollapse.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonFillingLineExpand
             // 
@@ -903,6 +905,7 @@
             this.buttonFillingLineExpand.Tag = "EXPAND";
             this.buttonFillingLineExpand.Text = "toolStripButton5";
             this.buttonFillingLineExpand.ToolTipText = "Expand All";
+            this.buttonFillingLineExpand.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // toolStripSeparator21
             // 
@@ -920,6 +923,7 @@
             this.buttonFillingLineSelect.Tag = "SELECT";
             this.buttonFillingLineSelect.Text = "toolStripButton1";
             this.buttonFillingLineSelect.ToolTipText = "Select All";
+            this.buttonFillingLineSelect.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonFillingLineSelectFilter
             // 
@@ -932,6 +936,7 @@
             this.buttonFillingLineSelectFilter.Tag = "SELECTFILTER";
             this.buttonFillingLineSelectFilter.Text = "toolStripButton7";
             this.buttonFillingLineSelectFilter.ToolTipText = "Select Filtered Items";
+            this.buttonFillingLineSelectFilter.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonFillingLineDeselect
             // 
@@ -944,6 +949,7 @@
             this.buttonFillingLineDeselect.Tag = "DESELECT";
             this.buttonFillingLineDeselect.Text = "toolStripButton3";
             this.buttonFillingLineDeselect.ToolTipText = "Deselect All";
+            this.buttonFillingLineDeselect.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // toolStripSeparator22
             // 
@@ -957,10 +963,11 @@
             this.buttonFillingLineClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonFillingLineClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonFillingLineClear.Name = "buttonFillingLineClear";
-            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 24);
+            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 20);
             this.buttonFillingLineClear.Tag = "CLEAR";
             this.buttonFillingLineClear.Text = "toolStripButton6";
             this.buttonFillingLineClear.ToolTipText = "Clear Filters";
+            this.buttonFillingLineClear.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // panelBatchTypeID
             // 
@@ -1042,6 +1049,7 @@
             this.textBatchType.Name = "textBatchType";
             this.textBatchType.Size = new System.Drawing.Size(1129, 28);
             this.textBatchType.TabIndex = 70;
+            this.textBatchType.TextChanged += new System.EventHandler(this.textFILTER_TextChanged);
             // 
             // panel27
             // 
@@ -1082,6 +1090,7 @@
             this.buttonBatchTypeCollapse.Tag = "COLLAPSE";
             this.buttonBatchTypeCollapse.Text = "toolStripButton4";
             this.buttonBatchTypeCollapse.ToolTipText = "Collapse All";
+            this.buttonBatchTypeCollapse.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonBatchTypeExpand
             // 
@@ -1094,6 +1103,7 @@
             this.buttonBatchTypeExpand.Tag = "EXPAND";
             this.buttonBatchTypeExpand.Text = "toolStripButton5";
             this.buttonBatchTypeExpand.ToolTipText = "Expand All";
+            this.buttonBatchTypeExpand.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // toolStripSeparator19
             // 
@@ -1111,6 +1121,7 @@
             this.buttonBatchTypeSelect.Tag = "SELECT";
             this.buttonBatchTypeSelect.Text = "toolStripButton1";
             this.buttonBatchTypeSelect.ToolTipText = "Select All";
+            this.buttonBatchTypeSelect.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonBatchTypeSelectFilter
             // 
@@ -1123,6 +1134,7 @@
             this.buttonBatchTypeSelectFilter.Tag = "SELECTFILTER";
             this.buttonBatchTypeSelectFilter.Text = "toolStripButton7";
             this.buttonBatchTypeSelectFilter.ToolTipText = "Select Filtered Items";
+            this.buttonBatchTypeSelectFilter.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonBatchTypeDeselect
             // 
@@ -1135,6 +1147,7 @@
             this.buttonBatchTypeDeselect.Tag = "DESELECT";
             this.buttonBatchTypeDeselect.Text = "toolStripButton3";
             this.buttonBatchTypeDeselect.ToolTipText = "Deselect All";
+            this.buttonBatchTypeDeselect.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // toolStripSeparator20
             // 
@@ -1152,6 +1165,7 @@
             this.buttonBatchTypeClear.Tag = "CLEAR";
             this.buttonBatchTypeClear.Text = "toolStripButton6";
             this.buttonBatchTypeClear.ToolTipText = "Clear Filters";
+            this.buttonBatchTypeClear.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // panelBatchMasterID
             // 
@@ -1233,6 +1247,7 @@
             this.textBatchMaster.Name = "textBatchMaster";
             this.textBatchMaster.Size = new System.Drawing.Size(1069, 28);
             this.textBatchMaster.TabIndex = 70;
+            this.textBatchMaster.TextChanged += new System.EventHandler(this.textFILTER_TextChanged);
             // 
             // panel9
             // 
@@ -1273,6 +1288,7 @@
             this.buttonBatchMasterCollapse.Tag = "COLLAPSE";
             this.buttonBatchMasterCollapse.Text = "toolStripButton4";
             this.buttonBatchMasterCollapse.ToolTipText = "Collapse All";
+            this.buttonBatchMasterCollapse.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonBatchMasterExpand
             // 
@@ -1285,6 +1301,7 @@
             this.buttonBatchMasterExpand.Tag = "EXPAND";
             this.buttonBatchMasterExpand.Text = "toolStripButton5";
             this.buttonBatchMasterExpand.ToolTipText = "Expand All";
+            this.buttonBatchMasterExpand.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // toolStripSeparator17
             // 
@@ -1302,6 +1319,7 @@
             this.buttonBatchMasterSelect.Tag = "SELECT";
             this.buttonBatchMasterSelect.Text = "toolStripButton1";
             this.buttonBatchMasterSelect.ToolTipText = "Select All";
+            this.buttonBatchMasterSelect.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonBatchMasterSelectFilter
             // 
@@ -1314,6 +1332,7 @@
             this.buttonBatchMasterSelectFilter.Tag = "SELECTFILTER";
             this.buttonBatchMasterSelectFilter.Text = "toolStripButton7";
             this.buttonBatchMasterSelectFilter.ToolTipText = "Select Filtered Items";
+            this.buttonBatchMasterSelectFilter.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // buttonBatchMasterDeselect
             // 
@@ -1326,6 +1345,7 @@
             this.buttonBatchMasterDeselect.Tag = "DESELECT";
             this.buttonBatchMasterDeselect.Text = "toolStripButton3";
             this.buttonBatchMasterDeselect.ToolTipText = "Deselect All";
+            this.buttonBatchMasterDeselect.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // toolStripSeparator18
             // 
@@ -1343,6 +1363,7 @@
             this.buttonBatchMasterClear.Tag = "CLEAR";
             this.buttonBatchMasterClear.Text = "toolStripButton6";
             this.buttonBatchMasterClear.ToolTipText = "Clear Filters";
+            this.buttonBatchMasterClear.Click += new System.EventHandler(this.buttonCollapse_Click);
             // 
             // panelWarehouseIssueID
             // 
