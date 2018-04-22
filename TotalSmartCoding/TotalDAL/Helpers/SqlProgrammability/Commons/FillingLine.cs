@@ -24,6 +24,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             //this.FillingLineSaveRelative();
 
             this.GetFillingLineBases();
+            this.GetFillingLineTrees();
         }
 
 
@@ -101,6 +102,26 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetFillingLineBases", queryString);
+        }
+
+        private void GetFillingLineTrees()
+        {
+            string queryString;
+
+            queryString = " " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       SELECT      " + GlobalEnums.RootNode + " AS NodeID, 0 AS ParentNodeID, NULL AS PrimaryID, NULL AS AncestorID, '[All]' AS Code, NULL AS Name, NULL AS ParameterName, CAST(1 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       UNION ALL " + "\r\n";
+            queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " + FillingLineID AS NodeID, " + GlobalEnums.RootNode + " + 0 AS ParentNodeID, FillingLineID AS PrimaryID, NULL AS AncestorID, Code, N'' AS Name, 'FillingLineID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       FROM        FillingLines " + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetFillingLineTrees", queryString);
+
         }
 
     }

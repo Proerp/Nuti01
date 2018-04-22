@@ -32,6 +32,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchMasterRemoveLot();
 
             this.GetBatchMasterBases();
+            this.GetBatchMasterTrees();
         }
 
 
@@ -233,6 +234,27 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    END " + "\r\n";
 
             return queryString;
+        }
+
+
+        private void GetBatchMasterTrees()
+        {
+            string queryString;
+
+            queryString = " " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       SELECT      " + GlobalEnums.RootNode + " AS NodeID, 0 AS ParentNodeID, NULL AS PrimaryID, NULL AS AncestorID, '[All]' AS Code, NULL AS Name, NULL AS ParameterName, CAST(1 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       UNION ALL " + "\r\n";
+            queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " + BatchMasterID AS NodeID, " + GlobalEnums.RootNode + " + 0 AS ParentNodeID, BatchMasterID AS PrimaryID, NULL AS AncestorID, Code, N'' AS Name, 'BatchMasterID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       FROM        BatchMasters " + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetBatchMasterTrees", queryString);
+
         }
     }
 }

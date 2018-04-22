@@ -87,6 +87,21 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
             inventory.RestoreProcedure();
 
+            //return;
+
+            Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
+            batchMaster.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Commons.BatchType batchType = new Helpers.SqlProgrammability.Commons.BatchType(totalSmartCodingEntities);
+            batchType.RestoreProcedure();
+
+            ////return;
+
+            Helpers.SqlProgrammability.Commons.FillingLine fillingLine = new Helpers.SqlProgrammability.Commons.FillingLine(totalSmartCodingEntities);
+            fillingLine.RestoreProcedure();
+
             return;
 
             Helpers.SqlProgrammability.Generals.Report report = new Helpers.SqlProgrammability.Generals.Report(totalSmartCodingEntities);
@@ -97,10 +112,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Generals.OleDb oleDb = new Helpers.SqlProgrammability.Generals.OleDb(totalSmartCodingEntities);
             oleDb.RestoreProcedure();
 
-            //return;
 
-            Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
-            batchMaster.RestoreProcedure();
 
             ////return;
 
@@ -140,17 +152,10 @@ namespace TotalDAL.Repositories
             location.RestoreProcedure();
 
 
-            ////return;
-
-            Helpers.SqlProgrammability.Commons.FillingLine fillingLine = new Helpers.SqlProgrammability.Commons.FillingLine(totalSmartCodingEntities);
-            fillingLine.RestoreProcedure();
+            
 
 
 
-            //return;
-
-            Helpers.SqlProgrammability.Commons.BatchType batchType = new Helpers.SqlProgrammability.Commons.BatchType(totalSmartCodingEntities);
-            batchType.RestoreProcedure();
 
             //return;
 

@@ -2602,5 +2602,20 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("LookupRecartons", cartonIDParameter);
         }
+    
+        public virtual ObjectResult<BatchMasterTree> GetBatchMasterTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterTree>("GetBatchMasterTrees");
+        }
+    
+        public virtual ObjectResult<BatchTypeTree> GetBatchTypeTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchTypeTree>("GetBatchTypeTrees");
+        }
+    
+        public virtual ObjectResult<FillingLineTree> GetFillingLineTrees()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingLineTree>("GetFillingLineTrees");
+        }
     }
 }

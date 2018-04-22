@@ -66,6 +66,57 @@
             this.olvReportGroupName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvReportName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelCenter = new System.Windows.Forms.Panel();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.treeFillingLineID = new BrightIdeasSoftware.DataTreeListView();
+            this.olvColumn29 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn31 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.panel28 = new System.Windows.Forms.Panel();
+            this.textFillingLine = new System.Windows.Forms.TextBox();
+            this.panel29 = new System.Windows.Forms.Panel();
+            this.stripFillingLine = new System.Windows.Forms.ToolStrip();
+            this.buttonFillingLineCollapse = new System.Windows.Forms.ToolStripButton();
+            this.buttonFillingLineExpand = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonFillingLineSelect = new System.Windows.Forms.ToolStripButton();
+            this.buttonFillingLineSelectFilter = new System.Windows.Forms.ToolStripButton();
+            this.buttonFillingLineDeselect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonFillingLineClear = new System.Windows.Forms.ToolStripButton();
+            this.panel24 = new System.Windows.Forms.Panel();
+            this.treeBatchTypeID = new BrightIdeasSoftware.DataTreeListView();
+            this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn27 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn28 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.panel26 = new System.Windows.Forms.Panel();
+            this.textBatchType = new System.Windows.Forms.TextBox();
+            this.panel27 = new System.Windows.Forms.Panel();
+            this.stripBatchType = new System.Windows.Forms.ToolStrip();
+            this.buttonBatchTypeCollapse = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatchTypeExpand = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonBatchTypeSelect = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatchTypeSelectFilter = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatchTypeDeselect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonBatchTypeClear = new System.Windows.Forms.ToolStripButton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.treeBatchMasterID = new BrightIdeasSoftware.DataTreeListView();
+            this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumn25 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.textBatchMaster = new System.Windows.Forms.TextBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.stripBatchMaster = new System.Windows.Forms.ToolStrip();
+            this.buttonBatchMasterCollapse = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatchMasterExpand = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonBatchMasterSelect = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatchMasterSelectFilter = new System.Windows.Forms.ToolStripButton();
+            this.buttonBatchMasterDeselect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonBatchMasterClear = new System.Windows.Forms.ToolStripButton();
             this.panelWarehouseIssueID = new System.Windows.Forms.Panel();
             this.treeWarehouseIssueID = new BrightIdeasSoftware.DataTreeListView();
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -210,6 +261,21 @@
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastReportIndex)).BeginInit();
             this.panelCenter.SuspendLayout();
+            this.panel25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeFillingLineID)).BeginInit();
+            this.panel28.SuspendLayout();
+            this.panel29.SuspendLayout();
+            this.stripFillingLine.SuspendLayout();
+            this.panel24.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeBatchTypeID)).BeginInit();
+            this.panel26.SuspendLayout();
+            this.panel27.SuspendLayout();
+            this.stripBatchType.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.treeBatchMasterID)).BeginInit();
+            this.panel6.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.stripBatchMaster.SuspendLayout();
             this.panelWarehouseIssueID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeWarehouseIssueID)).BeginInit();
             this.panel10.SuspendLayout();
@@ -314,7 +380,7 @@
             this.treeCommodityID.RootKeyValueString = "";
             this.treeCommodityID.ShowGroups = false;
             this.treeCommodityID.ShowKeyColumns = false;
-            this.treeCommodityID.Size = new System.Drawing.Size(811, 104);
+            this.treeCommodityID.Size = new System.Drawing.Size(811, 59);
             this.treeCommodityID.TabIndex = 66;
             this.treeCommodityID.UseCompatibleStateImageBehavior = false;
             this.treeCommodityID.UseFilterIndicator = true;
@@ -690,6 +756,9 @@
             // 
             // panelCenter
             // 
+            this.panelCenter.Controls.Add(this.panel25);
+            this.panelCenter.Controls.Add(this.panel24);
+            this.panelCenter.Controls.Add(this.panel3);
             this.panelCenter.Controls.Add(this.panelWarehouseIssueID);
             this.panelCenter.Controls.Add(this.panelWarehouseAdjustmentTypeID);
             this.panelCenter.Controls.Add(this.panelWarehouseReceiptID);
@@ -702,11 +771,584 @@
             this.panelCenter.Size = new System.Drawing.Size(1219, 702);
             this.panelCenter.TabIndex = 69;
             // 
+            // panel25
+            // 
+            this.panel25.Controls.Add(this.treeFillingLineID);
+            this.panel25.Controls.Add(this.panel28);
+            this.panel25.Location = new System.Drawing.Point(3, 617);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(1234, 62);
+            this.panel25.TabIndex = 79;
+            // 
+            // treeFillingLineID
+            // 
+            this.treeFillingLineID.AllColumns.Add(this.olvColumn29);
+            this.treeFillingLineID.AllColumns.Add(this.olvColumn30);
+            this.treeFillingLineID.AllColumns.Add(this.olvColumn33);
+            this.treeFillingLineID.AllColumns.Add(this.olvColumn4);
+            this.treeFillingLineID.AllColumns.Add(this.olvColumn5);
+            this.treeFillingLineID.AllColumns.Add(this.olvColumn31);
+            this.treeFillingLineID.BackColor = System.Drawing.Color.Ivory;
+            this.treeFillingLineID.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn29,
+            this.olvColumn30,
+            this.olvColumn31});
+            this.treeFillingLineID.DataSource = null;
+            this.treeFillingLineID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeFillingLineID.FullRowSelect = true;
+            this.treeFillingLineID.KeyAspectName = "NodeID";
+            this.treeFillingLineID.Location = new System.Drawing.Point(0, 24);
+            this.treeFillingLineID.Name = "treeFillingLineID";
+            this.treeFillingLineID.OwnerDraw = true;
+            this.treeFillingLineID.ParentKeyAspectName = "ParentNodeID";
+            this.treeFillingLineID.RootKeyValueString = "";
+            this.treeFillingLineID.ShowGroups = false;
+            this.treeFillingLineID.ShowKeyColumns = false;
+            this.treeFillingLineID.Size = new System.Drawing.Size(1234, 38);
+            this.treeFillingLineID.TabIndex = 73;
+            this.treeFillingLineID.UseCompatibleStateImageBehavior = false;
+            this.treeFillingLineID.UseFilterIndicator = true;
+            this.treeFillingLineID.UseFiltering = true;
+            this.treeFillingLineID.View = System.Windows.Forms.View.Details;
+            this.treeFillingLineID.VirtualMode = true;
+            // 
+            // olvColumn29
+            // 
+            this.olvColumn29.AspectName = "Code";
+            this.olvColumn29.Text = "Adjustment Types";
+            this.olvColumn29.Width = 268;
+            // 
+            // olvColumn30
+            // 
+            this.olvColumn30.AspectName = "Selected";
+            this.olvColumn30.CheckBoxes = true;
+            this.olvColumn30.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn30.Text = "";
+            this.olvColumn30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn30.Width = 45;
+            // 
+            // olvColumn31
+            // 
+            this.olvColumn31.AspectName = "Name";
+            this.olvColumn31.FillsFreeSpace = true;
+            this.olvColumn31.Text = "Description";
+            this.olvColumn31.Width = 100;
+            // 
+            // panel28
+            // 
+            this.panel28.Controls.Add(this.textFillingLine);
+            this.panel28.Controls.Add(this.panel29);
+            this.panel28.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel28.Location = new System.Drawing.Point(0, 0);
+            this.panel28.Name = "panel28";
+            this.panel28.Size = new System.Drawing.Size(1234, 24);
+            this.panel28.TabIndex = 71;
+            // 
+            // textFillingLine
+            // 
+            this.textFillingLine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textFillingLine.Location = new System.Drawing.Point(153, 0);
+            this.textFillingLine.Name = "textFillingLine";
+            this.textFillingLine.Size = new System.Drawing.Size(1081, 28);
+            this.textFillingLine.TabIndex = 70;
+            // 
+            // panel29
+            // 
+            this.panel29.Controls.Add(this.stripFillingLine);
+            this.panel29.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel29.Location = new System.Drawing.Point(0, 0);
+            this.panel29.Name = "panel29";
+            this.panel29.Size = new System.Drawing.Size(153, 24);
+            this.panel29.TabIndex = 69;
+            // 
+            // stripFillingLine
+            // 
+            this.stripFillingLine.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.stripFillingLine.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.stripFillingLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonFillingLineCollapse,
+            this.buttonFillingLineExpand,
+            this.toolStripSeparator21,
+            this.buttonFillingLineSelect,
+            this.buttonFillingLineSelectFilter,
+            this.buttonFillingLineDeselect,
+            this.toolStripSeparator22,
+            this.buttonFillingLineClear});
+            this.stripFillingLine.Location = new System.Drawing.Point(0, 0);
+            this.stripFillingLine.Name = "stripFillingLine";
+            this.stripFillingLine.Size = new System.Drawing.Size(153, 27);
+            this.stripFillingLine.TabIndex = 0;
+            this.stripFillingLine.Text = "Collapse All";
+            // 
+            // buttonFillingLineCollapse
+            // 
+            this.buttonFillingLineCollapse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFillingLineCollapse.Image = global::TotalSmartCoding.Properties.Resources.GoUp_16;
+            this.buttonFillingLineCollapse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFillingLineCollapse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFillingLineCollapse.Name = "buttonFillingLineCollapse";
+            this.buttonFillingLineCollapse.Size = new System.Drawing.Size(23, 24);
+            this.buttonFillingLineCollapse.Tag = "COLLAPSE";
+            this.buttonFillingLineCollapse.Text = "toolStripButton4";
+            this.buttonFillingLineCollapse.ToolTipText = "Collapse All";
+            // 
+            // buttonFillingLineExpand
+            // 
+            this.buttonFillingLineExpand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFillingLineExpand.Image = global::TotalSmartCoding.Properties.Resources.godown_14;
+            this.buttonFillingLineExpand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFillingLineExpand.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFillingLineExpand.Name = "buttonFillingLineExpand";
+            this.buttonFillingLineExpand.Size = new System.Drawing.Size(23, 24);
+            this.buttonFillingLineExpand.Tag = "EXPAND";
+            this.buttonFillingLineExpand.Text = "toolStripButton5";
+            this.buttonFillingLineExpand.ToolTipText = "Expand All";
+            // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            this.toolStripSeparator21.Size = new System.Drawing.Size(6, 27);
+            // 
+            // buttonFillingLineSelect
+            // 
+            this.buttonFillingLineSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFillingLineSelect.Image = global::TotalSmartCoding.Properties.Resources.check_Ok_16;
+            this.buttonFillingLineSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFillingLineSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFillingLineSelect.Name = "buttonFillingLineSelect";
+            this.buttonFillingLineSelect.Size = new System.Drawing.Size(23, 24);
+            this.buttonFillingLineSelect.Tag = "SELECT";
+            this.buttonFillingLineSelect.Text = "toolStripButton1";
+            this.buttonFillingLineSelect.ToolTipText = "Select All";
+            // 
+            // buttonFillingLineSelectFilter
+            // 
+            this.buttonFillingLineSelectFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFillingLineSelectFilter.Image = global::TotalSmartCoding.Properties.Resources.check_Circle_20;
+            this.buttonFillingLineSelectFilter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFillingLineSelectFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFillingLineSelectFilter.Name = "buttonFillingLineSelectFilter";
+            this.buttonFillingLineSelectFilter.Size = new System.Drawing.Size(24, 24);
+            this.buttonFillingLineSelectFilter.Tag = "SELECTFILTER";
+            this.buttonFillingLineSelectFilter.Text = "toolStripButton7";
+            this.buttonFillingLineSelectFilter.ToolTipText = "Select Filtered Items";
+            // 
+            // buttonFillingLineDeselect
+            // 
+            this.buttonFillingLineDeselect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFillingLineDeselect.Image = global::TotalSmartCoding.Properties.Resources.Empty_20;
+            this.buttonFillingLineDeselect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFillingLineDeselect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFillingLineDeselect.Name = "buttonFillingLineDeselect";
+            this.buttonFillingLineDeselect.Size = new System.Drawing.Size(24, 24);
+            this.buttonFillingLineDeselect.Tag = "DESELECT";
+            this.buttonFillingLineDeselect.Text = "toolStripButton3";
+            this.buttonFillingLineDeselect.ToolTipText = "Deselect All";
+            // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            this.toolStripSeparator22.Size = new System.Drawing.Size(6, 27);
+            // 
+            // buttonFillingLineClear
+            // 
+            this.buttonFillingLineClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonFillingLineClear.Image = global::TotalSmartCoding.Properties.Resources.backspace_l_R_16;
+            this.buttonFillingLineClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonFillingLineClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonFillingLineClear.Name = "buttonFillingLineClear";
+            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 20);
+            this.buttonFillingLineClear.Tag = "CLEAR";
+            this.buttonFillingLineClear.Text = "toolStripButton6";
+            this.buttonFillingLineClear.ToolTipText = "Clear Filters";
+            // 
+            // panel24
+            // 
+            this.panel24.Controls.Add(this.treeBatchTypeID);
+            this.panel24.Controls.Add(this.panel26);
+            this.panel24.Location = new System.Drawing.Point(3, 540);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(1282, 71);
+            this.panel24.TabIndex = 78;
+            // 
+            // treeBatchTypeID
+            // 
+            this.treeBatchTypeID.AllColumns.Add(this.olvColumn26);
+            this.treeBatchTypeID.AllColumns.Add(this.olvColumn27);
+            this.treeBatchTypeID.AllColumns.Add(this.olvColumn33);
+            this.treeBatchTypeID.AllColumns.Add(this.olvColumn4);
+            this.treeBatchTypeID.AllColumns.Add(this.olvColumn5);
+            this.treeBatchTypeID.AllColumns.Add(this.olvColumn28);
+            this.treeBatchTypeID.BackColor = System.Drawing.Color.Ivory;
+            this.treeBatchTypeID.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn26,
+            this.olvColumn27,
+            this.olvColumn28});
+            this.treeBatchTypeID.DataSource = null;
+            this.treeBatchTypeID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeBatchTypeID.FullRowSelect = true;
+            this.treeBatchTypeID.KeyAspectName = "NodeID";
+            this.treeBatchTypeID.Location = new System.Drawing.Point(0, 24);
+            this.treeBatchTypeID.Name = "treeBatchTypeID";
+            this.treeBatchTypeID.OwnerDraw = true;
+            this.treeBatchTypeID.ParentKeyAspectName = "ParentNodeID";
+            this.treeBatchTypeID.RootKeyValueString = "";
+            this.treeBatchTypeID.ShowGroups = false;
+            this.treeBatchTypeID.ShowKeyColumns = false;
+            this.treeBatchTypeID.Size = new System.Drawing.Size(1282, 47);
+            this.treeBatchTypeID.TabIndex = 73;
+            this.treeBatchTypeID.UseCompatibleStateImageBehavior = false;
+            this.treeBatchTypeID.UseFilterIndicator = true;
+            this.treeBatchTypeID.UseFiltering = true;
+            this.treeBatchTypeID.View = System.Windows.Forms.View.Details;
+            this.treeBatchTypeID.VirtualMode = true;
+            // 
+            // olvColumn26
+            // 
+            this.olvColumn26.AspectName = "Code";
+            this.olvColumn26.Text = "Adjustment Types";
+            this.olvColumn26.Width = 268;
+            // 
+            // olvColumn27
+            // 
+            this.olvColumn27.AspectName = "Selected";
+            this.olvColumn27.CheckBoxes = true;
+            this.olvColumn27.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn27.Text = "";
+            this.olvColumn27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn27.Width = 45;
+            // 
+            // olvColumn28
+            // 
+            this.olvColumn28.AspectName = "Name";
+            this.olvColumn28.FillsFreeSpace = true;
+            this.olvColumn28.Text = "Description";
+            this.olvColumn28.Width = 100;
+            // 
+            // panel26
+            // 
+            this.panel26.Controls.Add(this.textBatchType);
+            this.panel26.Controls.Add(this.panel27);
+            this.panel26.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel26.Location = new System.Drawing.Point(0, 0);
+            this.panel26.Name = "panel26";
+            this.panel26.Size = new System.Drawing.Size(1282, 24);
+            this.panel26.TabIndex = 71;
+            // 
+            // textBatchType
+            // 
+            this.textBatchType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBatchType.Location = new System.Drawing.Point(153, 0);
+            this.textBatchType.Name = "textBatchType";
+            this.textBatchType.Size = new System.Drawing.Size(1129, 28);
+            this.textBatchType.TabIndex = 70;
+            // 
+            // panel27
+            // 
+            this.panel27.Controls.Add(this.stripBatchType);
+            this.panel27.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel27.Location = new System.Drawing.Point(0, 0);
+            this.panel27.Name = "panel27";
+            this.panel27.Size = new System.Drawing.Size(153, 24);
+            this.panel27.TabIndex = 69;
+            // 
+            // stripBatchType
+            // 
+            this.stripBatchType.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.stripBatchType.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.stripBatchType.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonBatchTypeCollapse,
+            this.buttonBatchTypeExpand,
+            this.toolStripSeparator19,
+            this.buttonBatchTypeSelect,
+            this.buttonBatchTypeSelectFilter,
+            this.buttonBatchTypeDeselect,
+            this.toolStripSeparator20,
+            this.buttonBatchTypeClear});
+            this.stripBatchType.Location = new System.Drawing.Point(0, 0);
+            this.stripBatchType.Name = "stripBatchType";
+            this.stripBatchType.Size = new System.Drawing.Size(153, 27);
+            this.stripBatchType.TabIndex = 0;
+            this.stripBatchType.Text = "Collapse All";
+            // 
+            // buttonBatchTypeCollapse
+            // 
+            this.buttonBatchTypeCollapse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchTypeCollapse.Image = global::TotalSmartCoding.Properties.Resources.GoUp_16;
+            this.buttonBatchTypeCollapse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchTypeCollapse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchTypeCollapse.Name = "buttonBatchTypeCollapse";
+            this.buttonBatchTypeCollapse.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchTypeCollapse.Tag = "COLLAPSE";
+            this.buttonBatchTypeCollapse.Text = "toolStripButton4";
+            this.buttonBatchTypeCollapse.ToolTipText = "Collapse All";
+            // 
+            // buttonBatchTypeExpand
+            // 
+            this.buttonBatchTypeExpand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchTypeExpand.Image = global::TotalSmartCoding.Properties.Resources.godown_14;
+            this.buttonBatchTypeExpand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchTypeExpand.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchTypeExpand.Name = "buttonBatchTypeExpand";
+            this.buttonBatchTypeExpand.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchTypeExpand.Tag = "EXPAND";
+            this.buttonBatchTypeExpand.Text = "toolStripButton5";
+            this.buttonBatchTypeExpand.ToolTipText = "Expand All";
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(6, 27);
+            // 
+            // buttonBatchTypeSelect
+            // 
+            this.buttonBatchTypeSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchTypeSelect.Image = global::TotalSmartCoding.Properties.Resources.check_Ok_16;
+            this.buttonBatchTypeSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchTypeSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchTypeSelect.Name = "buttonBatchTypeSelect";
+            this.buttonBatchTypeSelect.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchTypeSelect.Tag = "SELECT";
+            this.buttonBatchTypeSelect.Text = "toolStripButton1";
+            this.buttonBatchTypeSelect.ToolTipText = "Select All";
+            // 
+            // buttonBatchTypeSelectFilter
+            // 
+            this.buttonBatchTypeSelectFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchTypeSelectFilter.Image = global::TotalSmartCoding.Properties.Resources.check_Circle_20;
+            this.buttonBatchTypeSelectFilter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchTypeSelectFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchTypeSelectFilter.Name = "buttonBatchTypeSelectFilter";
+            this.buttonBatchTypeSelectFilter.Size = new System.Drawing.Size(24, 24);
+            this.buttonBatchTypeSelectFilter.Tag = "SELECTFILTER";
+            this.buttonBatchTypeSelectFilter.Text = "toolStripButton7";
+            this.buttonBatchTypeSelectFilter.ToolTipText = "Select Filtered Items";
+            // 
+            // buttonBatchTypeDeselect
+            // 
+            this.buttonBatchTypeDeselect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchTypeDeselect.Image = global::TotalSmartCoding.Properties.Resources.Empty_20;
+            this.buttonBatchTypeDeselect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchTypeDeselect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchTypeDeselect.Name = "buttonBatchTypeDeselect";
+            this.buttonBatchTypeDeselect.Size = new System.Drawing.Size(24, 24);
+            this.buttonBatchTypeDeselect.Tag = "DESELECT";
+            this.buttonBatchTypeDeselect.Text = "toolStripButton3";
+            this.buttonBatchTypeDeselect.ToolTipText = "Deselect All";
+            // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            this.toolStripSeparator20.Size = new System.Drawing.Size(6, 27);
+            // 
+            // buttonBatchTypeClear
+            // 
+            this.buttonBatchTypeClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchTypeClear.Image = global::TotalSmartCoding.Properties.Resources.backspace_l_R_16;
+            this.buttonBatchTypeClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchTypeClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchTypeClear.Name = "buttonBatchTypeClear";
+            this.buttonBatchTypeClear.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchTypeClear.Tag = "CLEAR";
+            this.buttonBatchTypeClear.Text = "toolStripButton6";
+            this.buttonBatchTypeClear.ToolTipText = "Clear Filters";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.treeBatchMasterID);
+            this.panel3.Controls.Add(this.panel6);
+            this.panel3.Location = new System.Drawing.Point(3, 475);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1222, 59);
+            this.panel3.TabIndex = 77;
+            // 
+            // treeBatchMasterID
+            // 
+            this.treeBatchMasterID.AllColumns.Add(this.olvColumn23);
+            this.treeBatchMasterID.AllColumns.Add(this.olvColumn24);
+            this.treeBatchMasterID.AllColumns.Add(this.olvColumn33);
+            this.treeBatchMasterID.AllColumns.Add(this.olvColumn4);
+            this.treeBatchMasterID.AllColumns.Add(this.olvColumn5);
+            this.treeBatchMasterID.AllColumns.Add(this.olvColumn25);
+            this.treeBatchMasterID.BackColor = System.Drawing.Color.Ivory;
+            this.treeBatchMasterID.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumn23,
+            this.olvColumn24,
+            this.olvColumn25});
+            this.treeBatchMasterID.DataSource = null;
+            this.treeBatchMasterID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeBatchMasterID.FullRowSelect = true;
+            this.treeBatchMasterID.KeyAspectName = "NodeID";
+            this.treeBatchMasterID.Location = new System.Drawing.Point(0, 24);
+            this.treeBatchMasterID.Name = "treeBatchMasterID";
+            this.treeBatchMasterID.OwnerDraw = true;
+            this.treeBatchMasterID.ParentKeyAspectName = "ParentNodeID";
+            this.treeBatchMasterID.RootKeyValueString = "";
+            this.treeBatchMasterID.ShowGroups = false;
+            this.treeBatchMasterID.ShowKeyColumns = false;
+            this.treeBatchMasterID.Size = new System.Drawing.Size(1222, 35);
+            this.treeBatchMasterID.TabIndex = 72;
+            this.treeBatchMasterID.UseCompatibleStateImageBehavior = false;
+            this.treeBatchMasterID.UseFilterIndicator = true;
+            this.treeBatchMasterID.UseFiltering = true;
+            this.treeBatchMasterID.View = System.Windows.Forms.View.Details;
+            this.treeBatchMasterID.VirtualMode = true;
+            // 
+            // olvColumn23
+            // 
+            this.olvColumn23.AspectName = "Code";
+            this.olvColumn23.Text = "Adjustment Types";
+            this.olvColumn23.Width = 268;
+            // 
+            // olvColumn24
+            // 
+            this.olvColumn24.AspectName = "Selected";
+            this.olvColumn24.CheckBoxes = true;
+            this.olvColumn24.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn24.Text = "";
+            this.olvColumn24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvColumn24.Width = 45;
+            // 
+            // olvColumn25
+            // 
+            this.olvColumn25.AspectName = "Name";
+            this.olvColumn25.FillsFreeSpace = true;
+            this.olvColumn25.Text = "Description";
+            this.olvColumn25.Width = 100;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBatchMaster);
+            this.panel6.Controls.Add(this.panel9);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1222, 24);
+            this.panel6.TabIndex = 70;
+            // 
+            // textBatchMaster
+            // 
+            this.textBatchMaster.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBatchMaster.Location = new System.Drawing.Point(153, 0);
+            this.textBatchMaster.Name = "textBatchMaster";
+            this.textBatchMaster.Size = new System.Drawing.Size(1069, 28);
+            this.textBatchMaster.TabIndex = 70;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.stripBatchMaster);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(153, 24);
+            this.panel9.TabIndex = 69;
+            // 
+            // stripBatchMaster
+            // 
+            this.stripBatchMaster.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.stripBatchMaster.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.stripBatchMaster.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonBatchMasterCollapse,
+            this.buttonBatchMasterExpand,
+            this.toolStripSeparator17,
+            this.buttonBatchMasterSelect,
+            this.buttonBatchMasterSelectFilter,
+            this.buttonBatchMasterDeselect,
+            this.toolStripSeparator18,
+            this.buttonBatchMasterClear});
+            this.stripBatchMaster.Location = new System.Drawing.Point(0, 0);
+            this.stripBatchMaster.Name = "stripBatchMaster";
+            this.stripBatchMaster.Size = new System.Drawing.Size(153, 27);
+            this.stripBatchMaster.TabIndex = 0;
+            this.stripBatchMaster.Text = "Collapse All";
+            // 
+            // buttonBatchMasterCollapse
+            // 
+            this.buttonBatchMasterCollapse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchMasterCollapse.Image = global::TotalSmartCoding.Properties.Resources.GoUp_16;
+            this.buttonBatchMasterCollapse.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchMasterCollapse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchMasterCollapse.Name = "buttonBatchMasterCollapse";
+            this.buttonBatchMasterCollapse.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchMasterCollapse.Tag = "COLLAPSE";
+            this.buttonBatchMasterCollapse.Text = "toolStripButton4";
+            this.buttonBatchMasterCollapse.ToolTipText = "Collapse All";
+            // 
+            // buttonBatchMasterExpand
+            // 
+            this.buttonBatchMasterExpand.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchMasterExpand.Image = global::TotalSmartCoding.Properties.Resources.godown_14;
+            this.buttonBatchMasterExpand.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchMasterExpand.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchMasterExpand.Name = "buttonBatchMasterExpand";
+            this.buttonBatchMasterExpand.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchMasterExpand.Tag = "EXPAND";
+            this.buttonBatchMasterExpand.Text = "toolStripButton5";
+            this.buttonBatchMasterExpand.ToolTipText = "Expand All";
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.toolStripSeparator17.Size = new System.Drawing.Size(6, 27);
+            // 
+            // buttonBatchMasterSelect
+            // 
+            this.buttonBatchMasterSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchMasterSelect.Image = global::TotalSmartCoding.Properties.Resources.check_Ok_16;
+            this.buttonBatchMasterSelect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchMasterSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchMasterSelect.Name = "buttonBatchMasterSelect";
+            this.buttonBatchMasterSelect.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchMasterSelect.Tag = "SELECT";
+            this.buttonBatchMasterSelect.Text = "toolStripButton1";
+            this.buttonBatchMasterSelect.ToolTipText = "Select All";
+            // 
+            // buttonBatchMasterSelectFilter
+            // 
+            this.buttonBatchMasterSelectFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchMasterSelectFilter.Image = global::TotalSmartCoding.Properties.Resources.check_Circle_20;
+            this.buttonBatchMasterSelectFilter.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchMasterSelectFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchMasterSelectFilter.Name = "buttonBatchMasterSelectFilter";
+            this.buttonBatchMasterSelectFilter.Size = new System.Drawing.Size(24, 24);
+            this.buttonBatchMasterSelectFilter.Tag = "SELECTFILTER";
+            this.buttonBatchMasterSelectFilter.Text = "toolStripButton7";
+            this.buttonBatchMasterSelectFilter.ToolTipText = "Select Filtered Items";
+            // 
+            // buttonBatchMasterDeselect
+            // 
+            this.buttonBatchMasterDeselect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchMasterDeselect.Image = global::TotalSmartCoding.Properties.Resources.Empty_20;
+            this.buttonBatchMasterDeselect.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchMasterDeselect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchMasterDeselect.Name = "buttonBatchMasterDeselect";
+            this.buttonBatchMasterDeselect.Size = new System.Drawing.Size(24, 24);
+            this.buttonBatchMasterDeselect.Tag = "DESELECT";
+            this.buttonBatchMasterDeselect.Text = "toolStripButton3";
+            this.buttonBatchMasterDeselect.ToolTipText = "Deselect All";
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            this.toolStripSeparator18.Size = new System.Drawing.Size(6, 27);
+            // 
+            // buttonBatchMasterClear
+            // 
+            this.buttonBatchMasterClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatchMasterClear.Image = global::TotalSmartCoding.Properties.Resources.backspace_l_R_16;
+            this.buttonBatchMasterClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatchMasterClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatchMasterClear.Name = "buttonBatchMasterClear";
+            this.buttonBatchMasterClear.Size = new System.Drawing.Size(23, 24);
+            this.buttonBatchMasterClear.Tag = "CLEAR";
+            this.buttonBatchMasterClear.Text = "toolStripButton6";
+            this.buttonBatchMasterClear.ToolTipText = "Clear Filters";
+            // 
             // panelWarehouseIssueID
             // 
             this.panelWarehouseIssueID.Controls.Add(this.treeWarehouseIssueID);
             this.panelWarehouseIssueID.Controls.Add(this.panel10);
-            this.panelWarehouseIssueID.Location = new System.Drawing.Point(3, 623);
+            this.panelWarehouseIssueID.Location = new System.Drawing.Point(3, 392);
             this.panelWarehouseIssueID.Name = "panelWarehouseIssueID";
             this.panelWarehouseIssueID.Size = new System.Drawing.Size(1219, 67);
             this.panelWarehouseIssueID.TabIndex = 76;
@@ -904,7 +1546,7 @@
             // 
             this.panelWarehouseAdjustmentTypeID.Controls.Add(this.treeWarehouseAdjustmentTypeID);
             this.panelWarehouseAdjustmentTypeID.Controls.Add(this.panel7);
-            this.panelWarehouseAdjustmentTypeID.Location = new System.Drawing.Point(3, 530);
+            this.panelWarehouseAdjustmentTypeID.Location = new System.Drawing.Point(3, 319);
             this.panelWarehouseAdjustmentTypeID.Name = "panelWarehouseAdjustmentTypeID";
             this.panelWarehouseAdjustmentTypeID.Size = new System.Drawing.Size(1219, 67);
             this.panelWarehouseAdjustmentTypeID.TabIndex = 75;
@@ -1102,7 +1744,7 @@
             // 
             this.panelWarehouseReceiptID.Controls.Add(this.treeWarehouseReceiptID);
             this.panelWarehouseReceiptID.Controls.Add(this.panel4);
-            this.panelWarehouseReceiptID.Location = new System.Drawing.Point(6, 414);
+            this.panelWarehouseReceiptID.Location = new System.Drawing.Point(6, 246);
             this.panelWarehouseReceiptID.Name = "panelWarehouseReceiptID";
             this.panelWarehouseReceiptID.Size = new System.Drawing.Size(1219, 67);
             this.panelWarehouseReceiptID.TabIndex = 74;
@@ -1300,7 +1942,7 @@
             // 
             this.panelWarehouseID.Controls.Add(this.treeWarehouseID);
             this.panelWarehouseID.Controls.Add(this.panel1);
-            this.panelWarehouseID.Location = new System.Drawing.Point(6, 302);
+            this.panelWarehouseID.Location = new System.Drawing.Point(6, 173);
             this.panelWarehouseID.Name = "panelWarehouseID";
             this.panelWarehouseID.Size = new System.Drawing.Size(1216, 67);
             this.panelWarehouseID.TabIndex = 73;
@@ -1498,9 +2140,9 @@
             // 
             this.panelCustomers.Controls.Add(this.panel15);
             this.panelCustomers.Controls.Add(this.panel12);
-            this.panelCustomers.Location = new System.Drawing.Point(6, 169);
+            this.panelCustomers.Location = new System.Drawing.Point(6, 95);
             this.panelCustomers.Name = "panelCustomers";
-            this.panelCustomers.Size = new System.Drawing.Size(1219, 99);
+            this.panelCustomers.Size = new System.Drawing.Size(1219, 72);
             this.panelCustomers.TabIndex = 69;
             // 
             // panel15
@@ -1510,7 +2152,7 @@
             this.panel15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel15.Location = new System.Drawing.Point(408, 0);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(811, 99);
+            this.panel15.Size = new System.Drawing.Size(811, 72);
             this.panel15.TabIndex = 78;
             // 
             // treeCustomerID
@@ -1537,7 +2179,7 @@
             this.treeCustomerID.RootKeyValueString = "";
             this.treeCustomerID.ShowGroups = false;
             this.treeCustomerID.ShowKeyColumns = false;
-            this.treeCustomerID.Size = new System.Drawing.Size(811, 75);
+            this.treeCustomerID.Size = new System.Drawing.Size(811, 48);
             this.treeCustomerID.TabIndex = 66;
             this.treeCustomerID.UseCompatibleStateImageBehavior = false;
             this.treeCustomerID.UseFilterIndicator = true;
@@ -1709,7 +2351,7 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(408, 99);
+            this.panel12.Size = new System.Drawing.Size(408, 72);
             this.panel12.TabIndex = 77;
             // 
             // treeEmployeeID
@@ -1735,7 +2377,7 @@
             this.treeEmployeeID.RootKeyValueString = "";
             this.treeEmployeeID.ShowGroups = false;
             this.treeEmployeeID.ShowKeyColumns = false;
-            this.treeEmployeeID.Size = new System.Drawing.Size(408, 75);
+            this.treeEmployeeID.Size = new System.Drawing.Size(408, 48);
             this.treeEmployeeID.TabIndex = 67;
             this.treeEmployeeID.UseCompatibleStateImageBehavior = false;
             this.treeEmployeeID.UseFilterIndicator = true;
@@ -1908,7 +2550,7 @@
             this.panelCommodities.Controls.Add(this.panel18);
             this.panelCommodities.Location = new System.Drawing.Point(6, 6);
             this.panelCommodities.Name = "panelCommodities";
-            this.panelCommodities.Size = new System.Drawing.Size(1219, 128);
+            this.panelCommodities.Size = new System.Drawing.Size(1219, 83);
             this.panelCommodities.TabIndex = 68;
             // 
             // panel21
@@ -1918,7 +2560,7 @@
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(408, 0);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(811, 128);
+            this.panel21.Size = new System.Drawing.Size(811, 83);
             this.panel21.TabIndex = 78;
             // 
             // panel22
@@ -2063,7 +2705,7 @@
             this.panel18.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel18.Location = new System.Drawing.Point(0, 0);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(408, 128);
+            this.panel18.Size = new System.Drawing.Size(408, 83);
             this.panel18.TabIndex = 77;
             // 
             // treeCommodityTypeID
@@ -2089,7 +2731,7 @@
             this.treeCommodityTypeID.RootKeyValueString = "";
             this.treeCommodityTypeID.ShowGroups = false;
             this.treeCommodityTypeID.ShowKeyColumns = false;
-            this.treeCommodityTypeID.Size = new System.Drawing.Size(408, 104);
+            this.treeCommodityTypeID.Size = new System.Drawing.Size(408, 59);
             this.treeCommodityTypeID.TabIndex = 67;
             this.treeCommodityTypeID.UseCompatibleStateImageBehavior = false;
             this.treeCommodityTypeID.UseFilterIndicator = true;
@@ -2280,6 +2922,30 @@
             this.panelLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastReportIndex)).EndInit();
             this.panelCenter.ResumeLayout(false);
+            this.panel25.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeFillingLineID)).EndInit();
+            this.panel28.ResumeLayout(false);
+            this.panel28.PerformLayout();
+            this.panel29.ResumeLayout(false);
+            this.panel29.PerformLayout();
+            this.stripFillingLine.ResumeLayout(false);
+            this.stripFillingLine.PerformLayout();
+            this.panel24.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeBatchTypeID)).EndInit();
+            this.panel26.ResumeLayout(false);
+            this.panel26.PerformLayout();
+            this.panel27.ResumeLayout(false);
+            this.panel27.PerformLayout();
+            this.stripBatchType.ResumeLayout(false);
+            this.stripBatchType.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.treeBatchMasterID)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.stripBatchMaster.ResumeLayout(false);
+            this.stripBatchMaster.PerformLayout();
             this.panelWarehouseIssueID.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeWarehouseIssueID)).EndInit();
             this.panel10.ResumeLayout(false);
@@ -2521,6 +3187,57 @@
         private System.Windows.Forms.Label labelSlowMoving;
         private System.Windows.Forms.NumericUpDown numericSlowMoving;
         private System.Windows.Forms.ComboBox comboSlowMoving;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.TextBox textBatchMaster;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.ToolStrip stripBatchMaster;
+        private System.Windows.Forms.ToolStripButton buttonBatchMasterCollapse;
+        private System.Windows.Forms.ToolStripButton buttonBatchMasterExpand;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private System.Windows.Forms.ToolStripButton buttonBatchMasterSelect;
+        private System.Windows.Forms.ToolStripButton buttonBatchMasterSelectFilter;
+        private System.Windows.Forms.ToolStripButton buttonBatchMasterDeselect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+        private System.Windows.Forms.ToolStripButton buttonBatchMasterClear;
+        private BrightIdeasSoftware.DataTreeListView treeBatchMasterID;
+        private BrightIdeasSoftware.OLVColumn olvColumn23;
+        private BrightIdeasSoftware.OLVColumn olvColumn24;
+        private BrightIdeasSoftware.OLVColumn olvColumn25;
+        private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.Panel panel24;
+        private BrightIdeasSoftware.DataTreeListView treeFillingLineID;
+        private BrightIdeasSoftware.OLVColumn olvColumn29;
+        private BrightIdeasSoftware.OLVColumn olvColumn30;
+        private BrightIdeasSoftware.OLVColumn olvColumn31;
+        private System.Windows.Forms.Panel panel28;
+        private System.Windows.Forms.TextBox textFillingLine;
+        private System.Windows.Forms.Panel panel29;
+        private System.Windows.Forms.ToolStrip stripFillingLine;
+        private System.Windows.Forms.ToolStripButton buttonFillingLineCollapse;
+        private System.Windows.Forms.ToolStripButton buttonFillingLineExpand;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+        private System.Windows.Forms.ToolStripButton buttonFillingLineSelect;
+        private System.Windows.Forms.ToolStripButton buttonFillingLineSelectFilter;
+        private System.Windows.Forms.ToolStripButton buttonFillingLineDeselect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
+        private System.Windows.Forms.ToolStripButton buttonFillingLineClear;
+        private BrightIdeasSoftware.DataTreeListView treeBatchTypeID;
+        private BrightIdeasSoftware.OLVColumn olvColumn26;
+        private BrightIdeasSoftware.OLVColumn olvColumn27;
+        private BrightIdeasSoftware.OLVColumn olvColumn28;
+        private System.Windows.Forms.Panel panel26;
+        private System.Windows.Forms.TextBox textBatchType;
+        private System.Windows.Forms.Panel panel27;
+        private System.Windows.Forms.ToolStrip stripBatchType;
+        private System.Windows.Forms.ToolStripButton buttonBatchTypeCollapse;
+        private System.Windows.Forms.ToolStripButton buttonBatchTypeExpand;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
+        private System.Windows.Forms.ToolStripButton buttonBatchTypeSelect;
+        private System.Windows.Forms.ToolStripButton buttonBatchTypeSelectFilter;
+        private System.Windows.Forms.ToolStripButton buttonBatchTypeDeselect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+        private System.Windows.Forms.ToolStripButton buttonBatchTypeClear;
 
     }
 }

@@ -2352,6 +2352,7 @@
           <Parameter Name="ShowCummulativePacks" Type="bit" Mode="In" />
           <Parameter Name="ActiveOption" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetBatchMasterTrees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetBatchRepacks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
           <Parameter Name="NotPrintedOnly" Type="bit" Mode="In" />
@@ -2374,6 +2375,7 @@
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GetBatchTypeTrees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetBinLocationBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="WarehouseID" Type="int" Mode="In" />
         </Function>
@@ -2460,6 +2462,7 @@
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GetFillingLineTrees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetGoodsIssueIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
@@ -4609,6 +4612,9 @@
           <FunctionImport Name="LookupRecartons" ReturnType="Collection(TotalSmartCodingModel.BatchRepack)">
           <Parameter Name="CartonID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetBatchMasterTrees" ReturnType="Collection(TotalSmartCodingModel.BatchMasterTree)" />
+          <FunctionImport Name="GetBatchTypeTrees" ReturnType="Collection(TotalSmartCodingModel.BatchTypeTree)" />
+          <FunctionImport Name="GetFillingLineTrees" ReturnType="Collection(TotalSmartCodingModel.FillingLineTree)" />
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -8105,6 +8111,36 @@
           <Property Type="String" Name="FillingLineCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="PrintedTimes" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="BatchMasterTree">
+          <Property Type="Int32" Name="NodeID" Nullable="true" />
+          <Property Type="Int32" Name="ParentNodeID" Nullable="true" />
+          <Property Type="Int32" Name="PrimaryID" Nullable="true" />
+          <Property Type="Int32" Name="AncestorID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="13" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="BatchTypeTree">
+          <Property Type="Int32" Name="NodeID" Nullable="true" />
+          <Property Type="Int32" Name="ParentNodeID" Nullable="true" />
+          <Property Type="Int32" Name="PrimaryID" Nullable="true" />
+          <Property Type="Int32" Name="AncestorID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="11" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FillingLineTree">
+          <Property Type="Int32" Name="NodeID" Nullable="true" />
+          <Property Type="Int32" Name="ParentNodeID" Nullable="true" />
+          <Property Type="Int32" Name="PrimaryID" Nullable="true" />
+          <Property Type="Int32" Name="AncestorID" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="13" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10740,6 +10776,48 @@
                 <ScalarProperty Name="APICode" ColumnName="APICode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchMasterTrees" FunctionName="TotalSmartCodingModel.Store.GetBatchMasterTrees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchMasterTree">
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="ParentNodeID" ColumnName="ParentNodeID" />
+                <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
+                <ScalarProperty Name="AncestorID" ColumnName="AncestorID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBatchTypeTrees" FunctionName="TotalSmartCodingModel.Store.GetBatchTypeTrees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.BatchTypeTree">
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="ParentNodeID" ColumnName="ParentNodeID" />
+                <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
+                <ScalarProperty Name="AncestorID" ColumnName="AncestorID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetFillingLineTrees" FunctionName="TotalSmartCodingModel.Store.GetFillingLineTrees">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartCodingModel.FillingLineTree">
+                <ScalarProperty Name="NodeID" ColumnName="NodeID" />
+                <ScalarProperty Name="ParentNodeID" ColumnName="ParentNodeID" />
+                <ScalarProperty Name="PrimaryID" ColumnName="PrimaryID" />
+                <ScalarProperty Name="AncestorID" ColumnName="AncestorID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
