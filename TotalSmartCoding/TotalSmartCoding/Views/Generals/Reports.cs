@@ -27,6 +27,8 @@ using TotalSmartCoding.Controllers.APIs.Commons;
 using System.ComponentModel;
 using TotalCore.Services.Generals;
 using TotalSmartCoding.Controllers.Generals;
+using TotalSmartCoding.Controllers.APIs.Productions;
+using TotalCore.Repositories.Productions;
 
 
 namespace TotalSmartCoding.Views.Generals
@@ -40,8 +42,11 @@ namespace TotalSmartCoding.Views.Generals
         private TabPage tabPageWarehouseIssues;
         private TabPage tabPageWarehouseReceipts;
         private TabPage tabPageWarehouseAdjustmentTypes;
+        private TabPage tabPageBatchMasters;
+        private TabPage tabPageBatchTypes;
+        private TabPage tabPageFillingLines;
         private TabPage[] tabPages;
-        private CustomTabControl customTabBatch;
+        private CustomTabControl customTabMaster;
 
         private ReportAPIs reportAPIs;
         private ReportViewModel reportViewModel { get; set; }
@@ -73,13 +78,16 @@ namespace TotalSmartCoding.Views.Generals
                 this.tabPageWarehouseIssues = new TabPage("Source Warehouses"); this.tabPageWarehouseIssues.Tag = (int)GlobalEnums.ReportTabPageID.TabPageWarehouseIssues;
                 this.tabPageWarehouseReceipts = new TabPage("Destination Warehouses"); this.tabPageWarehouseReceipts.Tag = (int)GlobalEnums.ReportTabPageID.TabPageWarehouseReceipts;
                 this.tabPageWarehouseAdjustmentTypes = new TabPage("Adjustment Types"); this.tabPageWarehouseAdjustmentTypes.Tag = (int)GlobalEnums.ReportTabPageID.TabPageWarehouseAdjustmentTypes;
+                this.tabPageBatchMasters = new TabPage("Batches"); this.tabPageBatchMasters.Tag = (int)GlobalEnums.ReportTabPageID.TabPageBatchMasters;
+                this.tabPageBatchTypes = new TabPage("Batch Types"); this.tabPageBatchTypes.Tag = (int)GlobalEnums.ReportTabPageID.TabPageBatchTypes;
+                this.tabPageFillingLines = new TabPage("Filling Lines"); this.tabPageFillingLines.Tag = (int)GlobalEnums.ReportTabPageID.TabPageFillingLines;
 
-                this.tabPages = new TabPage[] { this.tabPageWarehouses, this.tabPageCommodities, this.tabPageCustomers, this.tabPageWarehouseIssues, this.tabPageWarehouseReceipts, this.tabPageWarehouseAdjustmentTypes };
+                this.tabPages = new TabPage[] { this.tabPageWarehouses, this.tabPageCommodities, this.tabPageCustomers, this.tabPageWarehouseIssues, this.tabPageWarehouseReceipts, this.tabPageWarehouseAdjustmentTypes, this.tabPageBatchMasters, this.tabPageBatchTypes, this.tabPageFillingLines };
 
-                this.customTabBatch = new CustomTabControl();
-                this.customTabBatch.Font = this.treeWarehouseID.Font;
-                this.customTabBatch.DisplayStyle = TabStyle.VisualStudio;
-                this.customTabBatch.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
+                this.customTabMaster = new CustomTabControl();
+                this.customTabMaster.Font = this.treeWarehouseID.Font;
+                this.customTabMaster.DisplayStyle = TabStyle.VisualStudio;
+                this.customTabMaster.DisplayStyleProvider.ImageAlign = ContentAlignment.MiddleLeft;
 
                 this.tabPageWarehouses.Controls.Add(this.panelWarehouseID);
                 this.tabPageCommodities.Controls.Add(this.panelCommodities);
@@ -87,6 +95,9 @@ namespace TotalSmartCoding.Views.Generals
                 this.tabPageWarehouseIssues.Controls.Add(this.panelWarehouseIssueID);
                 this.tabPageWarehouseReceipts.Controls.Add(this.panelWarehouseReceiptID);
                 this.tabPageWarehouseAdjustmentTypes.Controls.Add(this.panelWarehouseAdjustmentTypeID);
+                this.tabPageBatchMasters.Controls.Add(this.panelBatchMasterID);
+                this.tabPageBatchTypes.Controls.Add(this.panelBatchTypeID);
+                this.tabPageFillingLines.Controls.Add(this.panelFillingLineID);
 
                 this.panelWarehouseID.Dock = DockStyle.Fill;
                 this.panelCommodities.Dock = DockStyle.Fill;
@@ -94,9 +105,12 @@ namespace TotalSmartCoding.Views.Generals
                 this.panelWarehouseIssueID.Dock = DockStyle.Fill;
                 this.panelWarehouseReceiptID.Dock = DockStyle.Fill;
                 this.panelWarehouseAdjustmentTypeID.Dock = DockStyle.Fill;
+                this.panelBatchMasterID.Dock = DockStyle.Fill;
+                this.panelBatchTypeID.Dock = DockStyle.Fill;
+                this.panelFillingLineID.Dock = DockStyle.Fill;
 
-                this.customTabBatch.Dock = DockStyle.Fill;
-                this.panelCenter.Controls.Add(this.customTabBatch);
+                this.customTabMaster.Dock = DockStyle.Fill;
+                this.panelCenter.Controls.Add(this.customTabMaster);
             }
             catch (Exception exception)
             {
@@ -119,6 +133,9 @@ namespace TotalSmartCoding.Views.Generals
         private IList<WarehouseTree> warehouseIssueTrees;
         private IList<WarehouseTree> warehouseReceiptTrees;
         private IList<WarehouseAdjustmentTypeTree> warehouseAdjustmentTypeTrees;
+        private IList<BatchMasterTree> batchMasterTrees;
+        private IList<BatchTypeTree> batchTypeTrees;
+        private IList<FillingLineTree> fillingLineTrees;
 
         protected override void InitializeCommonControlBinding()
         {
@@ -132,6 +149,9 @@ namespace TotalSmartCoding.Views.Generals
             this.treeWarehouseIssueID.RootKeyValue = 0;
             this.treeWarehouseReceiptID.RootKeyValue = 0;
             this.treeWarehouseAdjustmentTypeID.RootKeyValue = 0;
+            this.treeBatchMasterID.RootKeyValue = 0;
+            this.treeBatchTypeID.RootKeyValue = 0;
+            this.treeFillingLineID.RootKeyValue = 0;
 
             WarehouseAPIs warehouseAPIs = new WarehouseAPIs(CommonNinject.Kernel.Get<IWarehouseAPIRepository>());
             this.warehouseTrees = warehouseAPIs.GetWarehouseTrees(ContextAttributes.User.LocationID);
@@ -146,6 +166,18 @@ namespace TotalSmartCoding.Views.Generals
             WarehouseAdjustmentTypeAPIs warehouseAdjustmentTypeAPIs = new WarehouseAdjustmentTypeAPIs(CommonNinject.Kernel.Get<IWarehouseAdjustmentTypeAPIRepository>());
             this.warehouseAdjustmentTypeTrees = warehouseAdjustmentTypeAPIs.GetWarehouseAdjustmentTypeTrees();
             this.treeWarehouseAdjustmentTypeID.DataSource = new BindingSource(this.warehouseAdjustmentTypeTrees, "");
+
+            BatchMasterAPIs batchMasterAPIs = new BatchMasterAPIs(CommonNinject.Kernel.Get<IBatchMasterAPIRepository>());
+            this.batchMasterTrees = batchMasterAPIs.GetBatchMasterTrees();
+            this.treeBatchMasterID.DataSource = new BindingSource(this.batchMasterTrees, "");
+
+            BatchTypeAPIs batchTypeAPIs = new BatchTypeAPIs(CommonNinject.Kernel.Get<IBatchTypeAPIRepository>());
+            this.batchTypeTrees = batchTypeAPIs.GetBatchTypeTrees();
+            this.treeBatchTypeID.DataSource = new BindingSource(this.batchTypeTrees, "");
+
+            FillingLineAPIs fillingLineAPIs = new FillingLineAPIs(CommonNinject.Kernel.Get<IFillingLineAPIRepository>());
+            this.fillingLineTrees = fillingLineAPIs.GetFillingLineTrees();
+            this.treeFillingLineID.DataSource = new BindingSource(this.fillingLineTrees, "");
 
             CommodityAPIs commodityAPIs = new CommodityAPIs(CommonNinject.Kernel.Get<ICommodityAPIRepository>());
             this.commodityTrees = commodityAPIs.GetCommodityTrees();
@@ -229,6 +261,9 @@ namespace TotalSmartCoding.Views.Generals
             if (this.treeWarehouseIssueID.GetModelObject(0) != null) { this.treeWarehouseIssueID.Expand(this.treeWarehouseIssueID.GetModelObject(0)); if (this.treeWarehouseIssueID.Items.Count >= 2) this.treeWarehouseIssueID.SelectedIndex = 1; }
             if (this.treeWarehouseReceiptID.GetModelObject(0) != null) { this.treeWarehouseReceiptID.Expand(this.treeWarehouseReceiptID.GetModelObject(0)); if (this.treeWarehouseReceiptID.Items.Count >= 2) this.treeWarehouseReceiptID.SelectedIndex = 1; }
             if (this.treeWarehouseAdjustmentTypeID.GetModelObject(0) != null) { this.treeWarehouseAdjustmentTypeID.Expand(this.treeWarehouseAdjustmentTypeID.GetModelObject(0)); if (this.treeWarehouseAdjustmentTypeID.Items.Count >= 2) this.treeWarehouseAdjustmentTypeID.SelectedIndex = 1; }
+            if (this.treeBatchMasterID.GetModelObject(0) != null) { this.treeBatchMasterID.Expand(this.treeBatchMasterID.GetModelObject(0)); if (this.treeBatchMasterID.Items.Count >= 2) this.treeBatchMasterID.SelectedIndex = 1; }
+            if (this.treeBatchTypeID.GetModelObject(0) != null) { this.treeBatchTypeID.Expand(this.treeBatchTypeID.GetModelObject(0)); if (this.treeBatchTypeID.Items.Count >= 2) this.treeBatchTypeID.SelectedIndex = 1; }
+            if (this.treeFillingLineID.GetModelObject(0) != null) { this.treeFillingLineID.Expand(this.treeFillingLineID.GetModelObject(0)); if (this.treeFillingLineID.Items.Count >= 2) this.treeFillingLineID.SelectedIndex = 1; }
         }
 
         #endregion MANAGE THE VIEW
@@ -265,14 +300,14 @@ namespace TotalSmartCoding.Views.Generals
         {
             try
             {
-                this.customTabBatch.SuspendLayout();
+                this.customTabMaster.SuspendLayout();
                 this.clearTabPages();
                 foreach (TabPage tabpage in this.tabPages)
                 {
-                    if (this.reportViewModel.ReportTabPageIDs.IndexOf(tabpage.Tag.ToString()) != -1 && !this.customTabBatch.TabPages.Contains(tabpage))
-                        this.customTabBatch.TabPages.Add(tabpage);
+                    if (this.reportViewModel.ReportTabPageIDs.IndexOf(tabpage.Tag.ToString()) != -1 && !this.customTabMaster.TabPages.Contains(tabpage))
+                        this.customTabMaster.TabPages.Add(tabpage);
                 }
-                if (this.customTabBatch.TabPages.Contains(this.tabPageCommodities)) this.customTabBatch.SelectedTab = this.tabPageCommodities;
+                if (this.customTabMaster.TabPages.Contains(this.tabPageCommodities)) this.customTabMaster.SelectedTab = this.tabPageCommodities;
             }
             catch (Exception exception)
             {
@@ -280,7 +315,7 @@ namespace TotalSmartCoding.Views.Generals
             }
             finally
             {
-                this.customTabBatch.ResumeLayout();
+                this.customTabMaster.ResumeLayout();
             }
         }
 
@@ -288,7 +323,7 @@ namespace TotalSmartCoding.Views.Generals
         {
             try
             {
-                foreach (TabPage tabpage in this.customTabBatch.TabPages)
+                foreach (TabPage tabpage in this.customTabMaster.TabPages)
                 {
                     if (this.reportViewModel.ReportTabPageIDs.IndexOf(tabpage.Tag.ToString()) == -1)
                     {//CALL CollapseAll() TO PREVENT UNKNOW ERROR!!! //IF WE DON'T COLLAPSE ALL THE TREE, IT WIL RAISE ERROR WHEN WE CALL CLEAR OR REMOVE TABPAGES
@@ -304,8 +339,14 @@ namespace TotalSmartCoding.Views.Generals
                         { this.treeWarehouseReceiptID.CollapseAll(); }
                         if (tabpage.Equals(this.tabPageWarehouseAdjustmentTypes))
                         { this.treeWarehouseAdjustmentTypeID.CollapseAll(); }
+                        if (tabpage.Equals(this.tabPageBatchMasters))
+                        { this.treeBatchMasterID.CollapseAll(); }
+                        if (tabpage.Equals(this.tabPageBatchTypes))
+                        { this.treeBatchTypeID.CollapseAll(); }
+                        if (tabpage.Equals(this.tabPageFillingLines))
+                        { this.treeFillingLineID.CollapseAll(); }
 
-                        this.customTabBatch.TabPages.Remove(tabpage);
+                        this.customTabMaster.TabPages.Remove(tabpage);
                     }
                 }
             }
@@ -392,26 +433,30 @@ namespace TotalSmartCoding.Views.Generals
 
             string captionDescriptions = "";
 
-            if (this.customTabBatch.TabPages.Contains(this.tabPageWarehouses))
+            if (this.customTabMaster.TabPages.Contains(this.tabPageWarehouses))
                 this.AddFilterParameters(printViewModel, this.warehouseTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("LocationID", "LocationIDs", "Location", true, false), new FilterParameter("WarehouseID", "WarehouseIDs", "Warehouse", true, false) }, ref captionDescriptions);
-            if (this.customTabBatch.TabPages.Contains(this.tabPageCommodities))
+            if (this.customTabMaster.TabPages.Contains(this.tabPageCommodities))
             {
                 this.AddFilterParameters(printViewModel, this.commodityTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("CommodityCategoryID", "CommodityCategoryIDs", "Category", true, false), new FilterParameter("CommodityID", "CommodityIDs", "Item", true, false) }, ref captionDescriptions);
                 this.AddFilterParameters(printViewModel, this.commodityTypeTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("CommodityTypeID", "CommodityTypeIDs", "Item Type", true, false) }, ref captionDescriptions);
             }
-            if (this.customTabBatch.TabPages.Contains(this.tabPageCustomers))
+            if (this.customTabMaster.TabPages.Contains(this.tabPageCustomers))
             {
                 this.AddFilterParameters(printViewModel, this.customerTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("CustomerCategoryID", "CustomerCategoryIDs", "Channel", true, false), new FilterParameter("CustomerID", "CustomerIDs", "Customer", true, true) }, ref captionDescriptions);
                 this.AddFilterParameters(printViewModel, this.employeeTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("TeamID", "TeamIDs", "Team", true, false), new FilterParameter("EmployeeID", "EmployeeIDs", "Salesperson", true, false) }, ref captionDescriptions);
             }
-            if (this.customTabBatch.TabPages.Contains(this.tabPageWarehouseIssues))
+            if (this.customTabMaster.TabPages.Contains(this.tabPageWarehouseIssues))
                 this.AddFilterParameters(printViewModel, this.warehouseIssueTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("LocationID", "LocationIssueIDs", "Source Location", true, false), new FilterParameter("WarehouseID", "WarehouseIssueIDs", "Source Warehouse", true, false) }, ref captionDescriptions);
-            if (this.customTabBatch.TabPages.Contains(this.tabPageWarehouseReceipts))
+            if (this.customTabMaster.TabPages.Contains(this.tabPageWarehouseReceipts))
                 this.AddFilterParameters(printViewModel, this.warehouseReceiptTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("LocationID", "LocationReceiptIDs", "Destination Location", true, false), new FilterParameter("WarehouseID", "WarehouseReceiptIDs", "Destination Warehouse", true, false) }, ref captionDescriptions);
-            if (this.customTabBatch.TabPages.Contains(this.tabPageWarehouseAdjustmentTypes))
+            if (this.customTabMaster.TabPages.Contains(this.tabPageWarehouseAdjustmentTypes))
                 this.AddFilterParameters(printViewModel, this.warehouseAdjustmentTypeTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("WarehouseAdjustmentTypeID", "WarehouseAdjustmentTypeIDs", "Adjustment Type", true, false) }, ref captionDescriptions);
-
-
+            if (this.customTabMaster.TabPages.Contains(this.tabPageBatchMasters))
+                this.AddFilterParameters(printViewModel, this.batchMasterTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("BatchMasterID", "BatchMasterIDs", "Batch", true, false) }, ref captionDescriptions);
+            if (this.customTabMaster.TabPages.Contains(this.tabPageBatchTypes))
+                this.AddFilterParameters(printViewModel, this.batchTypeTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("BatchTypeID", "BatchTypeIDs", "Batch Type", true, false) }, ref captionDescriptions);
+            if (this.customTabMaster.TabPages.Contains(this.tabPageFillingLines))
+                this.AddFilterParameters(printViewModel, this.fillingLineTrees.Cast<IFilterTree>(), new FilterParameter[] { new FilterParameter("FillingLineID", "FillingLineIDs", "Filling Line", true, false) }, ref captionDescriptions);
 
 
 
@@ -480,7 +525,7 @@ namespace TotalSmartCoding.Views.Generals
                 ToolStripButton senderButton = sender as ToolStripButton;
                 if (sender != null)
                 {
-                    DataTreeListView dataTreeListView = senderButton.Owner.Equals(this.stripCommodityType) ? this.treeCommodityTypeID : (senderButton.Owner.Equals(this.stripCommodity) ? this.treeCommodityID : (senderButton.Owner.Equals(this.stripEmployee) ? this.treeEmployeeID : (senderButton.Owner.Equals(this.stripCustomer) ? this.treeCustomerID : (senderButton.Owner.Equals(this.stripWarehouse) ? this.treeWarehouseID : (senderButton.Owner.Equals(this.stripWarehouseReceipt) ? this.treeWarehouseReceiptID : (senderButton.Owner.Equals(this.stripWarehouseAdjustmentType) ? this.treeWarehouseAdjustmentTypeID : (senderButton.Owner.Equals(this.stripWarehouseIssue) ? this.treeWarehouseIssueID : null)))))));
+                    DataTreeListView dataTreeListView = senderButton.Owner.Equals(this.stripCommodityType) ? this.treeCommodityTypeID : (senderButton.Owner.Equals(this.stripCommodity) ? this.treeCommodityID : (senderButton.Owner.Equals(this.stripEmployee) ? this.treeEmployeeID : (senderButton.Owner.Equals(this.stripCustomer) ? this.treeCustomerID : (senderButton.Owner.Equals(this.stripWarehouse) ? this.treeWarehouseID : (senderButton.Owner.Equals(this.stripWarehouseReceipt) ? this.treeWarehouseReceiptID : (senderButton.Owner.Equals(this.stripWarehouseAdjustmentType) ? this.treeWarehouseAdjustmentTypeID : (senderButton.Owner.Equals(this.stripWarehouseIssue) ? this.treeWarehouseIssueID : (senderButton.Owner.Equals(this.stripBatchMaster) ? this.treeBatchMasterID : (senderButton.Owner.Equals(this.stripBatchType) ? this.treeBatchTypeID : (senderButton.Owner.Equals(this.stripFillingLine) ? this.treeFillingLineID : null))))))))));
                     if (dataTreeListView != null)
                     {
                         if (senderButton.Tag.ToString().ToUpper() == "COLLAPSE") { dataTreeListView.CollapseAll(); dataTreeListView.Expand(dataTreeListView.GetModelObject(0)); }
@@ -493,7 +538,7 @@ namespace TotalSmartCoding.Views.Generals
                             {
                                 string textFilter = "";
                                 if (senderButton.Tag.ToString().ToUpper() == "SELECTFILTER")
-                                    textFilter = (senderButton.Owner.Equals(this.stripCommodityType) ? this.textCommodityType.Text : (senderButton.Owner.Equals(this.stripCommodity) ? this.textCommodity.Text : (senderButton.Owner.Equals(this.stripEmployee) ? this.textEmployee.Text : (senderButton.Owner.Equals(this.stripCustomer) ? this.textCustomer.Text : (senderButton.Owner.Equals(this.stripWarehouse) ? this.textWarehouse.Text : (senderButton.Owner.Equals(this.stripWarehouseReceipt) ? this.textWarehouseReceipt.Text : (senderButton.Owner.Equals(this.stripWarehouseAdjustmentType) ? this.textWarehouseAdjustmentType.Text : (senderButton.Owner.Equals(this.stripWarehouseIssue) ? this.textWarehouseIssue.Text : null)))))))).ToUpper();
+                                    textFilter = (senderButton.Owner.Equals(this.stripCommodityType) ? this.textCommodityType.Text : (senderButton.Owner.Equals(this.stripCommodity) ? this.textCommodity.Text : (senderButton.Owner.Equals(this.stripEmployee) ? this.textEmployee.Text : (senderButton.Owner.Equals(this.stripCustomer) ? this.textCustomer.Text : (senderButton.Owner.Equals(this.stripWarehouse) ? this.textWarehouse.Text : (senderButton.Owner.Equals(this.stripWarehouseReceipt) ? this.textWarehouseReceipt.Text : (senderButton.Owner.Equals(this.stripWarehouseAdjustmentType) ? this.textWarehouseAdjustmentType.Text : (senderButton.Owner.Equals(this.stripWarehouseIssue) ? this.textWarehouseIssue.Text : (senderButton.Owner.Equals(this.stripBatchMaster) ? this.textBatchMaster.Text : (senderButton.Owner.Equals(this.stripBatchType) ? this.textBatchType.Text : (senderButton.Owner.Equals(this.stripFillingLine) ? this.textFillingLine.Text : null))))))))))).ToUpper();
 
                                 bool selected = senderButton.Tag.ToString().ToUpper() != "DESELECT";
 
@@ -513,7 +558,7 @@ namespace TotalSmartCoding.Views.Generals
                         }
                         if (senderButton.Tag.ToString().ToUpper() == "CLEAR")
                         {
-                            TextBox textBoxCLEAR = senderButton.Owner.Equals(this.stripCommodityType) ? this.textCommodityType : (senderButton.Owner.Equals(this.stripCommodity) ? this.textCommodity : (senderButton.Owner.Equals(this.stripEmployee) ? this.textEmployee : (senderButton.Owner.Equals(this.stripCustomer) ? this.textCustomer : (senderButton.Owner.Equals(this.stripWarehouse) ? this.textWarehouse : (senderButton.Owner.Equals(this.stripWarehouseReceipt) ? this.textWarehouseReceipt : (senderButton.Owner.Equals(this.stripWarehouseAdjustmentType) ? this.textWarehouseAdjustmentType : (senderButton.Owner.Equals(this.stripWarehouseIssue) ? this.textWarehouseIssue : null)))))));
+                            TextBox textBoxCLEAR = senderButton.Owner.Equals(this.stripCommodityType) ? this.textCommodityType : (senderButton.Owner.Equals(this.stripCommodity) ? this.textCommodity : (senderButton.Owner.Equals(this.stripEmployee) ? this.textEmployee : (senderButton.Owner.Equals(this.stripCustomer) ? this.textCustomer : (senderButton.Owner.Equals(this.stripWarehouse) ? this.textWarehouse : (senderButton.Owner.Equals(this.stripWarehouseReceipt) ? this.textWarehouseReceipt : (senderButton.Owner.Equals(this.stripWarehouseAdjustmentType) ? this.textWarehouseAdjustmentType : (senderButton.Owner.Equals(this.stripWarehouseIssue) ? this.textWarehouseIssue : (senderButton.Owner.Equals(this.stripBatchMaster) ? this.textBatchMaster : (senderButton.Owner.Equals(this.stripBatchType) ? this.textBatchType : (senderButton.Owner.Equals(this.stripFillingLine) ? this.textFillingLine : null))))))))));
                             textBoxCLEAR.Clear();
                         }
                     }
@@ -529,8 +574,8 @@ namespace TotalSmartCoding.Views.Generals
                 TextBox senderTextBox = sender as TextBox;
                 if (senderTextBox != null)
                 {
-                    DataTreeListView dataTreeListView = sender.Equals(this.textCommodityType) ? this.treeCommodityTypeID : (sender.Equals(this.textCommodity) ? this.treeCommodityID : (sender.Equals(this.textEmployee) ? this.treeEmployeeID : (sender.Equals(this.textCustomer) ? this.treeCustomerID : (sender.Equals(this.textWarehouse) ? this.treeWarehouseID : (sender.Equals(this.textWarehouseReceipt) ? this.treeWarehouseReceiptID : (sender.Equals(this.textWarehouseAdjustmentType) ? this.treeWarehouseAdjustmentTypeID : (sender.Equals(this.textWarehouseIssue) ? this.treeWarehouseIssueID : null)))))));
-                    IList<IFilterTree> dataSourceFilterTrees = (sender.Equals(this.textCommodityType) ? this.commodityTypeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textCommodity) ? this.commodityTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textEmployee) ? this.employeeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textCustomer) ? this.customerTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouse) ? this.warehouseTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouseReceipt) ? this.warehouseReceiptTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouseAdjustmentType) ? this.warehouseAdjustmentTypeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouseIssue) ? this.warehouseIssueTrees.Cast<IFilterTree>().ToList() : null))))))));
+                    DataTreeListView dataTreeListView = sender.Equals(this.textCommodityType) ? this.treeCommodityTypeID : (sender.Equals(this.textCommodity) ? this.treeCommodityID : (sender.Equals(this.textEmployee) ? this.treeEmployeeID : (sender.Equals(this.textCustomer) ? this.treeCustomerID : (sender.Equals(this.textWarehouse) ? this.treeWarehouseID : (sender.Equals(this.textWarehouseReceipt) ? this.treeWarehouseReceiptID : (sender.Equals(this.textWarehouseAdjustmentType) ? this.treeWarehouseAdjustmentTypeID : (sender.Equals(this.textWarehouseIssue) ? this.treeWarehouseIssueID : (sender.Equals(this.textBatchMaster) ? this.treeBatchMasterID : (sender.Equals(this.textBatchType) ? this.treeBatchTypeID : (sender.Equals(this.textFillingLine) ? this.treeFillingLineID : null))))))))));
+                    IList<IFilterTree> dataSourceFilterTrees = (sender.Equals(this.textCommodityType) ? this.commodityTypeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textCommodity) ? this.commodityTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textEmployee) ? this.employeeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textCustomer) ? this.customerTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouse) ? this.warehouseTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouseReceipt) ? this.warehouseReceiptTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouseAdjustmentType) ? this.warehouseAdjustmentTypeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textWarehouseIssue) ? this.warehouseIssueTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textBatchMaster) ? this.batchMasterTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textBatchType) ? this.batchTypeTrees.Cast<IFilterTree>().ToList() : (sender.Equals(this.textFillingLine) ? this.fillingLineTrees.Cast<IFilterTree>().ToList() : null)))))))))));
 
                     if (dataTreeListView != null && dataSourceFilterTrees != null)
                     {

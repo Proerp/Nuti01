@@ -313,7 +313,10 @@
             TabPageCustomers = 3,
             TabPageWarehouseIssues = 4,
             TabPageWarehouseReceipts = 5,
-            TabPageWarehouseAdjustmentTypes = 6
+            TabPageWarehouseAdjustmentTypes = 6,
+            TabPageBatchMasters = 7,
+            TabPageBatchTypes = 8,
+            TabPageFillingLines = 9
         }
 
         public enum OptionBoxID

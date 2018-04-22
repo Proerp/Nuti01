@@ -55,5 +55,10 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
         {
             return this.batchMasterAPIRepository.GetBatchMasterBases();
         }
+
+        public IList<BatchMasterTree> GetBatchMasterTrees()
+        {
+            return this.batchMasterAPIRepository.GetBatchMasterTrees();
+        }
     }
 }

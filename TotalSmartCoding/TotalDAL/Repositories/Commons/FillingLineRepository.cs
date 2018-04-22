@@ -30,5 +30,10 @@ namespace TotalDAL.Repositories.Commons
         {
             return this.TotalSmartCodingEntities.GetFillingLineBases().ToList();
         }
+
+        public IList<FillingLineTree> GetFillingLineTrees()
+        {
+            return this.TotalSmartCodingEntities.GetFillingLineTrees().ToList();
+        }
     }
 }

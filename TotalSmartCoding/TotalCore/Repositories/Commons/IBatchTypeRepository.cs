@@ -12,5 +12,6 @@ namespace TotalCore.Repositories.Commons
     public interface IBatchTypeAPIRepository : IGenericAPIRepository
     {
         IList<BatchTypeBase> GetBatchTypeBases();
+        IList<BatchTypeTree> GetBatchTypeTrees();
     }
 }

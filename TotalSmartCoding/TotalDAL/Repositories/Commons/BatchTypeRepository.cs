@@ -30,5 +30,10 @@ namespace TotalDAL.Repositories.Commons
         {
             return this.TotalSmartCodingEntities.GetBatchTypeBases().ToList();
         }
+
+        public IList<BatchTypeTree> GetBatchTypeTrees()
+        {
+            return this.TotalSmartCodingEntities.GetBatchTypeTrees().ToList();
+        }
     }
 }

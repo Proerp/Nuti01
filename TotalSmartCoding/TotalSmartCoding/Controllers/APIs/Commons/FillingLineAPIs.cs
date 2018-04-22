@@ -34,5 +34,10 @@ namespace TotalSmartCoding.Controllers.APIs.Commons
             return this.fillingLineAPIRepository.GetFillingLineBases();
         }
 
+        public IList<FillingLineTree> GetFillingLineTrees()
+        {
+            return this.fillingLineAPIRepository.GetFillingLineTrees();
+        }
+
     }
 }

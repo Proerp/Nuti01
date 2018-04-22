@@ -64,6 +64,11 @@ namespace TotalDAL.Repositories.Productions
         {
             return this.TotalSmartCodingEntities.GetBatchMasterBases().ToList();
         }
+
+        public IList<BatchMasterTree> GetBatchMasterTrees()
+        {
+            return this.TotalSmartCodingEntities.GetBatchMasterTrees().ToList();
+        }
     }
 
 

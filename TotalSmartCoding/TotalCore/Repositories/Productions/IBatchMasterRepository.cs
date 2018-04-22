@@ -16,5 +16,6 @@ namespace TotalCore.Repositories.Productions
         BatchMasterBase GetBatchMasterBase(string code);
         BatchMasterBase GetBatchMasterBase(int batchMasterID);
         IList<BatchMasterBase> GetBatchMasterBases();
+        IList<BatchMasterTree> GetBatchMasterTrees();
     }
 }

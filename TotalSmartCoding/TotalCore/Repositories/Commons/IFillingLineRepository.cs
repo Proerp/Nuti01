@@ -12,5 +12,6 @@ namespace TotalCore.Repositories.Commons
     public interface IFillingLineAPIRepository : IGenericAPIRepository
     {
         IList<FillingLineBase> GetFillingLineBases();
+        IList<FillingLineTree> GetFillingLineTrees();
     }
 }

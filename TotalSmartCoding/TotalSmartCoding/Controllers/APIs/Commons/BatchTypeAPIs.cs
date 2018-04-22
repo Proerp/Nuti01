@@ -34,5 +34,9 @@ namespace TotalSmartCoding.Controllers.APIs.Commons
             return this.batchTypeAPIRepository.GetBatchTypeBases();
         }
 
+        public IList<BatchTypeTree> GetBatchTypeTrees()
+        {
+            return this.batchTypeAPIRepository.GetBatchTypeTrees();
+        }
     }
 }

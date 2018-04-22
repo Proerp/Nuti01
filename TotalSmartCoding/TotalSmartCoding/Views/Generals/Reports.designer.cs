@@ -66,7 +66,7 @@
             this.olvReportGroupName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvReportName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelCenter = new System.Windows.Forms.Panel();
-            this.panel25 = new System.Windows.Forms.Panel();
+            this.panelFillingLineID = new System.Windows.Forms.Panel();
             this.treeFillingLineID = new BrightIdeasSoftware.DataTreeListView();
             this.olvColumn29 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn30 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -83,7 +83,7 @@
             this.buttonFillingLineDeselect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonFillingLineClear = new System.Windows.Forms.ToolStripButton();
-            this.panel24 = new System.Windows.Forms.Panel();
+            this.panelBatchTypeID = new System.Windows.Forms.Panel();
             this.treeBatchTypeID = new BrightIdeasSoftware.DataTreeListView();
             this.olvColumn26 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn27 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -100,7 +100,7 @@
             this.buttonBatchTypeDeselect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonBatchTypeClear = new System.Windows.Forms.ToolStripButton();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelBatchMasterID = new System.Windows.Forms.Panel();
             this.treeBatchMasterID = new BrightIdeasSoftware.DataTreeListView();
             this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -261,17 +261,17 @@
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fastReportIndex)).BeginInit();
             this.panelCenter.SuspendLayout();
-            this.panel25.SuspendLayout();
+            this.panelFillingLineID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeFillingLineID)).BeginInit();
             this.panel28.SuspendLayout();
             this.panel29.SuspendLayout();
             this.stripFillingLine.SuspendLayout();
-            this.panel24.SuspendLayout();
+            this.panelBatchTypeID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeBatchTypeID)).BeginInit();
             this.panel26.SuspendLayout();
             this.panel27.SuspendLayout();
             this.stripBatchType.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.panelBatchMasterID.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeBatchMasterID)).BeginInit();
             this.panel6.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -756,9 +756,9 @@
             // 
             // panelCenter
             // 
-            this.panelCenter.Controls.Add(this.panel25);
-            this.panelCenter.Controls.Add(this.panel24);
-            this.panelCenter.Controls.Add(this.panel3);
+            this.panelCenter.Controls.Add(this.panelFillingLineID);
+            this.panelCenter.Controls.Add(this.panelBatchTypeID);
+            this.panelCenter.Controls.Add(this.panelBatchMasterID);
             this.panelCenter.Controls.Add(this.panelWarehouseIssueID);
             this.panelCenter.Controls.Add(this.panelWarehouseAdjustmentTypeID);
             this.panelCenter.Controls.Add(this.panelWarehouseReceiptID);
@@ -771,14 +771,14 @@
             this.panelCenter.Size = new System.Drawing.Size(1219, 702);
             this.panelCenter.TabIndex = 69;
             // 
-            // panel25
+            // panelFillingLineID
             // 
-            this.panel25.Controls.Add(this.treeFillingLineID);
-            this.panel25.Controls.Add(this.panel28);
-            this.panel25.Location = new System.Drawing.Point(3, 617);
-            this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(1234, 62);
-            this.panel25.TabIndex = 79;
+            this.panelFillingLineID.Controls.Add(this.treeFillingLineID);
+            this.panelFillingLineID.Controls.Add(this.panel28);
+            this.panelFillingLineID.Location = new System.Drawing.Point(3, 617);
+            this.panelFillingLineID.Name = "panelFillingLineID";
+            this.panelFillingLineID.Size = new System.Drawing.Size(1234, 62);
+            this.panelFillingLineID.TabIndex = 79;
             // 
             // treeFillingLineID
             // 
@@ -957,19 +957,19 @@
             this.buttonFillingLineClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonFillingLineClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonFillingLineClear.Name = "buttonFillingLineClear";
-            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 20);
+            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 24);
             this.buttonFillingLineClear.Tag = "CLEAR";
             this.buttonFillingLineClear.Text = "toolStripButton6";
             this.buttonFillingLineClear.ToolTipText = "Clear Filters";
             // 
-            // panel24
+            // panelBatchTypeID
             // 
-            this.panel24.Controls.Add(this.treeBatchTypeID);
-            this.panel24.Controls.Add(this.panel26);
-            this.panel24.Location = new System.Drawing.Point(3, 540);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(1282, 71);
-            this.panel24.TabIndex = 78;
+            this.panelBatchTypeID.Controls.Add(this.treeBatchTypeID);
+            this.panelBatchTypeID.Controls.Add(this.panel26);
+            this.panelBatchTypeID.Location = new System.Drawing.Point(3, 540);
+            this.panelBatchTypeID.Name = "panelBatchTypeID";
+            this.panelBatchTypeID.Size = new System.Drawing.Size(1282, 71);
+            this.panelBatchTypeID.TabIndex = 78;
             // 
             // treeBatchTypeID
             // 
@@ -1153,14 +1153,14 @@
             this.buttonBatchTypeClear.Text = "toolStripButton6";
             this.buttonBatchTypeClear.ToolTipText = "Clear Filters";
             // 
-            // panel3
+            // panelBatchMasterID
             // 
-            this.panel3.Controls.Add(this.treeBatchMasterID);
-            this.panel3.Controls.Add(this.panel6);
-            this.panel3.Location = new System.Drawing.Point(3, 475);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1222, 59);
-            this.panel3.TabIndex = 77;
+            this.panelBatchMasterID.Controls.Add(this.treeBatchMasterID);
+            this.panelBatchMasterID.Controls.Add(this.panel6);
+            this.panelBatchMasterID.Location = new System.Drawing.Point(3, 475);
+            this.panelBatchMasterID.Name = "panelBatchMasterID";
+            this.panelBatchMasterID.Size = new System.Drawing.Size(1222, 59);
+            this.panelBatchMasterID.TabIndex = 77;
             // 
             // treeBatchMasterID
             // 
@@ -2922,7 +2922,7 @@
             this.panelLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fastReportIndex)).EndInit();
             this.panelCenter.ResumeLayout(false);
-            this.panel25.ResumeLayout(false);
+            this.panelFillingLineID.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeFillingLineID)).EndInit();
             this.panel28.ResumeLayout(false);
             this.panel28.PerformLayout();
@@ -2930,7 +2930,7 @@
             this.panel29.PerformLayout();
             this.stripFillingLine.ResumeLayout(false);
             this.stripFillingLine.PerformLayout();
-            this.panel24.ResumeLayout(false);
+            this.panelBatchTypeID.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeBatchTypeID)).EndInit();
             this.panel26.ResumeLayout(false);
             this.panel26.PerformLayout();
@@ -2938,7 +2938,7 @@
             this.panel27.PerformLayout();
             this.stripBatchType.ResumeLayout(false);
             this.stripBatchType.PerformLayout();
-            this.panel3.ResumeLayout(false);
+            this.panelBatchMasterID.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeBatchMasterID)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -3187,7 +3187,7 @@
         private System.Windows.Forms.Label labelSlowMoving;
         private System.Windows.Forms.NumericUpDown numericSlowMoving;
         private System.Windows.Forms.ComboBox comboSlowMoving;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelBatchMasterID;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.TextBox textBatchMaster;
         private System.Windows.Forms.Panel panel9;
@@ -3204,8 +3204,8 @@
         private BrightIdeasSoftware.OLVColumn olvColumn23;
         private BrightIdeasSoftware.OLVColumn olvColumn24;
         private BrightIdeasSoftware.OLVColumn olvColumn25;
-        private System.Windows.Forms.Panel panel25;
-        private System.Windows.Forms.Panel panel24;
+        private System.Windows.Forms.Panel panelFillingLineID;
+        private System.Windows.Forms.Panel panelBatchTypeID;
         private BrightIdeasSoftware.DataTreeListView treeFillingLineID;
         private BrightIdeasSoftware.OLVColumn olvColumn29;
         private BrightIdeasSoftware.OLVColumn olvColumn30;
