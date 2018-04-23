@@ -14,6 +14,7 @@ using System.Drawing;
 using BrightIdeasSoftware;
 using TotalSmartCoding.Views.Productions;
 using TotalSmartCoding.ViewModels.Helpers;
+using TotalBase.Enums;
 
 namespace TotalSmartCoding.Views.Mains
 {
@@ -64,7 +65,11 @@ namespace TotalSmartCoding.Views.Mains
             this.customTabBatch.TabPages[0].Text = "Pack " + this.fastPacks.GetItemCount().ToString("N0") + " pack" + (this.fastPacks.GetItemCount() > 1 ? "s" : "");
             this.customTabBatch.TabPages[1].Text = "Carton: " + this.fastCartons.GetItemCount().ToString("N0") + " carton" + (this.fastCartons.GetItemCount() > 1 ? "s" : "");
             this.customTabBatch.TabPages[2].Text = "Pallet: " + this.fastPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPallets.GetItemCount() > 1 ? "s" : "");
+
+            this.customTabBatch.SelectedIndexChanged += customTabBatch_SelectedIndexChanged;
+            //this.customTabBatch.SelectedIndexChanged += ;
         }
+
 
         private void textFilter_Enter(object sender, EventArgs e)
         {
@@ -155,6 +160,31 @@ namespace TotalSmartCoding.Views.Mains
             }
         }
 
+
+        private void customTabBatch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.labelReprintCarton.Visible = this.customTabBatch.SelectedIndex == 1;
+        }
+
+        private void labelReprintCarton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.fastCartons.SelectedObject != null)
+                {
+                    CartonDTO cartonDTO = this.fastCartons.SelectedObject as CartonDTO;
+                    if (cartonDTO != null)
+                    {
+                        GlobalEnums.ReprintCartonID = cartonDTO.CartonID;
+                        this.DialogResult = System.Windows.Forms.DialogResult.Yes;
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
 
     }
 }

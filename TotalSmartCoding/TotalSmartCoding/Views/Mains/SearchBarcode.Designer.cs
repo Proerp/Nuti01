@@ -33,6 +33,7 @@
             this.olvPackCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.textFilterPack = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelReprintCarton = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fastCartons = new BrightIdeasSoftware.FastObjectListView();
             this.olvColumn2 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -110,17 +111,34 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.labelReprintCarton);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(97, 823);
+            this.panel1.Size = new System.Drawing.Size(182, 823);
             this.panel1.TabIndex = 73;
+            // 
+            // labelReprintCarton
+            // 
+            this.labelReprintCarton.AutoSize = true;
+            this.labelReprintCarton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelReprintCarton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelReprintCarton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReprintCarton.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.labelReprintCarton.Location = new System.Drawing.Point(0, 786);
+            this.labelReprintCarton.Name = "labelReprintCarton";
+            this.labelReprintCarton.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.labelReprintCarton.Size = new System.Drawing.Size(175, 37);
+            this.labelReprintCarton.TabIndex = 8;
+            this.labelReprintCarton.Text = "Click here to reprint carton";
+            this.labelReprintCarton.Visible = false;
+            this.labelReprintCarton.Click += new System.EventHandler(this.labelReprintCarton_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::TotalSmartCoding.Properties.Resources.Search_barcode_32;
-            this.pictureBox1.Location = new System.Drawing.Point(21, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(31, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(48, 48);
             this.pictureBox1.TabIndex = 7;
@@ -224,9 +242,9 @@
             this.panelCenter.Controls.Add(this.fastPallets);
             this.panelCenter.Controls.Add(this.fastCartons);
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCenter.Location = new System.Drawing.Point(97, 0);
+            this.panelCenter.Location = new System.Drawing.Point(182, 0);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(663, 823);
+            this.panelCenter.Size = new System.Drawing.Size(592, 823);
             this.panelCenter.TabIndex = 76;
             // 
             // textFilterPallet
@@ -261,7 +279,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 823);
+            this.ClientSize = new System.Drawing.Size(774, 823);
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -272,6 +290,7 @@
             this.Text = "Search Results";
             ((System.ComponentModel.ISupportInitialize)(this.fastPacks)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastCartons)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fastPallets)).EndInit();
@@ -298,5 +317,6 @@
         private System.Windows.Forms.Panel panelCenter;
         private System.Windows.Forms.TextBox textFilterPallet;
         private System.Windows.Forms.TextBox textFilterCarton;
+        private System.Windows.Forms.Label labelReprintCarton;
     }
 }

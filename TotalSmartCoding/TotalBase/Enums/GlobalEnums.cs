@@ -19,6 +19,8 @@
         public static bool OnTestPalletReceivedNow = false;
 
 
+        public static int ReprintCartonID = 0;
+
         public static OptionSetting GlobalOptionSetting = new OptionSetting();
         public static string stringFieldRequired = "Input not correct. Please make sure all required fields are filled out correctly";
 

@@ -1023,7 +1023,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 }
                                 else
                                 {
-                                    if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                                    if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.privateFillingData.ReprintCarton)) && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                                     {
                                         this.lastProductCounting = 0;//VARIBLE PLAY A RULE OF POINTER TO THE BUFFERS
                                         this.privateFillingData.RepackSentIndex = this.privateFillingData.RepackPrintedIndex;
@@ -1043,15 +1043,18 @@ namespace TotalSmartCoding.Controllers.Productions
                                     }
                                     else
                                     {
-                                        this.storeMessage(this.wholeMessageLine()); //SHOULD Update serial number: - Note: Some DOMINO firmware version does not need to update serial number. Just set startup serial number only when insert serial number. BUT: FOR SURE, It will be updated FOR ALL
+                                        if (!this.privateFillingData.ReprintCarton)
+                                        {
+                                            this.storeMessage(this.wholeMessageLine()); //SHOULD Update serial number: - Note: Some DOMINO firmware version does not need to update serial number. Just set startup serial number only when insert serial number. BUT: FOR SURE, It will be updated FOR ALL
 
-                                        //    U: UPDATE SERIAL NUMBER - Counter 1
-                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
-                                        if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                            //    U: UPDATE SERIAL NUMBER - Counter 1
+                                            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
+                                            if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
 
-                                        //    U: UPDATE SERIAL NUMBER - Counter 2
-                                        this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
-                                        if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                            //    U: UPDATE SERIAL NUMBER - Counter 2
+                                            this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/2/" + this.getNextNo() + "/" + GlobalVariables.charEOT);
+                                            if (this.waitforDomino(ref receivedFeedback, true)) Thread.Sleep(1000); else throw new System.InvalidOperationException("Lỗi không thể cài đặt số thứ tự sản phẩm: " + receivedFeedback);
+                                        }
                                     }
                                 }
                                 #endregion SETUP MESSAGE
@@ -1064,7 +1067,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
                             #region Read counter: printerName == DigitInkjet || printerName == PackInkjet || printerName == CartonInkjet
-                            if (this.printerName == GlobalVariables.PrinterName.DigitInkjet || (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID != (int)GlobalEnums.BatchTypeID.Repack) || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
+                            if (this.printerName == GlobalVariables.PrinterName.DigitInkjet || (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID != (int)GlobalEnums.BatchTypeID.Repack) || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && !this.privateFillingData.ReprintCarton))
                             {
                                 this.ionetSocket.WritetoStream(GlobalVariables.charESC + "/U/001/1/?/" + GlobalVariables.charEOT);//    U: Read Counter 1 (ONLY COUNTER 1---COUNTER 2: THE SAME COUNTER 1: Principlely)
                                 if (this.waitforDomino(ref receivedFeedback, false, "U", 13))
@@ -1082,8 +1085,8 @@ namespace TotalSmartCoding.Controllers.Productions
                                 this.sendtoZebra();
                                 this.waitforZebra();
                             }
-
-                            if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                            
+                            if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.privateFillingData.ReprintCarton)) && this.privateFillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                             {//RepackSentIndex: MEANS: HAS BEEN SENT ALREADY. HERE RepackSentIndex MUST LESS (<) THAN this.privateFillingData.BatchRepacks.Count. BUT HERE: WE USE '<=': THE PUPOSE IS: TO SENT THE LAST BARCODE TWICE ==> TO PREVENT THE PRINNTER PRINT BLANK BARCODE IF THIS SOFTWARE CAN NOT CLEAR THE MESSAGE RIGHT AFTER (IMMEDIATELY) THE LAST MSG HAS BEEN PRINTED (THE RULE IS: WHEN TWO MESSAGE PRINT TWICE, THE SCANNER WILL DETECT DUPLICATE BARCODE TO STOP PRINTER)
                                 if (this.privateFillingData.RepackSentIndex - this.privateFillingData.RepackPrintedIndex < 25 && this.privateFillingData.RepackSentIndex <= this.privateFillingData.BatchRepacks.Count) //SEND DOUBLE TIME FOR THE LAST
                                 { if (this.sendtoBuffer()) this.privateFillingData.RepackSentIndex++; } //25: MEAN: WE USE MAXIMUN 25 BUFFER ENTRY FOR CACHED DATA (THE MAX CAPACITY OF BUFFER ARE 32 ENTRY)

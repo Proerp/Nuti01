@@ -190,6 +190,7 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.fillingData.BatchRepacks.RaiseListChangedEvents = false;
                 this.fillingData.BatchRepacks.Clear();
+                this.fillingData.ReprintCarton = false;
 
                 if (this.fillingData.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                 {
@@ -198,6 +199,7 @@ namespace TotalSmartCoding.Views.Productions
                         BatchRepackDTO batchRepackDTO = Mapper.Map<BatchRepack, BatchRepackDTO>(recartonbatchRepack);
                         batchRepackDTO.LineIndex = 1;
                         this.fillingData.BatchRepacks.Add(batchRepackDTO);
+                        this.fillingData.ReprintCarton = true;
                     }
                     else
                     {
@@ -1170,7 +1172,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (this.scannerController.AllQueueEmpty)
+                if (this.buttonConnect.Enabled && this.scannerController.AllQueueEmpty)
                 {
                     RepackController repackController = new RepackController(CommonNinject.Kernel.Get<IRepackService>(), CommonNinject.Kernel.Get<RepackViewModel>());
 

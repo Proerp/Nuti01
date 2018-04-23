@@ -769,12 +769,15 @@ namespace TotalSmartCoding.Views.Mains
                     if (this.comboSearchBarcode.Items.IndexOf(this.comboSearchBarcode.Text) == -1)
                         this.comboSearchBarcode.Items.Add(this.comboSearchBarcode.Text);
 
-                    SearchBarcode quickView = new SearchBarcode(this.comboSearchBarcode.Text);
-                    quickView.ShowDialog(); quickView.Dispose();
+                    SearchBarcode searchBarcode = new SearchBarcode(this.comboSearchBarcode.Text);
+                    DialogResult dialogResult = searchBarcode.ShowDialog(); searchBarcode.Dispose();
 
-                    SmartCoding activeSmartCoding = ActiveMdiChild as SmartCoding;
-                    if (activeSmartCoding != null)
-                        activeSmartCoding.ReprintCarton(28123);
+                    if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        SmartCoding activeSmartCoding = ActiveMdiChild as SmartCoding;
+                        if (activeSmartCoding != null)
+                            activeSmartCoding.ReprintCarton(GlobalEnums.ReprintCartonID);
+                    }
                 }
             }
             catch (Exception exception)

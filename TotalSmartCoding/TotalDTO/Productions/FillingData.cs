@@ -149,6 +149,13 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<FillingData, bool>(ref this.isPailLabel, o => o.IsPailLabel, value); }
         }
 
+        private bool reprintCarton;
+        public bool ReprintCarton
+        {
+            get { return this.reprintCarton; }
+            set { ApplyPropertyChange<FillingData, bool>(ref this.reprintCarton, o => o.ReprintCarton, value); }
+        }
+
         public int BatchTypeID { get; set; }
         public string BatchTypeCode
         {
