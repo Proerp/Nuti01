@@ -370,8 +370,6 @@ namespace TotalSmartCoding.Views.Generals
             PrintViewModel printViewModel = base.InitPrintViewModel();
             printViewModel.ReportPath = this.reportViewModel.ReportURL;
 
-            printViewModel.ShowPromptAreaButton = true;
-
             this.PassFilterParameters(printViewModel);
 
             return printViewModel;

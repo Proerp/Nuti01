@@ -71,6 +71,20 @@ namespace TotalDAL.Repositories
 
             //this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.Report + ", 9, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
             //this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.Report + " AS NMVNTaskID, OrganizationalUnitID, 1 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Report + ") = 0", new ObjectParameter[] { });
+
+            if (!this.totalSmartCodingEntities.ColumnExists("Pallets", "MinPackDate"))
+            {
+                this.totalSmartCodingEntities.ColumnAdd("Pallets", "MinPackDate", "datetime", null, false);
+                this.totalSmartCodingEntities.ColumnAdd("Pallets", "MaxPackDate", "datetime", null, false);
+
+                this.ExecuteStoreCommand(" UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = Pallets.PalletID) ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = Pallets.PalletID) ", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" ALTER TABLE Pallets ALTER COLUMN MinPackDate datetime NOT NULL", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" ALTER TABLE Pallets ALTER COLUMN MaxPackDate datetime NOT NULL", new ObjectParameter[] { });
+            }
+
+
             this.InitReports();
 
             this.ExecuteStoreCommand("UPDATE BatchMasters SET BatchStatusID = " + (int)GlobalVariables.BatchStatuses.WIP + " WHERE BatchMasterID IN (SELECT BatchMasterID FROM Lots)", new ObjectParameter[] { });
