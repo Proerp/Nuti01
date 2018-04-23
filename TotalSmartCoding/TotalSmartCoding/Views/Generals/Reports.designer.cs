@@ -48,6 +48,7 @@
             this.comboDateVersusMonth = new System.Windows.Forms.ToolStripComboBox();
             this.buttonDateVersusMonth = new System.Windows.Forms.ToolStripButton();
             this.comboSalesVersusPromotion = new System.Windows.Forms.ToolStripComboBox();
+            this.comboPalletVersusCartonAndPack = new System.Windows.Forms.ToolStripComboBox();
             this.comboForecastFilters = new System.Windows.Forms.ToolStripComboBox();
             this.buttonSalesVersusPromotion = new System.Windows.Forms.ToolStripButton();
             this.layoutTop = new System.Windows.Forms.TableLayoutPanel();
@@ -458,6 +459,7 @@
             this.comboDateVersusMonth,
             this.buttonDateVersusMonth,
             this.comboSalesVersusPromotion,
+            this.comboPalletVersusCartonAndPack,
             this.comboForecastFilters,
             this.buttonSalesVersusPromotion});
             this.toolReport.Location = new System.Drawing.Point(3, 3);
@@ -518,6 +520,14 @@
             this.comboSalesVersusPromotion.Name = "comboSalesVersusPromotion";
             this.comboSalesVersusPromotion.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboSalesVersusPromotion.Size = new System.Drawing.Size(135, 29);
+            // 
+            // comboPalletVersusCartonAndPack
+            // 
+            this.comboPalletVersusCartonAndPack.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPalletVersusCartonAndPack.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.comboPalletVersusCartonAndPack.Name = "comboPalletVersusCartonAndPack";
+            this.comboPalletVersusCartonAndPack.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.comboPalletVersusCartonAndPack.Size = new System.Drawing.Size(135, 28);
             // 
             // comboForecastFilters
             // 
@@ -963,7 +973,7 @@
             this.buttonFillingLineClear.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonFillingLineClear.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonFillingLineClear.Name = "buttonFillingLineClear";
-            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 20);
+            this.buttonFillingLineClear.Size = new System.Drawing.Size(23, 24);
             this.buttonFillingLineClear.Tag = "CLEAR";
             this.buttonFillingLineClear.Text = "toolStripButton6";
             this.buttonFillingLineClear.ToolTipText = "Clear Filters";
@@ -3259,6 +3269,7 @@
         private System.Windows.Forms.ToolStripButton buttonBatchTypeDeselect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
         private System.Windows.Forms.ToolStripButton buttonBatchTypeClear;
+        private System.Windows.Forms.ToolStripComboBox comboPalletVersusCartonAndPack;
 
     }
 }

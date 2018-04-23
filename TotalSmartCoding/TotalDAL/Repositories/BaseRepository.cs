@@ -300,7 +300,7 @@ namespace TotalDAL.Repositories
 
             this.ExecuteStoreCommand("DELETE FROM Reports", new ObjectParameter[] { });
 
-            string optionBoxIDs = GlobalEnums.OBx(GlobalEnums.OptionBoxID.FromDate) + GlobalEnums.OBx(GlobalEnums.OptionBoxID.ToDate);
+            string optionBoxIDs = GlobalEnums.OBx(GlobalEnums.OptionBoxID.FromDate) + GlobalEnums.OBx(GlobalEnums.OptionBoxID.ToDate) + GlobalEnums.OBx(GlobalEnums.OptionBoxID.PalletVersusCartonAndPack);
 
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.PivotStockDIOH3M + ", " + (int)GlobalEnums.ReportID.PivotStockDIOH3M + ", 8, '1.INVENTORY REPORTS', N'Pivot Stock with DIOH 3M', N'WarehouseForecastPivots', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.WarehouseForecast + ", 50, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.PivotStockDRP + ", " + (int)GlobalEnums.ReportID.PivotStockDRP + ", 8, '1.INVENTORY REPORTS', N'Pivot Stock for DRP Planning', N'WarehouseForecastPivots', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.WarehouseForecast + ", 60, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });

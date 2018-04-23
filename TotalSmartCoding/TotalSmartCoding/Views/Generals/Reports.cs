@@ -207,6 +207,9 @@ namespace TotalSmartCoding.Views.Generals
             this.comboSalesVersusPromotion.ComboBox.Items.AddRange(new string[] { "Sales & promotions", "Sales only", "Promotions only" });
             this.comboSalesVersusPromotion.ComboBox.SelectedIndex = 0;
 
+            this.comboPalletVersusCartonAndPack.ComboBox.Items.AddRange(new string[] { "Pallet Only", "Pallet & Carton", "Pallet, Carton & Pack" });
+            this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex = 0;
+
             this.comboForecastFilters.ComboBox.Items.AddRange(new string[] { "[All Items in Stock]", "[Current Stock + In Transit] > 0", "[Current Stock + In Transit] = 0", "[Current Stock + In Transit] < 0", "[Current Stock + In Transit] Between Low-High Level", "[Current Stock + In Transit] Out of Range Low-High Level", "[Current Stock + In Transit] Under Low-Level", "[Current Stock + In Transit] Over High-Level" });
             this.comboForecastFilters.ComboBox.SelectedIndex = 0;
 
@@ -285,8 +288,9 @@ namespace TotalSmartCoding.Views.Generals
                 this.comboQuantityVersusVolume.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.QuantityVersusVolume)) != -1; this.buttonQuantityVersusVolume.Visible = this.comboSummaryVersusDetail.Visible || this.comboQuantityVersusVolume.Visible;
                 this.comboDateVersusMonth.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.DateVersusMonth)) != -1; this.buttonDateVersusMonth.Visible = this.comboDateVersusMonth.Visible;
                 this.comboSalesVersusPromotion.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.SalesVersusPromotion)) != -1;
+                this.comboPalletVersusCartonAndPack.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.PalletVersusCartonAndPack)) != -1;
 
-                this.comboForecastFilters.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.ForecastFilters)) != -1; this.buttonSalesVersusPromotion.Visible = this.comboSalesVersusPromotion.Visible || this.comboForecastFilters.Visible;
+                this.comboForecastFilters.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.ForecastFilters)) != -1; this.buttonSalesVersusPromotion.Visible = this.comboSalesVersusPromotion.Visible || this.comboPalletVersusCartonAndPack.Visible || this.comboForecastFilters.Visible;
 
                 this.comboSlowMoving.Visible = this.reportViewModel.OptionBoxIDs.IndexOf(GlobalEnums.OBx(GlobalEnums.OptionBoxID.SlowMoving)) != -1; this.labelSlowMoving.Visible = this.comboSlowMoving.Visible; this.numericSlowMoving.Visible = this.comboSlowMoving.Visible;
             }
@@ -416,6 +420,12 @@ namespace TotalSmartCoding.Views.Generals
                 {
                     if (this.comboSalesVersusPromotion.ComboBox.SelectedIndex != 0) headerTitle = headerTitle + " [" + this.comboSalesVersusPromotion.Text + "]";
                     printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("SalesVersusPromotion", (this.comboSalesVersusPromotion.ComboBox.SelectedIndex - 1).ToString()));
+                }
+
+                if (this.comboPalletVersusCartonAndPack.Visible)
+                {
+                    if (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex != 0) headerTitle = headerTitle + " [" + this.comboPalletVersusCartonAndPack.Text + "]";
+                    printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("PalletVersusCartonAndPack", (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex - 1).ToString()));
                 }
             }
 

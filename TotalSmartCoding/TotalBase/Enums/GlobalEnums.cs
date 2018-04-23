@@ -327,6 +327,7 @@
             QuantityVersusVolume = 20,
             DateVersusMonth = 30,
             SalesVersusPromotion = 50,
+            PalletVersusCartonAndPack = 80,
             ForecastFilters = 60,
             SlowMoving = 70
         }//NOTES: OBx(OptionBoxID optionBoxID): MUST BE NOT DUPLICATE ANY PART
