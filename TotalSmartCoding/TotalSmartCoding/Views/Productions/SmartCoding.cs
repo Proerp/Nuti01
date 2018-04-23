@@ -220,6 +220,10 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.fillingData.BatchRepacks.RaiseListChangedEvents = true;
                 this.fillingData.BatchRepacks.ResetBindings();
+
+                this.buttonRepackImport.Visible = !this.fillingData.ReprintCarton;
+                this.buttonRepackRemove.Visible = !this.fillingData.ReprintCarton;
+                this.buttonRepackReprint.Visible = !this.fillingData.ReprintCarton;
             }
             catch (Exception exception)
             {
@@ -381,7 +385,7 @@ namespace TotalSmartCoding.Views.Productions
                     palletThread.Start();
                     scannerThread.Start();
 
-                    this.InitializeRepack(true);
+                    if (!this.fillingData.ReprintCarton) this.InitializeRepack(true);
                 }
             }
             catch (Exception exception)
@@ -409,7 +413,7 @@ namespace TotalSmartCoding.Views.Productions
                     this.Initialize();
                 }
                 else
-                    this.InitializeRepack(false);
+                    if (!this.fillingData.ReprintCarton) this.InitializeRepack(false);
             }
             catch (Exception exception)
             {
@@ -1188,7 +1192,7 @@ namespace TotalSmartCoding.Views.Productions
                         {
                             batchIndex.BatchTypeID = (int)GlobalEnums.BatchTypeID.Repack;
 
-                            GlobalEnums.OnTestRepackWithoutScanner = true;
+                            ////////GlobalEnums.OnTestRepackWithoutScanner = true;
 
                             this.Initialize(batchIndex, batchRepack);
                         }
