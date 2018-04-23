@@ -593,6 +593,8 @@
           </Key>
           <Property Name="PalletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="MinPackDate" Type="datetime" Nullable="false" />
+          <Property Name="MaxPackDate" Type="datetime" Nullable="false" />
           <Property Name="FillingLineID" Type="int" Nullable="false" />
           <Property Name="BatchID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
@@ -605,8 +607,6 @@
           <Property Name="LineVolume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="LineVolumePickup" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
-          <Property Name="MinPackDate" Type="datetime" Nullable="false" />
-          <Property Name="MaxPackDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="PickupDetails">
           <Key>
