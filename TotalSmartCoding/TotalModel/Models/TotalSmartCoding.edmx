@@ -605,6 +605,8 @@
           <Property Name="LineVolume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="LineVolumePickup" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
+          <Property Name="MinPackDate" Type="datetime" Nullable="false" />
+          <Property Name="MaxPackDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="PickupDetails">
           <Key>
@@ -5544,6 +5546,8 @@
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Pallet" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="Pallet" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Pallets" FromRole="Pallet" ToRole="WarehouseAdjustmentDetail" />
+          <Property Name="MinPackDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaxPackDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_Cartons_FillingLines">
           <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
@@ -9179,6 +9183,8 @@
           <EntitySetMapping Name="Pallets">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pallet">
               <MappingFragment StoreEntitySet="Pallets">
+                <ScalarProperty Name="MaxPackDate" ColumnName="MaxPackDate" />
+                <ScalarProperty Name="MinPackDate" ColumnName="MinPackDate" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
                 <ScalarProperty Name="LineVolumePickup" ColumnName="LineVolumePickup" />
                 <ScalarProperty Name="LineVolume" ColumnName="LineVolume" />

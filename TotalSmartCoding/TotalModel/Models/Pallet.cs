@@ -37,6 +37,8 @@ namespace TotalModel.Models
         public decimal LineVolume { get; set; }
         public decimal LineVolumePickup { get; set; }
         public int EntryStatusID { get; set; }
+        public System.DateTime MinPackDate { get; set; }
+        public System.DateTime MaxPackDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons { get; set; }
