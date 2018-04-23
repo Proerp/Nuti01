@@ -24,7 +24,7 @@ namespace TotalDTO.Commons
             this.Initialize();
         }
 
-        private void Initialize() { this.Volume = 0; this.PackPerCarton = 0; this.CartonPerPallet = 0; this.Shelflife = 0; }
+        private void Initialize() { this.Unit = "Lon"; this.Volume = 0; this.PackPerCarton = 0; this.CartonPerPallet = 0; this.Shelflife = 0; }
 
 
         public override int GetID() { return this.CommodityID; }

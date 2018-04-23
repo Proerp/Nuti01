@@ -103,7 +103,7 @@
             this.buttonBatchTypeClear = new System.Windows.Forms.ToolStripButton();
             this.panelBatchMasterID = new System.Windows.Forms.Panel();
             this.treeBatchMasterID = new BrightIdeasSoftware.DataTreeListView();
-            this.olvColumn23 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvBatchMasterCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn24 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumn25 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panel6 = new System.Windows.Forms.Panel();
@@ -1188,7 +1188,7 @@
             // 
             // treeBatchMasterID
             // 
-            this.treeBatchMasterID.AllColumns.Add(this.olvColumn23);
+            this.treeBatchMasterID.AllColumns.Add(this.olvBatchMasterCode);
             this.treeBatchMasterID.AllColumns.Add(this.olvColumn24);
             this.treeBatchMasterID.AllColumns.Add(this.olvColumn33);
             this.treeBatchMasterID.AllColumns.Add(this.olvColumn4);
@@ -1196,7 +1196,7 @@
             this.treeBatchMasterID.AllColumns.Add(this.olvColumn25);
             this.treeBatchMasterID.BackColor = System.Drawing.Color.Ivory;
             this.treeBatchMasterID.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn23,
+            this.olvBatchMasterCode,
             this.olvColumn24,
             this.olvColumn25});
             this.treeBatchMasterID.DataSource = null;
@@ -1218,11 +1218,11 @@
             this.treeBatchMasterID.View = System.Windows.Forms.View.Details;
             this.treeBatchMasterID.VirtualMode = true;
             // 
-            // olvColumn23
+            // olvBatchMasterCode
             // 
-            this.olvColumn23.AspectName = "Code";
-            this.olvColumn23.Text = "Adjustment Types";
-            this.olvColumn23.Width = 268;
+            this.olvBatchMasterCode.AspectName = "Code";
+            this.olvBatchMasterCode.Text = "Batches";
+            this.olvBatchMasterCode.Width = 268;
             // 
             // olvColumn24
             // 
@@ -3232,7 +3232,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
         private System.Windows.Forms.ToolStripButton buttonBatchMasterClear;
         private BrightIdeasSoftware.DataTreeListView treeBatchMasterID;
-        private BrightIdeasSoftware.OLVColumn olvColumn23;
+        private BrightIdeasSoftware.OLVColumn olvBatchMasterCode;
         private BrightIdeasSoftware.OLVColumn olvColumn24;
         private BrightIdeasSoftware.OLVColumn olvColumn25;
         private System.Windows.Forms.Panel panelFillingLineID;

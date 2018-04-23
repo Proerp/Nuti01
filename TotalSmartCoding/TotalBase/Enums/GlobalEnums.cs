@@ -303,7 +303,8 @@
 
             WarehouseForecast = 686,
 
-            WarehouseJournal = 800
+            WarehouseJournal = 800,
+            ProductionJournal = 1001
         }
 
         public enum ReportTabPageID
@@ -372,7 +373,13 @@
             SaleAndProduction = 868,
             OldAndSlowMoving = 869,
 
-            WarehouseJournal = 888
+            WarehouseJournal = 888,
+
+            ProductionJournal001 = 1001,
+            ProductionJournal002 = 1002,
+            ProductionJournal003 = 1003,
+            ProductionJournal004 = 1004,
+            ProductionJournal005 = 1005
         }
 
         public enum ForecastFilterID

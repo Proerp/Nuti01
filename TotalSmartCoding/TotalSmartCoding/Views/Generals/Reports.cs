@@ -170,6 +170,7 @@ namespace TotalSmartCoding.Views.Generals
             BatchMasterAPIs batchMasterAPIs = new BatchMasterAPIs(CommonNinject.Kernel.Get<IBatchMasterAPIRepository>());
             this.batchMasterTrees = batchMasterAPIs.GetBatchMasterTrees();
             this.treeBatchMasterID.DataSource = new BindingSource(this.batchMasterTrees, "");
+            this.treeBatchMasterID.Sort(this.olvBatchMasterCode, SortOrder.Descending);
 
             BatchTypeAPIs batchTypeAPIs = new BatchTypeAPIs(CommonNinject.Kernel.Get<IBatchTypeAPIRepository>());
             this.batchTypeTrees = batchTypeAPIs.GetBatchTypeTrees();
@@ -369,6 +370,8 @@ namespace TotalSmartCoding.Views.Generals
             PrintViewModel printViewModel = base.InitPrintViewModel();
             printViewModel.ReportPath = this.reportViewModel.ReportURL;
 
+            printViewModel.ShowPromptAreaButton = true;
+
             this.PassFilterParameters(printViewModel);
 
             return printViewModel;
@@ -421,12 +424,13 @@ namespace TotalSmartCoding.Views.Generals
                     if (this.comboSalesVersusPromotion.ComboBox.SelectedIndex != 0) headerTitle = headerTitle + " [" + this.comboSalesVersusPromotion.Text + "]";
                     printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("SalesVersusPromotion", (this.comboSalesVersusPromotion.ComboBox.SelectedIndex - 1).ToString()));
                 }
+            }
 
-                if (this.comboPalletVersusCartonAndPack.Visible)
-                {
-                    if (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex != 0) headerTitle = headerTitle + " [" + this.comboPalletVersusCartonAndPack.Text + "]";
-                    printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("PalletVersusCartonAndPack", (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex - 1).ToString()));
-                }
+            if (this.comboPalletVersusCartonAndPack.Visible)
+            {
+                if (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex != 0) headerTitle = headerTitle + " [" + this.comboPalletVersusCartonAndPack.Text + "]";
+                printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("WithCartons", (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex == 1 || this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex == 2).ToString()));
+                printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("WithPacks", (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex == 2).ToString()));
             }
 
             if (this.comboQuantityVersusVolume.Visible)
