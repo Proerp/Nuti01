@@ -133,17 +133,17 @@ namespace TotalBase
         public static int ConfigVersionID(int configID)
         {
             if (configID == (int)GlobalVariables.FillingLine.None)
-                return 19;
+                return 20;
             else if (configID == (int)GlobalVariables.FillingLine.Pickup)
-                return 19;
+                return 20;
             else if (configID == (int)GlobalVariables.FillingLine.GoodsIssue)
-                return 19;
+                return 20;
             else if (configID == (int)GlobalVariables.FillingLine.BatchMaster)
-                return 19;
+                return 20;
 
 
             else if (configID == (int)GlobalVariables.FillingLine.Smallpack || configID == (int)GlobalVariables.FillingLine.Pail || configID == (int)GlobalVariables.FillingLine.Drum)
-                return 19; //PAY ATTENTION WHEN CHANGE THIS VALUE BECAUSE: THIS IS USING ON THE FILLING LINES
+                return 20; //PAY ATTENTION WHEN CHANGE THIS VALUE BECAUSE: THIS IS USING ON THE FILLING LINES
             else
                 return -1;
         }
@@ -171,7 +171,8 @@ namespace TotalBase
 
 
         //public static string ReportServerUrl = "http://vnhpbcvmsql01/ReportServer_SQL01";
-        public static string ReportServerUrl = "http://dell-e7240t/ReportServer_SQL2016";
+        //public static string ReportServerUrl = "http://dell-e7240t/ReportServer_SQL2016";
+        public static string ReportServerUrl = "http://server3/ReportServer_SQLEXPRESS";
 
         public const int ServerLineID = 99;
 

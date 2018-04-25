@@ -521,7 +521,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 {
                     this.MainStatus = this.OnScanning ? "Đang đọc mã vạch ..." : "Sẳn sàng đọc mã vạch";
 
-                    if (!GlobalEnums.OnTestRepackWithoutScanner)
+                    if (!GlobalEnums.OnTestRepackWithoutScanner && !this.FillingData.ReprintCarton)
                     {
                         if (this.OnScanning && this.FillingData.HasPack)
                         {

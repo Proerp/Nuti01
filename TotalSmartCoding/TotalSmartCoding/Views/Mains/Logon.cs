@@ -111,7 +111,7 @@ namespace TotalSmartCoding.Views.Mains
                 this.baseRepository = CommonNinject.Kernel.Get<IBaseRepository>();
 
                 UserAPIs userAPIs = new UserAPIs(CommonNinject.Kernel.Get<IUserAPIRepository>());
-                IList<ActiveUser> activeUsers = userAPIs.GetActiveUsers(currentUserPrincipal.Sid.Value);
+                IList<ActiveUser> activeUsers = userAPIs.GetActiveUsers("S-1-5-21-705987929-4194781227-356911358-1001"); //currentUserPrincipal.Sid.Value
 
                 //throw new Exception(currentUserPrincipal.Sid.Value);
                 if (activeUsers.Count > 0)

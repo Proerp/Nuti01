@@ -414,7 +414,7 @@ namespace TotalDTO.Productions
         {
             get
             {
-                if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+                if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                     return (DateTime)this.printedBatchRepackDTO.EntryDate;
                 else
                     return this.EntryDate;
@@ -444,7 +444,7 @@ namespace TotalDTO.Productions
 
         public string FirstLineA2(bool isReadableText)
         {
-            if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+            if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
                 return this.printedBatchRepackDTO.FillingLineCode + this.FillingLineFactoryCode;
             else
                 return this.FillingLineCode + this.FillingLineFactoryCode;
@@ -467,8 +467,8 @@ namespace TotalDTO.Productions
         }
 
         public string ThirdLineA1(bool isReadableText)
-        {
-            if (this.printerName == GlobalVariables.PrinterName.PackInkjet && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+        {            
+            if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
             {
                 BatchRepackDTO batchRepackDTO = this.printedBatchRepackDTO;
                 return batchRepackDTO.BatchCode + batchRepackDTO.LotCode;

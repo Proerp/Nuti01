@@ -12,7 +12,10 @@ namespace TotalDTO.Productions
         { }
         public PalletPrimitiveDTO(FillingData fillingData)
             : base(fillingData)
-        { }
+        {
+            this.MinPackDate = new DateTime(2000, 1, 1);
+            this.MaxPackDate = new DateTime(2000, 1, 1);
+        }
 
 
         public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Pallet; } }
@@ -23,6 +26,9 @@ namespace TotalDTO.Productions
         public int PalletID { get; set; }
 
         public int CartonCounts { get; set; }
+
+        public DateTime MinPackDate { get; set; }
+        public DateTime MaxPackDate { get; set; }
     }
 
     public class PalletDTO : PalletPrimitiveDTO, IShallowClone<PalletDTO>

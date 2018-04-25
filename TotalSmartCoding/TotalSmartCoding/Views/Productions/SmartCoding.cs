@@ -385,7 +385,11 @@ namespace TotalSmartCoding.Views.Productions
                     palletThread.Start();
                     scannerThread.Start();
 
-                    if (!this.fillingData.ReprintCarton) this.InitializeRepack(true);
+                    if (!this.fillingData.ReprintCarton)
+                        this.InitializeRepack(true);
+                    else
+                        if (this.fillingData.BatchRepacks.Count > 0)
+                            this.fillingData.BatchRepacks[0].PrintedTimes = 0;
                 }
             }
             catch (Exception exception)
@@ -556,6 +560,23 @@ namespace TotalSmartCoding.Views.Productions
             {
                 this.setToolStripActive();
 
+                if (e.PropertyName == "RepackPrintedIndex")
+                {
+                    this.fillingData.BatchRepacks.RaiseListChangedEvents = false;
+
+                    int repackPrintedIndex = sender.Equals(this.packController) ? this.packController.RepackPrintedIndex : (sender.Equals(this.cartonController) ? this.cartonController.RepackPrintedIndex : 0);
+
+                    this.fillingData.BatchRepacks.Where(w => w.LineIndex <= repackPrintedIndex && w.PrintedTimes == 0).Each(batchRepackDTO =>
+                    {
+                        batchRepackDTO.PrintedTimes = 1;
+                    });
+
+                    this.fillingData.BatchRepacks.RaiseListChangedEvents = true;
+                    this.fillingData.BatchRepacks.ResetBindings();
+
+                    return;
+                }
+
                 if (sender.Equals(this.digitController))
                 {
                     if (e.PropertyName == "MainStatus") { this.digitStatusbox.Text = "[" + DateTime.Now.ToString("hh:mm:ss") + "] " + this.digitController.MainStatus + "\r\n" + this.digitStatusbox.Text; this.cutStatusBox(false); return; }
@@ -569,22 +590,6 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "LedStatus") { this.packLEDGreen.Enabled = this.packController.LedGreenOn; this.packLEDAmber.Enabled = this.packController.LedAmberOn; this.packLEDRed.Enabled = this.packController.LedRedOn; if (this.packController.LedRedOn) this.StopPrint(true, true, false, false); return; }
 
                     if (e.PropertyName == "NextPackNo") { this.fillingData.NextPackNo = this.packController.NextPackNo; return; }
-
-
-                    if (e.PropertyName == "RepackPrintedIndex")
-                    {
-                        this.fillingData.BatchRepacks.RaiseListChangedEvents = false;
-
-                        this.fillingData.BatchRepacks.Where(w => w.LineIndex <= this.packController.RepackPrintedIndex && w.PrintedTimes == 0).Each(batchRepackDTO =>
-                        {
-                            batchRepackDTO.PrintedTimes = 1;
-                        });
-
-                        this.fillingData.BatchRepacks.RaiseListChangedEvents = true;
-                        this.fillingData.BatchRepacks.ResetBindings();
-
-                        return;
-                    }
                 }
                 else if (sender.Equals(this.cartonController))
                 {
