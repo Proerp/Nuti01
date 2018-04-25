@@ -88,7 +88,7 @@ namespace TotalSmartCoding.Views.Mains
                 switch (this.nmvnTaskID)
                 {
                     case GlobalEnums.NmvnTaskID.SmartCoding:
-                        this.buttonEscape.Visible = false;
+                        
                         this.buttonLoading.Visible = false;
                         this.buttonNew.Visible = false;
                         this.buttonEdit.Visible = false;
@@ -103,9 +103,7 @@ namespace TotalSmartCoding.Views.Mains
                         this.toolStripSeparatorVoid.Visible = false;
                         this.buttonPrint.Visible = false;
                         this.buttonPrintPreview.Visible = false;
-                        this.toolStripSeparatorPrint.Visible = false;
-                        this.separatorInputData.Visible = false;
-                        this.labelSearchBarcode.Visible = false;
+                        this.toolStripSeparatorPrint.Visible = false;                                                
                         this.toolStripTopHead.Visible = false;
                         break;
                     case GlobalEnums.NmvnTaskID.Batch:
@@ -169,8 +167,7 @@ namespace TotalSmartCoding.Views.Mains
                 this.comboSearchBarcode.Text = this.searchPlaceHolder;
                 this.toolUserReferences.Visible = ContextAttributes.User.IsDatabaseAdmin;
                 this.statusUserDescription.Text = ContextAttributes.User.FullyQualifiedUserName;
-
-                this.panelTopRight.Width = (this.nmvnTaskID == GlobalEnums.NmvnTaskID.SmartCoding ? 10 : this.labelSearchBarcode.Width) + this.comboSearchBarcode.Width + this.buttonSearchBarcode.Width;
+                
                 this.panelTop.Height = this.nmvnTaskID == GlobalEnums.NmvnTaskID.SmartCoding ? 61 : 39;
             }
             catch (Exception exception)
@@ -449,6 +446,20 @@ namespace TotalSmartCoding.Views.Mains
                     toolstripChild_PropertyChanged(toolstripChild, new PropertyChangedEventArgs("IsDirty"));
                 }
 
+                else
+                {
+                    this.buttonEscape.Visible = false;
+                    this.separatorInputData.Visible = false;
+
+                    this.toolStripSeparatorPrint.Visible = false;
+                    this.buttonPrint.Visible = false;
+                    this.buttonPrintPreview.Visible = false;
+                }
+
+                this.buttonEscape.Visible = toolstripChild != null;
+                this.labelSearchBarcode.Visible = toolstripChild != null;
+                this.panelTopRight.Width = (toolstripChild != null ? this.labelSearchBarcode.Width + 20 : 10) + this.comboSearchBarcode.Width + this.buttonSearchBarcode.Width + this.buttonReports.Width;
+
                 if (ActiveMdiChild != null)
                     ActiveMdiChild.WindowState = FormWindowState.Maximized;
             }
@@ -490,8 +501,7 @@ namespace TotalSmartCoding.Views.Mains
 
                     this.buttonEscape.Enabled = closable;
                     this.buttonLoading.Enabled = loadable && readonlyMode;
-
-                    this.separatorInputData.Visible = toolstripChild.AllowDataInput;
+                    
                     this.buttonNew.Visible = toolstripChild.AllowDataInput;
                     this.buttonEdit.Visible = toolstripChild.AllowDataInput;
                     this.buttonSave.Visible = toolstripChild.AllowDataInput;
@@ -526,7 +536,7 @@ namespace TotalSmartCoding.Views.Mains
                     this.buttonPrint.Visible = printVisible;
                     this.buttonPrintPreview.Enabled = printable;
                     this.buttonPrintPreview.Visible = printVisible;
-                    this.toolStripSeparatorPrint.Visible = printVisible;
+                    this.toolStripSeparatorPrint.Visible = printVisible && toolstripChild.AllowDataInput;
                 }
             }
             catch (Exception exception)

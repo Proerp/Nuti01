@@ -34,18 +34,21 @@
             this.imageListModuleMasterLarge = new System.Windows.Forms.ImageList(this.components);
             this.imageListTaskMaster = new System.Windows.Forms.ImageList(this.components);
             this.naviBarModuleMaster = new Guifreaks.Navisuite.NaviBar(this.components);
+            this.listViewTaskMaster = new System.Windows.Forms.ListView();
+            this.buttonNaviBarHeader = new System.Windows.Forms.Button();
             this.InvisibleMainMenuStripOfMDI = new System.Windows.Forms.MenuStrip();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
             this.statusVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
             this.statusUserDescription = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.panelTopLeft = new System.Windows.Forms.Panel();
-            this.panelTopRight = new System.Windows.Forms.Panel();
-            this.listViewTaskMaster = new System.Windows.Forms.ListView();
-            this.buttonNaviBarHeader = new System.Windows.Forms.Button();
             this.toolstripMain = new System.Windows.Forms.ToolStrip();
             this.buttonEscape = new System.Windows.Forms.ToolStripButton();
             this.separatorInputData = new System.Windows.Forms.ToolStripSeparator();
@@ -63,6 +66,7 @@
             this.buttonApprove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparatorVoid = new System.Windows.Forms.ToolStripSeparator();
             this.buttonVoid = new System.Windows.Forms.ToolStripButton();
+            this.panelTopRight = new System.Windows.Forms.Panel();
             this.toolStripTopRight = new System.Windows.Forms.ToolStrip();
             this.buttonSearchBarcode = new System.Windows.Forms.ToolStripButton();
             this.comboSearchBarcode = new System.Windows.Forms.ToolStripComboBox();
@@ -77,20 +81,16 @@
             this.textFillterUpperDate = new System.Windows.Forms.ToolStripTextBox();
             this.buttonLoading = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.buttonReports = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.comboFilterTexts = new System.Windows.Forms.ToolStripComboBox();
             this.buttonClearFilters = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.toolStripSplitButton3 = new System.Windows.Forms.ToolStripSplitButton();
-            this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
-            this.toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
+            this.buttonReports = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.naviBarModuleMaster.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelTopLeft.SuspendLayout();
-            this.panelTopRight.SuspendLayout();
             this.toolstripMain.SuspendLayout();
+            this.panelTopRight.SuspendLayout();
             this.toolStripTopRight.SuspendLayout();
             this.toolStripTopHead.SuspendLayout();
             this.SuspendLayout();
@@ -198,6 +198,40 @@
             this.naviBarModuleMaster.ActiveBandChanged += new System.EventHandler(this.naviBarModuleMaster_ActiveBandChanged);
             this.naviBarModuleMaster.CollapsedChanged += new System.EventHandler(this.naviBarModuleMaster_CollapsedChanged);
             // 
+            // listViewTaskMaster
+            // 
+            this.listViewTaskMaster.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Blue2010Large;
+            this.listViewTaskMaster.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewTaskMaster.FullRowSelect = true;
+            this.listViewTaskMaster.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewTaskMaster.LargeImageList = this.imageListTaskMaster;
+            this.listViewTaskMaster.Location = new System.Drawing.Point(0, 42);
+            this.listViewTaskMaster.Margin = new System.Windows.Forms.Padding(4);
+            this.listViewTaskMaster.Name = "listViewTaskMaster";
+            this.listViewTaskMaster.Size = new System.Drawing.Size(287, 720);
+            this.listViewTaskMaster.SmallImageList = this.imageListTaskMaster;
+            this.listViewTaskMaster.TabIndex = 24;
+            this.listViewTaskMaster.UseCompatibleStateImageBehavior = false;
+            this.listViewTaskMaster.View = System.Windows.Forms.View.Details;
+            this.listViewTaskMaster.Visible = false;
+            this.listViewTaskMaster.SelectedIndexChanged += new System.EventHandler(this.listViewTaskMaster_SelectedIndexChanged);
+            // 
+            // buttonNaviBarHeader
+            // 
+            this.buttonNaviBarHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNaviBarHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.buttonNaviBarHeader.Image = global::TotalSmartCoding.Properties.Resources.ButtonImageIcon;
+            this.buttonNaviBarHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonNaviBarHeader.Location = new System.Drawing.Point(0, 2);
+            this.buttonNaviBarHeader.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonNaviBarHeader.Name = "buttonNaviBarHeader";
+            this.buttonNaviBarHeader.Size = new System.Drawing.Size(287, 34);
+            this.buttonNaviBarHeader.TabIndex = 20;
+            this.buttonNaviBarHeader.Text = "Home Navigation Panel";
+            this.buttonNaviBarHeader.UseVisualStyleBackColor = true;
+            this.buttonNaviBarHeader.Click += new System.EventHandler(this.buttonNaviBarHeader_Click);
+            // 
             // InvisibleMainMenuStripOfMDI
             // 
             this.InvisibleMainMenuStripOfMDI.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -236,11 +270,29 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(212, 21);
             this.toolStripStatusLabel.Text = "Designed by Le Minh Hiep       ";
             // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(19, 24);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(407, 21);
             this.toolStripStatusLabel1.Text = " Cell phone: +84-0903-880-501     +84-0919-878-329            ";
+            // 
+            // toolStripSplitButton3
+            // 
+            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
+            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
+            this.toolStripSplitButton3.Size = new System.Drawing.Size(19, 24);
+            this.toolStripSplitButton3.Text = "toolStripSplitButton3";
             // 
             // statusVersion
             // 
@@ -250,6 +302,15 @@
             this.statusVersion.Text = "Version 1.91i Date: 19.Feb.2016 ";
             this.statusVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // toolStripSplitButton2
+            // 
+            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
+            this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton2.Name = "toolStripSplitButton2";
+            this.toolStripSplitButton2.Size = new System.Drawing.Size(19, 24);
+            this.toolStripSplitButton2.Text = "toolStripSplitButton2";
+            // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.AutoSize = false;
@@ -257,6 +318,15 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(360, 21);
             this.toolStripStatusLabel2.Text = "Email: hieple.erp@gmail.com;    hieperp@gmail.com;  ";
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSplitButton4
+            // 
+            this.toolStripSplitButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton4.Image")));
+            this.toolStripSplitButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton4.Name = "toolStripSplitButton4";
+            this.toolStripSplitButton4.Size = new System.Drawing.Size(19, 24);
+            this.toolStripSplitButton4.Text = "toolStripSplitButton4";
             // 
             // statusUserDescription
             // 
@@ -282,51 +352,8 @@
             this.panelTopLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTopLeft.Location = new System.Drawing.Point(0, 0);
             this.panelTopLeft.Name = "panelTopLeft";
-            this.panelTopLeft.Size = new System.Drawing.Size(1359, 55);
+            this.panelTopLeft.Size = new System.Drawing.Size(1306, 55);
             this.panelTopLeft.TabIndex = 1;
-            // 
-            // panelTopRight
-            // 
-            this.panelTopRight.Controls.Add(this.toolStripTopRight);
-            this.panelTopRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelTopRight.Location = new System.Drawing.Point(1359, 0);
-            this.panelTopRight.Name = "panelTopRight";
-            this.panelTopRight.Size = new System.Drawing.Size(547, 55);
-            this.panelTopRight.TabIndex = 0;
-            // 
-            // listViewTaskMaster
-            // 
-            this.listViewTaskMaster.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Blue2010Large;
-            this.listViewTaskMaster.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listViewTaskMaster.FullRowSelect = true;
-            this.listViewTaskMaster.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.listViewTaskMaster.LargeImageList = this.imageListTaskMaster;
-            this.listViewTaskMaster.Location = new System.Drawing.Point(0, 42);
-            this.listViewTaskMaster.Margin = new System.Windows.Forms.Padding(4);
-            this.listViewTaskMaster.Name = "listViewTaskMaster";
-            this.listViewTaskMaster.Size = new System.Drawing.Size(287, 720);
-            this.listViewTaskMaster.SmallImageList = this.imageListTaskMaster;
-            this.listViewTaskMaster.TabIndex = 24;
-            this.listViewTaskMaster.UseCompatibleStateImageBehavior = false;
-            this.listViewTaskMaster.View = System.Windows.Forms.View.Details;
-            this.listViewTaskMaster.Visible = false;
-            this.listViewTaskMaster.SelectedIndexChanged += new System.EventHandler(this.listViewTaskMaster_SelectedIndexChanged);
-            // 
-            // buttonNaviBarHeader
-            // 
-            this.buttonNaviBarHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonNaviBarHeader.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.buttonNaviBarHeader.Image = global::TotalSmartCoding.Properties.Resources.ButtonImageIcon;
-            this.buttonNaviBarHeader.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonNaviBarHeader.Location = new System.Drawing.Point(0, 2);
-            this.buttonNaviBarHeader.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonNaviBarHeader.Name = "buttonNaviBarHeader";
-            this.buttonNaviBarHeader.Size = new System.Drawing.Size(287, 34);
-            this.buttonNaviBarHeader.TabIndex = 20;
-            this.buttonNaviBarHeader.Text = "Home Navigation Panel";
-            this.buttonNaviBarHeader.UseVisualStyleBackColor = true;
-            this.buttonNaviBarHeader.Click += new System.EventHandler(this.buttonNaviBarHeader_Click);
             // 
             // toolstripMain
             // 
@@ -354,7 +381,7 @@
             this.toolstripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolstripMain.Location = new System.Drawing.Point(0, 0);
             this.toolstripMain.Name = "toolstripMain";
-            this.toolstripMain.Size = new System.Drawing.Size(1359, 55);
+            this.toolstripMain.Size = new System.Drawing.Size(1306, 55);
             this.toolstripMain.TabIndex = 10;
             this.toolstripMain.Text = "ToolStrip";
             // 
@@ -518,6 +545,15 @@
             this.buttonVoid.Text = "Void";
             this.buttonVoid.Click += new System.EventHandler(this.buttonVoid_Click);
             // 
+            // panelTopRight
+            // 
+            this.panelTopRight.Controls.Add(this.toolStripTopRight);
+            this.panelTopRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelTopRight.Location = new System.Drawing.Point(1306, 0);
+            this.panelTopRight.Name = "panelTopRight";
+            this.panelTopRight.Size = new System.Drawing.Size(600, 55);
+            this.panelTopRight.TabIndex = 0;
+            // 
             // toolStripTopRight
             // 
             this.toolStripTopRight.BackgroundImage = global::TotalSmartCoding.Properties.Resources.Toolbar_Image;
@@ -525,13 +561,15 @@
             this.toolStripTopRight.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStripTopRight.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripTopRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonReports,
+            this.toolStripSeparator2,
             this.buttonSearchBarcode,
             this.comboSearchBarcode,
             this.labelSearchBarcode});
             this.toolStripTopRight.Location = new System.Drawing.Point(0, 0);
             this.toolStripTopRight.Name = "toolStripTopRight";
             this.toolStripTopRight.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStripTopRight.Size = new System.Drawing.Size(547, 55);
+            this.toolStripTopRight.Size = new System.Drawing.Size(600, 55);
             this.toolStripTopRight.TabIndex = 1;
             this.toolStripTopRight.Text = "toolStrip2";
             // 
@@ -580,8 +618,6 @@
             this.textFillterUpperDate,
             this.buttonLoading,
             this.toolStripSeparator13,
-            this.buttonReports,
-            this.toolStripSeparator1,
             this.comboFilterTexts,
             this.buttonClearFilters});
             this.toolStripTopHead.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
@@ -671,22 +707,6 @@
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             this.toolStripSeparator13.Size = new System.Drawing.Size(6, 55);
             // 
-            // buttonReports
-            // 
-            this.buttonReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonReports.Image = global::TotalSmartCoding.Properties.Resources.ReportAnalytics;
-            this.buttonReports.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonReports.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonReports.Name = "buttonReports";
-            this.buttonReports.Size = new System.Drawing.Size(36, 52);
-            this.buttonReports.Text = "Reports";
-            this.buttonReports.Click += new System.EventHandler(this.buttonReports_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
-            // 
             // comboFilterTexts
             // 
             this.comboFilterTexts.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
@@ -709,41 +729,21 @@
             this.buttonClearFilters.ToolTipText = "Clear current filters";
             this.buttonClearFilters.Click += new System.EventHandler(this.buttonClearFilters_Click);
             // 
-            // toolStripSplitButton1
+            // buttonReports
             // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(19, 4);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            this.buttonReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonReports.Image = global::TotalSmartCoding.Properties.Resources.ReportAnalytics;
+            this.buttonReports.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonReports.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonReports.Name = "buttonReports";
+            this.buttonReports.Size = new System.Drawing.Size(36, 52);
+            this.buttonReports.Text = "Reports";
+            this.buttonReports.Click += new System.EventHandler(this.buttonReports_Click);
             // 
-            // toolStripSplitButton3
+            // toolStripSeparator2
             // 
-            this.toolStripSplitButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton3.Image")));
-            this.toolStripSplitButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton3.Name = "toolStripSplitButton3";
-            this.toolStripSplitButton3.Size = new System.Drawing.Size(19, 4);
-            this.toolStripSplitButton3.Text = "toolStripSplitButton3";
-            // 
-            // toolStripSplitButton2
-            // 
-            this.toolStripSplitButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton2.Image")));
-            this.toolStripSplitButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton2.Name = "toolStripSplitButton2";
-            this.toolStripSplitButton2.Size = new System.Drawing.Size(19, 4);
-            this.toolStripSplitButton2.Text = "toolStripSplitButton2";
-            // 
-            // toolStripSplitButton4
-            // 
-            this.toolStripSplitButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton4.Image")));
-            this.toolStripSplitButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton4.Name = "toolStripSplitButton4";
-            this.toolStripSplitButton4.Size = new System.Drawing.Size(19, 4);
-            this.toolStripSplitButton4.Text = "toolStripSplitButton4";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
             // 
             // MasterMDI
             // 
@@ -769,10 +769,10 @@
             this.panelTop.ResumeLayout(false);
             this.panelTopLeft.ResumeLayout(false);
             this.panelTopLeft.PerformLayout();
-            this.panelTopRight.ResumeLayout(false);
-            this.panelTopRight.PerformLayout();
             this.toolstripMain.ResumeLayout(false);
             this.toolstripMain.PerformLayout();
+            this.panelTopRight.ResumeLayout(false);
+            this.panelTopRight.PerformLayout();
             this.toolStripTopRight.ResumeLayout(false);
             this.toolStripTopRight.PerformLayout();
             this.toolStripTopHead.ResumeLayout(false);
@@ -838,7 +838,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorVoid;
         private System.Windows.Forms.ToolStripButton buttonVoid;
         private System.Windows.Forms.ToolStripButton buttonReports;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }
