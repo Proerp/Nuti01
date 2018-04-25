@@ -62,8 +62,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "           ELSE " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
-            queryString = queryString + "                   UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) " + "\r\n";
-            queryString = queryString + "                   UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) " + "\r\n";
+            queryString = queryString + "                   UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) WHERE PalletID = @EntityID " + "\r\n";
+            queryString = queryString + "                   UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) WHERE PalletID = @EntityID " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
 
             queryString = queryString + "       END " + "\r\n";

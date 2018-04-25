@@ -124,8 +124,8 @@ namespace TotalSmartCoding.Views.Mains
                             this.MinimizeBox = false; this.MaximizeBox = false; this.WindowState = FormWindowState.Normal;
                         }
 
-                        this.panelTopRight.Visible = false;
-                        this.panelTopLeft.Dock = DockStyle.Fill;
+                        //this.panelTopRight.Visible = false;
+                        //this.panelTopLeft.Dock = DockStyle.Fill;
                         break;
                     case GlobalEnums.NmvnTaskID.Commodity:
                         this.Size = new Size(1388, 740);

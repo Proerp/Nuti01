@@ -248,8 +248,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      " + GlobalEnums.RootNode + " AS NodeID, 0 AS ParentNodeID, NULL AS PrimaryID, NULL AS AncestorID, '[All]' AS Code, NULL AS Name, NULL AS ParameterName, CAST(1 AS bit) AS Selected " + "\r\n";
             queryString = queryString + "       UNION ALL " + "\r\n";
-            queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " + BatchMasterID AS NodeID, " + GlobalEnums.RootNode + " + 0 AS ParentNodeID, BatchMasterID AS PrimaryID, NULL AS AncestorID, BatchMasters.Code, LEFT(CONVERT(VARCHAR, BatchMasters.EntryDate, 103), 10) + '    [' + Commodities.Code + ']    ' + Commodities.Name AS Name, 'BatchMasterID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+
+            queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " - DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) AS NodeID, " + GlobalEnums.RootNode + " AS ParentNodeID, NULL AS PrimaryID, NULL AS AncestorID, LEFT(CONVERT(VARCHAR, MIN(EntryDate), 103), 10) AS Code, NULL AS Name, '' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
+            queryString = queryString + "       FROM        BatchMasters GROUP BY DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) " + "\r\n";
+            queryString = queryString + "       UNION ALL " + "\r\n";
+            queryString = queryString + "       SELECT      BatchMasterID AS NodeID, " + GlobalEnums.AncestorNode + " - DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) AS ParentNodeID, BatchMasters.BatchMasterID AS PrimaryID, NULL AS AncestorID, BatchMasters.Code, '[' + Commodities.Code + ']    ' + Commodities.Name AS Name, 'BatchMasterID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
             queryString = queryString + "       FROM        BatchMasters INNER JOIN Commodities ON BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            queryString = queryString + "       ORDER BY    NodeID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
