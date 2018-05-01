@@ -384,7 +384,7 @@ namespace TotalSmartCoding.Views.Generals
             {
                 if (this.dateTimexFromDate.Visible) printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("FromDate", this.dateTimexFromDate.Text));
                 if (this.dateTimexToDate.Visible) printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("ToDate", this.dateTimexToDate.Text));
-                headerTerms = headerTerms + " " + (this.dateTimexFromDate.Visible ? this.labelFromDate.Text + " " + this.dateTimexFromDate.Text : "") + (this.dateTimexToDate.Visible ? this.labelToDate.Text + " " + this.dateTimexToDate.Text : "");
+                headerTerms = headerTerms + " " + (this.dateTimexFromDate.Visible ? this.labelFromDate.Text + " " + this.dateTimexFromDate.Text : "") + " " + (this.dateTimexToDate.Visible ? this.labelToDate.Text + " " + this.dateTimexToDate.Text : "");
             }
 
 
@@ -424,7 +424,7 @@ namespace TotalSmartCoding.Views.Generals
                 }
             }
 
-            if (this.comboPalletVersusCartonAndPack.Visible)
+            if (this.comboPalletVersusCartonAndPack.Visible && (!this.comboSummaryVersusDetail.Visible || this.comboSummaryVersusDetail.ComboBox.SelectedIndex == 1))
             {
                 if (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex != 0) headerTitle = headerTitle + " [" + this.comboPalletVersusCartonAndPack.Text + "]";
                 printViewModel.ReportParameters.Add(new Microsoft.Reporting.WinForms.ReportParameter("WithCartons", (this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex == 1 || this.comboPalletVersusCartonAndPack.ComboBox.SelectedIndex == 2).ToString()));

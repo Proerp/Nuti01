@@ -159,7 +159,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.fastBatchMasterIndex.ShowGroups = true;
 
-            this.buttonNewLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; this.separatorNewLOT.Visible = this.buttonNewLOT.Visible;
+            this.buttonNewLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail;
             this.buttonRemoveLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; this.separatorRemoveLOT.Visible = this.buttonRemoveLOT.Visible;
         }
 

@@ -171,8 +171,8 @@ namespace TotalBase
 
 
         //public static string ReportServerUrl = "http://vnhpbcvmsql01/ReportServer_SQL01";
-        //public static string ReportServerUrl = "http://dell-e7240t/ReportServer_SQL2016";
-        public static string ReportServerUrl = "http://server3/ReportServer_SQLEXPRESS";
+        public static string ReportServerUrl = "http://dell-e7240t/ReportServer_SQL2016";
+        //public static string ReportServerUrl = "http://server3/ReportServer_SQLEXPRESS";
 
         public const int ServerLineID = 99;
 

@@ -316,10 +316,12 @@ namespace TotalDAL.Repositories
         {
             this.ExecuteStoreCommand("DELETE FROM Reports", new ObjectParameter[] { });
 
-            string optionBoxIDs = GlobalEnums.OBx(GlobalEnums.OptionBoxID.PalletVersusCartonAndPack);
+            string optionBoxIDs = "";
             string reportTabPageIDs = ((int)GlobalEnums.ReportTabPageID.TabPageBatchMasters).ToString() + "," + ((int)GlobalEnums.ReportTabPageID.TabPageBatchTypes).ToString();
 
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal001 + ", " + (int)GlobalEnums.ReportID.ProductionJournal001 + ", 1, N'1.BÁO CÁO THEO BATCH', N'Báo cáo thành phẩm theo batch', N'ProductionJournal001', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 10, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
+
+            optionBoxIDs = GlobalEnums.OBx(GlobalEnums.OptionBoxID.PalletVersusCartonAndPack);
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal002 + ", " + (int)GlobalEnums.ReportID.ProductionJournal002 + ", 1, N'1.BÁO CÁO THEO BATCH', N'Báo cáo thành phẩm chi tiết', N'ProductionJournal003', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 20, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal003 + ", " + (int)GlobalEnums.ReportID.ProductionJournal003 + ", 1, N'1.BÁO CÁO THEO BATCH', N'Báo cáo thành phẩm tổng hợp', N'ProductionJournal002', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + GlobalEnums.OBx(GlobalEnums.OptionBoxID.SummaryVersusDetail) + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 30, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
 

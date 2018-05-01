@@ -48,7 +48,6 @@
             this.textexRemarks = new CustomControls.TextexBox();
             this.label3 = new System.Windows.Forms.Label();
             this.toolStripChildForm = new System.Windows.Forms.ToolStrip();
-            this.separatorNewLOT = new System.Windows.Forms.ToolStripSeparator();
             this.buttonNewLOT = new System.Windows.Forms.ToolStripButton();
             this.separatorRemoveLOT = new System.Windows.Forms.ToolStripSeparator();
             this.buttonRemoveLOT = new System.Windows.Forms.ToolStripButton();
@@ -339,7 +338,6 @@
             this.toolStripChildForm.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.toolStripChildForm.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripChildForm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.separatorNewLOT,
             this.buttonNewLOT,
             this.separatorRemoveLOT,
             this.buttonRemoveLOT,
@@ -356,11 +354,6 @@
             this.toolStripChildForm.Text = "toolStrip1";
             this.toolStripChildForm.Visible = false;
             // 
-            // separatorNewLOT
-            // 
-            this.separatorNewLOT.Name = "separatorNewLOT";
-            this.separatorNewLOT.Size = new System.Drawing.Size(6, 55);
-            // 
             // buttonNewLOT
             // 
             this.buttonNewLOT.Image = global::TotalSmartCoding.Properties.Resources.Add_continue;
@@ -369,6 +362,7 @@
             this.buttonNewLOT.Name = "buttonNewLOT";
             this.buttonNewLOT.Size = new System.Drawing.Size(114, 52);
             this.buttonNewLOT.Text = "Add Lot";
+            this.buttonNewLOT.Visible = false;
             this.buttonNewLOT.Click += new System.EventHandler(this.buttonNewLOT_Click);
             // 
             // separatorRemoveLOT
@@ -702,7 +696,6 @@
         private System.Windows.Forms.ToolStripButton buttonNewLOT;
         private BrightIdeasSoftware.OLVColumn olvLotCode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator separatorNewLOT;
         private System.Windows.Forms.ToolStripSeparator separatorRemoveLOT;
         private System.Windows.Forms.ToolStripButton buttonRemoveLOT;
         private System.Windows.Forms.ToolStripComboBox comboShowCummulativePacks;

@@ -33,6 +33,7 @@ namespace TotalSmartCoding.Views.Mains
 
                 System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("Administrator", "Nuti123@#", "SERVER3");
                 ////////WINDOWS AUTHENTICATION!!! System.Net.ICredentials credentials = System.Net.CredentialCache.DefaultCredentials;// Get a reference to the default credentials  
+                
                 ReportServerCredentials rsCredentials = serverReport.ReportServerCredentials;// Get a reference to the report server credentials  
                 rsCredentials.NetworkCredentials = credentials; // Set the credentials for the server report  
 

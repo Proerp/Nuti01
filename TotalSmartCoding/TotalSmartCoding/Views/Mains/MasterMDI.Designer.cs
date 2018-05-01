@@ -68,6 +68,8 @@
             this.buttonVoid = new System.Windows.Forms.ToolStripButton();
             this.panelTopRight = new System.Windows.Forms.Panel();
             this.toolStripTopRight = new System.Windows.Forms.ToolStrip();
+            this.buttonReports = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonSearchBarcode = new System.Windows.Forms.ToolStripButton();
             this.comboSearchBarcode = new System.Windows.Forms.ToolStripComboBox();
             this.labelSearchBarcode = new System.Windows.Forms.ToolStripLabel();
@@ -83,8 +85,6 @@
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.comboFilterTexts = new System.Windows.Forms.ToolStripComboBox();
             this.buttonClearFilters = new System.Windows.Forms.ToolStripButton();
-            this.buttonReports = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.naviBarModuleMaster.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -352,7 +352,7 @@
             this.panelTopLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTopLeft.Location = new System.Drawing.Point(0, 0);
             this.panelTopLeft.Name = "panelTopLeft";
-            this.panelTopLeft.Size = new System.Drawing.Size(1306, 55);
+            this.panelTopLeft.Size = new System.Drawing.Size(1298, 55);
             this.panelTopLeft.TabIndex = 1;
             // 
             // toolstripMain
@@ -381,7 +381,7 @@
             this.toolstripMain.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolstripMain.Location = new System.Drawing.Point(0, 0);
             this.toolstripMain.Name = "toolstripMain";
-            this.toolstripMain.Size = new System.Drawing.Size(1306, 55);
+            this.toolstripMain.Size = new System.Drawing.Size(1298, 55);
             this.toolstripMain.TabIndex = 10;
             this.toolstripMain.Text = "ToolStrip";
             // 
@@ -549,9 +549,9 @@
             // 
             this.panelTopRight.Controls.Add(this.toolStripTopRight);
             this.panelTopRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelTopRight.Location = new System.Drawing.Point(1306, 0);
+            this.panelTopRight.Location = new System.Drawing.Point(1298, 0);
             this.panelTopRight.Name = "panelTopRight";
-            this.panelTopRight.Size = new System.Drawing.Size(600, 55);
+            this.panelTopRight.Size = new System.Drawing.Size(608, 55);
             this.panelTopRight.TabIndex = 0;
             // 
             // toolStripTopRight
@@ -569,9 +569,25 @@
             this.toolStripTopRight.Location = new System.Drawing.Point(0, 0);
             this.toolStripTopRight.Name = "toolStripTopRight";
             this.toolStripTopRight.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStripTopRight.Size = new System.Drawing.Size(600, 55);
+            this.toolStripTopRight.Size = new System.Drawing.Size(608, 55);
             this.toolStripTopRight.TabIndex = 1;
             this.toolStripTopRight.Text = "toolStrip2";
+            // 
+            // buttonReports
+            // 
+            this.buttonReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonReports.Image = global::TotalSmartCoding.Properties.Resources.ReportAnalytics;
+            this.buttonReports.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonReports.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonReports.Name = "buttonReports";
+            this.buttonReports.Size = new System.Drawing.Size(36, 52);
+            this.buttonReports.Text = "Reports";
+            this.buttonReports.Click += new System.EventHandler(this.buttonReports_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
             // 
             // buttonSearchBarcode
             // 
@@ -728,22 +744,6 @@
             this.buttonClearFilters.Size = new System.Drawing.Size(52, 52);
             this.buttonClearFilters.ToolTipText = "Clear current filters";
             this.buttonClearFilters.Click += new System.EventHandler(this.buttonClearFilters_Click);
-            // 
-            // buttonReports
-            // 
-            this.buttonReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.buttonReports.Image = global::TotalSmartCoding.Properties.Resources.ReportAnalytics;
-            this.buttonReports.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.buttonReports.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.buttonReports.Name = "buttonReports";
-            this.buttonReports.Size = new System.Drawing.Size(36, 52);
-            this.buttonReports.Text = "Reports";
-            this.buttonReports.Click += new System.EventHandler(this.buttonReports_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 55);
             // 
             // MasterMDI
             // 

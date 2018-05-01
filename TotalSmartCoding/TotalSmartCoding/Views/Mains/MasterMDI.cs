@@ -448,15 +448,14 @@ namespace TotalSmartCoding.Views.Mains
 
                 else
                 {
-                    this.buttonEscape.Visible = false;
-                    this.separatorInputData.Visible = false;
-
                     this.toolStripSeparatorPrint.Visible = false;
                     this.buttonPrint.Visible = false;
                     this.buttonPrintPreview.Visible = false;
                 }
 
                 this.buttonEscape.Visible = toolstripChild != null;
+                this.separatorInputData.Visible = toolstripChild != null;
+
                 this.labelSearchBarcode.Visible = toolstripChild != null;
                 this.panelTopRight.Width = (toolstripChild != null ? this.labelSearchBarcode.Width + 20 : 10) + this.comboSearchBarcode.Width + this.buttonSearchBarcode.Width + this.buttonReports.Width;
 
