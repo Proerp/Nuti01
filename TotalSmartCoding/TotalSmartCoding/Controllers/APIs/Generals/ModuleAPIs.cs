@@ -26,7 +26,7 @@ namespace TotalSmartCoding.Controllers.APIs.Generals
 
         public ICollection<ModuleIndex> GetModuleIndexes()
         {
-            return this.moduleAPIRepository.GetEntityIndexes<ModuleIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate).ToList();
+            return this.moduleAPIRepository.GetEntityIndexes<ModuleIndex>(ContextAttributes.User.UserID, GlobalEnums.GlobalOptionSetting.LowerFillterDate, GlobalEnums.GlobalOptionSetting.UpperFillterDate).ToList();
         }
 
         public IList<ModuleDetailIndex> GetModuleDetailIndexes()

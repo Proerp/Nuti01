@@ -29,7 +29,7 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
         {
             this.batchMasterAPIRepository.RepositoryBag["ShowCummulativePacks"] = showCummulativePacks ? 1 : 0;
             this.batchMasterAPIRepository.RepositoryBag["ActiveOption"] = (int)activeOption;
-            ICollection<BatchMasterIndex> goodsReceiptIndexes = this.batchMasterAPIRepository.GetEntityIndexes<BatchMasterIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
+            ICollection<BatchMasterIndex> goodsReceiptIndexes = this.batchMasterAPIRepository.GetEntityIndexes<BatchMasterIndex>(ContextAttributes.User.UserID, GlobalEnums.GlobalOptionSetting.LowerFillterDate, GlobalEnums.GlobalOptionSetting.UpperFillterDate);
 
             return goodsReceiptIndexes;
         }

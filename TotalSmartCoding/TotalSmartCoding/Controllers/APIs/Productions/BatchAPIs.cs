@@ -31,7 +31,7 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
             this.batchAPIRepository.RepositoryBag["ShowCummulativePacks"] = showCummulativePacks ? 1 : 0;
             this.batchAPIRepository.RepositoryBag["ActiveOption"] = (int)activeOption;
             this.batchAPIRepository.RepositoryBag["DefaultOnly"] = defaultOnly ? 1 : 0;
-            ICollection<BatchIndex> goodsReceiptIndexes = this.batchAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate);
+            ICollection<BatchIndex> goodsReceiptIndexes = this.batchAPIRepository.GetEntityIndexes<BatchIndex>(ContextAttributes.User.UserID, GlobalEnums.GlobalOptionSetting.LowerFillterDate, GlobalEnums.GlobalOptionSetting.UpperFillterDate);
 
             return goodsReceiptIndexes;
         }

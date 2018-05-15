@@ -26,7 +26,7 @@ namespace TotalSmartCoding.Controllers.APIs.Commons
 
         public ICollection<WarehouseIndex> GetWarehouseIndexes()
         {
-            return this.warehouseAPIRepository.GetEntityIndexes<WarehouseIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate).ToList();
+            return this.warehouseAPIRepository.GetEntityIndexes<WarehouseIndex>(ContextAttributes.User.UserID, GlobalEnums.GlobalOptionSetting.LowerFillterDate, GlobalEnums.GlobalOptionSetting.UpperFillterDate).ToList();
         }
 
         public IList<WarehouseBase> GetWarehouseBases()

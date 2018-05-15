@@ -26,7 +26,7 @@ namespace TotalSmartCoding.Controllers.APIs.Commons
 
         public ICollection<TransferOrderTypeIndex> GetTransferOrderTypeIndexes()
         {
-            return this.transferOrderTypeAPIRepository.GetEntityIndexes<TransferOrderTypeIndex>(ContextAttributes.User.UserID, ContextAttributes.FromDate, ContextAttributes.ToDate).ToList();
+            return this.transferOrderTypeAPIRepository.GetEntityIndexes<TransferOrderTypeIndex>(ContextAttributes.User.UserID, GlobalEnums.GlobalOptionSetting.LowerFillterDate, GlobalEnums.GlobalOptionSetting.UpperFillterDate).ToList();
         }
 
         public IList<TransferOrderTypeBase> GetTransferOrderTypeBases()
