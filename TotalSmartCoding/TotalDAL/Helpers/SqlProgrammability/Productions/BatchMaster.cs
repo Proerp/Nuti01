@@ -22,6 +22,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.BatchMasterApproved();
             this.BatchMasterEditable();
+
+            this.BatchMasterSaveRelative();
             this.BatchMasterPostSaveValidate();
 
             this.BatchMasterToggleApproved();
@@ -109,6 +111,21 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryArray[2] = " SELECT TOP 1 @FoundEntity = BatchMasterID FROM Batches WHERE BatchMasterID = @EntityID ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchMasterEditable", queryArray);
+        }
+
+        private void BatchMasterSaveRelative()
+        {
+            string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       BEGIN " + "\r\n";
+            queryString = queryString + "           DELETE FROM     UniquePacks     WHERE EntryDate < DATEADD(day, -15, GETDATE()) " + "\r\n";
+            queryString = queryString + "           DELETE FROM     UniqueCartons   WHERE EntryDate < DATEADD(day, -15, GETDATE()) " + "\r\n";
+            queryString = queryString + "           DELETE FROM     UniquePallets   WHERE EntryDate < DATEADD(day, -15, GETDATE()) " + "\r\n";
+            queryString = queryString + "       END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterSaveRelative", queryString);
         }
 
         private void BatchMasterPostSaveValidate()

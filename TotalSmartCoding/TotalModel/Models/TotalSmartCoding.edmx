@@ -2216,6 +2216,10 @@
         <Function Name="BatchMasterRemoveLot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LotID" Type="int" Mode="In" />
         </Function>
+        <Function Name="BatchMasterSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+        </Function>
         <Function Name="BatchMasterToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
@@ -2237,6 +2241,10 @@
         <Function Name="BatchRepackUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
           <Parameter Name="RepackID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BatchSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
         </Function>
         <Function Name="BatchToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -2554,6 +2562,7 @@
         </Function>
         <Function Name="GetPendingLots" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
+          <Parameter Name="FillingLineID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetPendingPallets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
@@ -4488,7 +4497,8 @@
           <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPendingLots" ReturnType="Collection(TotalSmartCodingModel.PendingLot)">
-          <Parameter Name="LocationID" Mode="In" Type="Int32" />
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+            <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Batches" EntityType="TotalSmartCodingModel.Batch" />
           <AssociationSet Name="FK_Batches_BatchMasters" Association="TotalSmartCodingModel.FK_Batches_BatchMasters">
@@ -4618,6 +4628,14 @@
           <FunctionImport Name="GetBatchMasterTrees" ReturnType="Collection(TotalSmartCodingModel.BatchMasterTree)" />
           <FunctionImport Name="GetBatchTypeTrees" ReturnType="Collection(TotalSmartCodingModel.BatchTypeTree)" />
           <FunctionImport Name="GetFillingLineTrees" ReturnType="Collection(TotalSmartCodingModel.FillingLineTree)" />
+          <FunctionImport Name="BatchMasterSaveRelative">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BatchSaveRelative">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -10834,6 +10852,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BatchMasterSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchMasterSaveRelative" />
+          <FunctionImportMapping FunctionImportName="BatchSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchSaveRelative" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

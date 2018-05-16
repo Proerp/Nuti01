@@ -17,7 +17,7 @@ namespace TotalCore.Repositories.Productions
 
     public interface IBatchAPIRepository : IGenericAPIRepository
     {
-        List<PendingLot> GetPendingLots(int? locationID);
+        List<PendingLot> GetPendingLots(int? locationID, int? fillingLineID);
         List<BatchRepack> GetBatchRepacks(int? batchID, bool notPrintedOnly);
 
         List<BatchAvailable> GetBatchAvailables(int? locationID, int? deliveryAdviceID, int? transferOrderID, int? commodityID, bool withNullRow);

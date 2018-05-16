@@ -24,6 +24,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.GetBatchRepacks();
 
             this.BatchEditable();
+            
+            this.BatchSaveRelative();
             this.BatchPostSaveValidate();
 
             this.BatchToggleApproved();
@@ -123,17 +125,19 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void GetPendingLots()
         {
-            string queryString = " @LocationID int " + "\r\n";
+            string queryString = " @LocationID int, @FillingLineID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          Lots.LotID, Lots.Code AS LotCode, BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, BatchMasters.PlannedQuantity, BatchStatuses.Code AS BatchStatusCode, BatchStatuses.Remarks, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, LastBatches.NextPackNo, LastBatches.NextCartonNo, LastBatches.NextPalletNo " + "\r\n";
+            queryString = queryString + "       SELECT          Lots.LotID, Lots.Code AS LotCode, BatchMasters.BatchMasterID, BatchMasters.EntryDate, BatchMasters.Code, BatchMasters.PlannedQuantity, BatchStatuses.Code AS BatchStatusCode, BatchStatuses.Remarks, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, LastLots.NextPackNo, LastLots.NextCartonNo, LastBatchMasters.NextPalletNo " + "\r\n";
             queryString = queryString + "       FROM            Lots " + "\r\n";
             queryString = queryString + "                       INNER JOIN BatchMasters ON Lots.LocationID = @LocationID AND BatchMasters.InActive = 0 AND Lots.BatchMasterID = BatchMasters.BatchMasterID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                       INNER JOIN BatchStatuses ON BatchMasters.BatchStatusID = BatchStatuses.BatchStatusID " + "\r\n";
 
-            queryString = queryString + "                       LEFT JOIN (SELECT Batches.LotID, MAX(Batches.NextPackNo) AS NextPackNo, MAX(Batches.NextCartonNo) AS NextCartonNo, MAX(Batches.NextPalletNo) AS NextPalletNo FROM Batches INNER JOIN BatchMasters ON Batches.BatchMasterID = BatchMasters.BatchMasterID WHERE BatchMasters.InActive = 0 GROUP BY Batches.LotID) LastBatches ON Lots.LotID = LastBatches.LotID " + "\r\n";
+            queryString = queryString + "                       LEFT JOIN (SELECT Batches.LotID, MAX(Batches.NextPackNo) AS NextPackNo, MAX(Batches.NextCartonNo) AS NextCartonNo FROM Batches INNER JOIN BatchMasters ON Batches.BatchMasterID = BatchMasters.BatchMasterID WHERE Batches.FillingLineID = @FillingLineID AND BatchMasters.InActive = 0 GROUP BY Batches.LotID) LastLots ON Lots.LotID = LastLots.LotID " + "\r\n";
+
+            queryString = queryString + "                       LEFT JOIN (SELECT BatchMasterID, MAX(NextPalletNo) AS NextPalletNo FROM Batches WHERE FillingLineID = @FillingLineID GROUP BY BatchMasterID) LastBatchMasters ON Lots.BatchMasterID = LastBatchMasters.BatchMasterID " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetPendingLots", queryString);
         }
@@ -198,6 +202,21 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryArray[3] = " SELECT TOP 1 @FoundEntity = BatchID FROM Packs WHERE BatchID = @EntityID ";
 
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchEditable", queryArray);
+        }
+
+        private void BatchSaveRelative()
+        {
+            string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       BEGIN " + "\r\n";
+            //queryString = queryString + "           UPDATE          Batches " + "\r\n";
+            //queryString = queryString + "           SET             IsDefault = 0 " + "\r\n";
+            //queryString = queryString + "           WHERE           FillingLineID = (SELECT FillingLineID FROM Batches WHERE BatchID = @EntityID) " + "\r\n";
+            queryString = queryString + "       END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchSaveRelative", queryString);
         }
 
         private void BatchPostSaveValidate()

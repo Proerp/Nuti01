@@ -73,9 +73,9 @@ namespace TotalDAL.Repositories.Productions
         }
 
 
-        public List<PendingLot> GetPendingLots(int? locationID)
+        public List<PendingLot> GetPendingLots(int? locationID, int? fillingLineID)
         {
-            return base.TotalSmartCodingEntities.GetPendingLots(locationID).ToList();
+            return base.TotalSmartCodingEntities.GetPendingLots(locationID, fillingLineID).ToList();
         }
 
         public List<BatchRepack> GetBatchRepacks(int? batchID, bool notPrintedOnly)

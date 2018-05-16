@@ -50,9 +50,9 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
             return goodsReceiptIndexes;
         }
 
-        public List<PendingLot> GetPendingLots(int? locationID)
+        public List<PendingLot> GetPendingLots(int? locationID, int? fillingLineID)
         {
-            return this.batchAPIRepository.GetPendingLots(locationID);
+            return this.batchAPIRepository.GetPendingLots(locationID, fillingLineID);
         }
 
         public List<BatchRepack> GetBatchRepacks(int? batchID, bool notPrintedOnly)

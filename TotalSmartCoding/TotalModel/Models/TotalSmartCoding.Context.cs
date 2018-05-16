@@ -2285,13 +2285,17 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterAddLot", batchMasterIDParameter);
         }
     
-        public virtual ObjectResult<PendingLot> GetPendingLots(Nullable<int> locationID)
+        public virtual ObjectResult<PendingLot> GetPendingLots(Nullable<int> locationID, Nullable<int> fillingLineID)
         {
             var locationIDParameter = locationID.HasValue ?
                 new ObjectParameter("LocationID", locationID) :
                 new ObjectParameter("LocationID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingLot>("GetPendingLots", locationIDParameter);
+            var fillingLineIDParameter = fillingLineID.HasValue ?
+                new ObjectParameter("FillingLineID", fillingLineID) :
+                new ObjectParameter("FillingLineID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PendingLot>("GetPendingLots", locationIDParameter, fillingLineIDParameter);
         }
     
         public virtual ObjectResult<ColumnMapping> GetColumnMappings(Nullable<int> mappingTaskID)
@@ -2616,6 +2620,32 @@ namespace TotalModel.Models
         public virtual ObjectResult<FillingLineTree> GetFillingLineTrees()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillingLineTree>("GetFillingLineTrees");
+        }
+    
+        public virtual int BatchMasterSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
+    
+        public virtual int BatchSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchSaveRelative", entityIDParameter, saveRelativeOptionParameter);
         }
     }
 }

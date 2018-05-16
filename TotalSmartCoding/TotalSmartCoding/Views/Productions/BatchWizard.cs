@@ -42,7 +42,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.fastPendingLots.SetObjects(this.batchAPIs.GetPendingLots(this.batchViewModel.LocationID));
+                this.fastPendingLots.SetObjects(this.batchAPIs.GetPendingLots(this.batchViewModel.LocationID, this.batchViewModel.FillingLineID));
             }
             catch (Exception exception)
             {
