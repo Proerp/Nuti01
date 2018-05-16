@@ -672,6 +672,7 @@
           <Property Name="PackID" Type="int" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PrintedTimes" Type="int" Nullable="false" />
+          <Property Name="SerialID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Reports">
           <Key>
@@ -8062,6 +8063,7 @@
           <Property Type="String" Name="APICode" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="Int32" Name="SerialID" Nullable="false" />
           </ComplexType>
         <EntityType Name="Repack">
           <Key>
@@ -8075,6 +8077,7 @@
           <NavigationProperty Name="Batch" Relationship="TotalSmartCodingModel.FK_Repacks_Batches" FromRole="Repack" ToRole="Batch" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_Repacks_Packs" FromRole="Repack" ToRole="Pack" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SerialID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Repacks_Batches">
           <End Type="TotalSmartCodingModel.Batch" Role="Batch" Multiplicity="1" />
@@ -10725,6 +10728,7 @@
                 <ScalarProperty Name="APICode" ColumnName="APICode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10732,6 +10736,7 @@
           <EntitySetMapping Name="Repacks">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Repack">
               <MappingFragment StoreEntitySet="Repacks">
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="PrintedTimes" ColumnName="PrintedTimes" />
                 <ScalarProperty Name="PackID" ColumnName="PackID" />
@@ -10757,6 +10762,7 @@
                 <ScalarProperty Name="APICode" ColumnName="APICode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -10782,6 +10788,7 @@
                 <ScalarProperty Name="APICode" ColumnName="APICode" />
                 <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

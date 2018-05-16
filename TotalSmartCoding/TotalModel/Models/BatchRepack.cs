@@ -26,5 +26,6 @@ namespace TotalModel.Models
         public string APICode { get; set; }
         public string CommodityName { get; set; }
         public int CommodityID { get; set; }
+        public int SerialID { get; set; }
     }
 }

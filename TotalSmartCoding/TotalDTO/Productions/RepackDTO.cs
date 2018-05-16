@@ -14,6 +14,8 @@ namespace TotalDTO.Productions
 
         public int RepackID { get; set; }
 
+        public int SerialID { get; set; }
+
         public int PackID { get; set; }
         public string Code { get; set; } 
         public int BatchID { get; set; }

@@ -33,6 +33,7 @@
             this.buttonAddExit = new System.Windows.Forms.ToolStripButton();
             this.fastBatchRepacks = new BrightIdeasSoftware.FastObjectListView();
             this.olvLineIndex = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvSerialID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPackCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBatchEntryDate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -43,6 +44,7 @@
             this.panelMaster = new System.Windows.Forms.Panel();
             this.fastMismatchedBarcodes = new BrightIdeasSoftware.FastObjectListView();
             this.olvColumn5 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvMismatchedSerialID = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScannedBarcode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvItemAPICode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvDescription = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -93,6 +95,7 @@
             // fastBatchRepacks
             // 
             this.fastBatchRepacks.AllColumns.Add(this.olvLineIndex);
+            this.fastBatchRepacks.AllColumns.Add(this.olvSerialID);
             this.fastBatchRepacks.AllColumns.Add(this.olvPackCode);
             this.fastBatchRepacks.AllColumns.Add(this.olvBatchCode);
             this.fastBatchRepacks.AllColumns.Add(this.olvBatchEntryDate);
@@ -103,6 +106,7 @@
             this.fastBatchRepacks.CheckedAspectName = "";
             this.fastBatchRepacks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvLineIndex,
+            this.olvSerialID,
             this.olvPackCode,
             this.olvBatchCode,
             this.olvBatchEntryDate,
@@ -136,6 +140,13 @@
             this.olvLineIndex.Text = "";
             this.olvLineIndex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvLineIndex.Width = 39;
+            // 
+            // olvSerialID
+            // 
+            this.olvSerialID.AspectName = "SerialID";
+            this.olvSerialID.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvSerialID.Text = "Serial #";
+            this.olvSerialID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvPackCode
             // 
@@ -173,7 +184,7 @@
             this.olvLotCode.Sortable = false;
             this.olvLotCode.Text = "Lot";
             this.olvLotCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvLotCode.Width = 98;
+            this.olvLotCode.Width = 88;
             // 
             // olvPrintedDate
             // 
@@ -216,6 +227,7 @@
             // fastMismatchedBarcodes
             // 
             this.fastMismatchedBarcodes.AllColumns.Add(this.olvColumn5);
+            this.fastMismatchedBarcodes.AllColumns.Add(this.olvMismatchedSerialID);
             this.fastMismatchedBarcodes.AllColumns.Add(this.olvScannedBarcode);
             this.fastMismatchedBarcodes.AllColumns.Add(this.olvItemAPICode);
             this.fastMismatchedBarcodes.AllColumns.Add(this.olvDescription);
@@ -223,6 +235,7 @@
             this.fastMismatchedBarcodes.CheckedAspectName = "";
             this.fastMismatchedBarcodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn5,
+            this.olvMismatchedSerialID,
             this.olvScannedBarcode,
             this.olvItemAPICode,
             this.olvDescription,
@@ -252,6 +265,13 @@
             this.olvColumn5.Text = "";
             this.olvColumn5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumn5.Width = 39;
+            // 
+            // olvMismatchedSerialID
+            // 
+            this.olvMismatchedSerialID.AspectName = "SerialID";
+            this.olvMismatchedSerialID.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvMismatchedSerialID.Text = "Serial #";
+            this.olvMismatchedSerialID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvScannedBarcode
             // 
@@ -330,5 +350,7 @@
         private BrightIdeasSoftware.OLVColumn olvPrintedDate;
         private BrightIdeasSoftware.OLVColumn olvPrintedHour;
         private BrightIdeasSoftware.OLVColumn olvPrintedMinute;
+        private BrightIdeasSoftware.OLVColumn olvSerialID;
+        private BrightIdeasSoftware.OLVColumn olvMismatchedSerialID;
     }
 }

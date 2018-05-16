@@ -144,7 +144,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          Repacks.RepackID, Repacks.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, Repacks.PrintedTimes " + "\r\n";
+            queryString = queryString + "       SELECT          Repacks.RepackID, Repacks.SerialID, Repacks.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, Repacks.PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Repacks " + "\r\n"; //Packs.BatchID: SAVED BATCH; Repacks.BatchID: REPACK BATCH
             queryString = queryString + "                       INNER JOIN Packs ON (@NotPrintedOnly = 0 OR Repacks.PrintedTimes = 0) AND Repacks.BatchID = @BatchID AND Repacks.PackID = Packs.PackID " + "\r\n";
             queryString = queryString + "                       INNER JOIN FillingLines ON Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n";
@@ -164,7 +164,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          TOP 1 -1 AS RepackID, Packs.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, 0 AS PrintedTimes " + "\r\n";
+            queryString = queryString + "       SELECT          TOP 1 -1 AS RepackID, 0 AS SerialID, Packs.PackID, Packs.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Packs.Code, Packs.FillingLineID, FillingLines.Code AS FillingLineCode, 0 AS PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Packs " + "\r\n";
             queryString = queryString + "                       INNER JOIN FillingLines ON Packs.Code = @Barcode AND Packs.FillingLineID = FillingLines.FillingLineID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Batches ON Packs.BatchID = Batches.BatchID " + "\r\n";
@@ -179,7 +179,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          TOP 1 -1 AS RepackID, Cartons.CartonID AS PackID, Cartons.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Cartons.Code, Cartons.FillingLineID, FillingLines.Code AS FillingLineCode, 0 AS PrintedTimes " + "\r\n";
+            queryString = queryString + "       SELECT          TOP 1 -1 AS RepackID, 0 AS SerialID, Cartons.CartonID AS PackID, Cartons.CommodityID, Commodities.APICode, Commodities.Name AS CommodityName, Batches.BatchID, Batches.EntryDate, Batches.Code AS BatchCode, Batches.LotCode, Cartons.Code, Cartons.FillingLineID, FillingLines.Code AS FillingLineCode, 0 AS PrintedTimes " + "\r\n";
             queryString = queryString + "       FROM            Cartons " + "\r\n";
             queryString = queryString + "                       INNER JOIN FillingLines ON Cartons.CartonID = @CartonID AND Cartons.FillingLineID = FillingLines.FillingLineID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Batches ON Cartons.BatchID = Batches.BatchID " + "\r\n";

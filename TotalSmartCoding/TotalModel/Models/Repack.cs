@@ -20,6 +20,7 @@ namespace TotalModel.Models
         public int PackID { get; set; }
         public int PrintedTimes { get; set; }
         public string Code { get; set; }
+        public int SerialID { get; set; }
     
         public virtual Batch Batch { get; set; }
         public virtual Pack Pack { get; set; }

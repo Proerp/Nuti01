@@ -88,7 +88,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.batchRepacks = new List<BatchRepackDTO>();
                 List<MismatchedBarcode> mismatchedBarcodes = new List<MismatchedBarcode>();
 
-                string[] barcodes = System.IO.File.ReadAllLines(fileName); int lineNo = 0; int mismatchedLineNo = 0;
+                string[] barcodes = System.IO.File.ReadAllLines(fileName); int lineIndex = 0; int mismatchedLineNo = 0; int serialID = 0;
                 if (barcodes.Count() > 0)
                 {
                     RepackController repackController = new RepackController(CommonNinject.Kernel.Get<IRepackService>(), this.repackViewModel);
@@ -104,24 +104,25 @@ namespace TotalSmartCoding.Views.Productions
                             {
                                 if (batchRepackDTO.CommodityID == this.fillingData.CommodityID)
                                 {
-                                    batchRepackDTO.LineIndex = ++lineNo;
+                                    batchRepackDTO.LineIndex = ++lineIndex;
+                                    batchRepackDTO.SerialID = ++serialID;
                                     this.batchRepacks.Add(batchRepackDTO);
                                 }
                                 else
-                                    mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, Barcode = barcode, APICode = batchRepackDTO.APICode, CommodityName = batchRepackDTO.CommodityName, Description = "Không cùng mã sản phẩm." });
+                                    mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, SerialID = ++serialID, Barcode = barcode, APICode = batchRepackDTO.APICode, CommodityName = batchRepackDTO.CommodityName, Description = "Không cùng mã sản phẩm." });
                             }
                             else
-                                mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, Barcode = barcode, APICode = batchRepackDTO.APICode, CommodityName = batchRepackDTO.CommodityName, Description = "Trùng mã vạch lon." });
+                                mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, SerialID = serialID, Barcode = barcode, APICode = batchRepackDTO.APICode, CommodityName = batchRepackDTO.CommodityName, Description = "Trùng mã vạch lon." });
                         }
                         else
-                            mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, Barcode = barcode, Description = "Không tìm thấy mã vạch." });
+                            mismatchedBarcodes.Add(new MismatchedBarcode() { LineIndex = ++mismatchedLineNo, SerialID = ++serialID, Barcode = barcode, Description = "Không tìm thấy mã vạch." });
                     }
                 }
 
                 this.fastBatchRepacks.SetObjects(this.batchRepacks);
                 //if (this.batchRepacks.Count > 0) this.fastBatchRepacks.Sort(this.olvBatchCode, SortOrder.Descending);
                 this.fastMismatchedBarcodes.SetObjects(mismatchedBarcodes);
-                if (mismatchedBarcodes.Count > 0) this.fastMismatchedBarcodes.Sort(this.olvDescription, SortOrder.Descending);
+                if (mismatchedBarcodes.Count > 0) this.fastMismatchedBarcodes.Sort(this.olvDescription, SortOrder.Ascending);
 
                 this.customTabBatch.TabPages[0].Text = this.fastBatchRepacks.GetItemCount().ToString("N0") + " Pack" + (this.fastBatchRepacks.GetItemCount() > 1 ? "s" : "") + " found            ";
                 this.customTabBatch.TabPages[this.customTabBatch.TabPages.Count - 1].Text = this.fastMismatchedBarcodes.GetItemCount().ToString("N0") + " Mismatched Barcode" + (this.fastMismatchedBarcodes.GetItemCount() > 1 ? "s      " : "      ");
@@ -148,6 +149,8 @@ namespace TotalSmartCoding.Views.Productions
                         repackDTO.PackID = batchRepack.PackID;
                         repackDTO.Code = batchRepack.Code;
 
+                        repackDTO.SerialID = batchRepack.SerialID;
+
                         if (!repackController.repackService.Save(repackDTO))
                             throw new Exception(lastSavedBarcode);
                         else
@@ -169,6 +172,7 @@ namespace TotalSmartCoding.Views.Productions
     public class MismatchedBarcode
     {
         public int LineIndex { get; set; }
+        public int SerialID { get; set; }
         public string Barcode { get; set; }
         public string APICode { get; set; }
         public string CommodityName { get; set; }

@@ -11,6 +11,8 @@ namespace TotalDTO.Productions
 
         public int LineIndex { get; set; }
 
+        public int SerialID { get; set; }
+
         public int PackID { get; set; }
         public int BatchID { get; set; }
         public string BatchCode { get; set; }

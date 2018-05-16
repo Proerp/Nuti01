@@ -42,9 +42,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -57,6 +54,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             this.digitStatusbox = new System.Windows.Forms.TextBox();
             this.dgvPackQueue = new System.Windows.Forms.DataGridView();
             this.dgvPacksetQueue = new System.Windows.Forms.DataGridView();
@@ -78,9 +78,6 @@
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.panelRepack = new System.Windows.Forms.Panel();
             this.dgvRepacks = new System.Windows.Forms.DataGridView();
-            this.Printed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStripRepack = new System.Windows.Forms.ToolStrip();
             this.buttonRepackImport = new System.Windows.Forms.ToolStripButton();
             this.buttonRepackReprint = new System.Windows.Forms.ToolStripButton();
@@ -218,6 +215,10 @@
             this.comboBoxEmptyCarton = new System.Windows.Forms.ToolStripComboBox();
             this.buttonSendToZebra = new System.Windows.Forms.ToolStripButton();
             this.comboBoxSendToZebra = new System.Windows.Forms.ToolStripComboBox();
+            this.Printed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SerialID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LineNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPacksetQueue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartonQueue)).BeginInit();
@@ -349,7 +350,7 @@
             this.dgvPackQueue.RowTemplate.Height = 47;
             this.dgvPackQueue.RowTemplate.ReadOnly = true;
             this.dgvPackQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvPackQueue.Size = new System.Drawing.Size(553, 216);
+            this.dgvPackQueue.Size = new System.Drawing.Size(536, 216);
             this.dgvPackQueue.TabIndex = 8;
             this.dgvPackQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPackQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
@@ -403,7 +404,7 @@
             this.dgvPacksetQueue.RowTemplate.Height = 47;
             this.dgvPacksetQueue.RowTemplate.ReadOnly = true;
             this.dgvPacksetQueue.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgvPacksetQueue.Size = new System.Drawing.Size(706, 216);
+            this.dgvPacksetQueue.Size = new System.Drawing.Size(685, 216);
             this.dgvPacksetQueue.TabIndex = 9;
             this.dgvPacksetQueue.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dgvPacksetQueue.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridView_CellPainting);
@@ -504,7 +505,7 @@
             // splitPackQueue
             // 
             this.splitPackQueue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitPackQueue.Location = new System.Drawing.Point(380, 0);
+            this.splitPackQueue.Location = new System.Drawing.Point(418, 0);
             this.splitPackQueue.Margin = new System.Windows.Forms.Padding(4);
             this.splitPackQueue.Name = "splitPackQueue";
             // 
@@ -519,8 +520,8 @@
             this.splitPackQueue.Panel2.Controls.Add(this.dgvPacksetQueue);
             this.splitPackQueue.Panel2.Controls.Add(this.toolStrip12);
             this.splitPackQueue.Panel2MinSize = 39;
-            this.splitPackQueue.Size = new System.Drawing.Size(1260, 271);
-            this.splitPackQueue.SplitterDistance = 553;
+            this.splitPackQueue.Size = new System.Drawing.Size(1222, 271);
+            this.splitPackQueue.SplitterDistance = 536;
             this.splitPackQueue.SplitterWidth = 1;
             this.splitPackQueue.TabIndex = 0;
             // 
@@ -539,7 +540,7 @@
             this.toolStrip11.Location = new System.Drawing.Point(0, 0);
             this.toolStrip11.Name = "toolStrip11";
             this.toolStrip11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip11.Size = new System.Drawing.Size(553, 55);
+            this.toolStrip11.Size = new System.Drawing.Size(536, 55);
             this.toolStrip11.TabIndex = 16;
             this.toolStrip11.Text = "toolStrip11";
             // 
@@ -610,7 +611,7 @@
             this.toolStrip12.Location = new System.Drawing.Point(0, 0);
             this.toolStrip12.Name = "toolStrip12";
             this.toolStrip12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStrip12.Size = new System.Drawing.Size(706, 55);
+            this.toolStrip12.Size = new System.Drawing.Size(685, 55);
             this.toolStrip12.TabIndex = 16;
             this.toolStrip12.Text = "toolStrip12";
             // 
@@ -671,7 +672,7 @@
             this.panelRepack.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelRepack.Location = new System.Drawing.Point(0, 0);
             this.panelRepack.Name = "panelRepack";
-            this.panelRepack.Size = new System.Drawing.Size(380, 271);
+            this.panelRepack.Size = new System.Drawing.Size(418, 271);
             this.panelRepack.TabIndex = 1;
             // 
             // dgvRepacks
@@ -696,6 +697,7 @@
             this.dgvRepacks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Printed,
             this.Code,
+            this.SerialID,
             this.LineNo});
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
@@ -722,45 +724,8 @@
             this.dgvRepacks.RowTemplate.Height = 24;
             this.dgvRepacks.RowTemplate.ReadOnly = true;
             this.dgvRepacks.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvRepacks.Size = new System.Drawing.Size(380, 216);
+            this.dgvRepacks.Size = new System.Drawing.Size(418, 216);
             this.dgvRepacks.TabIndex = 18;
-            // 
-            // Printed
-            // 
-            this.Printed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Printed.DataPropertyName = "PrintedTimes";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.Format = "N0";
-            this.Printed.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Printed.FillWeight = 10F;
-            this.Printed.HeaderText = "P";
-            this.Printed.Name = "Printed";
-            this.Printed.ReadOnly = true;
-            this.Printed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Code
-            // 
-            this.Code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Code.DataPropertyName = "Code";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Code.DefaultCellStyle = dataGridViewCellStyle12;
-            this.Code.FillWeight = 95F;
-            this.Code.HeaderText = "Code";
-            this.Code.Name = "Code";
-            this.Code.ReadOnly = true;
-            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // LineNo
-            // 
-            this.LineNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LineNo.DataPropertyName = "LineIndex";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.Format = "N0";
-            this.LineNo.DefaultCellStyle = dataGridViewCellStyle13;
-            this.LineNo.FillWeight = 15F;
-            this.LineNo.HeaderText = "#";
-            this.LineNo.Name = "LineNo";
-            this.LineNo.ReadOnly = true;
             // 
             // toolStripRepack
             // 
@@ -776,7 +741,7 @@
             this.toolStripRepack.Location = new System.Drawing.Point(0, 0);
             this.toolStripRepack.Name = "toolStripRepack";
             this.toolStripRepack.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.toolStripRepack.Size = new System.Drawing.Size(380, 55);
+            this.toolStripRepack.Size = new System.Drawing.Size(418, 55);
             this.toolStripRepack.TabIndex = 17;
             this.toolStripRepack.Text = "toolStrip13";
             // 
@@ -2338,7 +2303,7 @@
             this.textBoxCommodityOfficialCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxCommodityOfficialCode.Name = "textBoxCommodityOfficialCode";
             this.textBoxCommodityOfficialCode.ReadOnly = true;
-            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(96, 75);
+            this.textBoxCommodityOfficialCode.Size = new System.Drawing.Size(96, 27);
             this.textBoxCommodityOfficialCode.Text = "8984568";
             this.textBoxCommodityOfficialCode.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxCommodityOfficialCode.Visible = false;
@@ -2473,7 +2438,7 @@
             this.comboBoxEmptyCarton.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEmptyCarton.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.comboBoxEmptyCarton.Name = "comboBoxEmptyCarton";
-            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(75, 75);
+            this.comboBoxEmptyCarton.Size = new System.Drawing.Size(75, 28);
             this.comboBoxEmptyCarton.Visible = false;
             // 
             // buttonSendToZebra
@@ -2493,6 +2458,52 @@
             this.comboBoxSendToZebra.Name = "comboBoxSendToZebra";
             this.comboBoxSendToZebra.Size = new System.Drawing.Size(118, 75);
             this.comboBoxSendToZebra.SelectedIndexChanged += new System.EventHandler(this.comboBoxSendToZebra_SelectedIndexChanged);
+            // 
+            // Printed
+            // 
+            this.Printed.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Printed.DataPropertyName = "PrintedTimes";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.Format = "N0";
+            this.Printed.DefaultCellStyle = dataGridViewCellStyle11;
+            this.Printed.FillWeight = 10F;
+            this.Printed.HeaderText = "P";
+            this.Printed.Name = "Printed";
+            this.Printed.ReadOnly = true;
+            this.Printed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Code
+            // 
+            this.Code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Code.DataPropertyName = "Code";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Code.DefaultCellStyle = dataGridViewCellStyle12;
+            this.Code.FillWeight = 69F;
+            this.Code.HeaderText = "Code";
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // SerialID
+            // 
+            this.SerialID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SerialID.DataPropertyName = "SerialID";
+            this.SerialID.FillWeight = 11F;
+            this.SerialID.HeaderText = "No";
+            this.SerialID.Name = "SerialID";
+            this.SerialID.ReadOnly = true;
+            // 
+            // LineNo
+            // 
+            this.LineNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LineNo.DataPropertyName = "LineIndex";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.Format = "N0";
+            this.LineNo.DefaultCellStyle = dataGridViewCellStyle13;
+            this.LineNo.FillWeight = 9F;
+            this.LineNo.HeaderText = "#";
+            this.LineNo.Name = "LineNo";
+            this.LineNo.ReadOnly = true;
             // 
             // SmartCoding
             // 
@@ -2771,9 +2782,10 @@
         private System.Windows.Forms.ToolStripButton buttonRepackRemove;
         private System.Windows.Forms.ToolStripButton toolStripButton21;
         private System.Windows.Forms.ToolStripButton buttonRepackImport;
+        private System.Windows.Forms.ToolStripButton buttonRepackReprint;
         private System.Windows.Forms.DataGridViewTextBoxColumn Printed;
         private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SerialID;
         private System.Windows.Forms.DataGridViewTextBoxColumn LineNo;
-        private System.Windows.Forms.ToolStripButton buttonRepackReprint;
     }
 }
