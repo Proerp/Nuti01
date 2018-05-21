@@ -210,11 +210,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       BEGIN " + "\r\n";
+            //queryString = queryString + "       BEGIN " + "\r\n";
             //queryString = queryString + "           UPDATE          Batches " + "\r\n";
             //queryString = queryString + "           SET             IsDefault = 0 " + "\r\n";
             //queryString = queryString + "           WHERE           FillingLineID = (SELECT FillingLineID FROM Batches WHERE BatchID = @EntityID) " + "\r\n";
-            queryString = queryString + "       END " + "\r\n";
+            //queryString = queryString + "       END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchSaveRelative", queryString);
         }
