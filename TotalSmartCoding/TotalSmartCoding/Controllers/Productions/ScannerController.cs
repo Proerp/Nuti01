@@ -570,7 +570,9 @@ namespace TotalSmartCoding.Controllers.Productions
             catch (Exception exception)
             {
                 this.LoopRoutine = false;
-                this.MainStatus = exception.Message;
+
+                Exception baseException = exception.GetBaseException();
+                this.MainStatus = exception.Message + (baseException != null ? " [Base: " + baseException.Message + "]" : "");
 
                 this.setLED(this.LedGreenOn, this.LedAmberOn, true);
             }
@@ -888,7 +890,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private string interpretBarcode(string barcode)
         {
             if (barcode == "NoRead")
-                barcode = new String('X', 27) + DateTime.Now.ToString("hhmm"); //this.FillingData.FirstLineA1(false, false) + this.FillingData.FirstLineA2(false) + this.FillingData.SecondLineA1(false) + this.FillingData.SecondLineA2(false) + 
+                barcode = DateTime.Now.ToString("yyMMddHHmmssfff") + this.FillingData.BatchCode + this.FillingData.LotCode + this.FillingData.FillingLineCode + new String('X', 5) + DateTime.Now.ToString("HHmm"); //this.FillingData.FirstLineA1(false, false) + this.FillingData.FirstLineA2(false) + this.FillingData.SecondLineA1(false) + this.FillingData.SecondLineA2(false) + 
             return barcode;
         }
 
