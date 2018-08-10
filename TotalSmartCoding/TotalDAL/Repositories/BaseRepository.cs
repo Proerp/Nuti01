@@ -23,6 +23,7 @@ namespace TotalDAL.Repositories
         {
             this.RepositoryBag = new Dictionary<string, object>();
             this.totalSmartCodingEntities = totalSmartCodingEntities;
+            this.totalSmartCodingEntities.Database.CommandTimeout = 300;
         }
 
         private ObjectContext TotalBikePortalsObjectContext
@@ -101,7 +102,7 @@ namespace TotalDAL.Repositories
         public void CreateStoredProcedure()
         {
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
             inventory.RestoreProcedure();

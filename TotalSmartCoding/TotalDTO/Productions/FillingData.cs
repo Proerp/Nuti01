@@ -442,21 +442,21 @@ namespace TotalDTO.Productions
             return isReadableText ? this.printedEntryDate.AddDays(1 - this.printedEntryDate.Day).AddMonths(this.Shelflife).AddDays(-1 + this.printedEntryDate.Day).ToString(yyyy ? "dd.MM.yyyy" : "ddMMyy") : "";
         }
 
-        //public string FirstLineA2(bool isReadableText)
-        //{
-        //    if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
-        //        return (isReadableText ? "" : this.printedBatchRepackDTO.FillingLineCode) + this.FillingLineFactoryCode;
-        //    else
-        //        return (isReadableText ? "" : this.FillingLineCode) + this.FillingLineFactoryCode;
-        //}
-
         public string FirstLineA2(bool isReadableText)
         {
             if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
-                return this.printedBatchRepackDTO.FillingLineCode + this.FillingLineFactoryCode;
+                return (isReadableText ? "" : this.printedBatchRepackDTO.FillingLineCode) + this.FillingLineFactoryCode;
             else
-                return this.FillingLineCode + this.FillingLineFactoryCode;
+                return (isReadableText ? "" : this.FillingLineCode) + this.FillingLineFactoryCode;
         }
+
+        ////public string FirstLineA2(bool isReadableText)
+        ////{
+        ////    if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+        ////        return this.printedBatchRepackDTO.FillingLineCode + this.FillingLineFactoryCode;
+        ////    else
+        ////        return this.FillingLineCode + this.FillingLineFactoryCode;
+        ////}
 
         public string FirstLineA2B(bool isReadableText)
         {
@@ -474,27 +474,27 @@ namespace TotalDTO.Productions
             return "";
         }
 
-        //public string ThirdLineA1(bool isReadableText)
-        //{
-        //    if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
-        //    {
-        //        BatchRepackDTO batchRepackDTO = this.printedBatchRepackDTO;
-        //        return batchRepackDTO.BatchCode + batchRepackDTO.LotCode + (isReadableText ? this.printedBatchRepackDTO.FillingLineCode : "");
-        //    }
-        //    else
-        //        return this.BatchCode + this.LotCode + (isReadableText ? this.FillingLineCode : "");
-        //}
-
         public string ThirdLineA1(bool isReadableText)
         {
             if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
             {
                 BatchRepackDTO batchRepackDTO = this.printedBatchRepackDTO;
-                return batchRepackDTO.BatchCode + batchRepackDTO.LotCode;
+                return batchRepackDTO.BatchCode + batchRepackDTO.LotCode + (isReadableText ? this.printedBatchRepackDTO.FillingLineCode : "");
             }
             else
-                return this.BatchCode + this.LotCode;
+                return this.BatchCode + this.LotCode + (isReadableText ? this.FillingLineCode : "");
         }
+
+        ////public string ThirdLineA1(bool isReadableText)
+        ////{
+        ////    if ((this.printerName == GlobalVariables.PrinterName.PackInkjet || (this.printerName == GlobalVariables.PrinterName.CartonInkjet && this.ReprintCarton)) && this.BatchTypeID == (int)GlobalEnums.BatchTypeID.Repack)
+        ////    {
+        ////        BatchRepackDTO batchRepackDTO = this.printedBatchRepackDTO;
+        ////        return batchRepackDTO.BatchCode + batchRepackDTO.LotCode;
+        ////    }
+        ////    else
+        ////        return this.BatchCode + this.LotCode;
+        ////}
 
 
 
