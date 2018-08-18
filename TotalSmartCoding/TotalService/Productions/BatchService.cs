@@ -16,6 +16,16 @@ namespace TotalService.Productions
             this.batchRepository = batchRepository;
         }
 
+
+        public override bool Approvable(BatchDTO dto)
+        {
+            if (dto.NoApprovable || this.GlobalLocked(dto)) return false;
+            if (dto.Approved || !this.GetApprovalPermitted(dto.OrganizationalUnitID)) return false;
+
+            return true; //this.genericRepository.GetEditable(dto.GetID()) SPECIAL OVERWRITE FOR THIS CLASS BatchService TO IGNORE EDITABLE WHEN CHECK Approvable
+        }
+
+
         public bool CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
         {
             try
