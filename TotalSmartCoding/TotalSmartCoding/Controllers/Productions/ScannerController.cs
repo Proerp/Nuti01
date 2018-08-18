@@ -1073,7 +1073,7 @@ namespace TotalSmartCoding.Controllers.Productions
             {
                 lock (this.cartonsetQueue)
                 {
-                    if (movedCartonQueue.Count > 0 && (!fromCartonsetQueue || this.cartonQueue.Count > 0))
+                    if (movedCartonQueue.Count > 0 && (true || !fromCartonsetQueue || this.cartonQueue.Count > 0))
                     {
                         CartonDTO cartonDTO = movedCartonQueue.Dequeue(cartonID);
                         if (cartonDTO != null)
@@ -1093,22 +1093,50 @@ namespace TotalSmartCoding.Controllers.Productions
                                     {
                                         if (fromCartonsetQueue)
                                         {
-                                            cartonDTO = this.cartonQueue.Dequeue();
-                                            if (cartonDTO != null)
-                                            {
-                                                cartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Readytoset;
-                                                this.cartonsetQueue.Enqueue(cartonDTO);
+                                            if (this.cartonQueue.Count > 0)
+                                            { //GET ONE Carton FROM cartonQueue AND MOVE TO cartonsetQueue
+                                                cartonDTO = this.cartonQueue.Dequeue();
+                                                if (cartonDTO != null)
+                                                {
+                                                    cartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Readytoset;
+                                                    this.cartonsetQueue.Enqueue(cartonDTO);
 
-                                                this.NotifyPropertyChanged("CartonQueue");
-                                                this.NotifyPropertyChanged("CartonsetQueue");
+                                                    this.NotifyPropertyChanged("CartonQueue");
+                                                    this.NotifyPropertyChanged("CartonsetQueue");
 
-                                                if (this.cartonController.cartonService.UpdateEntryStatus(cartonDTO.CartonID.ToString(), GlobalVariables.BarcodeStatus.Readytoset)) return true;
-                                                else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                                                    if (this.cartonController.cartonService.UpdateEntryStatus(cartonDTO.CartonID.ToString(), GlobalVariables.BarcodeStatus.Readytoset)) return true;
+                                                    else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                                                }
+                                                else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
                                             }
-                                            else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
+                                            else //JUST ADD THIS NEW FEATURE 18/AU/2018: MOVE ALL Cartons FROM cartonsetQueue BACK TO cartonQueue
+                                            {
+                                                if (this.cartonsetQueue.Count > 0)
+                                                { //SOMETIME, THERE IS ONLY 1 Carton IN cartonsetQueue (EX: LAST PALLET). THEN, AFTER Move Carton To Pending Queue, THERE IS NO Carton.
+                                                    string entityIDs = this.cartonsetQueue.EntityIDs;
+
+                                                    while (this.cartonsetQueue.Count > 0) {
+                                                        cartonDTO = this.cartonsetQueue.Dequeue();
+                                                        if (cartonDTO != null)
+                                                        {
+                                                            cartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Freshnew;
+                                                            this.cartonQueue.Enqueue(cartonDTO);                                                            
+                                                        }
+                                                        else throw new System.ArgumentException("Fail to handle this carton", "Can not remove carton from the line");
+                                                    }
+
+                                                    this.NotifyPropertyChanged("CartonQueue");
+                                                    this.NotifyPropertyChanged("CartonsetQueue");
+
+                                                    if (this.cartonController.cartonService.UpdateEntryStatus(entityIDs, GlobalVariables.BarcodeStatus.Freshnew)) return true;
+                                                    else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
+                                                }
+                                                else
+                                                    return true; //DO NOTHING
+                                            }
                                         }
                                         else
-                                            return true;
+                                            return true; //DO NOTHING
                                     }
                                     else throw new System.ArgumentException("Fail to handle this carton", "Can not delete carton from the line");
                                 }
