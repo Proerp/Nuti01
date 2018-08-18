@@ -1238,6 +1238,57 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
+        public Boolean UnwrapPallettoCarton(int palletID)
+        {
+            if (palletID <= 0) return false;
+
+            lock (this.cartonsetQueue)
+            {
+                if (this.cartonsetQueue.Count <= 0)
+                {
+                    lock (this.palletQueue)
+                    {
+                        lock (this.cartonController)
+                        {
+                            IList<Carton> cartons = this.cartonController.cartonService.GetCartons(this.FillingData.FillingLineID, (int)GlobalVariables.BarcodeStatus.Wrapped + "", palletID);
+                            if (cartons.Count > 0)
+                            {
+                                cartons.Each(carton =>
+                                { //(***)
+                                    if (carton.BatchID == this.FillingData.BatchID && carton.CommodityID == this.FillingData.CommodityID)
+                                    {
+                                        CartonDTO cartonDTO = Mapper.Map<Carton, CartonDTO>(carton);
+                                        cartonDTO.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Readytoset;
+                                        this.cartonsetQueue.Enqueue(cartonDTO, false);
+                                    }
+                                    else
+                                        throw new Exception("Lỗi: Mã sản phẩm, số batch của pallet không đúng mã sản phẩm, số batch của chuyền");
+                                });
+                                this.palletQueue.Dequeue(palletID);
+
+                                this.NotifyPropertyChanged("CartonsetQueue");
+                                this.NotifyPropertyChanged("PalletQueue");
+
+                                lock (this.palletController)
+                                {
+                                    this.palletController.palletService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Freshnew; //THIS PALLET MUST BE Freshnew IN ORDER TO UNWRAP TO CARTON
+                                    this.palletController.palletService.ServiceBag["CartonIDs"] = this.cartonsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL CARTON OF THIS PALLET TO cartonsetQueue ALREADY. SO, NOW WE CAN USE this.cartonsetQueue.EntityIDs FOR ServiceBag["CartonIDs"]
+                                    if (!this.palletController.palletService.Delete(palletID)) throw new System.ArgumentException("Lỗi", "Không thể xóa pallet trên CSDL");
+                                }
+                                return true;
+                            }
+                            else
+                            {
+                                this.MainStatus = "Không thể tìm thấy pallet cần xả ra đóng lại. Vui lòng kiểm tra lại";
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else throw new System.ArgumentException("Fail to handle this pallet", "Another pallet is on the line");
+            }
+        }
+
         public Boolean UpdateCartonBarcode(int cartonID, string cartonBarcode)
         {
             if (cartonID <= 0 || cartonBarcode.Length < 12) throw new Exception("Invalid barcode: It is required 12 letters barcode [" + cartonBarcode + "]");

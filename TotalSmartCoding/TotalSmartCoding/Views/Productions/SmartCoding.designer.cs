@@ -108,7 +108,7 @@
             this.splitPalletQueue = new System.Windows.Forms.SplitContainer();
             this.dgvPalletQueue = new System.Windows.Forms.DataGridView();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.buttonRemovePallet = new System.Windows.Forms.ToolStripButton();
             this.buttonPalletQueueCount = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton15 = new System.Windows.Forms.ToolStripButton();
             this.dgvPalletPickupQueue = new System.Windows.Forms.DataGridView();
@@ -1243,7 +1243,7 @@
             this.toolStrip8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.toolStrip8.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
+            this.buttonRemovePallet,
             this.buttonPalletQueueCount,
             this.toolStripButton15});
             this.toolStrip8.Location = new System.Drawing.Point(0, 0);
@@ -1253,14 +1253,16 @@
             this.toolStrip8.TabIndex = 15;
             this.toolStrip8.Text = "toolStrip8";
             // 
-            // toolStripButton3
+            // buttonRemovePallet
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::TotalSmartCoding.Properties.Resources.Honeycomb_Barcode_Scanner_32;
-            this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(36, 36);
+            this.buttonRemovePallet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRemovePallet.Image = global::TotalSmartCoding.Properties.Resources.Green_cross;
+            this.buttonRemovePallet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonRemovePallet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRemovePallet.Name = "buttonRemovePallet";
+            this.buttonRemovePallet.ToolTipText = "Xóa pallet đang chọn";
+            this.buttonRemovePallet.Size = new System.Drawing.Size(36, 36);
+            this.buttonRemovePallet.Click += new System.EventHandler(this.dgvPalletQueue_Remove);
             // 
             // buttonPalletQueueCount
             // 
@@ -2730,7 +2732,7 @@
         private System.Windows.Forms.ToolStripButton buttonCartonsetQueueCount;
         private System.Windows.Forms.ToolStripButton buttonCartonQueueCount;
         private System.Windows.Forms.ToolStripButton buttonPalletQueueCount;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton buttonRemovePallet;
         private System.Windows.Forms.ToolStripButton buttonRemoveCarton;
         private System.Windows.Forms.ToolStripButton buttonRemoveCartonPending;
         private System.Windows.Forms.ToolStripButton buttonRemoveCartonset;

@@ -62,8 +62,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "           ELSE " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
-            queryString = queryString + "                   UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) WHERE PalletID = @EntityID " + "\r\n";
-            queryString = queryString + "                   UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) WHERE PalletID = @EntityID " + "\r\n";
+            queryString = queryString + "                   IF (@SaveRelativeOption = 1) " + "\r\n";
+            queryString = queryString + "                       BEGIN " + "\r\n";
+            queryString = queryString + "                           UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) WHERE PalletID = @EntityID " + "\r\n";
+            queryString = queryString + "                           UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = @EntityID) WHERE PalletID = @EntityID " + "\r\n";
+            queryString = queryString + "                       END " + "\r\n";
+            queryString = queryString + "                   ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
+            queryString = queryString + "                       BEGIN " + "\r\n";
+            queryString = queryString + "                           UPDATE      Pallets     SET     MinPackDate = EntryDate, MaxPackDate = EntryDate WHERE PalletID = @EntityID " + "\r\n";
+            queryString = queryString + "                       END " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
 
             queryString = queryString + "       END " + "\r\n";
