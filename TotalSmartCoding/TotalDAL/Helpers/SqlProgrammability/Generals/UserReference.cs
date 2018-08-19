@@ -22,6 +22,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
             this.GetOrganizationalUnitIndexes();
 
             this.GetActiveUsers();
+            this.GetPasswordHash();
 
             this.UserAdd();
             this.UserRemove();
@@ -88,6 +89,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetActiveUsers", queryString);
+        }
+
+        private void GetPasswordHash()
+        {
+            string queryString;
+
+            queryString = " @UserID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+            queryString = queryString + "       SELECT      PasswordHash FROM Users WHERE UserID = @UserID " + "\r\n";
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetPasswordHash", queryString);
         }
 
         private void UserAdd()

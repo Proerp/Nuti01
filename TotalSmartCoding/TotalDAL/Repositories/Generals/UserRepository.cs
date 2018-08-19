@@ -39,7 +39,12 @@ namespace TotalDAL.Repositories.Generals
         {
             return this.TotalSmartCodingEntities.GetActiveUsers(securityIdentifier).ToList();
         }
-        
+
+        public string GetPasswordHash(int userID)
+        {
+            return this.TotalSmartCodingEntities.GetPasswordHash(userID).Single();
+        }
+
         public IList<UserAccessControl> GetUserAccessControls(int? userID, int? nmvnTaskID)
         {
             return this.TotalSmartCodingEntities.GetUserAccessControls(userID, nmvnTaskID).ToList();

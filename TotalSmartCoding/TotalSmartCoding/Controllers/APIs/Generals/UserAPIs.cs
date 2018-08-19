@@ -40,7 +40,12 @@ namespace TotalSmartCoding.Controllers.APIs.Generals
             //this.userAPIRepository.ExecuteStoreCommand("UPDATE Users SET SecurityIdentifier = '" + securityIdentifier + "' WHERE UserID = 11 " , new ObjectParameter[] { });
             return this.userAPIRepository.GetActiveUsers(securityIdentifier);
         }
-        
+
+        public string GetPasswordHash(int userID)
+        {
+            return this.userAPIRepository.GetPasswordHash(userID);
+        }
+
         public IList<UserAccessControl> GetUserAccessControls(int? userID, int? nmvnTaskID)
         {
             return this.userAPIRepository.GetUserAccessControls(userID, nmvnTaskID);

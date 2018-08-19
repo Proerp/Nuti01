@@ -16,6 +16,7 @@ namespace TotalCore.Repositories.Generals
         List<UserTree> GetUserTrees(int? activeOption);
 
         IList<ActiveUser> GetActiveUsers(string securityIdentifier);
+        string GetPasswordHash(int userID);
 
         IList<UserAccessControl> GetUserAccessControls(int? userID, int? nmvnTaskID);
 

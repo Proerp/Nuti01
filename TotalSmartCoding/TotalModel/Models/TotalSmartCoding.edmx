@@ -2532,6 +2532,9 @@
           <Parameter Name="BatchID" Type="int" Mode="In" />
           <Parameter Name="EntryStatusIDs" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetPasswordHash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetPendingDeliveryAdviceCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
         </Function>
@@ -4636,6 +4639,9 @@
           <FunctionImport Name="BatchSaveRelative">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPasswordHash" ReturnType="Collection(String)">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -10859,6 +10865,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BatchMasterSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchMasterSaveRelative" />
           <FunctionImportMapping FunctionImportName="BatchSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchSaveRelative" />
+          <FunctionImportMapping FunctionImportName="GetPasswordHash" FunctionName="TotalSmartCodingModel.Store.GetPasswordHash" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
