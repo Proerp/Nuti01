@@ -651,7 +651,7 @@
             this.toolUserReferences.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolUserReferences.Name = "toolUserReferences";
             this.toolUserReferences.Size = new System.Drawing.Size(52, 52);
-            this.toolUserReferences.ToolTipText = "User References";
+            this.toolUserReferences.ToolTipText = "Đổi mật khẩu";
             this.toolUserReferences.Click += new System.EventHandler(this.toolUserReferences_Click);
             // 
             // buttonLockedDate

@@ -88,7 +88,7 @@ namespace TotalSmartCoding.Views.Mains
                 switch (this.nmvnTaskID)
                 {
                     case GlobalEnums.NmvnTaskID.SmartCoding:
-                        
+
                         this.buttonLoading.Visible = false;
                         this.buttonNew.Visible = false;
                         this.buttonEdit.Visible = false;
@@ -103,7 +103,7 @@ namespace TotalSmartCoding.Views.Mains
                         this.toolStripSeparatorVoid.Visible = false;
                         this.buttonPrint.Visible = false;
                         this.buttonPrintPreview.Visible = false;
-                        this.toolStripSeparatorPrint.Visible = false;                                                
+                        this.toolStripSeparatorPrint.Visible = false;
                         this.toolStripTopHead.Visible = false;
                         break;
                     case GlobalEnums.NmvnTaskID.Batch:
@@ -165,9 +165,9 @@ namespace TotalSmartCoding.Views.Mains
                 this.statusVersion.Text = "Version 1.0." + GlobalVariables.ConfigVersionID(GlobalVariables.ConfigID).ToString() + ", Date: " + buildDate.ToString("dd/MM/yyyy HH:mm:ss");
 
                 this.comboSearchBarcode.Text = this.searchPlaceHolder;
-                this.toolUserReferences.Enabled = ContextAttributes.User.IsDatabaseAdmin && false; //DISABLE FOR NUTIFOOD
+                this.toolUserReferences.Enabled = true; //ContextAttributes.User.IsDatabaseAdmin;
                 this.statusUserDescription.Text = ContextAttributes.User.FullyQualifiedUserName;
-                
+
                 this.panelTop.Height = this.nmvnTaskID == GlobalEnums.NmvnTaskID.SmartCoding ? 61 : 39;
             }
             catch (Exception exception)
@@ -500,7 +500,7 @@ namespace TotalSmartCoding.Views.Mains
 
                     this.buttonEscape.Enabled = closable;
                     this.buttonLoading.Enabled = loadable && readonlyMode;
-                    
+
                     this.buttonNew.Visible = toolstripChild.AllowDataInput;
                     this.buttonEdit.Visible = toolstripChild.AllowDataInput;
                     this.buttonSave.Visible = toolstripChild.AllowDataInput;
@@ -736,10 +736,19 @@ namespace TotalSmartCoding.Views.Mains
 
         private void toolUserReferences_Click(object sender, EventArgs e)
         {
-            UserReferences userReferences = new UserReferences();
-            DialogResult dialogResult = userReferences.ShowDialog();
+            //UserReferences userReferences = new UserReferences();
+            //DialogResult dialogResult = userReferences.ShowDialog();
+            //userReferences.Dispose();
 
-            userReferences.Dispose();
+            try
+            {
+                ChangePassword changePassword = new ChangePassword(); //new ChangePassword(true): checkPasswordOnly 
+                changePassword.ShowDialog(); changePassword.Dispose();
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
         }
 
 
