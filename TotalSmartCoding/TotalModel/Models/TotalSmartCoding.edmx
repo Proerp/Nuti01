@@ -832,6 +832,7 @@
           <Property Name="SecurityIdentifier" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="IsDatabaseAdmin" Type="bit" Nullable="false" />
           <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="WarehouseAdjustmentDetails">
           <Key>
@@ -7021,6 +7022,7 @@
           <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
           <Property Name="InActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="OrganizationalUnit" Relationship="TotalSmartCodingModel.FK_Users_OrganizationalUnits" FromRole="User" ToRole="OrganizationalUnit" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_OrganizationalUnitUsers_Users">
           <End Type="TotalSmartCodingModel.User" Role="User" Multiplicity="1" />
@@ -7333,6 +7335,7 @@
           <Property Type="String" Name="OrganizationalUnitName" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="LocationID" Nullable="false" />
           <Property Type="String" Name="LocationName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PasswordHash" Nullable="false" MaxLength="1000" />
         </ComplexType>
         <ComplexType Name="SearchCommodity">
           <Property Type="Int32" Name="LocationID" Nullable="false" />
@@ -10007,6 +10010,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
                 <ScalarProperty Name="IsDatabaseAdmin" ColumnName="IsDatabaseAdmin" />
@@ -10135,6 +10139,7 @@
                 <ScalarProperty Name="OrganizationalUnitName" ColumnName="OrganizationalUnitName" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

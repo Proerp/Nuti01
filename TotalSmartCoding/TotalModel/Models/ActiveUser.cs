@@ -23,5 +23,6 @@ namespace TotalModel.Models
         public string OrganizationalUnitName { get; set; }
         public int LocationID { get; set; }
         public string LocationName { get; set; }
+        public string PasswordHash { get; set; }
     }
 }

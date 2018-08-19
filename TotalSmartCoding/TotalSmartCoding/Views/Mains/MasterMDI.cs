@@ -165,7 +165,7 @@ namespace TotalSmartCoding.Views.Mains
                 this.statusVersion.Text = "Version 1.0." + GlobalVariables.ConfigVersionID(GlobalVariables.ConfigID).ToString() + ", Date: " + buildDate.ToString("dd/MM/yyyy HH:mm:ss");
 
                 this.comboSearchBarcode.Text = this.searchPlaceHolder;
-                this.toolUserReferences.Visible = ContextAttributes.User.IsDatabaseAdmin;
+                this.toolUserReferences.Enabled = ContextAttributes.User.IsDatabaseAdmin && false; //DISABLE FOR NUTIFOOD
                 this.statusUserDescription.Text = ContextAttributes.User.FullyQualifiedUserName;
                 
                 this.panelTop.Height = this.nmvnTaskID == GlobalEnums.NmvnTaskID.SmartCoding ? 61 : 39;

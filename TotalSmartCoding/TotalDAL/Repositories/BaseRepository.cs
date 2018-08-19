@@ -55,6 +55,21 @@ namespace TotalDAL.Repositories
 
         public bool RestoreProcedures()
         {
+            if (!this.totalSmartCodingEntities.ColumnExists("Users", "PasswordHash"))
+            {
+                this.totalSmartCodingEntities.ColumnAdd("Users", "PasswordHash", "nvarchar(1000)", "", true);
+
+                this.ExecuteStoreCommand(" UPDATE Users SET SecurityIdentifier = N'S-1-5-21-2907738014-1953812902-1740135539-2132-NTF' WHERE UserID IN (11, 24) ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Users SET FirstName = N'BATCH MANAGER', LastName = N'BATCH MANAGER', UserName = N'BATCH MANAGER' WHERE UserID = 11", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Users SET FirstName = N'READONLY USERS', LastName = N'READONLY USERS', UserName = N'READONLY USERS' WHERE UserID = 24", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 1, ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID = 24", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 1, ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
+            }
+
+
+
 
             this.totalSmartCodingEntities.ColumnAdd("Repacks", "SerialID", "int", "0", true);
 
@@ -105,6 +120,11 @@ namespace TotalDAL.Repositories
 
             Helpers.SqlProgrammability.Productions.Pallet pallet = new Helpers.SqlProgrammability.Productions.Pallet(totalSmartCodingEntities);
             pallet.RestoreProcedure();
+
+            //return;
+
+            Helpers.SqlProgrammability.Generals.UserReference userReference = new Helpers.SqlProgrammability.Generals.UserReference(totalSmartCodingEntities);
+            userReference.RestoreProcedure();
 
             return;
 
@@ -199,7 +219,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.Carton carton = new Helpers.SqlProgrammability.Productions.Carton(totalSmartCodingEntities);
             carton.RestoreProcedure();
 
-            
+
 
             //return;
 
@@ -297,11 +317,7 @@ namespace TotalDAL.Repositories
             warehouseAdjustmentType.RestoreProcedure();
 
 
-            //return;
-
-            Helpers.SqlProgrammability.Generals.UserReference userReference = new Helpers.SqlProgrammability.Generals.UserReference(totalSmartCodingEntities);
-            userReference.RestoreProcedure();
-
+            
 
             //return;
 

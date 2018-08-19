@@ -105,13 +105,15 @@ namespace TotalSmartCoding.Views.Mains
 
             try
             {
+                int.TryParse(CommonConfigs.ReadSetting("ConfigID"), out GlobalVariables.ConfigID);
+
                 UserPrincipal currentUserPrincipal = UserPrincipal.Current;
                 if (currentUserPrincipal == null || currentUserPrincipal.Sid == null) throw new Exception("Sorry, can not get current user principal!");
 
                 this.baseRepository = CommonNinject.Kernel.Get<IBaseRepository>();
 
                 UserAPIs userAPIs = new UserAPIs(CommonNinject.Kernel.Get<IUserAPIRepository>());
-                IList<ActiveUser> activeUsers = userAPIs.GetActiveUsers("S-1-5-21-705987929-4194781227-356911358-1001"); //currentUserPrincipal.Sid.Value
+                IList<ActiveUser> activeUsers = userAPIs.GetActiveUsers(GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail ? "S-1-5-21-705987929-4194781227-356911358-1001" : "S-1-5-21-2907738014-1953812902-1740135539-2132-NTF"); //currentUserPrincipal.Sid.Value
 
                 //throw new Exception(currentUserPrincipal.Sid.Value);
                 if (activeUsers.Count > 0)
@@ -126,14 +128,17 @@ namespace TotalSmartCoding.Views.Mains
                     this.comboFillingLineID.DisplayMember = CommonExpressions.PropertyName<FillingLineBase>(p => p.Name);
                     this.comboFillingLineID.ValueMember = CommonExpressions.PropertyName<FillingLineBase>(p => p.FillingLineID);
 
-                    if (int.TryParse(CommonConfigs.ReadSetting("ConfigID"), out GlobalVariables.ConfigID))
-                        if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum)
-                            this.comboFillingLineID.SelectedValue = GlobalVariables.ConfigID;
+
+                    if (GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum)
+                        this.comboFillingLineID.SelectedValue = GlobalVariables.ConfigID;
 
                     if (!(GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Drum))
                     {
                         this.lbProductionLineID.Visible = false;
                         this.comboFillingLineID.Visible = false;
+
+                        this.labelPassword.Top = this.lbEmployeeID.Top;
+                        this.textPassword.Top = this.comboBoxEmployeeID.Top;
 
                         this.lbEmployeeID.Top = this.lbProductionLineID.Top;
                         this.comboBoxEmployeeID.Top = this.comboFillingLineID.Top;
@@ -190,7 +195,7 @@ namespace TotalSmartCoding.Views.Mains
                 if (!(GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.BatchMaster))
                 {
                     CustomMsgBox.Show(this, "Sorry, can not open this application." + "\r\n" + "\r\n" + "Call 0919 878 329 for more information. Thanks!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    this.DialogResult = DialogResult.Cancel; return; 
+                    this.DialogResult = DialogResult.Cancel; return;
                 }
 
                 if (sender.Equals(this.buttonExit)) { this.DialogResult = DialogResult.Cancel; return; }
@@ -308,7 +313,7 @@ namespace TotalSmartCoding.Views.Mains
                             CustomMsgBox.Show(this, "The program on this computer must be updated to the latest version." + "\r\n" + "\r\n" + "Contact your administrator for more information.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                             this.buttonDownload_Click(this.buttonDownload, new EventArgs());
                         }
-                                                    
+
                     }
                 }
             }
@@ -382,6 +387,11 @@ namespace TotalSmartCoding.Views.Mains
             //{
             //    GlobalExceptionHandler.ShowExceptionMessageBox(this, exception);
             //}
+        }
+
+        private void labelChangePassword_Click(object sender, EventArgs e)
+        {
+
         }
 
 

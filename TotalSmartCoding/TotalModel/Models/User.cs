@@ -28,6 +28,7 @@ namespace TotalModel.Models
         public bool IsDatabaseAdmin { get; set; }
         public int OrganizationalUnitID { get; set; }
         public bool InActive { get; set; }
+        public string PasswordHash { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrganizationalUnitUser> OrganizationalUnitUsers { get; set; }
