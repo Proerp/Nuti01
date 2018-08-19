@@ -2889,6 +2889,10 @@
         <Function Name="SearchPallets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Barcode" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SetPasswordHash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="PasswordHash" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="TransferOrderApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -4641,7 +4645,11 @@
             <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPasswordHash" ReturnType="Collection(String)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SetPasswordHash">
             <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PasswordHash" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -10866,6 +10874,7 @@
           <FunctionImportMapping FunctionImportName="BatchMasterSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchMasterSaveRelative" />
           <FunctionImportMapping FunctionImportName="BatchSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchSaveRelative" />
           <FunctionImportMapping FunctionImportName="GetPasswordHash" FunctionName="TotalSmartCodingModel.Store.GetPasswordHash" />
+          <FunctionImportMapping FunctionImportName="SetPasswordHash" FunctionName="TotalSmartCodingModel.Store.SetPasswordHash" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

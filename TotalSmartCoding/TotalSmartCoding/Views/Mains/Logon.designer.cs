@@ -92,6 +92,7 @@
             this.comboBoxEmployeeID.Name = "comboBoxEmployeeID";
             this.comboBoxEmployeeID.Size = new System.Drawing.Size(415, 23);
             this.comboBoxEmployeeID.TabIndex = 14;
+            this.comboBoxEmployeeID.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmployeeID_SelectedIndexChanged);
             // 
             // comboBoxAutonicsPortName
             // 
@@ -293,7 +294,7 @@
             this.buttonDownload.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDownload.Name = "buttonDownload";
             this.buttonDownload.Size = new System.Drawing.Size(24, 42);
-            this.buttonDownload.Text = "Download latest version";
+            this.buttonDownload.Text = "Change password";
             this.buttonDownload.Visible = false;
             this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
             // 
@@ -317,6 +318,7 @@
             this.textPassword.PasswordChar = '*';
             this.textPassword.Size = new System.Drawing.Size(415, 23);
             this.textPassword.TabIndex = 75;
+            this.textPassword.TextChanged += new System.EventHandler(this.textPassword_TextChanged);
             // 
             // labelPassword
             // 

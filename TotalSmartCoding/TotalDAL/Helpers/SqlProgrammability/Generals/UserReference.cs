@@ -23,6 +23,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
 
             this.GetActiveUsers();
             this.GetPasswordHash();
+            this.SetPasswordHash();
 
             this.UserAdd();
             this.UserRemove();
@@ -103,6 +104,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetPasswordHash", queryString);
+        }
+
+        private void SetPasswordHash()
+        {
+            string queryString;
+
+            queryString = " @UserID int, @PasswordHash nvarchar(1000) " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+            queryString = queryString + "       UPDATE      Users SET PasswordHash = @PasswordHash WHERE UserID = @UserID " + "\r\n";
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("SetPasswordHash", queryString);
         }
 
         private void UserAdd()

@@ -46,6 +46,11 @@ namespace TotalSmartCoding.Controllers.APIs.Generals
             return this.userAPIRepository.GetPasswordHash(userID);
         }
 
+        public int SetPasswordHash(int userID, string passwordHash)
+        {
+            return this.userAPIRepository.SetPasswordHash(userID, passwordHash);
+        }
+
         public IList<UserAccessControl> GetUserAccessControls(int? userID, int? nmvnTaskID)
         {
             return this.userAPIRepository.GetUserAccessControls(userID, nmvnTaskID);

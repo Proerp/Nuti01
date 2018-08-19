@@ -2656,5 +2656,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetPasswordHash", userIDParameter);
         }
+    
+        public virtual int SetPasswordHash(Nullable<int> userID, string passwordHash)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var passwordHashParameter = passwordHash != null ?
+                new ObjectParameter("PasswordHash", passwordHash) :
+                new ObjectParameter("PasswordHash", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetPasswordHash", userIDParameter, passwordHashParameter);
+        }
     }
 }

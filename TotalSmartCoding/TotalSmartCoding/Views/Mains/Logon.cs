@@ -337,14 +337,29 @@ namespace TotalSmartCoding.Views.Mains
         {
             try
             {
-                throw new Exception("Please open your program again in order to update new version." + "\r\n" + "\r\n" + "Contact your admin for more information. Thank you!" + "\r\n" + "\r\n" + "\r\n" + "\r\n" + "Vui lòng mở lại phần mềm để cập nhật phiên bản mới nhất. Cám ơn.");
+                ChangePassword changePassword = new ChangePassword(); //new ChangePassword(true): checkPasswordOnly 
+                DialogResult dialogResult = changePassword.ShowDialog(); changePassword.Dispose();
+                if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+                {
+                    CustomMsgBox.Show(this, "Mật khẩu vừa thay đổi thành công." + "\r\n" + "\r\n" + "Vui lòng mở lại phần mềm để đăng nhập bằng mật khẩu mới.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    this.DialogResult = DialogResult.Yes;
+                }
             }
             catch (Exception exception)
             {
-                CommonConfigs.AddUpdateAppSetting("VersionID", "-9");
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
-                this.DialogResult = DialogResult.Cancel;
             }
+
+            //try
+            //{
+            //    throw new Exception("Please open your program again in order to update new version." + "\r\n" + "\r\n" + "Contact your admin for more information. Thank you!" + "\r\n" + "\r\n" + "\r\n" + "\r\n" + "Vui lòng mở lại phần mềm để cập nhật phiên bản mới nhất. Cám ơn.");
+            //}
+            //catch (Exception exception)
+            //{
+            //    CommonConfigs.AddUpdateAppSetting("VersionID", "-9");
+            //    ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            //    this.DialogResult = DialogResult.Cancel;
+            //}
         }
 
         private bool VersionValidate()
@@ -402,7 +417,35 @@ namespace TotalSmartCoding.Views.Mains
 
         }
 
+        private void SetButtonEnabled()
+        {
+            this.buttonLogin.Enabled = this.textPassword.Text == (string)this.textPassword.Tag;
+        }
 
+        private void comboBoxEmployeeID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxEmployeeID.SelectedIndex >= 0)
+            {
+                ActiveUser activeUser = this.comboBoxEmployeeID.SelectedItem as ActiveUser;
+                if (activeUser != null)
+                {
+                    //JUST SET IN ORDER TO CHANGE PASSWORD
+                    ContextAttributes.User = new UserInformation(activeUser.UserID, activeUser.OrganizationalUnitID, activeUser.LocationID, activeUser.LocationName, activeUser.UserName, activeUser.SecurityIdentifier, activeUser.FullyQualifiedUserName, activeUser.IsDatabaseAdmin, new DateTime());
+
+
+                    string passwordHash = activeUser.PasswordHash ;
+                    if (passwordHash != "") passwordHash = SecurePassword.Decrypt(passwordHash);
+
+                    this.textPassword.Tag = passwordHash;
+                }
+                this.SetButtonEnabled();
+            }
+        }
+
+        private void textPassword_TextChanged(object sender, EventArgs e)
+        {
+            this.SetButtonEnabled();
+        }
 
 
 

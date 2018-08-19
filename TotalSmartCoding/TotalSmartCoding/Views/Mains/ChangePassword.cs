@@ -13,6 +13,7 @@ using TotalSmartCoding.Libraries;
 using TotalCore.Repositories.Generals;
 using TotalBase;
 using TotalSmartCoding.Libraries.Helpers;
+using TotalCore.Extensions;
 
 
 namespace TotalSmartCoding.Views.Mains
@@ -35,7 +36,10 @@ namespace TotalSmartCoding.Views.Mains
             try
             {
                 UserAPIs userAPIs = new UserAPIs(CommonNinject.Kernel.Get<IUserAPIRepository>());
-                this.textBoxCurrentPassword.Tag = userAPIs.GetPasswordHash(ContextAttributes.User.UserID);
+                string passwordHash = userAPIs.GetPasswordHash(ContextAttributes.User.UserID);
+                if (passwordHash != "") passwordHash = SecurePassword.Decrypt(passwordHash);
+
+                this.textBoxCurrentPassword.Tag = passwordHash;
 
                 this.SetButtonEnabled();
             }
@@ -49,7 +53,7 @@ namespace TotalSmartCoding.Views.Mains
 
         private void SetButtonEnabled()
         {
-            this.buttonOK.Enabled = this.ValidPassword && this.textBoxCurrentPassword.Visible;
+            //this.buttonExit.Enabled = this.ValidPassword && this.textBoxCurrentPassword.Visible;
             this.buttonChange.Enabled = this.ValidPassword && this.textBoxNewPassword.Text == this.textBoxConfirmPassword.Text;
         }
 
@@ -83,15 +87,25 @@ namespace TotalSmartCoding.Views.Mains
                     this.SetButtonEnabled();
                     this.DialogResult = DialogResult.None;
                 }
-                //else
-                //{
-                //    SQLDatabase.ExecuteNonQuery("UPDATE ListEmployee SET Password = N'" + this.textBoxNewPassword.Text + "' WHERE EmployeeID = " + GlobalVariables.GlobalUserInformation.UserID);
-                //}
+                else
+                {
+                    string passwordHash = this.textBoxNewPassword.Text;
+                    if (passwordHash != "") passwordHash = SecurePassword.Encrypt(passwordHash);
+
+                    UserAPIs userAPIs = new UserAPIs(CommonNinject.Kernel.Get<IUserAPIRepository>());
+                    if (userAPIs.SetPasswordHash(ContextAttributes.User.UserID, passwordHash) == 1)
+                        this.DialogResult = DialogResult.Yes;
+                }
             }
             catch (Exception exception)
             {
                 ExceptionHandlers.ShowExceptionMessageBox(this, exception);
             }
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
 
 
