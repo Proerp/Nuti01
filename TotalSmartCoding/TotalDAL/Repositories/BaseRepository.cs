@@ -120,7 +120,13 @@ namespace TotalDAL.Repositories
 
         public void CreateStoredProcedure()
         {
-            //return;
+
+            return;
+
+            Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
+            batchMaster.RestoreProcedure();
+
+            return;
 
             Helpers.SqlProgrammability.Productions.Pallet pallet = new Helpers.SqlProgrammability.Productions.Pallet(totalSmartCodingEntities);
             pallet.RestoreProcedure();
@@ -140,10 +146,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
             inventory.RestoreProcedure();
 
-            //return;
 
-            Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
-            batchMaster.RestoreProcedure();
 
             //return;
 

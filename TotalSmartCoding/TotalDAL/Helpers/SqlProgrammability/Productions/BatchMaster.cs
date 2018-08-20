@@ -120,9 +120,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       BEGIN " + "\r\n";
-            queryString = queryString + "           DELETE FROM     UniquePacks     WHERE EntryDate < DATEADD(day, -15, GETDATE()) " + "\r\n";
-            queryString = queryString + "           DELETE FROM     UniqueCartons   WHERE EntryDate < DATEADD(day, -15, GETDATE()) " + "\r\n";
-            queryString = queryString + "           DELETE FROM     UniquePallets   WHERE EntryDate < DATEADD(day, -15, GETDATE()) " + "\r\n";
+            queryString = queryString + "           DELETE FROM     UniquePacks     WHERE EntryDate < DATEADD(day, -10, GETDATE()) " + "\r\n";
+            queryString = queryString + "           DELETE FROM     UniqueCartons   WHERE EntryDate < DATEADD(day, -10, GETDATE()) " + "\r\n";
+            queryString = queryString + "           DELETE FROM     UniquePallets   WHERE EntryDate < DATEADD(day, -10, GETDATE()) " + "\r\n";
             queryString = queryString + "       END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchMasterSaveRelative", queryString);
