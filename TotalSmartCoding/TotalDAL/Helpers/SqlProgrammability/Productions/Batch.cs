@@ -301,9 +301,22 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = " @BatchID int, @NextPackNo nvarchar(10), @NextCartonNo nvarchar(10), @NextPalletNo nvarchar(10) " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
-            queryString = queryString + "       UPDATE      Batches" + "\r\n";
-            queryString = queryString + "       SET         NextPackNo = CASE WHEN @NextPackNo != '' THEN @NextPackNo ELSE NextPackNo END, NextCartonNo = CASE WHEN @NextCartonNo != '' THEN @NextCartonNo ELSE NextCartonNo END, NextPalletNo = CASE WHEN @NextPalletNo != '' THEN @NextPalletNo ELSE NextPalletNo END " + "\r\n";
-            queryString = queryString + "       WHERE       BatchID = @BatchID " + "\r\n";
+            queryString = queryString + "       DECLARE     @FillingLineID int, @BatchMasterID int, @LotID int " + "\r\n";
+            queryString = queryString + "       SELECT      @FillingLineID = FillingLineID, @BatchMasterID = BatchMasterID, @LotID = LotID FROM Batches WHERE BatchID = @BatchID " + "\r\n";
+
+            queryString = queryString + "       IF (@NextPackNo <> '' OR @NextCartonNo <> '') " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE      Batches" + "\r\n";
+            queryString = queryString + "               SET         NextPackNo = CASE WHEN @NextPackNo != '' THEN @NextPackNo ELSE NextPackNo END, NextCartonNo = CASE WHEN @NextCartonNo != '' THEN @NextCartonNo ELSE NextCartonNo END " + "\r\n";
+            queryString = queryString + "               WHERE       FillingLineID = @FillingLineID AND LotID = @LotID " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            queryString = queryString + "       IF (@NextPalletNo <> '') " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE      Batches" + "\r\n";
+            queryString = queryString + "               SET         NextPalletNo = CASE WHEN @NextPalletNo != '' THEN @NextPalletNo ELSE NextPalletNo END " + "\r\n";
+            queryString = queryString + "               WHERE       FillingLineID = @FillingLineID AND BatchMasterID = @BatchMasterID " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchCommonUpdate", queryString);
         }
