@@ -32,6 +32,6 @@ namespace TotalDTO.Productions
 
         public int QueueID { get; set; } //JUST FOR PackDTO ONLY
 
-        
+        public bool Locked { get; set; }
     }
 }

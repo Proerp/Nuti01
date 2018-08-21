@@ -55,6 +55,18 @@ namespace TotalDAL.Repositories
 
         public bool RestoreProcedures()
         {
+
+
+            if (!this.totalSmartCodingEntities.ColumnExists("Batches", "Locked"))
+            {
+                this.totalSmartCodingEntities.ColumnAdd("Batches", "Locked", "bit", "0", true);
+                this.totalSmartCodingEntities.ColumnAdd("Pallets", "Locked", "bit", "0", true);
+
+                this.ExecuteStoreCommand(" UPDATE Batches SET Locked = 1 WHERE IsDefault = 0 AND BatchID IN (SELECT DISTINCT BatchID FROM Cartons) ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Pallets SET Locked = 1 WHERE BatchID IN (SELECT DISTINCT BatchID FROM Batches WHERE Locked = 1) ", new ObjectParameter[] { });
+            }
+
+
             if (!this.totalSmartCodingEntities.ColumnExists("Users", "PasswordHash"))
             {
                 this.ExecuteStoreCommand(" UPDATE Batches_1 SET Batches_1.NextPackNo   = UPDATELOTS.NextPackNo, Batches_1.NextCartonNo = UPDATELOTS.NextCartonNo    FROM (SELECT FillingLineID, LotID,          MAX(NextPackNo) AS NextPackNo, MAX(NextCartonNo) AS NextCartonNo, MAX(NextPalletNo) AS NextPalletNo FROM Batches GROUP BY FillingLineID, LotID)             AS UPDATELOTS       INNER JOIN Batches AS Batches_1 ON UPDATELOTS.FillingLineID = Batches_1.FillingLineID       AND UPDATELOTS.LotID = Batches_1.LotID                      ", new ObjectParameter[] { });
@@ -72,7 +84,7 @@ namespace TotalDAL.Repositories
                 //this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 2, ApprovalPermitted = 1, UnApprovalPermitted = 1, VoidablePermitted = 1, UnVoidablePermitted = 1 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
             }
 
-            
+
 
 
             this.totalSmartCodingEntities.ColumnAdd("Repacks", "SerialID", "int", "0", true);
@@ -326,7 +338,7 @@ namespace TotalDAL.Repositories
             warehouseAdjustmentType.RestoreProcedure();
 
 
-            
+
 
             //return;
 
