@@ -24,6 +24,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.GetBatchRepacks();
 
             this.BatchEditable();
+            this.BatchLocked();
             
             this.BatchSaveRelative();
             this.BatchPostSaveValidate();
@@ -204,6 +205,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchEditable", queryArray);
         }
 
+        private void BatchLocked()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = BatchID FROM Batches WHERE BatchID = @EntityID AND Locked = 1";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("BatchLocked", queryArray);
+        }
+
         private void BatchSaveRelative()
         {
             string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
@@ -239,8 +249,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       DECLARE @FillingLineID int ";
             queryString = queryString + "       SELECT @FillingLineID = FillingLineID FROM Batches WHERE BatchID = @EntityID ";
 
+            queryString = queryString + "       UPDATE      Pallets  SET Locked    = 1          WHERE BatchID IN (SELECT BatchID FROM Batches WHERE FillingLineID = @FillingLineID AND BatchID <> @EntityID AND IsDefault =  @Approved AND @Approved = 1) "; //LOCKED PALLET
+            queryString = queryString + "       UPDATE      Batches  SET Locked    = 1                                                        WHERE FillingLineID = @FillingLineID AND BatchID <> @EntityID AND IsDefault =  @Approved AND @Approved = 1 AND BatchID IN (SELECT DISTINCT BatchID FROM Pallets) " + "\r\n"; //LOCK BATCH IF EXIST PALLET
+
+
             queryString = queryString + "       UPDATE      Batches  SET IsDefault = ~@Approved WHERE FillingLineID = @FillingLineID AND BatchID <> @EntityID AND IsDefault =  @Approved" + "\r\n";
-            queryString = queryString + "       UPDATE      Batches  SET IsDefault =  @Approved WHERE FillingLineID = @FillingLineID AND BatchID =  @EntityID AND IsDefault = ~@Approved" + "\r\n";
+            queryString = queryString + "       UPDATE      Batches  SET IsDefault =  @Approved WHERE FillingLineID = @FillingLineID AND BatchID =  @EntityID AND IsDefault = ~@Approved AND Locked = 0 " + "\r\n";
 
             queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";

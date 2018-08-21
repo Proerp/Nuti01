@@ -22,7 +22,7 @@ namespace TotalService.Productions
             if (dto.NoApprovable || this.GlobalLocked(dto)) return false;
             if (dto.Approved || !this.GetApprovalPermitted(dto.OrganizationalUnitID)) return false;
 
-            return true; //this.genericRepository.GetEditable(dto.GetID()) SPECIAL OVERWRITE FOR THIS CLASS BatchService TO IGNORE EDITABLE WHEN CHECK Approvable
+            return !this.batchRepository.GetLocked(dto.GetID()); // SPECIAL OVERWRITE FOR THIS CLASS BatchService TO IGNORE EDITABLE WHEN CHECK Approvable
         }
 
 

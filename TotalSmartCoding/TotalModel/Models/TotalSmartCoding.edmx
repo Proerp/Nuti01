@@ -30,6 +30,7 @@
           <Property Name="IsDefault" Type="bit" Nullable="false" />
           <Property Name="InActive" Type="bit" Nullable="false" />
           <Property Name="InActiveDate" Type="datetime" />
+          <Property Name="Locked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="BatchMasters">
           <Key>
@@ -607,6 +608,7 @@
           <Property Name="LineVolume" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="LineVolumePickup" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
+          <Property Name="Locked" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PickupDetails">
           <Key>
@@ -2200,6 +2202,9 @@
           <Parameter Name="NextPalletNo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="BatchEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BatchLocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
         <Function Name="BatchMasterAddLot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -4651,6 +4656,9 @@
             <Parameter Name="UserID" Mode="In" Type="Int32" />
             <Parameter Name="PasswordHash" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="BatchLocked" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -5582,6 +5590,7 @@
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Pallets" FromRole="Pallet" ToRole="WarehouseAdjustmentDetail" />
           <Property Name="MinPackDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaxPackDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Locked" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cartons_FillingLines">
           <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
@@ -7906,6 +7915,7 @@
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="Batch" ToRole="FillingLine" />
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Batches" FromRole="Batch" ToRole="DeliveryAdviceDetail" />
           <NavigationProperty Name="Repacks" Relationship="TotalSmartCodingModel.FK_Repacks_Batches" FromRole="Batch" ToRole="Repack" />
+          <Property Name="Locked" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Batches_BatchMasters">
           <End Type="TotalSmartCodingModel.BatchMaster" Role="BatchMaster" Multiplicity="1" />
@@ -9221,6 +9231,7 @@
           <EntitySetMapping Name="Pallets">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pallet">
               <MappingFragment StoreEntitySet="Pallets">
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
                 <ScalarProperty Name="MaxPackDate" ColumnName="MaxPackDate" />
                 <ScalarProperty Name="MinPackDate" ColumnName="MinPackDate" />
                 <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
@@ -10465,6 +10476,7 @@
           <EntitySetMapping Name="Batches">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Batch">
               <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
@@ -10875,6 +10887,7 @@
           <FunctionImportMapping FunctionImportName="BatchSaveRelative" FunctionName="TotalSmartCodingModel.Store.BatchSaveRelative" />
           <FunctionImportMapping FunctionImportName="GetPasswordHash" FunctionName="TotalSmartCodingModel.Store.GetPasswordHash" />
           <FunctionImportMapping FunctionImportName="SetPasswordHash" FunctionName="TotalSmartCodingModel.Store.SetPasswordHash" />
+          <FunctionImportMapping FunctionImportName="BatchLocked" FunctionName="TotalSmartCodingModel.Store.BatchLocked" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

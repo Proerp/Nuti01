@@ -7,6 +7,8 @@ namespace TotalCore.Repositories.Productions
 {
     public interface IBatchRepository : IGenericRepository<Batch>
     {
+        bool GetLocked(int id);
+
         void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo);
         void RepackDelete(int batchID);
         void RepackUpdate(int batchID, int repackID);

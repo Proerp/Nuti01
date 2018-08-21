@@ -42,6 +42,7 @@ namespace TotalModel.Models
         public bool IsDefault { get; set; }
         public bool InActive { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
+        public bool Locked { get; set; }
     
         public virtual BatchMaster BatchMaster { get; set; }
         public virtual BatchType BatchType { get; set; }

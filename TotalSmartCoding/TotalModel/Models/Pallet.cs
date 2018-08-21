@@ -39,6 +39,7 @@ namespace TotalModel.Models
         public int EntryStatusID { get; set; }
         public System.DateTime MinPackDate { get; set; }
         public System.DateTime MaxPackDate { get; set; }
+        public bool Locked { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carton> Cartons { get; set; }

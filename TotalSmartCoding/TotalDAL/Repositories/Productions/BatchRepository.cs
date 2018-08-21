@@ -18,6 +18,11 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
+        public bool GetLocked(int id)
+        {
+            return this.CheckExisting(id, "BatchLocked");
+        }
+
         public void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
         {
             this.TotalSmartCodingEntities.BatchCommonUpdate(batchID, nextPackNo, nextCartonNo, nextPalletNo);

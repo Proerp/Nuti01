@@ -2669,5 +2669,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetPasswordHash", userIDParameter, passwordHashParameter);
         }
+    
+        public virtual ObjectResult<string> BatchLocked(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("BatchLocked", entityIDParameter);
+        }
     }
 }
