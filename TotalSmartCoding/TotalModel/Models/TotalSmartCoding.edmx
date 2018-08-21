@@ -2801,6 +2801,9 @@
         <Function Name="PalletEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="PalletLocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
         <Function Name="PalletPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -4657,6 +4660,9 @@
             <Parameter Name="PasswordHash" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="BatchLocked" ReturnType="Collection(String)">
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PalletLocked" ReturnType="Collection(String)">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -10888,6 +10894,7 @@
           <FunctionImportMapping FunctionImportName="GetPasswordHash" FunctionName="TotalSmartCodingModel.Store.GetPasswordHash" />
           <FunctionImportMapping FunctionImportName="SetPasswordHash" FunctionName="TotalSmartCodingModel.Store.SetPasswordHash" />
           <FunctionImportMapping FunctionImportName="BatchLocked" FunctionName="TotalSmartCodingModel.Store.BatchLocked" />
+          <FunctionImportMapping FunctionImportName="PalletLocked" FunctionName="TotalSmartCodingModel.Store.PalletLocked" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -30,6 +30,11 @@ namespace TotalService.Productions
         }
 
 
+        public bool GetLocked(int palletID)
+        {
+            return this.palletRepository.GetLocked(palletID);
+        }
+
         public bool GetPalletChanged(GlobalVariables.FillingLine fillingLineID)
         {
             return this.palletRepository.GetPalletChanged(fillingLineID);

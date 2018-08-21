@@ -22,7 +22,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.PalletPostSaveValidate();
 
             this.PalletEditable();
-
+            this.PalletLocked();
 
             this.GetPallets();
             this.GetPalletChanged();
