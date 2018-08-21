@@ -14,6 +14,10 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
+        public bool GetLocked(int palletID)
+        {
+            return this.CheckExisting(palletID, "PalletLocked");
+        }
 
         public bool GetPalletChanged(GlobalVariables.FillingLine fillingLineID)
         {

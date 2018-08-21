@@ -105,6 +105,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PalletEditable", queryArray);
         }
 
+        private void PalletLocked()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = PalletID FROM Pallets WHERE PalletID = @EntityID AND Locked = 1";
+
+            this.totalSmartCodingEntities.CreateProcedureToCheckExisting("PalletLocked", queryArray);
+        }
 
 
 

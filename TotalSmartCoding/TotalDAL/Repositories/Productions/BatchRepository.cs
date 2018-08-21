@@ -18,9 +18,9 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
-        public bool GetLocked(int id)
+        public bool GetLocked(int batchID)
         {
-            return this.CheckExisting(id, "BatchLocked");
+            return this.CheckExisting(batchID, "BatchLocked");
         }
 
         public void CommonUpdate(int batchID, string nextPackNo, string nextCartonNo, string nextPalletNo)
