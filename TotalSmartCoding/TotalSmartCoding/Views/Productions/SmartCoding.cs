@@ -1082,6 +1082,13 @@ namespace TotalSmartCoding.Views.Productions
             }
         }
 
+
+        private void buttonPalletQueueCount_Click(object sender, EventArgs e)
+        {
+            if (this.fillingData.BatchID >= 0)
+                this.ShowQuickView(this.fillingData.BatchCode, 0, 0, this.fillingData.BatchID);
+        }
+
         #endregion Exception Handler
 
 
