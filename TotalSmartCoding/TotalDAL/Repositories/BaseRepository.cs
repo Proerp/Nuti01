@@ -64,6 +64,9 @@ namespace TotalDAL.Repositories
 
                 this.ExecuteStoreCommand(" UPDATE Batches SET Locked = 1 WHERE IsDefault = 0 AND BatchID IN (SELECT DISTINCT BatchID FROM Cartons) ", new ObjectParameter[] { });
                 this.ExecuteStoreCommand(" UPDATE Pallets SET Locked = 1 WHERE BatchID IN (SELECT DISTINCT BatchID FROM Batches WHERE Locked = 1) ", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 2, UnApprovalPermitted = 2, VoidablePermitted = 2, UnVoidablePermitted = 2 WHERE UserID = 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Batch, new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID <> 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Pallet, new ObjectParameter[] { });
             }
 
 
@@ -84,7 +87,7 @@ namespace TotalDAL.Repositories
                 //this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 2, ApprovalPermitted = 1, UnApprovalPermitted = 1, VoidablePermitted = 1, UnVoidablePermitted = 1 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
             }
 
-            this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 2, UnApprovalPermitted = 2, VoidablePermitted = 2, UnVoidablePermitted = 2 WHERE UserID = 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Batch, new ObjectParameter[] { });
+            
 
 
             this.totalSmartCodingEntities.ColumnAdd("Repacks", "SerialID", "int", "0", true);

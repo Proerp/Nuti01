@@ -48,8 +48,7 @@ namespace TotalSmartCoding.Views.Productions
         private BatchAPIs batchAPIs;
         private BatchViewModel batchViewModel { get; set; }
 
-        private CommodityAPIs commodityAPIs { get; set; }
-        private ScannerAPIs scannerAPIs;
+        private CommodityAPIs commodityAPIs { get; set; }        
 
         public Batches(SmartCoding smartCoding, bool allQueueEmpty)
             : base()
@@ -79,9 +78,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.batchViewModel = CommonNinject.Kernel.Get<BatchViewModel>();
             this.batchViewModel.PropertyChanged += new PropertyChangedEventHandler(ModelDTO_PropertyChanged);
-            this.baseDTO = this.batchViewModel;
-
-            this.scannerAPIs = new ScannerAPIs(CommonNinject.Kernel.Get<IPackRepository>(), CommonNinject.Kernel.Get<ICartonRepository>(), CommonNinject.Kernel.Get<IPalletRepository>());
+            this.baseDTO = this.batchViewModel;            
         }
 
         protected override void NotifyPropertyChanged(string propertyName)
@@ -195,7 +192,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 if (this.checkSelectedIndexID())
                 {
-                    QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)this.batchViewModel.FillingLineID, 0, 0, this.baseDTO.GetID()), "Batch: " + this.batchViewModel.Code);
+                    //NEED TO REFRESH scannerAPIs
+                    ScannerAPIs scannerAPIs = new ScannerAPIs(CommonNinject.Kernel.Get<IPackRepository>(), CommonNinject.Kernel.Get<ICartonRepository>(), CommonNinject.Kernel.Get<IPalletRepository>());
+                    QuickView quickView = new QuickView(scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)this.batchViewModel.FillingLineID, 0, 0, this.baseDTO.GetID()), "Batch: " + this.batchViewModel.Code);
                     quickView.ShowDialog(); quickView.Dispose();
                 }
             }

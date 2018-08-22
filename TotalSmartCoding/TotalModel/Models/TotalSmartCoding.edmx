@@ -2816,6 +2816,10 @@
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
           <Parameter Name="CartonIDs" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="PalletToggleLocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="Locked" Type="bit" Mode="In" />
+        </Function>
         <Function Name="PalletUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PalletIDs" Type="varchar" Mode="In" />
           <Parameter Name="EntryStatusID" Type="int" Mode="In" />
@@ -4670,6 +4674,10 @@
           <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BatchToggleLocked">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="Locked" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="PalletToggleLocked">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="Locked" Mode="In" Type="Boolean" />
           </FunctionImport>
@@ -10908,6 +10916,7 @@
           <FunctionImportMapping FunctionImportName="BatchLocked" FunctionName="TotalSmartCodingModel.Store.BatchLocked" />
           <FunctionImportMapping FunctionImportName="PalletLocked" FunctionName="TotalSmartCodingModel.Store.PalletLocked" />
           <FunctionImportMapping FunctionImportName="BatchToggleLocked" FunctionName="TotalSmartCodingModel.Store.BatchToggleLocked" />
+          <FunctionImportMapping FunctionImportName="PalletToggleLocked" FunctionName="TotalSmartCodingModel.Store.PalletToggleLocked" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

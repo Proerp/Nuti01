@@ -91,7 +91,10 @@ namespace TotalSmartCoding.Views.Productions
 
                     if (CustomMsgBox.Show(this, "Are you sure you want to " + (palletViewModel.Lockable ? "lock" : "un-lock") + " this entry data" + "?", "Warning", MessageBoxButtons.YesNo, (palletViewModel.Lockable ? MessageBoxIcon.Information : MessageBoxIcon.Warning)) == DialogResult.Yes)
                         if (palletController.LockConfirmed())
-                            palletDTO.Lockable = palletViewModel.Locked;
+                        {
+                            ((PalletDTO)this.fastBarcodes.SelectedObject).Locked = !palletViewModel.Locked;
+                            this.fastBarcodes.RefreshObject(this.fastBarcodes.SelectedObject);
+                        }
                         else
                             throw new Exception("Lỗi khóa hay mở khóa pallet: " + palletViewModel.Code + "\r\n\r\nVui lòng đóng phần mềm và thử lại sau.");
                 }

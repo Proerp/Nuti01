@@ -24,6 +24,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.PalletEditable();
             this.PalletLocked();
 
+            this.PalletToggleLocked();
+
             this.GetPallets();
             this.GetPalletChanged();
 

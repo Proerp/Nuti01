@@ -1086,7 +1086,11 @@ namespace TotalSmartCoding.Views.Productions
         private void buttonPalletQueueCount_Click(object sender, EventArgs e)
         {
             if (this.fillingData.BatchID >= 0)
+            {
+                //NEED TO REFRESH scannerAPIs
+                this.scannerAPIs = new ScannerAPIs(CommonNinject.Kernel.Get<IPackRepository>(), CommonNinject.Kernel.Get<ICartonRepository>(), CommonNinject.Kernel.Get<IPalletRepository>());
                 this.ShowQuickView(this.fillingData.BatchCode, 0, 0, this.fillingData.BatchID);
+            }
         }
 
         #endregion Exception Handler
