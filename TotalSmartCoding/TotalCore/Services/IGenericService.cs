@@ -17,6 +17,8 @@ namespace TotalCore.Services
         bool Editable(TDto dto);
         bool Approvable(TDto dto);
         bool UnApprovable(TDto dto);
+        bool Lockable(TDto dto);
+        bool UnLockable(TDto dto);
         bool Voidable(TDto dto);
         bool UnVoidable(TDto dto);
         bool Deletable(TDto dto);

@@ -336,8 +336,8 @@ namespace TotalSmartCoding.Controllers
             if (!simpleViewModel.Locked)
                 if (this.GenericService.GetApprovalPermitted(simpleViewModel.OrganizationalUnitID))
                 {
-                    simpleViewModel.Approvable = this.GenericService.Approvable(simpleViewModel);
-                    if (!simpleViewModel.Approvable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                    simpleViewModel.Lockable = this.GenericService.Lockable(simpleViewModel);
+                    if (!simpleViewModel.Lockable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
                 }
                 else //USER DON'T HAVE PERMISSION TO DO
                     throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
@@ -345,8 +345,8 @@ namespace TotalSmartCoding.Controllers
             if (simpleViewModel.Locked)
                 if (this.GenericService.GetUnApprovalPermitted(simpleViewModel.OrganizationalUnitID))
                 {
-                    simpleViewModel.UnApprovable = this.GenericService.UnApprovable(simpleViewModel);
-                    if (!simpleViewModel.UnApprovable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                    simpleViewModel.UnLockable = this.GenericService.UnLockable(simpleViewModel);
+                    if (!simpleViewModel.UnLockable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
                 }
                 else //USER DON'T HAVE PERMISSION TO DO
                     throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");

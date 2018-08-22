@@ -107,7 +107,10 @@ namespace TotalDTO
         public bool Approvable { get; set; }
         public bool UnApprovable { get; set; }
         public virtual bool NoApprovable { get { return false; } }
-        
+
+        public bool Lockable { get; set; }
+        public bool UnLockable { get; set; }
+        public virtual bool NoLockable { get { return false; } }
 
         
         public bool Voidable { get; set; }

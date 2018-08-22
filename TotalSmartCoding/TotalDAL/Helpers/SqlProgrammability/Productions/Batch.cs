@@ -30,6 +30,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.BatchPostSaveValidate();
 
             this.BatchToggleApproved();
+            this.BatchToggleLocked();
             this.BatchToggleVoid();
 
             this.BatchInitReference(); //NOT USE THIS ANY MORE. NOW: Reference = Code + LotCode
@@ -197,7 +198,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string[] queryArray = new string[4];
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = BatchID FROM Batches WHERE BatchID = @EntityID AND InActive = 1 "; //Don't allow edit after void
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = BatchID FROM Batches WHERE BatchID = @EntityID AND (InActive = 1 OR Locked = 1) "; //Don't allow edit after void/ locked
             queryArray[1] = " SELECT TOP 1 @FoundEntity = BatchID FROM Pallets WHERE BatchID = @EntityID ";
             queryArray[2] = " SELECT TOP 1 @FoundEntity = BatchID FROM Cartons WHERE BatchID = @EntityID ";
             queryArray[3] = " SELECT TOP 1 @FoundEntity = BatchID FROM Packs WHERE BatchID = @EntityID ";
@@ -263,6 +264,25 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleApproved", queryString);
+        }
+
+        private void BatchToggleLocked()
+        {
+            string queryString = " @EntityID int, @Locked bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       IF (@Locked = 1)    UPDATE Pallets SET Locked = 1 WHERE BatchID = @EntityID ";
+
+            queryString = queryString + "       UPDATE      Batches  SET Locked = @Locked WHERE BatchID = @EntityID AND Locked = ~@Locked " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Không thể cài đặt batch này cho sản xuất' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("BatchToggleLocked", queryString);
         }
 
         private void BatchToggleVoid()

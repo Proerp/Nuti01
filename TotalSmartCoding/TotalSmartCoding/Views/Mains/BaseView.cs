@@ -529,7 +529,7 @@ namespace TotalSmartCoding.Views.Mains
                 {
                     this.myController.Lock(this.baseDTO.GetID());
 
-                    if (this.LockCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, "Are you sure you want to " + (this.baseDTO.Approvable ? "lock" : "un-lock") + " this entry data" + "?", "Warning", MessageBoxButtons.YesNo, (this.baseDTO.Approvable ? MessageBoxIcon.Information : MessageBoxIcon.Warning)) == DialogResult.Yes)
+                    if (this.LockCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, "Are you sure you want to " + (this.baseDTO.Lockable ? "lock" : "un-lock") + " this entry data" + "?", "Warning", MessageBoxButtons.YesNo, (this.baseDTO.Lockable ? MessageBoxIcon.Information : MessageBoxIcon.Warning)) == DialogResult.Yes)
                         if (this.myController.LockConfirmed())
                         {
                             this.LockMore(this.baseDTO.GetID());

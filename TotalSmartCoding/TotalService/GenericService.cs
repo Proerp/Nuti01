@@ -140,6 +140,22 @@ namespace TotalService
             return this.genericRepository.GetEditable(dto.GetID());
         }
 
+        public virtual bool Lockable(TDto dto)
+        {
+            if (dto.NoLockable || this.GlobalLocked(dto)) return false;
+            if (dto.Locked || !this.GetApprovalPermitted(dto.OrganizationalUnitID)) return false;
+
+            return true;// this.genericRepository.GetEditable(dto.GetID());
+        }
+
+        public virtual bool UnLockable(TDto dto)
+        {
+            if (dto.NoLockable || this.GlobalLocked(dto)) return false;
+            if (!dto.Locked || !this.GetUnApprovalPermitted(dto.OrganizationalUnitID)) return false;
+
+            return true;// this.genericRepository.GetEditable(dto.GetID());
+        }
+
         public virtual bool Voidable(TDto dto)
         {
             if (dto.NoVoidable || this.GlobalLocked(dto)) return false;
@@ -289,7 +305,7 @@ namespace TotalService
             {
                 try
                 {
-                    if ((!dto.Locked && !this.Approvable(dto)) || (dto.Locked && !this.UnApprovable(dto))) throw new System.ArgumentException("Lỗi " + (dto.Locked ? "mở " : "") + "khóa dữ liệu", "Bạn không có quyền hoặc dữ liệu này đã bị khóa.");
+                    if ((!dto.Locked && !this.Lockable(dto)) || (dto.Locked && !this.UnLockable(dto))) throw new System.ArgumentException("Lỗi " + (dto.Locked ? "mở " : "") + "khóa dữ liệu", "Bạn không có quyền hoặc dữ liệu này đã bị khóa.");
 
                     this.ToggleLockedMe(dto);
 

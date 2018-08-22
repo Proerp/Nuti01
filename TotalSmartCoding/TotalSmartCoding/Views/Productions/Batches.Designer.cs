@@ -55,7 +55,7 @@
             this.buttonUnlock = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonApply = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.separatorApply = new System.Windows.Forms.ToolStripSeparator();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.comboShowCummulativePacks = new System.Windows.Forms.ToolStripComboBox();
@@ -397,7 +397,7 @@
             this.buttonUnlock,
             this.toolStripSeparator1,
             this.buttonApply,
-            this.toolStripSeparator2,
+            this.separatorApply,
             this.buttonDiscontinued,
             this.toolStripLabel1,
             this.comboShowCummulativePacks,
@@ -416,8 +416,8 @@
             this.buttonUnlock.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonUnlock.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonUnlock.Name = "buttonUnlock";
-            this.buttonUnlock.Size = new System.Drawing.Size(72, 36);
-            this.buttonUnlock.Text = "Unlock";
+            this.buttonUnlock.Size = new System.Drawing.Size(114, 36);
+            this.buttonUnlock.Text = "Lock or Unlock";
             this.buttonUnlock.Click += new System.EventHandler(this.buttonUnlock_Click);
             // 
             // toolStripSeparator1
@@ -435,10 +435,10 @@
             this.buttonApply.Text = "Applying for Production     ";
             this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
-            // toolStripSeparator2
+            // separatorApply
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+            this.separatorApply.Name = "separatorApply";
+            this.separatorApply.Size = new System.Drawing.Size(6, 39);
             // 
             // buttonDiscontinued
             // 
@@ -778,7 +778,7 @@
         private BrightIdeasSoftware.OLVColumn olvEntryDate;
         private BrightIdeasSoftware.OLVColumn olvIsDefault;
         private System.Windows.Forms.ToolStripComboBox comboDiscontinued;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator separatorApply;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private CustomControls.DateTimexPicker dateTimexEntryDate;
         private CustomControls.TextexBox textexCode;

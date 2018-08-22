@@ -2687,5 +2687,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PalletLocked", entityIDParameter);
         }
+    
+        public virtual int BatchToggleLocked(Nullable<int> entityID, Nullable<bool> locked)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var lockedParameter = locked.HasValue ?
+                new ObjectParameter("Locked", locked) :
+                new ObjectParameter("Locked", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchToggleLocked", entityIDParameter, lockedParameter);
+        }
     }
 }

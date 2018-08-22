@@ -179,6 +179,9 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBatchIndex.ShowGroups = true;
 
             this.buttonUnlock.Visible = !this.batchViewModel.AllowDataInput;
+            this.buttonApply.Visible = this.batchViewModel.AllowDataInput;
+            this.buttonDiscontinued.Visible = this.batchViewModel.AllowDataInput;
+            this.separatorApply.Visible = this.batchViewModel.AllowDataInput;
         }
 
         private void fastBatchIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
