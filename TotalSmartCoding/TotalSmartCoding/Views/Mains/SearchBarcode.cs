@@ -123,7 +123,7 @@ namespace TotalSmartCoding.Views.Mains
 
                         if (cartonDTO != null || palletDTO != null)
                         {
-                            QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)(cartonDTO != null ? cartonDTO.FillingLineID : palletDTO.FillingLineID), cartonDTO != null ? cartonDTO.CartonID : 0, palletDTO != null ? palletDTO.PalletID : 0), cartonDTO != null ? "Carton: " + cartonDTO.Code : "Pallet: " + palletDTO.Code);
+                            QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)(cartonDTO != null ? cartonDTO.FillingLineID : palletDTO.FillingLineID), cartonDTO != null ? cartonDTO.CartonID : 0, palletDTO != null ? palletDTO.PalletID : 0, 0), cartonDTO != null ? "Carton: " + cartonDTO.Code : "Pallet: " + palletDTO.Code);
                             quickView.ShowDialog(); quickView.Dispose();
                         }
                     }

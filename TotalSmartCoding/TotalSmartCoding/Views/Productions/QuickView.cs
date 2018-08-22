@@ -46,10 +46,17 @@ namespace TotalSmartCoding.Views.Productions
                 {
                     if (this.fastBarcodes.SelectedObject != null)
                     {
+                        int fillingLineID = 0; int cartonID = 0; int palletID = 0; int batchID = 0;
+
                         CartonDTO cartonDTO = this.fastBarcodes.SelectedObject as CartonDTO;
-                        if (cartonDTO != null)
+                        if (cartonDTO != null) { fillingLineID = cartonDTO.FillingLineID; cartonID = cartonDTO.CartonID; }
+
+                        PalletDTO palletDTO = this.fastBarcodes.SelectedObject as PalletDTO;
+                        if (palletDTO != null) { fillingLineID = palletDTO.FillingLineID; palletID = palletDTO.PalletID; }
+
+                        if (fillingLineID > 0)
                         {
-                            QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)cartonDTO.FillingLineID, cartonDTO.CartonID, 0), "Carton: " + cartonDTO.Code);
+                            QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)fillingLineID, cartonID, palletID, batchID), (cartonDTO != null ? "Carton: " + cartonDTO.Code : (palletDTO != null ? "Pallet: " + palletDTO.Code : "")));
                             quickView.ShowDialog(); quickView.Dispose();
                         }
                     }

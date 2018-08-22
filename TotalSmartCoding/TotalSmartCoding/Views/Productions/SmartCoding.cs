@@ -992,8 +992,8 @@ namespace TotalSmartCoding.Views.Productions
                         {
                             int cartonID = sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? barcodeID : 0;
                             int palletID = sender.Equals(this.dgvCartonPendingQueue) || sender.Equals(this.dgvCartonQueue) || sender.Equals(this.dgvCartonsetQueue) ? 0 : barcodeID;
-                            QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList(this.fillingData.FillingLineID, cartonID, palletID), (cartonID != 0 ? "Carton: " : "Pallet: ") + selectedBarcode);
-                            quickView.ShowDialog(); quickView.Dispose();
+
+                            this.ShowQuickView(selectedBarcode, cartonID, palletID, 0);
                         }
                     }
                 }
@@ -1002,6 +1002,12 @@ namespace TotalSmartCoding.Views.Productions
                     ExceptionHandlers.ShowExceptionMessageBox(this, exception);
                 }
             }
+        }
+
+        private void ShowQuickView(string selectedBarcode, int cartonID, int palletID, int batchID)
+        {
+            QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList(this.fillingData.FillingLineID, cartonID, palletID, batchID), (cartonID != 0 ? "Carton: " : (palletID != 0 ? "Pallet: " : "Batch: ")) + selectedBarcode);
+            quickView.ShowDialog(); quickView.Dispose();
         }
 
         private int getBarcodeID(DataGridViewCell dataGridViewCell, out string selectedBarcode)

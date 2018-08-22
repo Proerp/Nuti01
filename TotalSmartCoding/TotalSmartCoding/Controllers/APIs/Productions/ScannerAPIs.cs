@@ -23,7 +23,7 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
             this.palletRepository = palletRepository;
         }
 
-        public IList<BarcodeDTO> GetBarcodeList(GlobalVariables.FillingLine fillingLineID, int cartonID, int palletID)
+        public IList<BarcodeDTO> GetBarcodeList(GlobalVariables.FillingLine fillingLineID, int cartonID, int palletID, int batchID)
         {
             try
             {
@@ -54,6 +54,19 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
                             });
                         }
                     }
+                    else
+                        if (batchID > 0)
+                        {
+                            IList<Pallet> pallets = this.palletRepository.GetPallets(fillingLineID, batchID, (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Wrapped);
+                            if (pallets.Count > 0)
+                            {
+                                pallets.Each(pallet =>
+                                {
+                                    PalletDTO palletDTO = Mapper.Map<Pallet, PalletDTO>(pallet);
+                                    barcodeList.Add(palletDTO);
+                                });
+                            }
+                        }
 
                 return barcodeList;
             }
