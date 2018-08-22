@@ -12,6 +12,7 @@ namespace TotalDTO.Productions
     public class BatchPrimitiveDTO : BaseDTO, IPrimitiveEntity, IPrimitiveDTO
     {
         public override GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.Batch; } }
+        public override bool AllowDataInput { get { return GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; } }
         public override bool NoVoidable { get { return false; } }
 
         public override int GetID() { return this.BatchID; }

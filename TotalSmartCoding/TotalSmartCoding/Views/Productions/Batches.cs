@@ -177,6 +177,8 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBatchIndex.AboutToCreateGroups += fastBatchIndex_AboutToCreateGroups;
 
             this.fastBatchIndex.ShowGroups = true;
+
+            this.buttonUnlock.Visible = !this.batchViewModel.AllowDataInput;
         }
 
         private void fastBatchIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
@@ -288,6 +290,18 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.combexCommodityID.DataSource = this.commodityAPIs.GetCommodityBases();
                 this.invokeEdit(this.batchViewModel.BatchID);
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        private void buttonUnlock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                
             }
             catch (Exception exception)
             {
