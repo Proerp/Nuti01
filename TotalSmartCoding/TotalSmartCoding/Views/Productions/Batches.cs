@@ -220,7 +220,7 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBatchIndex.SetObjects(this.batchAPIs.GetBatchIndexes(0, this.comboShowCummulativePacks.SelectedIndex == 0 ? false : true, this.comboDiscontinued.SelectedIndex == 0 ? GlobalEnums.ActiveOption.Active : GlobalEnums.ActiveOption.Both, false));
             base.Loading();
 
-            this.smartCoding.Initialize();
+            if (this.smartCoding != null) this.smartCoding.Initialize();
         }
 
         protected override void DoAfterLoad()

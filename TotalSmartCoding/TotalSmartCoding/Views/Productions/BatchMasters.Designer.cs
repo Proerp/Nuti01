@@ -52,6 +52,7 @@
             this.separatorRemoveLOT = new System.Windows.Forms.ToolStripSeparator();
             this.buttonRemoveLOT = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.buttonBatches = new System.Windows.Forms.ToolStripButton();
             this.buttonDiscontinued = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.comboShowCummulativePacks = new System.Windows.Forms.ToolStripComboBox();
@@ -73,6 +74,7 @@
             this.olvPackLineVolume = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.imageList32 = new System.Windows.Forms.ImageList(this.components);
+            this.separatorBatches = new System.Windows.Forms.ToolStripSeparator();
             this.layoutMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPlannedQuantity)).BeginInit();
             this.toolStripChildForm.SuspendLayout();
@@ -87,9 +89,9 @@
             this.layoutMaster.AutoSize = true;
             this.layoutMaster.BackColor = System.Drawing.Color.Ivory;
             this.layoutMaster.ColumnCount = 3;
-            this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.layoutMaster.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 19F));
             this.layoutMaster.Controls.Add(this.label4, 1, 7);
             this.layoutMaster.Controls.Add(this.textexCommodityAPICode, 1, 8);
             this.layoutMaster.Controls.Add(this.numericPlannedQuantity, 1, 12);
@@ -113,7 +115,7 @@
             this.layoutMaster.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.layoutMaster.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.layoutMaster.RowCount = 17;
-            this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 12F));
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -130,7 +132,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(378, 582);
+            this.layoutMaster.Size = new System.Drawing.Size(283, 509);
             this.layoutMaster.TabIndex = 62;
             // 
             // label4
@@ -138,10 +140,10 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 208);
-            this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label4.Location = new System.Drawing.Point(22, 169);
+            this.label4.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(322, 20);
+            this.label4.Size = new System.Drawing.Size(241, 15);
             this.label4.TabIndex = 104;
             this.label4.Text = "Short Code";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -150,25 +152,25 @@
             // 
             this.textexCommodityAPICode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityAPICode.Editable = false;
-            this.textexCommodityAPICode.Location = new System.Drawing.Point(33, 230);
-            this.textexCommodityAPICode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexCommodityAPICode.Location = new System.Drawing.Point(24, 186);
+            this.textexCommodityAPICode.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexCommodityAPICode.Name = "textexCommodityAPICode";
-            this.textexCommodityAPICode.Size = new System.Drawing.Size(319, 27);
+            this.textexCommodityAPICode.Size = new System.Drawing.Size(239, 23);
             this.textexCommodityAPICode.TabIndex = 3;
             // 
             // numericPlannedQuantity
             // 
             this.numericPlannedQuantity.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericPlannedQuantity.Editable = true;
-            this.numericPlannedQuantity.Location = new System.Drawing.Point(33, 350);
-            this.numericPlannedQuantity.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.numericPlannedQuantity.Location = new System.Drawing.Point(24, 284);
+            this.numericPlannedQuantity.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.numericPlannedQuantity.Maximum = new decimal(new int[] {
             1410065408,
             2,
             0,
             0});
             this.numericPlannedQuantity.Name = "numericPlannedQuantity";
-            this.numericPlannedQuantity.Size = new System.Drawing.Size(319, 27);
+            this.numericPlannedQuantity.Size = new System.Drawing.Size(239, 23);
             this.numericPlannedQuantity.TabIndex = 5;
             this.numericPlannedQuantity.ThousandsSeparator = true;
             // 
@@ -176,10 +178,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(30, 328);
-            this.label12.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label12.Location = new System.Drawing.Point(22, 267);
+            this.label12.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(322, 20);
+            this.label12.Size = new System.Drawing.Size(241, 15);
             this.label12.TabIndex = 95;
             this.label12.Text = "Planned Quantity";
             this.label12.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -191,11 +193,11 @@
             this.combexBatchStatusID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexBatchStatusID.Editable = true;
             this.combexBatchStatusID.FormattingEnabled = true;
-            this.combexBatchStatusID.Location = new System.Drawing.Point(33, 410);
-            this.combexBatchStatusID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexBatchStatusID.Location = new System.Drawing.Point(24, 333);
+            this.combexBatchStatusID.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.combexBatchStatusID.Name = "combexBatchStatusID";
             this.combexBatchStatusID.ReadOnly = false;
-            this.combexBatchStatusID.Size = new System.Drawing.Size(319, 28);
+            this.combexBatchStatusID.Size = new System.Drawing.Size(239, 23);
             this.combexBatchStatusID.TabIndex = 6;
             // 
             // label1
@@ -203,10 +205,10 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(30, 449);
-            this.label1.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label1.Location = new System.Drawing.Point(22, 365);
+            this.label1.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(322, 20);
+            this.label1.Size = new System.Drawing.Size(241, 15);
             this.label1.TabIndex = 57;
             this.label1.Text = "Remarks";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -216,10 +218,10 @@
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(30, 27);
-            this.label6.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label6.Location = new System.Drawing.Point(22, 22);
+            this.label6.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(322, 20);
+            this.label6.Size = new System.Drawing.Size(241, 15);
             this.label6.TabIndex = 30;
             this.label6.Text = "Date";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -229,10 +231,10 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(30, 87);
-            this.label2.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label2.Location = new System.Drawing.Point(22, 71);
+            this.label2.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(322, 20);
+            this.label2.Size = new System.Drawing.Size(241, 15);
             this.label2.TabIndex = 58;
             this.label2.Text = "Batch";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -242,10 +244,10 @@
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(30, 147);
-            this.label14.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label14.Location = new System.Drawing.Point(22, 120);
+            this.label14.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(322, 20);
+            this.label14.Size = new System.Drawing.Size(241, 15);
             this.label14.TabIndex = 51;
             this.label14.Text = "Item Code";
             this.label14.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -255,10 +257,10 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(30, 388);
-            this.label8.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label8.Location = new System.Drawing.Point(22, 316);
+            this.label8.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(322, 20);
+            this.label8.Size = new System.Drawing.Size(241, 15);
             this.label8.TabIndex = 68;
             this.label8.Text = "Status";
             this.label8.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -269,21 +271,21 @@
             this.dateTimexEntryDate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimexEntryDate.Editable = true;
             this.dateTimexEntryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimexEntryDate.Location = new System.Drawing.Point(33, 49);
-            this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.dateTimexEntryDate.Location = new System.Drawing.Point(24, 39);
+            this.dateTimexEntryDate.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.dateTimexEntryDate.Name = "dateTimexEntryDate";
             this.dateTimexEntryDate.ReadOnly = false;
-            this.dateTimexEntryDate.Size = new System.Drawing.Size(319, 27);
+            this.dateTimexEntryDate.Size = new System.Drawing.Size(239, 23);
             this.dateTimexEntryDate.TabIndex = 0;
             // 
             // textexCode
             // 
             this.textexCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCode.Editable = true;
-            this.textexCode.Location = new System.Drawing.Point(33, 109);
-            this.textexCode.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexCode.Location = new System.Drawing.Point(24, 88);
+            this.textexCode.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexCode.Name = "textexCode";
-            this.textexCode.Size = new System.Drawing.Size(319, 27);
+            this.textexCode.Size = new System.Drawing.Size(239, 23);
             this.textexCode.TabIndex = 1;
             // 
             // combexCommodityID
@@ -293,31 +295,31 @@
             this.combexCommodityID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.combexCommodityID.Editable = true;
             this.combexCommodityID.FormattingEnabled = true;
-            this.combexCommodityID.Location = new System.Drawing.Point(33, 169);
-            this.combexCommodityID.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.combexCommodityID.Location = new System.Drawing.Point(24, 137);
+            this.combexCommodityID.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.combexCommodityID.Name = "combexCommodityID";
             this.combexCommodityID.ReadOnly = false;
-            this.combexCommodityID.Size = new System.Drawing.Size(319, 28);
+            this.combexCommodityID.Size = new System.Drawing.Size(239, 23);
             this.combexCommodityID.TabIndex = 2;
             // 
             // textexCommodityName
             // 
             this.textexCommodityName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexCommodityName.Editable = false;
-            this.textexCommodityName.Location = new System.Drawing.Point(33, 290);
-            this.textexCommodityName.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexCommodityName.Location = new System.Drawing.Point(24, 235);
+            this.textexCommodityName.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexCommodityName.Name = "textexCommodityName";
-            this.textexCommodityName.Size = new System.Drawing.Size(319, 27);
+            this.textexCommodityName.Size = new System.Drawing.Size(239, 23);
             this.textexCommodityName.TabIndex = 4;
             // 
             // textexRemarks
             // 
             this.textexRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textexRemarks.Editable = true;
-            this.textexRemarks.Location = new System.Drawing.Point(33, 471);
-            this.textexRemarks.Margin = new System.Windows.Forms.Padding(3, 1, 1, 1);
+            this.textexRemarks.Location = new System.Drawing.Point(24, 382);
+            this.textexRemarks.Margin = new System.Windows.Forms.Padding(2, 1, 1, 1);
             this.textexRemarks.Name = "textexRemarks";
-            this.textexRemarks.Size = new System.Drawing.Size(319, 27);
+            this.textexRemarks.Size = new System.Drawing.Size(239, 23);
             this.textexRemarks.TabIndex = 7;
             // 
             // label3
@@ -325,10 +327,10 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(30, 268);
-            this.label3.Margin = new System.Windows.Forms.Padding(0, 10, 1, 1);
+            this.label3.Location = new System.Drawing.Point(22, 218);
+            this.label3.Margin = new System.Windows.Forms.Padding(0, 8, 1, 1);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(322, 20);
+            this.label3.Size = new System.Drawing.Size(241, 15);
             this.label3.TabIndex = 77;
             this.label3.Text = "Item Name";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -342,6 +344,8 @@
             this.separatorRemoveLOT,
             this.buttonRemoveLOT,
             this.toolStripSeparator1,
+            this.buttonBatches,
+            this.separatorBatches,
             this.buttonDiscontinued,
             this.toolStripLabel1,
             this.comboShowCummulativePacks,
@@ -349,7 +353,7 @@
             this.buttonItems});
             this.toolStripChildForm.Location = new System.Drawing.Point(0, 0);
             this.toolStripChildForm.Name = "toolStripChildForm";
-            this.toolStripChildForm.Size = new System.Drawing.Size(1483, 55);
+            this.toolStripChildForm.Size = new System.Drawing.Size(951, 39);
             this.toolStripChildForm.TabIndex = 29;
             this.toolStripChildForm.Text = "toolStrip1";
             this.toolStripChildForm.Visible = false;
@@ -360,7 +364,7 @@
             this.buttonNewLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonNewLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonNewLOT.Name = "buttonNewLOT";
-            this.buttonNewLOT.Size = new System.Drawing.Size(114, 52);
+            this.buttonNewLOT.Size = new System.Drawing.Size(85, 36);
             this.buttonNewLOT.Text = "Add Lot";
             this.buttonNewLOT.Visible = false;
             this.buttonNewLOT.Click += new System.EventHandler(this.buttonNewLOT_Click);
@@ -368,7 +372,7 @@
             // separatorRemoveLOT
             // 
             this.separatorRemoveLOT.Name = "separatorRemoveLOT";
-            this.separatorRemoveLOT.Size = new System.Drawing.Size(6, 55);
+            this.separatorRemoveLOT.Size = new System.Drawing.Size(6, 39);
             // 
             // buttonRemoveLOT
             // 
@@ -376,14 +380,25 @@
             this.buttonRemoveLOT.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonRemoveLOT.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonRemoveLOT.Name = "buttonRemoveLOT";
-            this.buttonRemoveLOT.Size = new System.Drawing.Size(116, 52);
+            this.buttonRemoveLOT.Size = new System.Drawing.Size(98, 36);
             this.buttonRemoveLOT.Text = "Remove Lot";
             this.buttonRemoveLOT.Click += new System.EventHandler(this.buttonRemoveLOT_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 55);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+            // 
+            // buttonBatches
+            // 
+            this.buttonBatches.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonBatches.Image = global::TotalSmartCoding.Properties.Resources.Barcode2D;
+            this.buttonBatches.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.buttonBatches.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonBatches.Name = "buttonBatches";
+            this.buttonBatches.Size = new System.Drawing.Size(36, 36);
+            this.buttonBatches.Text = "Settings";
+            this.buttonBatches.Click += new System.EventHandler(this.buttonBatches_Click);
             // 
             // buttonDiscontinued
             // 
@@ -391,15 +406,15 @@
             this.buttonDiscontinued.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonDiscontinued.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonDiscontinued.Name = "buttonDiscontinued";
-            this.buttonDiscontinued.Size = new System.Drawing.Size(93, 52);
+            this.buttonDiscontinued.Size = new System.Drawing.Size(68, 36);
             this.buttonDiscontinued.Text = "Hide";
             this.buttonDiscontinued.Click += new System.EventHandler(this.buttonDiscontinued_Click);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(33, 52);
-            this.toolStripLabel1.Text = "      ";
+            this.toolStripLabel1.Size = new System.Drawing.Size(13, 36);
+            this.toolStripLabel1.Text = "  ";
             // 
             // comboShowCummulativePacks
             // 
@@ -409,7 +424,7 @@
             "Don\'t show cummulative packs",
             "Show cummulative packs"});
             this.comboShowCummulativePacks.Name = "comboShowCummulativePacks";
-            this.comboShowCummulativePacks.Size = new System.Drawing.Size(260, 55);
+            this.comboShowCummulativePacks.Size = new System.Drawing.Size(196, 39);
             this.comboShowCummulativePacks.SelectedIndexChanged += new System.EventHandler(this.comboShowCummulativePacks_SelectedIndexChanged);
             // 
             // comboDiscontinued
@@ -420,7 +435,7 @@
             "Don\'t show hidden batches",
             "Show hidden batches"});
             this.comboDiscontinued.Name = "comboDiscontinued";
-            this.comboDiscontinued.Size = new System.Drawing.Size(227, 55);
+            this.comboDiscontinued.Size = new System.Drawing.Size(171, 39);
             this.comboDiscontinued.SelectedIndexChanged += new System.EventHandler(this.comboDiscontinued_SelectedIndexChanged);
             // 
             // buttonItems
@@ -429,7 +444,7 @@
             this.buttonItems.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.buttonItems.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonItems.Name = "buttonItems";
-            this.buttonItems.Size = new System.Drawing.Size(97, 52);
+            this.buttonItems.Size = new System.Drawing.Size(72, 36);
             this.buttonItems.Text = "Items";
             this.buttonItems.Click += new System.EventHandler(this.buttonItems_Click);
             // 
@@ -441,13 +456,14 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(1103, 55);
+            this.naviBarMaster.Location = new System.Drawing.Point(666, 0);
+            this.naviBarMaster.Margin = new System.Windows.Forms.Padding(2);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(380, 630);
+            this.naviBarMaster.Size = new System.Drawing.Size(285, 557);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -458,14 +474,16 @@
             this.naviBand1.ClientArea.Controls.Add(this.layoutMaster);
             this.naviBand1.ClientArea.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
+            this.naviBand1.ClientArea.Margin = new System.Windows.Forms.Padding(2);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(378, 582);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(283, 509);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
+            this.naviBand1.Margin = new System.Windows.Forms.Padding(2);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(378, 582);
+            this.naviBand1.Size = new System.Drawing.Size(283, 509);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -503,11 +521,12 @@
             this.fastBatchMasterIndex.GroupImageList = this.imageList32;
             this.fastBatchMasterIndex.HideSelection = false;
             this.fastBatchMasterIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 55);
+            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 0);
+            this.fastBatchMasterIndex.Margin = new System.Windows.Forms.Padding(2);
             this.fastBatchMasterIndex.Name = "fastBatchMasterIndex";
             this.fastBatchMasterIndex.OwnerDraw = true;
             this.fastBatchMasterIndex.ShowGroups = false;
-            this.fastBatchMasterIndex.Size = new System.Drawing.Size(1103, 630);
+            this.fastBatchMasterIndex.Size = new System.Drawing.Size(666, 557);
             this.fastBatchMasterIndex.TabIndex = 67;
             this.fastBatchMasterIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchMasterIndex.UseCompatibleStateImageBehavior = false;
@@ -626,11 +645,16 @@
             this.imageList32.Images.SetKeyName(7, "Sign_Order_32");
             this.imageList32.Images.SetKeyName(8, "CustomerRed");
             // 
+            // separatorBatches
+            // 
+            this.separatorBatches.Name = "separatorBatches";
+            this.separatorBatches.Size = new System.Drawing.Size(6, 39);
+            // 
             // BatchMasters
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1483, 685);
+            this.ClientSize = new System.Drawing.Size(951, 557);
             this.Controls.Add(this.fastBatchMasterIndex);
             this.Controls.Add(this.naviBarMaster);
             this.Controls.Add(this.toolStripChildForm);
@@ -699,6 +723,8 @@
         private System.Windows.Forms.ToolStripSeparator separatorRemoveLOT;
         private System.Windows.Forms.ToolStripButton buttonRemoveLOT;
         private System.Windows.Forms.ToolStripComboBox comboShowCummulativePacks;
+        private System.Windows.Forms.ToolStripButton buttonBatches;
+        private System.Windows.Forms.ToolStripSeparator separatorBatches;
 
     }
 }

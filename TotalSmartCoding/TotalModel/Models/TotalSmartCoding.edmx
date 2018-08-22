@@ -4663,7 +4663,7 @@
           <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PalletLocked" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -4792,6 +4792,8 @@
           <Property Type="String" Name="BatchTypeCodeName" Nullable="false" MaxLength="151" />
           <Property Type="String" Name="LotCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="BatchTypeID" Nullable="false" />
+          <Property Type="String" Name="FillingLineName" Nullable="false" MaxLength="60" />
+          <Property Type="Boolean" Name="Locked" Nullable="false" />
           </ComplexType>
         <ComplexType Name="CommodityIndex">
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
@@ -8365,6 +8367,8 @@
                 <ScalarProperty Name="BatchTypeCodeName" ColumnName="BatchTypeCodeName" />
                 <ScalarProperty Name="LotCode" ColumnName="LotCode" />
                 <ScalarProperty Name="BatchTypeID" ColumnName="BatchTypeID" />
+                <ScalarProperty Name="FillingLineName" ColumnName="FillingLineName" />
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -161,6 +161,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.buttonNewLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail;
             this.buttonRemoveLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; this.separatorRemoveLOT.Visible = this.buttonRemoveLOT.Visible;
+            this.buttonBatches.Visible = !this.buttonNewLOT.Visible; this.separatorBatches.Visible = this.buttonBatches.Visible;
         }
 
         private void fastBatchMasterIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
@@ -243,6 +244,22 @@ namespace TotalSmartCoding.Views.Productions
         protected override bool ApproveCheck(int id)
         {
             return !this.batchMasterViewModel.IsDefault && !this.batchMasterViewModel.InActive;
+        }
+
+
+        private void buttonBatches_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MasterMDI masterMDI = new MasterMDI(GlobalEnums.NmvnTaskID.Batch, new Batches(null, false));
+
+                masterMDI.ShowDialog();
+                masterMDI.Dispose();
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
         }
 
         private void buttonDiscontinued_Click(object sender, EventArgs e)
