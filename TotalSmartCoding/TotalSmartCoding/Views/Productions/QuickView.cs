@@ -10,6 +10,9 @@ using TotalCore.Repositories.Productions;
 using TotalSmartCoding.Libraries.Helpers;
 using TotalSmartCoding.Controllers.APIs.Productions;
 using TotalSmartCoding.Libraries;
+using TotalSmartCoding.Controllers.Productions;
+using TotalCore.Services.Productions;
+using TotalSmartCoding.ViewModels.Productions;
 
 namespace TotalSmartCoding.Views.Productions
 {
@@ -26,6 +29,12 @@ namespace TotalSmartCoding.Views.Productions
             this.fastBarcodes.SetObjects(barcodeList);
 
             this.Text = caption;
+
+            if (barcodeList.Count > 0)
+            {
+                PalletDTO palletDTO = barcodeList[0] as PalletDTO;
+                if (palletDTO != null) { this.labelLock.Visible = true; }
+            }
         }
 
         private void textFilter_TextChanged(object sender, EventArgs e)
@@ -67,5 +76,31 @@ namespace TotalSmartCoding.Views.Productions
                 }
             }
         }
+
+        private void labelLock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PalletDTO palletDTO = this.fastBarcodes.SelectedObject as PalletDTO;
+                if (palletDTO != null) {
+
+                    PalletViewModel palletViewModel = CommonNinject.Kernel.Get<PalletViewModel>();
+                    PalletController palletController = new PalletController(CommonNinject.Kernel.Get<IPalletService>(), palletViewModel);
+                    
+                    palletController.Lock(palletDTO.PalletID);
+
+                    if (CustomMsgBox.Show(this, "Are you sure you want to " + (palletViewModel.Lockable ? "lock" : "un-lock") + " this entry data" + "?", "Warning", MessageBoxButtons.YesNo, (palletViewModel.Lockable ? MessageBoxIcon.Information : MessageBoxIcon.Warning)) == DialogResult.Yes)
+                        if (palletController.LockConfirmed())
+                            palletDTO.Lockable = palletViewModel.Locked;
+                        else
+                            throw new Exception("Lỗi khóa hay mở khóa pallet: " + palletViewModel.Code + "\r\n\r\nVui lòng đóng phần mềm và thử lại sau.");
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
     }
 }

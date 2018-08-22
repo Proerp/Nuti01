@@ -115,6 +115,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         }
 
 
+        private void PalletToggleLocked()
+        {
+            string queryString = " @EntityID int, @Locked bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      Pallets  SET Locked = @Locked WHERE PalletID = @EntityID AND Locked = ~@Locked " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Không thể khóa hay mở khóa pallet này' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("PalletToggleLocked", queryString);
+        }
+
 
         private void GetPalletChanged()
         {

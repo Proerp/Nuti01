@@ -49,6 +49,7 @@ namespace TotalSmartCoding.Views.Productions
         private BatchViewModel batchViewModel { get; set; }
 
         private CommodityAPIs commodityAPIs { get; set; }
+        private ScannerAPIs scannerAPIs;
 
         public Batches(SmartCoding smartCoding, bool allQueueEmpty)
             : base()
@@ -79,6 +80,8 @@ namespace TotalSmartCoding.Views.Productions
             this.batchViewModel = CommonNinject.Kernel.Get<BatchViewModel>();
             this.batchViewModel.PropertyChanged += new PropertyChangedEventHandler(ModelDTO_PropertyChanged);
             this.baseDTO = this.batchViewModel;
+
+            this.scannerAPIs = new ScannerAPIs(CommonNinject.Kernel.Get<IPackRepository>(), CommonNinject.Kernel.Get<ICartonRepository>(), CommonNinject.Kernel.Get<IPalletRepository>());
         }
 
         protected override void NotifyPropertyChanged(string propertyName)
@@ -182,6 +185,24 @@ namespace TotalSmartCoding.Views.Productions
             this.buttonApply.Visible = this.batchViewModel.AllowDataInput;
             this.buttonDiscontinued.Visible = this.batchViewModel.AllowDataInput;
             this.separatorApply.Visible = this.batchViewModel.AllowDataInput;
+
+            this.fastBatchIndex.DoubleClick += fastBatchIndex_DoubleClick;
+        }
+
+        private void fastBatchIndex_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.checkSelectedIndexID())
+                {
+                    QuickView quickView = new QuickView(this.scannerAPIs.GetBarcodeList((GlobalVariables.FillingLine)this.batchViewModel.FillingLineID, 0, 0, this.baseDTO.GetID()), "Batch: " + this.batchViewModel.Code);
+                    quickView.ShowDialog(); quickView.Dispose();
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
         }
 
         private void fastBatchIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
