@@ -30,8 +30,6 @@ namespace TotalDTO.Productions
 
         public int EntryStatusID { get; set; }
 
-        public int QueueID { get; set; } //JUST FOR PackDTO ONLY
-
-        public bool Locked { get; set; }
+        public int QueueID { get; set; } //JUST FOR PackDTO ONLY        
     }
 }

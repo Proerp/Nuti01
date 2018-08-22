@@ -65,6 +65,14 @@ namespace TotalModel
         }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
 
+        private bool locked;
+        [DefaultValue(false)]
+        public bool Locked
+        {
+            get { return this.locked; }
+            set { ApplyPropertyChange<BaseModel, bool>(ref this.locked, o => o.Locked, value); }
+        }
+
         private bool inActive;
         [DefaultValue(false)]
         public bool InActive

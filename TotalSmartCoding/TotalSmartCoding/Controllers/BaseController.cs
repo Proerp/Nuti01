@@ -94,5 +94,9 @@ namespace TotalSmartCoding.Controllers
 
         public virtual void Void(int? id) { }
         public virtual bool VoidConfirmed() { return true; }
+
+
+        public virtual void Lock(int? id) { }
+        public virtual bool LockConfirmed() { return true; }
     }
 }

@@ -521,6 +521,32 @@ namespace TotalSmartCoding.Views.Mains
         protected virtual void VoidMore(int id) { }
 
 
+        public void Lock()
+        {
+            try
+            {
+                if (this.checkSelectedIndexID())
+                {
+                    this.myController.Lock(this.baseDTO.GetID());
+
+                    if (this.LockCheck(this.baseDTO.GetID()) && CustomMsgBox.Show(this, "Are you sure you want to " + (this.baseDTO.Approvable ? "lock" : "un-lock") + " this entry data" + "?", "Warning", MessageBoxButtons.YesNo, (this.baseDTO.Approvable ? MessageBoxIcon.Information : MessageBoxIcon.Warning)) == DialogResult.Yes)
+                        if (this.myController.LockConfirmed())
+                        {
+                            this.LockMore(this.baseDTO.GetID());
+                            this.Loading();
+                        }
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
+        }
+
+        protected virtual bool LockCheck(int id) { return true; }
+        protected virtual void LockMore(int id) { }
+
+
         public void Print(GlobalEnums.PrintDestination printDestination)
         {
             try

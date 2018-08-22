@@ -328,6 +328,42 @@ namespace TotalSmartCoding.Controllers
 
 
 
+        #region Lock/ UnLock
+        public override void Lock(int? id)
+        {
+            this.Edit(id);
+
+            if (!simpleViewModel.Locked)
+                if (this.GenericService.GetApprovalPermitted(simpleViewModel.OrganizationalUnitID))
+                {
+                    simpleViewModel.Approvable = this.GenericService.Approvable(simpleViewModel);
+                    if (!simpleViewModel.Approvable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                }
+                else //USER DON'T HAVE PERMISSION TO DO
+                    throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
+
+            if (simpleViewModel.Locked)
+                if (this.GenericService.GetUnApprovalPermitted(simpleViewModel.OrganizationalUnitID))
+                {
+                    simpleViewModel.UnApprovable = this.GenericService.UnApprovable(simpleViewModel);
+                    if (!simpleViewModel.UnApprovable) throw new System.ArgumentException("Lỗi", "Dữ liệu đã bị khóa.");
+                }
+                else //USER DON'T HAVE PERMISSION TO DO
+                    throw new System.ArgumentException("Lỗi", "Không có quyền truy cập.");
+
+            //-----return View(simpleViewModel);
+        }
+
+
+        public override bool LockConfirmed()
+        {
+            if (!this.simpleViewModel.IsValid || this.simpleViewModel.IsDirty) throw new System.ArgumentException("Lỗi khóa dữ liệu", "Dữ liệu không hợp lệ, vui lòng kiểm tra lại.");
+
+            return this.GenericService.ToggleLocked(this.simpleViewModel);
+        }
+
+
+        #endregion Lock/ UnLock
 
 
 

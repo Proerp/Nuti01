@@ -299,14 +299,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private void buttonUnlock_Click(object sender, EventArgs e)
         {
-            try
-            {
-                
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
-            }
+            this.Lock();
         }
 
 

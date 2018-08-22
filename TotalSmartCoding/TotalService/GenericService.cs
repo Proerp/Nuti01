@@ -37,6 +37,7 @@ namespace TotalService
         private readonly string functionNameSaveRelative;
         private readonly string functionNameToggleApproved;
         private readonly string functionNameToggleVoid;
+        private readonly string functionNameToggleLocked;
 
         private readonly GlobalEnums.NmvnTaskID nmvnTaskID;
 
@@ -57,6 +58,10 @@ namespace TotalService
         { }
 
         public GenericService(IGenericRepository<TEntity> genericRepository, string functionNamePostSaveValidate, string functionNameSaveRelative, string functionNameToggleApproved, string functionNameToggleVoid)
+            : this(genericRepository, functionNamePostSaveValidate, functionNameSaveRelative, functionNameToggleApproved, functionNameToggleVoid, null)
+        { }
+
+        public GenericService(IGenericRepository<TEntity> genericRepository, string functionNamePostSaveValidate, string functionNameSaveRelative, string functionNameToggleApproved, string functionNameToggleVoid, string functionNameToggleLocked)
             : base(genericRepository)
         {
             this.genericRepository = genericRepository;
@@ -65,6 +70,7 @@ namespace TotalService
             this.functionNameSaveRelative = functionNameSaveRelative;
             this.functionNameToggleApproved = functionNameToggleApproved;
             this.functionNameToggleVoid = functionNameToggleVoid;
+            this.functionNameToggleLocked = functionNameToggleLocked;
 
             this.nmvnTaskID = (new TPrimitiveDto()).NMVNTaskID;
         }
@@ -276,6 +282,32 @@ namespace TotalService
             return false;
         }
 
+
+        public virtual bool ToggleLocked(TDto dto)
+        {
+            using (var dbContextTransaction = this.genericRepository.BeginTransaction())
+            {
+                try
+                {
+                    if ((!dto.Locked && !this.Approvable(dto)) || (dto.Locked && !this.UnApprovable(dto))) throw new System.ArgumentException("Lỗi " + (dto.Locked ? "mở " : "") + "khóa dữ liệu", "Bạn không có quyền hoặc dữ liệu này đã bị khóa.");
+
+                    this.ToggleLockedMe(dto);
+
+                    this.genericRepository.SaveChanges();
+
+                    dbContextTransaction.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    dbContextTransaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
+
         public virtual bool Delete(int id)
         {
             return this.Delete(id, false);
@@ -462,6 +494,21 @@ namespace TotalService
                 throw new System.ArgumentException("Lỗi", "Hệ thống không cho phép thực hiện tác vụ này.");
         }
 
+
+        protected virtual void ToggleLockedMe(TDto dto)
+        {
+            if (this.functionNameToggleLocked != null && this.functionNameToggleLocked != "")
+            {
+                if (this.genericRepository.ExecuteFunction(this.functionNameToggleLocked, this.ToggleLockedParameters(dto)) < 1) throw new System.ArgumentException("Lỗi", "Chứng từ không tồn tại hoặc đã " + (dto.Locked ? "mở" : "") + "khóa");
+            }
+            else
+                throw new System.ArgumentException("Lỗi", "Hệ thống không cho phép thực hiện tác vụ này.");
+        }
+
+        protected virtual ObjectParameter[] ToggleLockedParameters(TDto dto)
+        {
+            return new ObjectParameter[] { new ObjectParameter("EntityID", dto.GetID()), new ObjectParameter("Locked", !dto.Locked) };
+        }
 
         protected virtual void DeleteMe(TDto dto, TEntity entity)
         {
