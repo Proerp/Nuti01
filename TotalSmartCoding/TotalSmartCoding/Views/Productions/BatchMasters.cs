@@ -161,7 +161,7 @@ namespace TotalSmartCoding.Views.Productions
 
             this.buttonNewLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail;
             this.buttonRemoveLOT.Visible = GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Smallpack || GlobalVariables.ConfigID == (int)GlobalVariables.FillingLine.Pail; this.separatorRemoveLOT.Visible = this.buttonRemoveLOT.Visible;
-            this.buttonBatches.Visible = !this.buttonNewLOT.Visible; this.separatorBatches.Visible = this.buttonBatches.Visible;
+            this.buttonBatches.Visible = !this.buttonNewLOT.Visible; 
         }
 
         private void fastBatchMasterIndex_AboutToCreateGroups(object sender, CreateGroupsEventArgs e)
