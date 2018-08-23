@@ -130,7 +130,7 @@
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutMaster.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutMaster.Size = new System.Drawing.Size(283, 470);
+            this.layoutMaster.Size = new System.Drawing.Size(283, 509);
             this.layoutMaster.TabIndex = 62;
             // 
             // label4
@@ -446,14 +446,14 @@
             this.naviBarMaster.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.naviBarMaster.HeaderHeight = 10;
             this.naviBarMaster.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.Office2010Blue;
-            this.naviBarMaster.Location = new System.Drawing.Point(666, 39);
+            this.naviBarMaster.Location = new System.Drawing.Point(666, 0);
             this.naviBarMaster.Margin = new System.Windows.Forms.Padding(2);
             this.naviBarMaster.Name = "naviBarMaster";
             this.naviBarMaster.PopupMinWidth = 10;
             this.naviBarMaster.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.naviBarMaster.ShowCollapseButton = false;
             this.naviBarMaster.ShowMoreOptionsButton = false;
-            this.naviBarMaster.Size = new System.Drawing.Size(285, 518);
+            this.naviBarMaster.Size = new System.Drawing.Size(285, 557);
             this.naviBarMaster.TabIndex = 66;
             // 
             // naviBand1
@@ -466,14 +466,14 @@
             this.naviBand1.ClientArea.Location = new System.Drawing.Point(0, 0);
             this.naviBand1.ClientArea.Margin = new System.Windows.Forms.Padding(2);
             this.naviBand1.ClientArea.Name = "ClientArea";
-            this.naviBand1.ClientArea.Size = new System.Drawing.Size(283, 470);
+            this.naviBand1.ClientArea.Size = new System.Drawing.Size(283, 509);
             this.naviBand1.ClientArea.TabIndex = 0;
             this.naviBand1.LargeImageIndex = 0;
             this.naviBand1.LayoutStyle = Guifreaks.Navisuite.NaviLayoutStyle.StyleFromOwner;
             this.naviBand1.Location = new System.Drawing.Point(1, 10);
             this.naviBand1.Margin = new System.Windows.Forms.Padding(2);
             this.naviBand1.Name = "naviBand1";
-            this.naviBand1.Size = new System.Drawing.Size(283, 470);
+            this.naviBand1.Size = new System.Drawing.Size(283, 509);
             this.naviBand1.SmallImageIndex = 0;
             this.naviBand1.TabIndex = 70;
             // 
@@ -511,12 +511,12 @@
             this.fastBatchMasterIndex.GroupImageList = this.imageList32;
             this.fastBatchMasterIndex.HideSelection = false;
             this.fastBatchMasterIndex.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 39);
+            this.fastBatchMasterIndex.Location = new System.Drawing.Point(0, 0);
             this.fastBatchMasterIndex.Margin = new System.Windows.Forms.Padding(2);
             this.fastBatchMasterIndex.Name = "fastBatchMasterIndex";
             this.fastBatchMasterIndex.OwnerDraw = true;
             this.fastBatchMasterIndex.ShowGroups = false;
-            this.fastBatchMasterIndex.Size = new System.Drawing.Size(666, 518);
+            this.fastBatchMasterIndex.Size = new System.Drawing.Size(666, 557);
             this.fastBatchMasterIndex.TabIndex = 67;
             this.fastBatchMasterIndex.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchMasterIndex.UseCompatibleStateImageBehavior = false;

@@ -15,6 +15,7 @@ namespace TotalDTO.Productions
                 this.CommodityID = fillingData.CommodityID;
 
                 this.EntryStatusID = (int)GlobalVariables.BarcodeStatus.Freshnew;
+                this.Locked = true;
             }
         }
 
