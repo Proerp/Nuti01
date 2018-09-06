@@ -56,6 +56,85 @@ namespace TotalDAL.Repositories
         public bool RestoreProcedures()
         {
 
+            if (!this.totalSmartCodingEntities.TableExists("DeletedPacks"))
+            {
+
+                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedPacks](
+	                                    [DeletedPackID] [int] IDENTITY(1,1) NOT NULL,
+	                                    [PackID] [int] NOT NULL,
+	                                    [EntryDate] [datetime] NOT NULL,
+	                                    [FillingLineID] [int] NOT NULL,
+	                                    [BatchID] [int] NOT NULL,
+	                                    [LocationID] [int] NOT NULL,
+	                                    [QueueID] [int] NOT NULL,
+	                                    [CommodityID] [int] NOT NULL,
+	                                    [RelatedPackID] [int] NULL,
+	                                    [CartonID] [int] NULL,
+	                                    [Code] [varchar](50) NOT NULL,
+	                                    [LineVolume] [decimal](18, 3) NOT NULL,
+	                                    [EntryStatusID] [int] NOT NULL,
+	                                    [DeletedDate] [datetime] NOT NULL,
+	                                    [Remarks] [nvarchar](1000) NULL,
+                                     CONSTRAINT [PK_DeletedPacks] PRIMARY KEY CLUSTERED 
+                                    (
+	                                    [DeletedPackID] ASC
+                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                    ) ON [PRIMARY]"
+                                    );
+
+                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedCartons](
+	                                    [DeletedCartonID] [int] IDENTITY(1,1) NOT NULL,
+	                                    [CartonID] [int] NOT NULL,
+	                                    [EntryDate] [datetime] NOT NULL,
+	                                    [FillingLineID] [int] NOT NULL,
+	                                    [BatchID] [int] NOT NULL,
+	                                    [LocationID] [int] NOT NULL,
+	                                    [CommodityID] [int] NOT NULL,
+	                                    [PalletID] [int] NULL,
+	                                    [Code] [varchar](50) NOT NULL,
+	                                    [Quantity] [decimal](18, 2) NOT NULL,
+	                                    [LineVolume] [decimal](18, 3) NOT NULL,
+	                                    [PackCounts] [int] NOT NULL,
+	                                    [EntryStatusID] [int] NOT NULL,
+	                                    [DeletedDate] [datetime] NOT NULL,
+	                                    [Remarks] [nvarchar](1000) NULL,
+                                     CONSTRAINT [PK_DeletedCartons] PRIMARY KEY CLUSTERED 
+                                    (
+	                                    [DeletedCartonID] ASC
+                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                    ) ON [PRIMARY]"
+                                   );
+
+                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedPallets](
+	                                    [DeletedPalletID] [int] IDENTITY(1,1) NOT NULL,
+	                                    [PalletID] [int] NOT NULL,
+	                                    [EntryDate] [datetime] NOT NULL,
+	                                    [MinPackDate] [datetime] NOT NULL,
+	                                    [MaxPackDate] [datetime] NOT NULL,
+	                                    [FillingLineID] [int] NOT NULL,
+	                                    [BatchID] [int] NOT NULL,
+	                                    [LocationID] [int] NOT NULL,
+	                                    [CommodityID] [int] NOT NULL,
+	                                    [Code] [varchar](50) NOT NULL,
+	                                    [PackCounts] [int] NOT NULL,
+	                                    [CartonCounts] [int] NOT NULL,
+	                                    [Quantity] [decimal](18, 2) NOT NULL,
+	                                    [QuantityPickup] [decimal](18, 2) NOT NULL,
+	                                    [LineVolume] [decimal](18, 2) NOT NULL,
+	                                    [LineVolumePickup] [decimal](18, 2) NOT NULL,
+	                                    [EntryStatusID] [int] NOT NULL,
+	                                    [Locked] [bit] NOT NULL,
+	                                    [DeletedDate] [datetime] NOT NULL,
+	                                    [Remarks] [nvarchar](1000) NULL,
+                                        CONSTRAINT [PK_DeletedPallets] PRIMARY KEY CLUSTERED 
+                                    (
+	                                    [DeletedPalletID] ASC
+                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                    ) ON [PRIMARY]"
+                                   );
+            }
+
+
 
             if (!this.totalSmartCodingEntities.ColumnExists("Batches", "Locked"))
             {
