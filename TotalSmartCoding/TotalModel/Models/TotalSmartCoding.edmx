@@ -2286,7 +2286,7 @@
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
           <Parameter Name="PackIDs" Type="varchar" Mode="In" />
           <Parameter Name="DeletePack" Type="bit" Mode="In" />
-          <Parameter Name="Remarks" Type="varchar" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="CartonUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CartonIDs" Type="varchar" Mode="In" />
@@ -2798,7 +2798,7 @@
         <Function Name="PackSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
-          <Parameter Name="Remarks" Type="varchar" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="PackUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PackIDs" Type="varchar" Mode="In" />
@@ -2821,7 +2821,7 @@
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
           <Parameter Name="CartonIDs" Type="varchar" Mode="In" />
-          <Parameter Name="Remarks" Type="varchar" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="PalletToggleLocked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
