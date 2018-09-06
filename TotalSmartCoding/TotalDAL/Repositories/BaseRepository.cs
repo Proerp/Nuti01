@@ -141,15 +141,22 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.Pack pack = new Helpers.SqlProgrammability.Productions.Pack(totalSmartCodingEntities);
             pack.RestoreProcedure();
 
-            return;
+            //return;
 
-            Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
-            batch.RestoreProcedure();
+            Helpers.SqlProgrammability.Productions.Carton carton = new Helpers.SqlProgrammability.Productions.Carton(totalSmartCodingEntities);
+            carton.RestoreProcedure();
 
             //return;
 
             Helpers.SqlProgrammability.Productions.Pallet pallet = new Helpers.SqlProgrammability.Productions.Pallet(totalSmartCodingEntities);
             pallet.RestoreProcedure();
+
+            return;
+
+            Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
+            batch.RestoreProcedure();
+
+            
 
             return;
 
@@ -244,10 +251,7 @@ namespace TotalDAL.Repositories
             
 
 
-            //return;
 
-            Helpers.SqlProgrammability.Productions.Carton carton = new Helpers.SqlProgrammability.Productions.Carton(totalSmartCodingEntities);
-            carton.RestoreProcedure();
 
 
 

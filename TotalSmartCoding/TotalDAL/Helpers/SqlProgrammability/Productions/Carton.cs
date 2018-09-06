@@ -48,14 +48,24 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
 
             queryString = queryString + "               BEGIN " + "\r\n";
+
+            queryString = queryString + "                   INSERT INTO     DeletedCartons (CartonID, EntryDate, FillingLineID, BatchID, LocationID, CommodityID, PalletID, Code, Quantity, LineVolume, PackCounts, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
+            queryString = queryString + "                   SELECT          CartonID, EntryDate, FillingLineID, BatchID, LocationID, CommodityID, 0 AS PalletID, Code, Quantity, LineVolume, PackCounts, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks FROM Cartons WHERE CartonID = @EntityID " + "\r\n";
+
             queryString = queryString + "                   IF (@DeletePack = 1) " + "\r\n";
-            queryString = queryString + "                       DELETE      " + "\r\n";
-            queryString = queryString + "                       FROM        Packs " + "\r\n";
-            queryString = queryString + "                       WHERE       CartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
+            queryString = queryString + "                       BEGIN " + "\r\n";
+            queryString = queryString + "                           INSERT INTO DeletedPacks (PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, RelatedPackID, CartonID, Code, LineVolume, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
+            queryString = queryString + "                           SELECT      PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks FROM Packs WHERE CartonID = @EntityID " + "\r\n";
+
+            queryString = queryString + "                           DELETE      " + "\r\n";
+            queryString = queryString + "                           FROM        Packs " + "\r\n";
+            queryString = queryString + "                           WHERE       CartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
+            queryString = queryString + "                       END " + "\r\n";
             queryString = queryString + "                   ELSE " + "\r\n";
             queryString = queryString + "                       UPDATE      Packs" + "\r\n";
             queryString = queryString + "                       SET         CartonID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME PackID PASS BY VARIBLE: PackIDs
             queryString = queryString + "                       WHERE       CartonID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + "\r\n";
+            
             queryString = queryString + "               END " + "\r\n";
 
 

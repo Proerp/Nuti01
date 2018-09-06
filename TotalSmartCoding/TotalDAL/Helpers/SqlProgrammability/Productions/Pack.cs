@@ -44,9 +44,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           IF (@SaveRelativeOption = -1) ";
             queryString = queryString + "               BEGIN ";
             queryString = queryString + "                   INSERT INTO     DeletedPacks (PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, RelatedPackID, CartonID, Code, LineVolume, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
-            queryString = queryString + "                   SELECT          PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks " + "\r\n";
-            queryString = queryString + "                   FROM            Packs " + "\r\n";
-            queryString = queryString + "                   WHERE           PackID = @EntityID " + "\r\n";
+            queryString = queryString + "                   SELECT          PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks FROM Packs WHERE PackID = @EntityID " + "\r\n";
 
             queryString = queryString + "                   IF @@ROWCOUNT <> 1 " + "\r\n";
             queryString = queryString + "                       BEGIN " + "\r\n";

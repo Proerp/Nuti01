@@ -52,11 +52,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "           ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
 
-            queryString = queryString + "               UPDATE      Cartons" + "\r\n";
-            queryString = queryString + "               SET         PalletID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME CartonID PASS BY VARIBLE: CartonIDs
-            queryString = queryString + "               WHERE       PalletID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + " AND CartonID IN (SELECT Id FROM dbo.SplitToIntList (@CartonIDs)) " + "\r\n";
+            queryString = queryString + "               BEGIN " + "\r\n";
+            queryString = queryString + "                   INSERT INTO DeletedPallets (PalletID, EntryDate, MinPackDate, MaxPackDate, FillingLineID, BatchID, LocationID, CommodityID, Code, PackCounts, CartonCounts, Quantity, QuantityPickup, LineVolume, LineVolumePickup, EntryStatusID, Locked, DeletedDate, Remarks) " + "\r\n";
+            queryString = queryString + "                   SELECT      PalletID, EntryDate, MinPackDate, MaxPackDate, FillingLineID, BatchID, LocationID, CommodityID, Code, PackCounts, CartonCounts, Quantity, QuantityPickup, LineVolume, LineVolumePickup, EntryStatusID, Locked, GETDATE() AS DeletedDate, N'' AS Remarks FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
 
-            queryString = queryString + "           " + "\r\n";
+            queryString = queryString + "                   UPDATE      Cartons" + "\r\n";
+            queryString = queryString + "                   SET         PalletID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME CartonID PASS BY VARIBLE: CartonIDs
+            queryString = queryString + "                   WHERE       PalletID = @EntityID AND EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Wrapped + " AND CartonID IN (SELECT Id FROM dbo.SplitToIntList (@CartonIDs)) " + "\r\n";
+            queryString = queryString + "               END " + "\r\n";
+
             queryString = queryString + "           IF @@ROWCOUNT <> (SELECT CartonCounts FROM Pallets WHERE PalletID = @EntityID)  OR  @@ROWCOUNT <> ((SELECT (LEN(@CartonIDs) - LEN(REPLACE(@CartonIDs, ',', '')))) + 1) " + "\r\n"; //CHECK BOTH CONDITION FOR SURE. BUT: WE CAN OMIT THE SECOND CONDITION 
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   DECLARE     @msg NVARCHAR(300) = N'System Error: Some carton does not exist!' ; " + "\r\n";
