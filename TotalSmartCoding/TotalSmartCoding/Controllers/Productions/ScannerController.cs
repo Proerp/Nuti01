@@ -983,12 +983,12 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        public bool RemovePackInPackQueue(int packID)
+        public bool RemovePackInPackQueue(int packID, string Remarks)
         {
-            return this.RemovePackInPackQueue(packID, false);
+            return this.RemovePackInPackQueue(packID, Remarks, false);
         }
 
-        public bool RemovePackInPackQueue(int packID, bool removeAll)
+        public bool RemovePackInPackQueue(int packID, string Remarks, bool removeAll)
         {
             if (packID <= 0 && !removeAll) return false;
 
@@ -1005,6 +1005,7 @@ namespace TotalSmartCoding.Controllers.Productions
                             {
                                 this.NotifyPropertyChanged("PackQueue");
 
+                                this.packController.packService.ServiceBag["Remarks"] = Remarks;
                                 if (!this.packController.packService.Delete(messageData.PackID)) throw new System.ArgumentException("Lỗi", "Không thể xóa chai từ CSDL: " + messageData.Code);
                             }
                             else throw new System.ArgumentException("Lỗi", "Không tìm thấy chai trên hàng");
@@ -1017,7 +1018,7 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        public bool MovePacksetToCartonPendingQueue(int packID)
+        public bool MovePacksetToCartonPendingQueue(int packID, string Remarks)
         {
             if (packID <= 0) return false;
 
@@ -1048,6 +1049,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                             lock (this.packController)
                             {
+                                this.packController.packService.ServiceBag["Remarks"] = Remarks;
                                 if (!this.packController.packService.Delete(packID)) throw new System.ArgumentException("Fail to handle this pack", "Can not delete pack from the line");
 
                                 if (!this.packController.packService.UpdateQueueID(messageData.PackID.ToString(), messageData.QueueID)) throw new System.ArgumentException("Fail to handle this pack", "Can not update new pack subqueue");
@@ -1188,7 +1190,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
 
 
-        public Boolean UnwrapCartontoPack(int cartonID)
+        public Boolean UnwrapCartontoPack(int cartonID, string Remarks)
         {
             if (cartonID <= 0) return false;
 
@@ -1223,6 +1225,7 @@ namespace TotalSmartCoding.Controllers.Productions
                                 {
                                     this.cartonController.cartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Noread + "," + (int)GlobalVariables.BarcodeStatus.Pending; //THIS CARTON MUST BE Noread || Pending IN ORDER TO UNWRAP TO PACK
                                     this.cartonController.cartonService.ServiceBag["PackIDs"] = this.packsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL PACK OF THIS CARTON TO packsetQueue ALREADY. SO, NOW WE CAN USE this.packsetQueue.EntityIDs FOR ServiceBag["PackIDs"]
+                                    this.cartonController.cartonService.ServiceBag["Remarks"] = Remarks;
                                     if (!this.cartonController.cartonService.Delete(cartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
                                 }
                                 return true;
@@ -1239,7 +1242,7 @@ namespace TotalSmartCoding.Controllers.Productions
             }
         }
 
-        public Boolean DeleteCarton(int cartonID)
+        public Boolean DeleteCarton(int cartonID, string Remarks)
         {
             if (cartonID <= 0) return false;
 
@@ -1254,6 +1257,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         this.cartonController.cartonService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Noread + "," + (int)GlobalVariables.BarcodeStatus.Pending; //THIS CARTON MUST BE Noread || Pending IN ORDER TO UNWRAP TO PACK
                         this.cartonController.cartonService.ServiceBag["PackIDs"] = string.Join(",", packs.Select(d => d.PackID));
                         this.cartonController.cartonService.ServiceBag["DeletePack"] = true;
+                        this.cartonController.cartonService.ServiceBag["Remarks"] = Remarks;
                         if (!this.cartonController.cartonService.Delete(cartonID)) throw new System.ArgumentException("Lỗi", "Không thể xóa carton trên CSDL");
 
                         this.cartonPendingQueue.Dequeue(cartonID);
@@ -1267,7 +1271,7 @@ namespace TotalSmartCoding.Controllers.Productions
         }
 
 
-        public Boolean UnwrapPallettoCarton(int palletID)
+        public Boolean UnwrapPallettoCarton(int palletID, string Remarks)
         {
             if (palletID <= 0) return false;
 
@@ -1304,6 +1308,7 @@ namespace TotalSmartCoding.Controllers.Productions
 
                                         this.palletController.palletService.ServiceBag["EntryStatusIDs"] = (int)GlobalVariables.BarcodeStatus.Freshnew; //THIS PALLET MUST BE Freshnew IN ORDER TO UNWRAP TO CARTON
                                         this.palletController.palletService.ServiceBag["CartonIDs"] = this.cartonsetQueue.EntityIDs; //SEE (***): WE HAVE ADDED ALL CARTON OF THIS PALLET TO cartonsetQueue ALREADY. SO, NOW WE CAN USE this.cartonsetQueue.EntityIDs FOR ServiceBag["CartonIDs"]
+                                        this.palletController.palletService.ServiceBag["Remarks"] = Remarks;
                                         if (!this.palletController.palletService.Delete(palletID)) throw new System.ArgumentException("Lỗi", "Không thể xóa pallet trên CSDL");
 
                                         return true;

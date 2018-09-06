@@ -12,13 +12,17 @@ namespace TotalSmartCoding.Views.Commons
 {
     public partial class CustomMessageBox : Form
     {
-        public CustomMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton)
+        public CustomMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, string promptText, string inputValue)
         {
             InitializeComponent();
 
             this.labelText.Text = text;
             this.Text = caption;
 
+            this.labelPromptText.Text = promptText;
+            this.textInputValue.Text = inputValue;
+            this.labelPromptText.Visible = promptText != null && promptText != "";
+            this.textInputValue.Visible = promptText != null && promptText != "";
 
             switch (buttons)
             {

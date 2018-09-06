@@ -37,7 +37,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         private void PalletSaveRelative()
         {
             //BE CAREFULL WHEN SAVE: NEED TO SET @CartonIDs (FOR BOTH WHEN SAVE - Update AND DELETE - Undo
-            string queryString = " @EntityID int, @SaveRelativeOption int, @CartonIDs varchar(3999), @Remarks varchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @EntityID int, @SaveRelativeOption int, @CartonIDs varchar(3999), @Remarks nvarchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 

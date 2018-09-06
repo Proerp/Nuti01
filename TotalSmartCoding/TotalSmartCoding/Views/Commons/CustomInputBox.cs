@@ -21,11 +21,17 @@ namespace TotalSmartCoding
         {
             return CustomMsgBox.Show(owner, text, caption, buttons, icon, MessageBoxDefaultButton.Button1);
         }
-
         public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton)
         {
-            CustomMessageBox customMessageBox = new CustomMessageBox(text, caption, buttons, icon, defaultButton);
+            string inputValue = "";
+            return CustomMsgBox.Show(owner, text, caption, buttons, icon, defaultButton, null, ref inputValue);
+        }
+
+        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, string promptText, ref string inputValue)
+        {
+            CustomMessageBox customMessageBox = new CustomMessageBox(text, caption, buttons, icon, defaultButton, promptText, inputValue);
             DialogResult dialogResult = customMessageBox.ShowDialog(owner);
+            inputValue = customMessageBox.textInputValue.Text.Trim();
 
             customMessageBox.Dispose();
             return dialogResult;

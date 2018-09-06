@@ -35,7 +35,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void PackSaveRelative()
         {
-            string queryString = " @EntityID int, @SaveRelativeOption int, @Remarks varchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @EntityID int, @SaveRelativeOption int, @Remarks nvarchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
