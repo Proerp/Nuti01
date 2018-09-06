@@ -18,6 +18,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         public void RestoreProcedure()
         {
+            this.PackSaveRelative();
             this.PackPostSaveValidate();
 
             this.PackEditable();
@@ -30,6 +31,34 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.SearchPacks();
             this.GetRelatedPackID();
+        }
+
+        private void PackSaveRelative()
+        {
+            string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       BEGIN " + "\r\n";
+
+            queryString = queryString + "           IF (@SaveRelativeOption = -1) ";
+            queryString = queryString + "               BEGIN ";
+            queryString = queryString + "                   INSERT INTO     DeletedPacks (PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, RelatedPackID, CartonID, Code, LineVolume, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
+            queryString = queryString + "                   SELECT          PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks " + "\r\n";
+            queryString = queryString + "                   FROM            Packs " + "\r\n";
+            queryString = queryString + "                   WHERE           PackID = @EntityID " + "\r\n";
+
+            queryString = queryString + "                   IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "                       BEGIN " + "\r\n";
+            queryString = queryString + "                           DECLARE     @msg NVARCHAR(300) = N'Lỗi hủy pack' ; " + "\r\n";
+            queryString = queryString + "                           THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "                       END " + "\r\n";
+
+            queryString = queryString + "               END ";
+            
+            queryString = queryString + "       END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("PackSaveRelative", queryString);
         }
 
         private void PackPostSaveValidate()

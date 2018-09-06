@@ -14,7 +14,7 @@ namespace TotalService.Productions
     {
         private IPackRepository packRepository;
         public PackService(IPackRepository packRepository)
-            : base(packRepository, "PackPostSaveValidate")
+            : base(packRepository, "PackPostSaveValidate", "PackSaveRelative")
         {
             this.packRepository = packRepository;
         }

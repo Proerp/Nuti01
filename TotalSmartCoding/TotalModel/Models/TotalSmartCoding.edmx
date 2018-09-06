@@ -2794,6 +2794,10 @@
         <Function Name="PackPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
+        <Function Name="PackSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+        </Function>
         <Function Name="PackUpdateEntryStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PackIDs" Type="varchar" Mode="In" />
           <Parameter Name="EntryStatusID" Type="int" Mode="In" />
@@ -4680,6 +4684,10 @@
           <FunctionImport Name="PalletToggleLocked">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="Locked" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="PackSaveRelative">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
@@ -10917,6 +10925,7 @@
           <FunctionImportMapping FunctionImportName="PalletLocked" FunctionName="TotalSmartCodingModel.Store.PalletLocked" />
           <FunctionImportMapping FunctionImportName="BatchToggleLocked" FunctionName="TotalSmartCodingModel.Store.BatchToggleLocked" />
           <FunctionImportMapping FunctionImportName="PalletToggleLocked" FunctionName="TotalSmartCodingModel.Store.PalletToggleLocked" />
+          <FunctionImportMapping FunctionImportName="PackSaveRelative" FunctionName="TotalSmartCodingModel.Store.PackSaveRelative" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

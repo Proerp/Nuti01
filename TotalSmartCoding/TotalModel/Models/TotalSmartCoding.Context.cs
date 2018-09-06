@@ -2713,5 +2713,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PalletToggleLocked", entityIDParameter, lockedParameter);
         }
+    
+        public virtual int PackSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
     }
 }
