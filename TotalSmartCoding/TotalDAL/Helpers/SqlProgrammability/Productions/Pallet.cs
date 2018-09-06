@@ -37,7 +37,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         private void PalletSaveRelative()
         {
             //BE CAREFULL WHEN SAVE: NEED TO SET @CartonIDs (FOR BOTH WHEN SAVE - Update AND DELETE - Undo
-            string queryString = " @EntityID int, @SaveRelativeOption int, @CartonIDs varchar(3999) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @EntityID int, @SaveRelativeOption int, @CartonIDs varchar(3999), @Remarks varchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
@@ -54,7 +54,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   INSERT INTO DeletedPallets (PalletID, EntryDate, MinPackDate, MaxPackDate, FillingLineID, BatchID, LocationID, CommodityID, Code, PackCounts, CartonCounts, Quantity, QuantityPickup, LineVolume, LineVolumePickup, EntryStatusID, Locked, DeletedDate, Remarks) " + "\r\n";
-            queryString = queryString + "                   SELECT      PalletID, EntryDate, MinPackDate, MaxPackDate, FillingLineID, BatchID, LocationID, CommodityID, Code, PackCounts, CartonCounts, Quantity, QuantityPickup, LineVolume, LineVolumePickup, EntryStatusID, Locked, GETDATE() AS DeletedDate, N'' AS Remarks FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
+            queryString = queryString + "                   SELECT      PalletID, EntryDate, MinPackDate, MaxPackDate, FillingLineID, BatchID, LocationID, CommodityID, Code, PackCounts, CartonCounts, Quantity, QuantityPickup, LineVolume, LineVolumePickup, EntryStatusID, Locked, GETDATE() AS DeletedDate, @Remarks AS Remarks FROM Pallets WHERE PalletID = @EntityID " + "\r\n";
 
             queryString = queryString + "                   UPDATE      Cartons" + "\r\n";
             queryString = queryString + "                   SET         PalletID = NULL, EntryStatusID = " + (int)GlobalVariables.BarcodeStatus.Readytoset + "\r\n"; //WHERE: NOT BELONG TO ANY CARTON, AND NUMBER OF PACK EFFECTED: IS THE SAME CartonID PASS BY VARIBLE: CartonIDs

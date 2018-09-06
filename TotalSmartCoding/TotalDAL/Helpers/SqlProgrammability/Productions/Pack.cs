@@ -35,7 +35,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void PackSaveRelative()
         {
-            string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @EntityID int, @SaveRelativeOption int, @Remarks varchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
@@ -44,7 +44,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           IF (@SaveRelativeOption = -1) ";
             queryString = queryString + "               BEGIN ";
             queryString = queryString + "                   INSERT INTO     DeletedPacks (PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, RelatedPackID, CartonID, Code, LineVolume, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
-            queryString = queryString + "                   SELECT          PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks FROM Packs WHERE PackID = @EntityID " + "\r\n";
+            queryString = queryString + "                   SELECT          PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, @Remarks AS Remarks FROM Packs WHERE PackID = @EntityID " + "\r\n";
 
             queryString = queryString + "                   IF @@ROWCOUNT <> 1 " + "\r\n";
             queryString = queryString + "                       BEGIN " + "\r\n";

@@ -32,7 +32,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         private void CartonSaveRelative()
         {
             //BE CAREFULL WHEN SAVE: NEED TO SET @PackIDs (FOR BOTH WHEN SAVE - Update AND DELETE - Undo
-            string queryString = " @EntityID int, @SaveRelativeOption int, @PackIDs varchar(3999), @DeletePack bit " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            string queryString = " @EntityID int, @SaveRelativeOption int, @PackIDs varchar(3999), @DeletePack bit, @Remarks varchar(800) " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
@@ -50,12 +50,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               BEGIN " + "\r\n";
 
             queryString = queryString + "                   INSERT INTO     DeletedCartons (CartonID, EntryDate, FillingLineID, BatchID, LocationID, CommodityID, PalletID, Code, Quantity, LineVolume, PackCounts, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
-            queryString = queryString + "                   SELECT          CartonID, EntryDate, FillingLineID, BatchID, LocationID, CommodityID, 0 AS PalletID, Code, Quantity, LineVolume, PackCounts, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks FROM Cartons WHERE CartonID = @EntityID " + "\r\n";
+            queryString = queryString + "                   SELECT          CartonID, EntryDate, FillingLineID, BatchID, LocationID, CommodityID, 0 AS PalletID, Code, Quantity, LineVolume, PackCounts, EntryStatusID, GETDATE() AS DeletedDate, @Remarks AS Remarks FROM Cartons WHERE CartonID = @EntityID " + "\r\n";
 
             queryString = queryString + "                   IF (@DeletePack = 1) " + "\r\n";
             queryString = queryString + "                       BEGIN " + "\r\n";
             queryString = queryString + "                           INSERT INTO DeletedPacks (PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, RelatedPackID, CartonID, Code, LineVolume, EntryStatusID, DeletedDate, Remarks) " + "\r\n";
-            queryString = queryString + "                           SELECT      PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, N'' AS Remarks FROM Packs WHERE CartonID = @EntityID " + "\r\n";
+            queryString = queryString + "                           SELECT      PackID, EntryDate, FillingLineID, BatchID, LocationID, QueueID, CommodityID, 0 AS RelatedPackID, 0 AS CartonID, Code, LineVolume, EntryStatusID, GETDATE() AS DeletedDate, @Remarks AS Remarks FROM Packs WHERE CartonID = @EntityID " + "\r\n";
 
             queryString = queryString + "                           DELETE      " + "\r\n";
             queryString = queryString + "                           FROM        Packs " + "\r\n";

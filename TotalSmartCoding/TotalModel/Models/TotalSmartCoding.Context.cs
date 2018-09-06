@@ -644,7 +644,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CartonEditable", entityIDParameter);
         }
     
-        public virtual int CartonSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string packIDs, Nullable<bool> deletePack)
+        public virtual int CartonSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string packIDs, Nullable<bool> deletePack, string remarks)
         {
             var entityIDParameter = entityID.HasValue ?
                 new ObjectParameter("EntityID", entityID) :
@@ -662,7 +662,11 @@ namespace TotalModel.Models
                 new ObjectParameter("DeletePack", deletePack) :
                 new ObjectParameter("DeletePack", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CartonSaveRelative", entityIDParameter, saveRelativeOptionParameter, packIDsParameter, deletePackParameter);
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CartonSaveRelative", entityIDParameter, saveRelativeOptionParameter, packIDsParameter, deletePackParameter, remarksParameter);
         }
     
         public virtual int CartonUpdateEntryStatus(string cartonIDs, Nullable<int> entryStatusID)
@@ -824,7 +828,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PalletEditable", entityIDParameter);
         }
     
-        public virtual int PalletSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string cartonIDs)
+        public virtual int PalletSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string cartonIDs, string remarks)
         {
             var entityIDParameter = entityID.HasValue ?
                 new ObjectParameter("EntityID", entityID) :
@@ -838,7 +842,11 @@ namespace TotalModel.Models
                 new ObjectParameter("CartonIDs", cartonIDs) :
                 new ObjectParameter("CartonIDs", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PalletSaveRelative", entityIDParameter, saveRelativeOptionParameter, cartonIDsParameter);
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PalletSaveRelative", entityIDParameter, saveRelativeOptionParameter, cartonIDsParameter, remarksParameter);
         }
     
         public virtual int PalletUpdateEntryStatus(string palletIDs, Nullable<int> entryStatusID)
@@ -2714,7 +2722,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PalletToggleLocked", entityIDParameter, lockedParameter);
         }
     
-        public virtual int PackSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        public virtual int PackSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption, string remarks)
         {
             var entityIDParameter = entityID.HasValue ?
                 new ObjectParameter("EntityID", entityID) :
@@ -2724,7 +2732,11 @@ namespace TotalModel.Models
                 new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
                 new ObjectParameter("SaveRelativeOption", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PackSaveRelative", entityIDParameter, saveRelativeOptionParameter, remarksParameter);
         }
     }
 }
