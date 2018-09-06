@@ -20,8 +20,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             this.GetExpiryDate();
 
-            this.ProductionJournals();
-            //this.WarehouseJournals();
+            //this.ProductionJournals(); JUST COMMENT OUT, BECAUSE NO NEED TO RUN AGAIN
+            ////-----------this.WarehouseJournals();
+
+            this.DeletedBarcodeJournals();
         }
 
 
@@ -375,6 +377,80 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         }
 
 
+        #region DeletedBarcodes
+        private void DeletedBarcodeJournals()
+        {
+            string queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @BatchMasterIDs varchar(3999), @BatchTypeIDs varchar(3999) " + "\r\n";
+
+            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+
+            queryString = queryString + "       DECLARE     @LocalUserID Int, @LocalFromDate DateTime, @LocalToDate DateTime, @LocalBatchMasterIDs varchar(3999), @LocalBatchTypeIDs varchar(3999) " + "\r\n";
+
+            queryString = queryString + "       SET         @LocalUserID = @UserID          SET @LocalFromDate = @FromDate          SET @LocalToDate = @ToDate  " + "\r\n";
+            queryString = queryString + "       SET         @LocalBatchMasterIDs = @BatchMasterIDs                                  SET @LocalBatchTypeIDs = @BatchTypeIDs " + "\r\n";
+
+            queryString = queryString + "       IF         (@LocalBatchMasterIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.DeletedBarcodeJournalsSQL(true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.DeletedBarcodeJournalsSQL(false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("DeletedBarcodeJournals", queryString);
+
+        }
+
+
+        private string DeletedBarcodeJournalsSQL(bool isBatchMasterID)
+        {
+            string queryString = "";
+
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF         (@LocalBatchTypeIDs <> '') " + "\r\n";
+            queryString = queryString + "                   " + this.DeletedBarcodeJournalsSQL(isBatchMasterID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "                   " + this.DeletedBarcodeJournalsSQL(isBatchMasterID, false) + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string DeletedBarcodeJournalsSQL(bool isBatchMasterID, bool isBatchTypeID)
+        {
+            string queryString = " " + "\r\n";
+
+            queryString = queryString + "   SELECT     'PACKS' AS GroupType, Batches.BatchMasterID, Batches.BatchID, Batches.EntryDate, dbo.GetExpiryDate(Batches.EntryDate, Commodities.Shelflife) AS ExpiryDate, Batches.Code AS BatchCode, Batches.LotID, Batches.LotCode, BatchTypes.BatchTypeID, BatchTypes.Code AS BatchTypeCode, Batches.FillingLineID, FillingLines.Code AS FillingLineCode, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode, Commodities.Unit, Commodities.PackageSize, " + "\r\n";
+            queryString = queryString + "               DeletedPacks.PackID, NULL AS CartonID, NULL AS PalletID, DeletedPacks.EntryDate AS BarcodeDate, DeletedPacks.Code, 0 AS PackCounts, 0 AS CartonCounts, DeletedPacks.DeletedDate, DeletedPacks.Remarks " + "\r\n";
+            queryString = queryString + "   FROM        Batches " + "\r\n";
+            queryString = queryString + "               INNER JOIN BatchTypes ON " + (isBatchMasterID ? "Batches.BatchMasterID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchMasterIDs)) " : "Batches.EntryDate >= @LocalFromDate AND Batches.EntryDate <= @LocalToDate") + (isBatchTypeID ? " AND Batches.BatchTypeID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchTypeIDs)) " : "") + " AND Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
+            queryString = queryString + "               INNER JOIN FillingLines ON Batches.FillingLineID = FillingLines.FillingLineID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Commodities ON Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "               INNER JOIN DeletedPacks ON Batches.BatchID = DeletedPacks.BatchID " + "\r\n";
+            queryString = queryString + "   UNION ALL " + "\r\n";
+            queryString = queryString + "   SELECT     'CARTONS' AS GroupType, Batches.BatchMasterID, Batches.BatchID, Batches.EntryDate, dbo.GetExpiryDate(Batches.EntryDate, Commodities.Shelflife) AS ExpiryDate, Batches.Code AS BatchCode, Batches.LotID, Batches.LotCode, BatchTypes.BatchTypeID, BatchTypes.Code AS BatchTypeCode, Batches.FillingLineID, FillingLines.Code AS FillingLineCode, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode, Commodities.Unit, Commodities.PackageSize, " + "\r\n";
+            queryString = queryString + "               NULL AS PackID, DeletedCartons.CartonID, NULL AS PalletID, DeletedCartons.EntryDate AS BarcodeDate, DeletedCartons.Code, DeletedCartons.PackCounts, 0 AS CartonCounts, DeletedCartons.DeletedDate, DeletedCartons.Remarks " + "\r\n";
+            queryString = queryString + "   FROM        Batches " + "\r\n";
+            queryString = queryString + "               INNER JOIN BatchTypes ON " + (isBatchMasterID ? "Batches.BatchMasterID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchMasterIDs)) " : "Batches.EntryDate >= @LocalFromDate AND Batches.EntryDate <= @LocalToDate") + (isBatchTypeID ? " AND Batches.BatchTypeID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchTypeIDs)) " : "") + " AND Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
+            queryString = queryString + "               INNER JOIN FillingLines ON Batches.FillingLineID = FillingLines.FillingLineID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Commodities ON Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "               INNER JOIN DeletedCartons ON Batches.BatchID = DeletedCartons.BatchID " + "\r\n";
+            queryString = queryString + "   UNION ALL " + "\r\n";
+            queryString = queryString + "   SELECT     ' PALLETS' AS GroupType, Batches.BatchMasterID, Batches.BatchID, Batches.EntryDate, dbo.GetExpiryDate(Batches.EntryDate, Commodities.Shelflife) AS ExpiryDate, Batches.Code AS BatchCode, Batches.LotID, Batches.LotCode, BatchTypes.BatchTypeID, BatchTypes.Code AS BatchTypeCode, Batches.FillingLineID, FillingLines.Code AS FillingLineCode, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.APICode, Commodities.Unit, Commodities.PackageSize, " + "\r\n";
+            queryString = queryString + "               NULL AS PackID, NULL AS CartonID, DeletedPallets.PalletID, DeletedPallets.EntryDate AS BarcodeDate, DeletedPallets.Code, DeletedPallets.PackCounts, DeletedPallets.CartonCounts, DeletedPallets.DeletedDate, DeletedPallets.Remarks " + "\r\n";
+            queryString = queryString + "   FROM        Batches " + "\r\n";
+            queryString = queryString + "               INNER JOIN BatchTypes ON " + (isBatchMasterID ? "Batches.BatchMasterID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchMasterIDs)) " : "Batches.EntryDate >= @LocalFromDate AND Batches.EntryDate <= @LocalToDate") + (isBatchTypeID ? " AND Batches.BatchTypeID IN (SELECT Id FROM dbo.SplitToIntList (@LocalBatchTypeIDs)) " : "") + " AND Batches.BatchTypeID = BatchTypes.BatchTypeID " + "\r\n";
+            queryString = queryString + "               INNER JOIN FillingLines ON Batches.FillingLineID = FillingLines.FillingLineID " + "\r\n";
+            queryString = queryString + "               INNER JOIN Commodities ON Batches.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "               INNER JOIN DeletedPallets ON Batches.BatchID = DeletedPallets.BatchID " + "\r\n";
+
+            return queryString;
+        }
+        #endregion DeletedBarcodes
 
     }
 }

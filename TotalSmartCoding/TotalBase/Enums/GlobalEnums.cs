@@ -381,7 +381,10 @@
             ProductionJournal002 = 1002,
             ProductionJournal003 = 1003,
             ProductionJournal004 = 1004,
-            ProductionJournal005 = 1005
+            ProductionJournal005 = 1005,
+
+            ProductionJournal008 = 1008,
+            ProductionJournal009 = 1009
         }
 
         public enum ForecastFilterID

@@ -230,6 +230,11 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.Pallet pallet = new Helpers.SqlProgrammability.Productions.Pallet(totalSmartCodingEntities);
             pallet.RestoreProcedure();
 
+            //return;
+
+            Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
+            inventory.RestoreProcedure();
+
             return;
 
             Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
@@ -251,11 +256,7 @@ namespace TotalDAL.Repositories
 
 
 
-            return;
-
-            Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
-            inventory.RestoreProcedure();
-
+            
 
 
             //return;
@@ -463,6 +464,15 @@ namespace TotalDAL.Repositories
 
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal004 + ", " + (int)GlobalEnums.ReportID.ProductionJournal004 + ", 2, N'2.BÁO CÁO THEO NGÀY SẢN XUẤT', N'Báo cáo thành phẩm chi tiết', N'ProductionJournal003', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 20, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
             this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal005 + ", " + (int)GlobalEnums.ReportID.ProductionJournal005 + ", 2, N'2.BÁO CÁO THEO NGÀY SẢN XUẤT', N'Báo cáo thành phẩm tổng hợp', N'ProductionJournal002', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + GlobalEnums.OBx(GlobalEnums.OptionBoxID.SummaryVersusDetail) + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 30, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
+
+
+            optionBoxIDs = "";
+            reportTabPageIDs = ((int)GlobalEnums.ReportTabPageID.TabPageBatchMasters).ToString() + "," + ((int)GlobalEnums.ReportTabPageID.TabPageBatchTypes).ToString();
+            this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal008 + ", " + (int)GlobalEnums.ReportID.ProductionJournal008 + ", 1, N'1.BÁO CÁO THEO BATCH', N'Báo cáo hủy lon, carton, pallet', N'ProductionJournal008', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 60, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
+            optionBoxIDs = GlobalEnums.OBx(GlobalEnums.OptionBoxID.FromDate) + GlobalEnums.OBx(GlobalEnums.OptionBoxID.ToDate);
+            reportTabPageIDs = ((int)GlobalEnums.ReportTabPageID.TabPageBatchTypes).ToString();
+            this.ExecuteStoreCommand("SET IDENTITY_INSERT Reports ON  INSERT INTO Reports (ReportID, ReportUniqueID, ReportGroupID, ReportGroupName, ReportName, ReportURL, ReportTabPageIDs, OptionBoxIDs, ReportTypeID, SerialID, Remarks) VALUES (" + (int)GlobalEnums.ReportID.ProductionJournal009 + ", " + (int)GlobalEnums.ReportID.ProductionJournal009 + ", 2, N'2.BÁO CÁO THEO NGÀY SẢN XUẤT', N'Báo cáo hủy lon, carton, pallet', N'ProductionJournal008', N'" + reportTabPageIDs + "', N'" + optionBoxIDs + "', " + (int)GlobalEnums.ReportTypeID.ProductionJournal + ", 60, N'')      SET IDENTITY_INSERT Reports OFF ", new ObjectParameter[] { });
+
         }
 
 
