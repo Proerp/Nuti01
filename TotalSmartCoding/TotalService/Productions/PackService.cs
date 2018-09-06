@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Data.Entity.Core.Objects;
 
 using TotalBase;
 using TotalModel.Models;
@@ -17,6 +18,16 @@ namespace TotalService.Productions
             : base(packRepository, "PackPostSaveValidate", "PackSaveRelative")
         {
             this.packRepository = packRepository;
+        }
+
+        protected override System.Data.Entity.Core.Objects.ObjectParameter[] SaveRelativeParameters(Pack entity, SaveRelativeOption saveRelativeOption)
+        {
+            ObjectParameter[] baseParameters = base.SaveRelativeParameters(entity, saveRelativeOption);
+            ObjectParameter[] objectParameters = new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("Remarks", this.ServiceBag.ContainsKey("Remarks") && this.ServiceBag["Remarks"] != null ? this.ServiceBag["Remarks"] : "") };
+
+            this.ServiceBag.Remove("Remarks");
+
+            return objectParameters;
         }
 
         public IList<Pack> GetPacks(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? cartonID)

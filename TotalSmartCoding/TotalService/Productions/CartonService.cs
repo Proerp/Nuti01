@@ -22,10 +22,11 @@ namespace TotalService.Productions
         protected override ObjectParameter[] SaveRelativeParameters(Carton entity, SaveRelativeOption saveRelativeOption)
         {
             ObjectParameter[] baseParameters = base.SaveRelativeParameters(entity, saveRelativeOption); //IMPORTANT: WE SHOULD SET PackIDs WHEN SaveRelativeOption.Update. WE DON'T CARE PackIDs WHEN SaveRelativeOption.Undo [SEE STORE PROCEDURE CartonSaveRelative FOR MORE INFORMATION] 
-            ObjectParameter[] objectParameters = new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("PackIDs", this.ServiceBag.ContainsKey("PackIDs") && this.ServiceBag["PackIDs"] != null ? this.ServiceBag["PackIDs"] : ""), new ObjectParameter("DeletePack", this.ServiceBag.ContainsKey("DeletePack") && this.ServiceBag["DeletePack"] != null ? true : false) };
+            ObjectParameter[] objectParameters = new ObjectParameter[] { baseParameters[0], baseParameters[1], new ObjectParameter("PackIDs", this.ServiceBag.ContainsKey("PackIDs") && this.ServiceBag["PackIDs"] != null ? this.ServiceBag["PackIDs"] : ""), new ObjectParameter("DeletePack", this.ServiceBag.ContainsKey("DeletePack") && this.ServiceBag["DeletePack"] != null ? true : false), new ObjectParameter("Remarks", this.ServiceBag.ContainsKey("Remarks") && this.ServiceBag["Remarks"] != null ? this.ServiceBag["Remarks"] : "") };
 
             this.ServiceBag.Remove("PackIDs");
             this.ServiceBag.Remove("DeletePack");
+            this.ServiceBag.Remove("Remarks");
             
             return objectParameters;
         }
