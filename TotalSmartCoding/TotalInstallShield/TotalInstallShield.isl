@@ -3879,7 +3879,7 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>C:\Users\Hiep\Downloads\Barcode2D.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>D:\VC PROJECTS\Nutifood\Program Files\Barcode2D.ico</td><td>0</td></row>
 		<row><td>StartUpSmartCoding_10E5EE2098564846BF1D60EFAC609210.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>StartUpSmartCoding_18865BD3DD92463B9CE810B549BDD4F1.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>StartUpSmartCoding_1E8646C3296A4C7C94A683F7BAB07AAE.exe</td><td/><td>D:\VC PROJECTS\Chevron VN\Github30SEP\trunk\TotalSmartCoding\packages\StartUpSmartCoding\StartUpSmartCoding.exe</td><td>0</td></row>
