@@ -12,12 +12,14 @@ using AutoMapper;
 
 using TotalBase;
 using TotalBase.Enums;
+using TotalCore.Repositories.Commons;
 using TotalCore.Repositories.Productions;
 using TotalCore.Services.Productions;
 using TotalModel.Models;
 using TotalDTO.Productions;
 
 using TotalSmartCoding.Controllers.Productions;
+using TotalSmartCoding.Controllers.APIs.Commons;
 using TotalSmartCoding.Controllers.APIs.Productions;
 using TotalSmartCoding.Libraries;
 using TotalSmartCoding.Libraries.Helpers;
@@ -62,6 +64,8 @@ namespace TotalSmartCoding.Views.Productions
 
         delegate void SetTextCallback(string text);
         delegate void propertyChangedThread(object sender, PropertyChangedEventArgs e);
+
+        private IList<string> voidTypeNames;
 
         #endregion Declaration
 
@@ -138,8 +142,8 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.labelNextDigitNo.Visible = false; this.textNextDigitNo.Visible = false;
 
-
-
+                VoidTypeAPIs voidTypeAPIs = new VoidTypeAPIs(CommonNinject.Kernel.Get<IVoidTypeRepository>());
+                this.voidTypeNames = voidTypeAPIs.GetVoidTypeNames();
 
 
             }
@@ -871,9 +875,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 try
                 {                //Handle exception for PackInOneCarton
-                    string selectedBarcode = ""; string remarks = "Hủy lon chưa đóng carton";
+                    string selectedBarcode = ""; string remarks = "";
                     int packID = this.getBarcodeID(this.dgvPackQueue.CurrentCell, out selectedBarcode);
-                    if (packID > 0 && CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Xóa toàn bộ chai đang trên chuyền" : "Xóa chai này:" + (char)13 + (char)13 + selectedBarcode) + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2, "Vui lòng nhập lý do", ref remarks) == System.Windows.Forms.DialogResult.Yes)
+                    if (packID > 0 && CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Xóa toàn bộ chai đang trên chuyền" : "Xóa chai này:" + (char)13 + (char)13 + selectedBarcode) + "?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2, "Vui lòng nhập lý do", voidTypeNames, ref remarks) == System.Windows.Forms.DialogResult.Yes)
                         if (this.scannerController.RemovePackInPackQueue(packID, remarks, sender.Equals(this.buttonDeleteAllPack))) CustomMsgBox.Show(this, (sender.Equals(this.buttonDeleteAllPack) ? "Toàn bộ chai đang trên chuyền" : "Pack: " + selectedBarcode) + "\r\n\r\nĐã được xóa thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception exception)
@@ -938,9 +942,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 try
                 {
-                    string selectedBarcode = ""; string remarks = sender.Equals(this.buttonRemoveCartonPending) ? "Xả carton ra và đóng lại" : "Hủy carton kèm hủy lon bên trong";
+                    string selectedBarcode = ""; string remarks = "";
                     int cartonID = this.getBarcodeID(this.dgvCartonPendingQueue.CurrentCell, out selectedBarcode);
-                    if (cartonID > 0 && CustomMsgBox.Show(this, "Bạn có muốn " + (sender.Equals(this.buttonRemoveCartonPending) ? "xả thùng carton này ra và đóng lại không:" : "xóa toàn bộ thùng carton, bao gồm các chai bên trong,: ") + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2, "Vui lòng nhập lý do", ref remarks) == System.Windows.Forms.DialogResult.Yes)
+                    if (cartonID > 0 && CustomMsgBox.Show(this, "Bạn có muốn " + (sender.Equals(this.buttonRemoveCartonPending) ? "xả thùng carton này ra và đóng lại không:" : "xóa toàn bộ thùng carton, bao gồm các chai bên trong,: ") + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2, "Vui lòng nhập lý do", voidTypeNames, ref remarks) == System.Windows.Forms.DialogResult.Yes)
                     {
                         if (sender.Equals(this.buttonRemoveCartonPending))
                             if ((this.fillingData.HasPack && this.scannerController.UnwrapCartontoPack(cartonID, remarks)) || (!this.fillingData.HasPack && this.scannerController.TakebackCartonFromPendingQueue(cartonID))) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nĐã được xả thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -963,9 +967,9 @@ namespace TotalSmartCoding.Views.Productions
             {
                 try
                 {
-                    string selectedBarcode = ""; string remarks = "Xả pallet";
+                    string selectedBarcode = ""; string remarks = "";
                     int palletID = this.getBarcodeID(this.dgvPalletQueue.CurrentCell, out selectedBarcode);
-                    if (this.fillingData.HasCarton && palletID > 0 && CustomMsgBox.Show(this, "Bạn có muốn xả pallet này ra và đóng lại không:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2, "Vui lòng nhập lý do", ref remarks) == System.Windows.Forms.DialogResult.Yes)
+                    if (this.fillingData.HasCarton && palletID > 0 && CustomMsgBox.Show(this, "Bạn có muốn xả pallet này ra và đóng lại không:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2, "Vui lòng nhập lý do", voidTypeNames, ref remarks) == System.Windows.Forms.DialogResult.Yes)
                     {
                         if (this.scannerController.UnwrapPallettoCarton(palletID, remarks)) CustomMsgBox.Show(this, "Pallet: " + selectedBarcode + "\r\nĐã được xả thành công.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

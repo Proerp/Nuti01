@@ -34,9 +34,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureIcon = new System.Windows.Forms.PictureBox();
-            this.textInputValue = new System.Windows.Forms.TextBox();
             this.labelPromptText = new System.Windows.Forms.Label();
             this.layoutTop = new System.Windows.Forms.TableLayoutPanel();
+            this.comboVoidTypeNames = new System.Windows.Forms.ComboBox();
+            this.textRemarks = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureIcon)).BeginInit();
             this.layoutTop.SuspendLayout();
@@ -118,16 +119,6 @@
             this.pictureIcon.TabIndex = 6;
             this.pictureIcon.TabStop = false;
             // 
-            // textInputValue
-            // 
-            this.textInputValue.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textInputValue.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.textInputValue.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.textInputValue.Location = new System.Drawing.Point(99, 102);
-            this.textInputValue.Name = "textInputValue";
-            this.textInputValue.Size = new System.Drawing.Size(511, 29);
-            this.textInputValue.TabIndex = 41;
-            // 
             // labelPromptText
             // 
             this.labelPromptText.AutoSize = true;
@@ -154,21 +145,44 @@
             this.layoutTop.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 13F));
             this.layoutTop.Controls.Add(this.labelText, 3, 1);
             this.layoutTop.Controls.Add(this.labelPromptText, 3, 2);
-            this.layoutTop.Controls.Add(this.textInputValue, 3, 3);
             this.layoutTop.Controls.Add(this.pictureIcon, 1, 1);
+            this.layoutTop.Controls.Add(this.comboVoidTypeNames, 3, 3);
+            this.layoutTop.Controls.Add(this.textRemarks, 3, 4);
             this.layoutTop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutTop.Location = new System.Drawing.Point(0, 0);
             this.layoutTop.Margin = new System.Windows.Forms.Padding(0);
             this.layoutTop.Name = "layoutTop";
             this.layoutTop.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.layoutTop.RowCount = 5;
+            this.layoutTop.RowCount = 6;
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.layoutTop.Size = new System.Drawing.Size(626, 237);
             this.layoutTop.TabIndex = 102;
+            // 
+            // comboVoidTypeNames
+            // 
+            this.comboVoidTypeNames.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboVoidTypeNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboVoidTypeNames.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.comboVoidTypeNames.FormattingEnabled = true;
+            this.comboVoidTypeNames.Location = new System.Drawing.Point(99, 102);
+            this.comboVoidTypeNames.Name = "comboVoidTypeNames";
+            this.comboVoidTypeNames.Size = new System.Drawing.Size(511, 29);
+            this.comboVoidTypeNames.TabIndex = 43;
+            this.comboVoidTypeNames.TextChanged += new System.EventHandler(this.comboVoidTypeNames_TextChanged);
+            // 
+            // textRemarks
+            // 
+            this.textRemarks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textRemarks.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.textRemarks.Location = new System.Drawing.Point(99, 137);
+            this.textRemarks.Name = "textRemarks";
+            this.textRemarks.Size = new System.Drawing.Size(511, 29);
+            this.textRemarks.TabIndex = 44;
             // 
             // CustomMessageBox
             // 
@@ -203,7 +217,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label labelPromptText;
-        public System.Windows.Forms.TextBox textInputValue;
         private System.Windows.Forms.TableLayoutPanel layoutTop;
+        public System.Windows.Forms.ComboBox comboVoidTypeNames;
+        public System.Windows.Forms.TextBox textRemarks;
     }
 }

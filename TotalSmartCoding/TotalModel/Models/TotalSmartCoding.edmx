@@ -836,6 +836,18 @@
           <Property Name="InActive" Type="bit" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
+        <EntityType Name="VoidTypes">
+          <Key>
+            <PropertyRef Name="VoidTypeID" />
+          </Key>
+          <Property Name="VoidTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VoidClassID" Type="int" Nullable="false" />
+          <Property Name="VoidCategoryID" Type="int" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="WarehouseAdjustmentDetails">
           <Key>
             <PropertyRef Name="WarehouseAdjustmentDetailID" />
@@ -3012,6 +3024,7 @@
           <EntitySet Name="TransferOrders" EntityType="Self.TransferOrders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransferOrderTypes" EntityType="Self.TransferOrderTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoidTypes" EntityType="Self.VoidTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WarehouseAdjustmentDetails" EntityType="Self.WarehouseAdjustmentDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WarehouseAdjustments" EntityType="Self.WarehouseAdjustments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WarehouseAdjustmentTypes" EntityType="Self.WarehouseAdjustmentTypes" Schema="dbo" store:Type="Tables" />
@@ -4695,6 +4708,7 @@
             <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
             <Parameter Name="Remarks" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="VoidTypes" EntityType="TotalSmartCodingModel.VoidType" />
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -8231,6 +8245,18 @@
           <Property Type="String" Name="ParameterName" Nullable="true" MaxLength="13" />
           <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
+        <EntityType Name="VoidType">
+          <Key>
+            <PropertyRef Name="VoidTypeID" />
+          </Key>
+          <Property Name="VoidTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VoidClassID" Type="Int32" Nullable="false" />
+          <Property Name="VoidCategoryID" Type="Int32" Nullable="false" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10932,6 +10958,19 @@
           <FunctionImportMapping FunctionImportName="BatchToggleLocked" FunctionName="TotalSmartCodingModel.Store.BatchToggleLocked" />
           <FunctionImportMapping FunctionImportName="PalletToggleLocked" FunctionName="TotalSmartCodingModel.Store.PalletToggleLocked" />
           <FunctionImportMapping FunctionImportName="PackSaveRelative" FunctionName="TotalSmartCodingModel.Store.PackSaveRelative" />
+          <EntitySetMapping Name="VoidTypes">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.VoidType">
+              <MappingFragment StoreEntitySet="VoidTypes">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="VoidCategoryID" ColumnName="VoidCategoryID" />
+                <ScalarProperty Name="VoidClassID" ColumnName="VoidClassID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

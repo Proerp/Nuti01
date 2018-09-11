@@ -104,6 +104,7 @@
     <Compile Include="Repositories\Commons\LocationRepository.cs" />
     <Compile Include="Repositories\Commons\TerritoryRepository.cs" />
     <Compile Include="Repositories\Commons\TransferOrderTypeRepository.cs" />
+    <Compile Include="Repositories\Commons\VoidTypeRepository.cs" />
     <Compile Include="Repositories\Commons\WarehouseAdjustmentTypeRepository.cs" />
     <Compile Include="Repositories\Commons\WarehouseRepository.cs" />
     <Compile Include="Repositories\Generals\ModuleRepository.cs" />

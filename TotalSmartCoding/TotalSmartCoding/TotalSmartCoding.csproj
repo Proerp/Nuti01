@@ -113,6 +113,7 @@
     <Compile Include="Controllers\APIs\Commons\LocationAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\TerritoryAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\TransferOrderTypeAPIs.cs" />
+    <Compile Include="Controllers\APIs\Commons\VoidTypeAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\WarehouseAdjustmentTypeAPIs.cs" />
     <Compile Include="Controllers\APIs\Commons\WarehouseAPIs.cs" />
     <Compile Include="Controllers\APIs\Generals\ModuleAPIs.cs" />

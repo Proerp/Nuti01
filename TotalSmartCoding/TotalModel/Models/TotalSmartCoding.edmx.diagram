@@ -158,6 +158,7 @@
         <EntityTypeShape EntityType="TotalSmartCodingModel.Repack" Width="1.5" PointX="22.125" PointY="11.125" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Repacks_Batches" />
         <AssociationConnector Association="TotalSmartCodingModel.FK_Repacks_Packs" />
+        <EntityTypeShape EntityType="TotalSmartCodingModel.VoidType" Width="1.5" PointX="18.375" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

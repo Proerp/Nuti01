@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using TotalSmartCoding.Views.Commons;
@@ -24,14 +25,14 @@ namespace TotalSmartCoding
         public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton)
         {
             string inputValue = "";
-            return CustomMsgBox.Show(owner, text, caption, buttons, icon, defaultButton, null, ref inputValue);
+            return CustomMsgBox.Show(owner, text, caption, buttons, icon, defaultButton, null, null, ref inputValue);
         }
 
-        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, string promptText, ref string inputValue)
+        public static DialogResult Show(IWin32Window owner, string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, string promptText, IList<string> voidTypeNames, ref string inputValue)
         {
-            CustomMessageBox customMessageBox = new CustomMessageBox(text, caption, buttons, icon, defaultButton, promptText, inputValue);
+            CustomMessageBox customMessageBox = new CustomMessageBox(text, caption, buttons, icon, defaultButton, promptText, voidTypeNames, inputValue);
             DialogResult dialogResult = customMessageBox.ShowDialog(owner);
-            inputValue = customMessageBox.textInputValue.Text.Trim();
+            inputValue = (customMessageBox.comboVoidTypeNames.Text.Trim() + " " + customMessageBox.textRemarks.Text.Trim()).Trim();
 
             customMessageBox.Dispose();
             return dialogResult;

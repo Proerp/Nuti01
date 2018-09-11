@@ -12,7 +12,7 @@ namespace TotalSmartCoding.Views.Commons
 {
     public partial class CustomMessageBox : Form
     {
-        public CustomMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, string promptText, string inputValue)
+        public CustomMessageBox(string text, string caption, MessageBoxButtons buttons, MessageBoxIcon icon, MessageBoxDefaultButton defaultButton, string promptText, IList<string> voidTypeNames, string inputValue)
         {
             InitializeComponent();
 
@@ -20,9 +20,11 @@ namespace TotalSmartCoding.Views.Commons
             this.Text = caption;
 
             this.labelPromptText.Text = promptText;
-            this.textInputValue.Text = inputValue;
+            this.comboVoidTypeNames.DataSource = voidTypeNames;
+
             this.labelPromptText.Visible = promptText != null && promptText != "";
-            this.textInputValue.Visible = promptText != null && promptText != "";
+            this.textRemarks.Visible = promptText != null && promptText != "";
+            this.comboVoidTypeNames.Visible = promptText != null && promptText != "";
 
             switch (buttons)
             {
@@ -86,7 +88,17 @@ namespace TotalSmartCoding.Views.Commons
 
             this.pictureIcon.Image = icon == MessageBoxIcon.Warning ? TotalSmartCoding.Properties.Resources.Martz90_Circle_Addon2_Warning : TotalSmartCoding.Properties.Resources.Kyo_Tux_Phuzion_Sign_Info;
 
-            this.AcceptButton = defaultButton == MessageBoxDefaultButton.Button1 ? this.button1 : (defaultButton == MessageBoxDefaultButton.Button1 ? this.button2 : this.button3);
+            if (promptText != null && promptText != "")
+                comboVoidTypeNames_TextChanged(this.comboVoidTypeNames, new EventArgs());
+            else
+                this.AcceptButton = defaultButton == MessageBoxDefaultButton.Button1 ? this.button1 : (defaultButton == MessageBoxDefaultButton.Button1 ? this.button2 : this.button3);
+        }
+
+        private void comboVoidTypeNames_TextChanged(object sender, EventArgs e)
+        {
+            if (this.button1.DialogResult != System.Windows.Forms.DialogResult.No && this.button1.DialogResult != System.Windows.Forms.DialogResult.Cancel) this.button1.Enabled = this.comboVoidTypeNames.Text.Trim().Length > 15;
+            if (this.button2.DialogResult != System.Windows.Forms.DialogResult.No && this.button2.DialogResult != System.Windows.Forms.DialogResult.Cancel) this.button2.Enabled = this.comboVoidTypeNames.Text.Trim().Length > 15;
+            if (this.button3.DialogResult != System.Windows.Forms.DialogResult.No && this.button3.DialogResult != System.Windows.Forms.DialogResult.Cancel) this.button3.Enabled = this.comboVoidTypeNames.Text.Trim().Length > 15;
         }
     }
 }

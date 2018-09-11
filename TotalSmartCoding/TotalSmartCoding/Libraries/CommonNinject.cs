@@ -188,6 +188,8 @@ namespace TotalSmartCoding.Libraries
                 Kernel.Bind<IBatchStatusAPIRepository>().To<BatchStatusAPIRepository>();
                 //Kernel.Bind<BatchStatusViewModel>().ToSelf();
 
+                Kernel.Bind<IVoidTypeRepository>().To<VoidTypeRepository>();
+
                 //Kernel.Bind<ILocationService>().To<LocationService>();
                 //Kernel.Bind<ILocationRepository>().To<LocationRepository>();
                 Kernel.Bind<ILocationAPIRepository>().To<LocationAPIRepository>();
