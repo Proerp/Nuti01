@@ -382,7 +382,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString = " @UserID Int, @FromDate DateTime, @ToDate DateTime, @BatchMasterIDs varchar(3999), @BatchTypeIDs varchar(3999) " + "\r\n";
 
-            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
