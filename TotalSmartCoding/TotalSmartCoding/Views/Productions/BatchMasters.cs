@@ -295,6 +295,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
+                this.batchMasterViewModel.LastID = this.batchMasterViewModel.GetID();
                 BatchMasterWizard wizardMaster = new BatchMasterWizard(this.batchMasterController, this.batchMasterViewModel);
                 DialogResult dialogResult = wizardMaster.ShowDialog(); wizardMaster.Dispose();
 
