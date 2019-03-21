@@ -2620,9 +2620,17 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchRepack>("LookupRecartons", cartonIDParameter);
         }
     
-        public virtual ObjectResult<BatchMasterTree> GetBatchMasterTrees()
+        public virtual ObjectResult<BatchMasterTree> GetBatchMasterTrees(Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterTree>("GetBatchMasterTrees");
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BatchMasterTree>("GetBatchMasterTrees", fromDateParameter, toDateParameter);
         }
     
         public virtual ObjectResult<BatchTypeTree> GetBatchTypeTrees()

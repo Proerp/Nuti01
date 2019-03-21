@@ -65,9 +65,9 @@ namespace TotalDAL.Repositories.Productions
             return this.TotalSmartCodingEntities.GetBatchMasterBases().ToList();
         }
 
-        public IList<BatchMasterTree> GetBatchMasterTrees()
+        public IList<BatchMasterTree> GetBatchMasterTrees(DateTime fromDate, DateTime toDate)
         {
-            return this.TotalSmartCodingEntities.GetBatchMasterTrees().ToList();
+            return this.TotalSmartCodingEntities.GetBatchMasterTrees(fromDate, toDate).ToList();
         }
     }
 

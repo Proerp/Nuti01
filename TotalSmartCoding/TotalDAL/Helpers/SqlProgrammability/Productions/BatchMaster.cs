@@ -258,7 +258,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString;
 
-            queryString = " " + "\r\n";
+            queryString = " @FromDate DateTime, @ToDate DateTime " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
@@ -267,10 +267,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       UNION ALL " + "\r\n";
 
             queryString = queryString + "       SELECT      " + GlobalEnums.AncestorNode + " - DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) AS NodeID, " + GlobalEnums.RootNode + " AS ParentNodeID, NULL AS PrimaryID, NULL AS AncestorID, LEFT(CONVERT(VARCHAR, MIN(EntryDate), 103), 10) AS Code, NULL AS Name, '' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
-            queryString = queryString + "       FROM        BatchMasters GROUP BY DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) " + "\r\n";
+            queryString = queryString + "       FROM        BatchMasters WHERE EntryDate >= @FromDate AND EntryDate <= @ToDate GROUP BY DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) " + "\r\n";
             queryString = queryString + "       UNION ALL " + "\r\n";
             queryString = queryString + "       SELECT      BatchMasterID AS NodeID, " + GlobalEnums.AncestorNode + " - DATEDIFF(day, CONVERT(DATETIME, '2000-01-01 00:00:00', 102), EntryDate) AS ParentNodeID, BatchMasters.BatchMasterID AS PrimaryID, NULL AS AncestorID, BatchMasters.Code, '[' + Commodities.Code + ']    ' + Commodities.Name AS Name, 'BatchMasterID' AS ParameterName, CAST(0 AS bit) AS Selected " + "\r\n";
-            queryString = queryString + "       FROM        BatchMasters INNER JOIN Commodities ON BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "       FROM        BatchMasters INNER JOIN Commodities ON BatchMasters.EntryDate >= @FromDate AND BatchMasters.EntryDate <= @ToDate AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
 
             queryString = queryString + "       ORDER BY    NodeID " + "\r\n";
 

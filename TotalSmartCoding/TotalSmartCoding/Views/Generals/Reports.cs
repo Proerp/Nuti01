@@ -167,11 +167,6 @@ namespace TotalSmartCoding.Views.Generals
             this.warehouseAdjustmentTypeTrees = warehouseAdjustmentTypeAPIs.GetWarehouseAdjustmentTypeTrees();
             this.treeWarehouseAdjustmentTypeID.DataSource = new BindingSource(this.warehouseAdjustmentTypeTrees, "");
 
-            BatchMasterAPIs batchMasterAPIs = new BatchMasterAPIs(CommonNinject.Kernel.Get<IBatchMasterAPIRepository>());
-            this.batchMasterTrees = batchMasterAPIs.GetBatchMasterTrees();
-            this.treeBatchMasterID.DataSource = new BindingSource(this.batchMasterTrees, "");
-            this.treeBatchMasterID.Sort(this.olvBatchMasterCode, SortOrder.Descending);
-
             BatchTypeAPIs batchTypeAPIs = new BatchTypeAPIs(CommonNinject.Kernel.Get<IBatchTypeAPIRepository>());
             this.batchTypeTrees = batchTypeAPIs.GetBatchTypeTrees();
             this.treeBatchTypeID.DataSource = new BindingSource(this.batchTypeTrees, "");
@@ -247,6 +242,11 @@ namespace TotalSmartCoding.Views.Generals
 
         public override void Loading()
         {
+            BatchMasterAPIs batchMasterAPIs = new BatchMasterAPIs(CommonNinject.Kernel.Get<IBatchMasterAPIRepository>());
+            this.batchMasterTrees = batchMasterAPIs.GetBatchMasterTrees(GlobalEnums.GlobalOptionSetting.LowerFillterDate, GlobalEnums.GlobalOptionSetting.UpperFillterDate);
+            this.treeBatchMasterID.DataSource = new BindingSource(this.batchMasterTrees, "");
+            this.treeBatchMasterID.Sort(this.olvBatchMasterCode, SortOrder.Descending);
+
             this.fastReportIndex.SetObjects(this.reportAPIs.GetReportIndexes());
 
             base.Loading();

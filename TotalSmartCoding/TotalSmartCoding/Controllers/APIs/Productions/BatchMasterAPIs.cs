@@ -56,9 +56,9 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
             return this.batchMasterAPIRepository.GetBatchMasterBases();
         }
 
-        public IList<BatchMasterTree> GetBatchMasterTrees()
+        public IList<BatchMasterTree> GetBatchMasterTrees(DateTime fromDate, DateTime toDate)
         {
-            return this.batchMasterAPIRepository.GetBatchMasterTrees();
+            return this.batchMasterAPIRepository.GetBatchMasterTrees(fromDate, toDate);
         }
     }
 }
