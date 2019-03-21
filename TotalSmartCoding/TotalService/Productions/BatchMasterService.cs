@@ -16,9 +16,9 @@ namespace TotalService.Productions
             this.batchMasterRepository = batchMasterRepository;
         }
 
-        public bool AddLot(int batchMasterID)
+        public bool AddLot(int batchMasterID, DateTime? entryDate)
         {
-            this.batchMasterRepository.AddLot(batchMasterID);
+            this.batchMasterRepository.AddLot(batchMasterID, entryDate);
             return true;
         }
 

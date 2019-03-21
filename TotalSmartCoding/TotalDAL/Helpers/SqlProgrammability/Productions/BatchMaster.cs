@@ -77,7 +77,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "   BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      BatchMasters.BatchMasterID, CAST(BatchMasters.EntryDate AS DATE) AS EntryDate, BatchMasters.Reference, BatchMasters.Code AS BatchMasterCode, BatchMasters.BatchStatusID, BatchStatuses.Code AS BatchStatusCode, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
+            queryString = queryString + "       SELECT      BatchMasters.BatchMasterID, CAST(ISNULL(Lots.EntryDate, BatchMasters.EntryDate) AS DATE) AS EntryDate, BatchMasters.Reference, BatchMasters.Code AS BatchMasterCode, BatchMasters.BatchStatusID, BatchStatuses.Code AS BatchStatusCode, BatchMasters.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, Commodities.APICode AS CommodityAPICode, Commodities.CartonCode AS CommodityCartonCode, Commodities.Volume, Commodities.PackPerCarton, Commodities.CartonPerPallet, Commodities.Shelflife, " + "\r\n";
             queryString = queryString + "                   Lots.LotID, Lots.EntryDate AS LotEntryDate, Lots.Code AS LotCode, BatchMasters.Description, BatchMasters.Remarks, BatchMasters.PlannedQuantity, " + (showCummulativePacks ? "CummulativePacks.PackQuantity" : "CAST(0 AS int) AS PackQuantity") + ", " + (showCummulativePacks ? "CummulativePacks.PackLineVolume" : "CAST(0 AS decimal(18, 2)) AS PackLineVolume") + ", BatchMasters.CreatedDate, BatchMasters.EditedDate, BatchMasters.IsDefault, BatchMasters.InActive " + "\r\n";
             queryString = queryString + "       FROM        BatchMasters " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON " + (isActiveOption ? "BatchMasters.InActive = @ActiveOption AND " : "") + "((BatchMasters.EntryDate >= @FromDate AND BatchMasters.EntryDate <= @ToDate) OR BatchMasters.EntryDate = CONVERT(DATETIME, '2000-01-01 00:00:00', 102)) AND BatchMasters.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -182,18 +182,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void BatchMasterAddLot()
         {
-            string queryString = " @BatchMasterID int " + "\r\n";
+            string queryString = " @BatchMasterID int, @EntryDate DateTime" + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       DECLARE     @EntryDate DateTime, @Code nvarchar(10) ";
-            queryString = queryString + "       SET         @EntryDate = GetDate() ";
+            queryString = queryString + "       DECLARE     @CreatedDate DateTime, @Code nvarchar(10) ";
+            queryString = queryString + "       SET         @CreatedDate = GetDate() ";
             queryString = queryString + "       SELECT      @Code = MAX(Code) FROM Lots WHERE BatchMasterID = @BatchMasterID ";
 
             queryString = queryString + "       SELECT      @Code = CHAR(CASE WHEN @Code IS NULL THEN 48 WHEN (ASCII(@Code) >= 48 AND ASCII(@Code) < 57) OR (ASCII(@Code) >= 65 AND ASCII(@Code) < 90) THEN ASCII(@Code) + 1 WHEN ASCII(@Code) = 57 THEN 65 ELSE 97 END) " + "\r\n";
 
             queryString = queryString + "       INSERT INTO Lots (EntryDate, Reference, Code, BatchMasterID, LocationID, Description, Remarks, CreatedDate, EditedDate, Approved, ApprovedDate, InActive, InActiveDate) " + "\r\n";
-            queryString = queryString + "       SELECT      @EntryDate AS EntryDate, @Code AS Reference, @Code, BatchMasterID, LocationID, NULL AS Description, NULL AS Remarks, @EntryDate AS CreatedDate, @EntryDate AS EditedDate, 0 AS Approved, NULL AS ApprovedDate, 0 AS InActive, NULL AS InActiveDate " + "\r\n";
+            queryString = queryString + "       SELECT      @EntryDate AS EntryDate, @Code AS Reference, @Code, BatchMasterID, LocationID, NULL AS Description, NULL AS Remarks, @CreatedDate AS CreatedDate, @CreatedDate AS EditedDate, 0 AS Approved, NULL AS ApprovedDate, 0 AS InActive, NULL AS InActiveDate " + "\r\n";
             queryString = queryString + "       FROM        BatchMasters " + "\r\n";
             queryString = queryString + "       WHERE       BatchMasterID = @BatchMasterID " + "\r\n";
 

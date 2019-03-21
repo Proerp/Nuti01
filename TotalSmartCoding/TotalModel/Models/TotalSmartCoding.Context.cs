@@ -2285,13 +2285,17 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterToggleApproved", entityIDParameter, approvedParameter);
         }
     
-        public virtual int BatchMasterAddLot(Nullable<int> batchMasterID)
+        public virtual int BatchMasterAddLot(Nullable<int> batchMasterID, Nullable<System.DateTime> entryDate)
         {
             var batchMasterIDParameter = batchMasterID.HasValue ?
                 new ObjectParameter("BatchMasterID", batchMasterID) :
                 new ObjectParameter("BatchMasterID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterAddLot", batchMasterIDParameter);
+            var entryDateParameter = entryDate.HasValue ?
+                new ObjectParameter("EntryDate", entryDate) :
+                new ObjectParameter("EntryDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchMasterAddLot", batchMasterIDParameter, entryDateParameter);
         }
     
         public virtual ObjectResult<PendingLot> GetPendingLots(Nullable<int> locationID, Nullable<int> fillingLineID)

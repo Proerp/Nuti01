@@ -1,4 +1,6 @@
-﻿using TotalModel.Models;
+﻿using System;
+
+using TotalModel.Models;
 using TotalDTO.Productions;
 
 using TotalCore.Services.Productions;
@@ -15,9 +17,9 @@ namespace TotalSmartCoding.Controllers.Productions
             this.batchMasterService = batchMasterService;
         }
 
-        public bool AddLot(int batchMasterID)
+        public bool AddLot(int batchMasterID, DateTime? entryDate)
         {
-            return this.batchMasterService.AddLot(batchMasterID);
+            return this.batchMasterService.AddLot(batchMasterID, entryDate);
         }
 
         public bool RemoveLot(int lotID)

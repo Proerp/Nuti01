@@ -55,7 +55,7 @@ namespace TotalDAL.Repositories
 
         public bool RestoreProcedures()
         {
-            this.ExecuteStoreCommand("UPDATE Lots SET Lots.EntryDate = BatchMasters.EntryDate FROM Lots INNER JOIN BatchMasters ON Lots.BatchMasterID = BatchMasters.BatchMasterID", new ObjectParameter[] { });
+            ////////this.ExecuteStoreCommand("UPDATE Lots SET Lots.EntryDate = BatchMasters.EntryDate FROM Lots INNER JOIN BatchMasters ON Lots.BatchMasterID = BatchMasters.BatchMasterID", new ObjectParameter[] { });
 
 
             this.InitReports();
@@ -77,35 +77,39 @@ namespace TotalDAL.Repositories
 
             //return;
 
-            Helpers.SqlProgrammability.Productions.Pack pack = new Helpers.SqlProgrammability.Productions.Pack(totalSmartCodingEntities);
-            pack.RestoreProcedure();
+            Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
+            batchMaster.RestoreProcedure();
 
             //return;
-
-            Helpers.SqlProgrammability.Productions.Carton carton = new Helpers.SqlProgrammability.Productions.Carton(totalSmartCodingEntities);
-            carton.RestoreProcedure();
-
-            //return;
-
-            Helpers.SqlProgrammability.Productions.Pallet pallet = new Helpers.SqlProgrammability.Productions.Pallet(totalSmartCodingEntities);
-            pallet.RestoreProcedure();
-
-            //return;
-
-            Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
-            inventory.RestoreProcedure();
-
-            return;
 
             Helpers.SqlProgrammability.Productions.Batch batch = new Helpers.SqlProgrammability.Productions.Batch(totalSmartCodingEntities);
             batch.RestoreProcedure();
 
-            
+            return;
+
+            Helpers.SqlProgrammability.Productions.Pack pack = new Helpers.SqlProgrammability.Productions.Pack(totalSmartCodingEntities);
+            pack.RestoreProcedure();
 
             return;
 
-            Helpers.SqlProgrammability.Productions.BatchMaster batchMaster = new Helpers.SqlProgrammability.Productions.BatchMaster(totalSmartCodingEntities);
-            batchMaster.RestoreProcedure();
+            Helpers.SqlProgrammability.Productions.Carton carton = new Helpers.SqlProgrammability.Productions.Carton(totalSmartCodingEntities);
+            carton.RestoreProcedure();
+
+            return;
+
+            Helpers.SqlProgrammability.Productions.Pallet pallet = new Helpers.SqlProgrammability.Productions.Pallet(totalSmartCodingEntities);
+            pallet.RestoreProcedure();
+
+            return;
+
+            Helpers.SqlProgrammability.Inventories.Inventory inventory = new Helpers.SqlProgrammability.Inventories.Inventory(totalSmartCodingEntities);
+            inventory.RestoreProcedure();
+
+
+
+            
+
+
 
 
 

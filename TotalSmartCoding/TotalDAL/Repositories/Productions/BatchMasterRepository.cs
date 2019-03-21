@@ -18,9 +18,9 @@ namespace TotalDAL.Repositories.Productions
         {
         }
 
-        public void AddLot(int batchMasterID)
+        public void AddLot(int batchMasterID, DateTime? entryDate)
         {
-            this.TotalSmartCodingEntities.BatchMasterAddLot(batchMasterID);
+            this.TotalSmartCodingEntities.BatchMasterAddLot(batchMasterID, entryDate);
         }
 
         public void RemoveLot(int lotID)
@@ -59,7 +59,7 @@ namespace TotalDAL.Repositories.Productions
         {
             return this.TotalSmartCodingEntities.GetBatchMasterBase(batchMasterID).FirstOrDefault();
         }
-       
+
         public IList<BatchMasterBase> GetBatchMasterBases()
         {
             return this.TotalSmartCodingEntities.GetBatchMasterBases().ToList();

@@ -81,7 +81,7 @@ namespace TotalSmartCoding.Views.Productions
                 if (sender.Equals(this.buttonOK))
                 {
                     if (this.batchMasterViewModel.IsDirty && (this.batchMasterViewModel.Editable || !this.batchMasterViewModel.IsFV)) this.batchMasterController.Save();
-                    if ((!this.batchMasterViewModel.IsDirty || (!this.batchMasterViewModel.Editable && this.batchMasterViewModel.IsFV)) && this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID)) this.DialogResult = DialogResult.OK;
+                    if ((!this.batchMasterViewModel.IsDirty || (!this.batchMasterViewModel.Editable && this.batchMasterViewModel.IsFV)) && this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID, this.batchMasterViewModel.EntryDate)) this.DialogResult = DialogResult.OK;
                 }
 
                 if (sender.Equals(this.buttonESC))

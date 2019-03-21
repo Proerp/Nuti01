@@ -2221,6 +2221,7 @@
         </Function>
         <Function Name="BatchMasterAddLot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchMasterID" Type="int" Mode="In" />
+          <Parameter Name="EntryDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="BatchMasterApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -4540,7 +4541,8 @@
             <Parameter Name="Approved" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="BatchMasterAddLot">
-          <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
+            <Parameter Name="BatchMasterID" Mode="In" Type="Int32" />
+            <Parameter Name="EntryDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetPendingLots" ReturnType="Collection(TotalSmartCodingModel.PendingLot)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
