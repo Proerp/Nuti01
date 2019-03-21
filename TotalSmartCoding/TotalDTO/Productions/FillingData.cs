@@ -206,7 +206,7 @@ namespace TotalDTO.Productions
 
         public string SettingDateShortDateFormat { get { return this.settingDate.ToShortDateString(); } }
 
-
+        public bool IsFV { get { return CommonExpressions.IsFV(this.CommodityCode); } }
         //-------------------------
 
         public string NextDigitNo

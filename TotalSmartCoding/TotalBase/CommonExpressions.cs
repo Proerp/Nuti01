@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using TotalBase.Enums;
 
 namespace TotalBase
-{    
+{
     public class CommonExpressions
     {
         public static string PropertyName<T>(Expression<Func<T, object>> expression)
@@ -41,5 +41,6 @@ namespace TotalBase
                 return code;
         }
 
+        public static bool IsFV(string commodityCode) { return commodityCode != null && commodityCode.Length > 3 && commodityCode.Substring(0, 2) == "FV"; }
     }
 }

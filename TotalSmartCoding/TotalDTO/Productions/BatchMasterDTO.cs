@@ -124,7 +124,7 @@ namespace TotalDTO.Productions
             set { ApplyPropertyChange<BatchMasterDTO, string>(ref this.commodityAPICode, o => o.CommodityAPICode, value, false); }
         }
 
-        public bool IsFV { get { return this.CommodityCode != null && this.CommodityCode.Length > 3 && this.CommodityCode.Substring(0, 2) == "FV"; } }
+        public bool IsFV { get { return CommonExpressions.IsFV(this.CommodityCode); } }
 
         protected override List<ValidationRule> CreateRules()
         {
