@@ -51,7 +51,7 @@ namespace TotalSmartCoding.Views.Productions
 
                 this.errorProviderMaster.DataSource = this.batchMasterViewModel;
 
-                if (this.batchMasterViewModel.Editable) { this.dateTimexEntryDate.ReadOnly = false; this.textexRemarks.ReadOnly = false; this.batchMasterController.Edit(this.batchMasterViewModel.BatchMasterID); } else { this.dateTimexEntryDate.ReadOnly = true; this.textexRemarks.ReadOnly = true; }
+                if (this.batchMasterViewModel.Editable) { this.dateTimexEntryDate.ReadOnly = false; this.textexRemarks.ReadOnly = false; this.batchMasterController.Edit(this.batchMasterViewModel.BatchMasterID); } else { this.dateTimexEntryDate.ReadOnly = !this.batchMasterViewModel.IsFV; this.textexRemarks.ReadOnly = true; }
             }
             catch (Exception exception)
             {
@@ -80,8 +80,8 @@ namespace TotalSmartCoding.Views.Productions
             {
                 if (sender.Equals(this.buttonOK))
                 {
-                    if (this.batchMasterViewModel.IsDirty) this.batchMasterController.Save();
-                    if (!this.batchMasterViewModel.IsDirty && this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID)) this.DialogResult = DialogResult.OK;
+                    if (this.batchMasterViewModel.IsDirty && (this.batchMasterViewModel.Editable || !this.batchMasterViewModel.IsFV)) this.batchMasterController.Save();
+                    if ((!this.batchMasterViewModel.IsDirty || (!this.batchMasterViewModel.Editable && this.batchMasterViewModel.IsFV)) && this.batchMasterController.AddLot(this.batchMasterViewModel.BatchMasterID)) this.DialogResult = DialogResult.OK;
                 }
 
                 if (sender.Equals(this.buttonESC))

@@ -55,147 +55,7 @@ namespace TotalDAL.Repositories
 
         public bool RestoreProcedures()
         {
-
-            if (!this.totalSmartCodingEntities.TableExists("DeletedPacks"))
-            {
-
-                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedPacks](
-	                                    [DeletedPackID] [int] IDENTITY(1,1) NOT NULL,
-	                                    [PackID] [int] NOT NULL,
-	                                    [EntryDate] [datetime] NOT NULL,
-	                                    [FillingLineID] [int] NOT NULL,
-	                                    [BatchID] [int] NOT NULL,
-	                                    [LocationID] [int] NOT NULL,
-	                                    [QueueID] [int] NOT NULL,
-	                                    [CommodityID] [int] NOT NULL,
-	                                    [RelatedPackID] [int] NULL,
-	                                    [CartonID] [int] NULL,
-	                                    [Code] [varchar](50) NOT NULL,
-	                                    [LineVolume] [decimal](18, 3) NOT NULL,
-	                                    [EntryStatusID] [int] NOT NULL,
-	                                    [DeletedDate] [datetime] NOT NULL,
-	                                    [Remarks] [nvarchar](1000) NULL,
-                                     CONSTRAINT [PK_DeletedPacks] PRIMARY KEY CLUSTERED 
-                                    (
-	                                    [DeletedPackID] ASC
-                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-                                    ) ON [PRIMARY]"
-                                    );
-
-                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedCartons](
-	                                    [DeletedCartonID] [int] IDENTITY(1,1) NOT NULL,
-	                                    [CartonID] [int] NOT NULL,
-	                                    [EntryDate] [datetime] NOT NULL,
-	                                    [FillingLineID] [int] NOT NULL,
-	                                    [BatchID] [int] NOT NULL,
-	                                    [LocationID] [int] NOT NULL,
-	                                    [CommodityID] [int] NOT NULL,
-	                                    [PalletID] [int] NULL,
-	                                    [Code] [varchar](50) NOT NULL,
-	                                    [Quantity] [decimal](18, 2) NOT NULL,
-	                                    [LineVolume] [decimal](18, 3) NOT NULL,
-	                                    [PackCounts] [int] NOT NULL,
-	                                    [EntryStatusID] [int] NOT NULL,
-	                                    [DeletedDate] [datetime] NOT NULL,
-	                                    [Remarks] [nvarchar](1000) NULL,
-                                     CONSTRAINT [PK_DeletedCartons] PRIMARY KEY CLUSTERED 
-                                    (
-	                                    [DeletedCartonID] ASC
-                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-                                    ) ON [PRIMARY]"
-                                   );
-
-                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedPallets](
-	                                    [DeletedPalletID] [int] IDENTITY(1,1) NOT NULL,
-	                                    [PalletID] [int] NOT NULL,
-	                                    [EntryDate] [datetime] NOT NULL,
-	                                    [MinPackDate] [datetime] NOT NULL,
-	                                    [MaxPackDate] [datetime] NOT NULL,
-	                                    [FillingLineID] [int] NOT NULL,
-	                                    [BatchID] [int] NOT NULL,
-	                                    [LocationID] [int] NOT NULL,
-	                                    [CommodityID] [int] NOT NULL,
-	                                    [Code] [varchar](50) NOT NULL,
-	                                    [PackCounts] [int] NOT NULL,
-	                                    [CartonCounts] [int] NOT NULL,
-	                                    [Quantity] [decimal](18, 2) NOT NULL,
-	                                    [QuantityPickup] [decimal](18, 2) NOT NULL,
-	                                    [LineVolume] [decimal](18, 2) NOT NULL,
-	                                    [LineVolumePickup] [decimal](18, 2) NOT NULL,
-	                                    [EntryStatusID] [int] NOT NULL,
-	                                    [Locked] [bit] NOT NULL,
-	                                    [DeletedDate] [datetime] NOT NULL,
-	                                    [Remarks] [nvarchar](1000) NULL,
-                                        CONSTRAINT [PK_DeletedPallets] PRIMARY KEY CLUSTERED 
-                                    (
-	                                    [DeletedPalletID] ASC
-                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-                                    ) ON [PRIMARY]"
-                                   );
-            }
-
-
-
-            if (!this.totalSmartCodingEntities.ColumnExists("Batches", "Locked"))
-            {
-                this.totalSmartCodingEntities.ColumnAdd("Batches", "Locked", "bit", "0", true);
-                this.totalSmartCodingEntities.ColumnAdd("Pallets", "Locked", "bit", "0", true);
-
-                this.ExecuteStoreCommand(" UPDATE Batches SET Locked = 1 WHERE IsDefault = 0 AND BatchID IN (SELECT DISTINCT BatchID FROM Cartons) ", new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" UPDATE Pallets SET Locked = 1 WHERE BatchID IN (SELECT DISTINCT BatchID FROM Batches WHERE Locked = 1) ", new ObjectParameter[] { });
-
-                this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 2, UnApprovalPermitted = 2, VoidablePermitted = 2, UnVoidablePermitted = 2 WHERE UserID = 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Batch, new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID <> 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Pallet, new ObjectParameter[] { });
-            }
-
-
-            if (!this.totalSmartCodingEntities.ColumnExists("Users", "PasswordHash"))
-            {
-                this.ExecuteStoreCommand(" UPDATE Batches_1 SET Batches_1.NextPackNo   = UPDATELOTS.NextPackNo, Batches_1.NextCartonNo = UPDATELOTS.NextCartonNo    FROM (SELECT FillingLineID, LotID,          MAX(NextPackNo) AS NextPackNo, MAX(NextCartonNo) AS NextCartonNo, MAX(NextPalletNo) AS NextPalletNo FROM Batches GROUP BY FillingLineID, LotID)             AS UPDATELOTS       INNER JOIN Batches AS Batches_1 ON UPDATELOTS.FillingLineID = Batches_1.FillingLineID       AND UPDATELOTS.LotID = Batches_1.LotID                      ", new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" UPDATE Batches_1 SET Batches_1.NextPalletNo = UPDATEPALLETS.NextPalletNo                                                 FROM (SELECT FillingLineID, BatchMasterID,  MAX(NextPackNo) AS NextPackNo, MAX(NextCartonNo) AS NextCartonNo, MAX(NextPalletNo) AS NextPalletNo FROM Batches GROUP BY FillingLineID, BatchMasterID)     AS UPDATEPALLETS    INNER JOIN Batches AS Batches_1 ON UPDATEPALLETS.FillingLineID = Batches_1.FillingLineID    AND UPDATEPALLETS.BatchMasterID = Batches_1.BatchMasterID   ", new ObjectParameter[] { });
-
-                this.totalSmartCodingEntities.ColumnAdd("Users", "PasswordHash", "nvarchar(1000)", "", true);
-
-                this.ExecuteStoreCommand(" UPDATE Users SET SecurityIdentifier = N'S-1-5-21-2907738014-1953812902-1740135539-2132-NTF' WHERE UserID IN (11, 24) ", new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" UPDATE Users SET FirstName = N'BATCH MANAGER', LastName = N'BATCH MANAGER', UserName = N'BATCH MANAGER' WHERE UserID = 11", new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" UPDATE Users SET FirstName = N'READONLY USERS', LastName = N'READONLY USERS', UserName = N'READONLY USERS' WHERE UserID = 24", new ObjectParameter[] { });
-
-                this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 1, ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID = 24", new ObjectParameter[] { });
-
-                //this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 1, ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
-                //this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 2, ApprovalPermitted = 1, UnApprovalPermitted = 1, VoidablePermitted = 1, UnVoidablePermitted = 1 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
-            }
-
-            
-
-
-            this.totalSmartCodingEntities.ColumnAdd("Repacks", "SerialID", "int", "0", true);
-
-            //////////////this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.Repack + ", 108, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
-            //////////////this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.Repack + " AS NMVNTaskID, OrganizationalUnitID, 2 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Pack + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Repack + ") = 0", new ObjectParameter[] { }); 
-
-
-            ////////////////////this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.BatchMaster + ", 108, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
-            ////////////////////this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.BatchMaster + " AS NMVNTaskID, OrganizationalUnitID, 2 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster + ") = 0", new ObjectParameter[] { }); 
-
-
-
-            //this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.Report + ", 9, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
-            //this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.Report + " AS NMVNTaskID, OrganizationalUnitID, 1 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Report + ") = 0", new ObjectParameter[] { });
-
-            if (!this.totalSmartCodingEntities.ColumnExists("Pallets", "MinPackDate"))
-            {
-                this.totalSmartCodingEntities.ColumnAdd("Pallets", "MinPackDate", "datetime", null, false);
-                this.totalSmartCodingEntities.ColumnAdd("Pallets", "MaxPackDate", "datetime", null, false);
-
-                this.ExecuteStoreCommand(" UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = Pallets.PalletID) ", new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = Pallets.PalletID) ", new ObjectParameter[] { });
-
-                this.ExecuteStoreCommand(" ALTER TABLE Pallets ALTER COLUMN MinPackDate datetime NOT NULL", new ObjectParameter[] { });
-                this.ExecuteStoreCommand(" ALTER TABLE Pallets ALTER COLUMN MaxPackDate datetime NOT NULL", new ObjectParameter[] { });
-
-                this.ExecuteStoreCommand(" UPDATE       Commodities SET Unit = N'Lon'", new ObjectParameter[] { });
-            }
+            this.ExecuteStoreCommand("UPDATE Lots SET Lots.EntryDate = BatchMasters.EntryDate FROM Lots INNER JOIN BatchMasters ON Lots.BatchMasterID = BatchMasters.BatchMasterID", new ObjectParameter[] { });
 
 
             this.InitReports();
@@ -481,6 +341,149 @@ namespace TotalDAL.Repositories
         private void UpdateBackup()
         {
 
+            #region Final 2018
+            if (!this.totalSmartCodingEntities.TableExists("DeletedPacks"))
+            {
+
+                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedPacks](
+	                                    [DeletedPackID] [int] IDENTITY(1,1) NOT NULL,
+	                                    [PackID] [int] NOT NULL,
+	                                    [EntryDate] [datetime] NOT NULL,
+	                                    [FillingLineID] [int] NOT NULL,
+	                                    [BatchID] [int] NOT NULL,
+	                                    [LocationID] [int] NOT NULL,
+	                                    [QueueID] [int] NOT NULL,
+	                                    [CommodityID] [int] NOT NULL,
+	                                    [RelatedPackID] [int] NULL,
+	                                    [CartonID] [int] NULL,
+	                                    [Code] [varchar](50) NOT NULL,
+	                                    [LineVolume] [decimal](18, 3) NOT NULL,
+	                                    [EntryStatusID] [int] NOT NULL,
+	                                    [DeletedDate] [datetime] NOT NULL,
+	                                    [Remarks] [nvarchar](1000) NULL,
+                                     CONSTRAINT [PK_DeletedPacks] PRIMARY KEY CLUSTERED 
+                                    (
+	                                    [DeletedPackID] ASC
+                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                    ) ON [PRIMARY]"
+                                    );
+
+                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedCartons](
+	                                    [DeletedCartonID] [int] IDENTITY(1,1) NOT NULL,
+	                                    [CartonID] [int] NOT NULL,
+	                                    [EntryDate] [datetime] NOT NULL,
+	                                    [FillingLineID] [int] NOT NULL,
+	                                    [BatchID] [int] NOT NULL,
+	                                    [LocationID] [int] NOT NULL,
+	                                    [CommodityID] [int] NOT NULL,
+	                                    [PalletID] [int] NULL,
+	                                    [Code] [varchar](50) NOT NULL,
+	                                    [Quantity] [decimal](18, 2) NOT NULL,
+	                                    [LineVolume] [decimal](18, 3) NOT NULL,
+	                                    [PackCounts] [int] NOT NULL,
+	                                    [EntryStatusID] [int] NOT NULL,
+	                                    [DeletedDate] [datetime] NOT NULL,
+	                                    [Remarks] [nvarchar](1000) NULL,
+                                     CONSTRAINT [PK_DeletedCartons] PRIMARY KEY CLUSTERED 
+                                    (
+	                                    [DeletedCartonID] ASC
+                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                    ) ON [PRIMARY]"
+                                   );
+
+                this.ExecuteStoreCommand(@"CREATE TABLE [dbo].[DeletedPallets](
+	                                    [DeletedPalletID] [int] IDENTITY(1,1) NOT NULL,
+	                                    [PalletID] [int] NOT NULL,
+	                                    [EntryDate] [datetime] NOT NULL,
+	                                    [MinPackDate] [datetime] NOT NULL,
+	                                    [MaxPackDate] [datetime] NOT NULL,
+	                                    [FillingLineID] [int] NOT NULL,
+	                                    [BatchID] [int] NOT NULL,
+	                                    [LocationID] [int] NOT NULL,
+	                                    [CommodityID] [int] NOT NULL,
+	                                    [Code] [varchar](50) NOT NULL,
+	                                    [PackCounts] [int] NOT NULL,
+	                                    [CartonCounts] [int] NOT NULL,
+	                                    [Quantity] [decimal](18, 2) NOT NULL,
+	                                    [QuantityPickup] [decimal](18, 2) NOT NULL,
+	                                    [LineVolume] [decimal](18, 2) NOT NULL,
+	                                    [LineVolumePickup] [decimal](18, 2) NOT NULL,
+	                                    [EntryStatusID] [int] NOT NULL,
+	                                    [Locked] [bit] NOT NULL,
+	                                    [DeletedDate] [datetime] NOT NULL,
+	                                    [Remarks] [nvarchar](1000) NULL,
+                                        CONSTRAINT [PK_DeletedPallets] PRIMARY KEY CLUSTERED 
+                                    (
+	                                    [DeletedPalletID] ASC
+                                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                                    ) ON [PRIMARY]"
+                                   );
+            }
+
+
+
+            if (!this.totalSmartCodingEntities.ColumnExists("Batches", "Locked"))
+            {
+                this.totalSmartCodingEntities.ColumnAdd("Batches", "Locked", "bit", "0", true);
+                this.totalSmartCodingEntities.ColumnAdd("Pallets", "Locked", "bit", "0", true);
+
+                this.ExecuteStoreCommand(" UPDATE Batches SET Locked = 1 WHERE IsDefault = 0 AND BatchID IN (SELECT DISTINCT BatchID FROM Cartons) ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Pallets SET Locked = 1 WHERE BatchID IN (SELECT DISTINCT BatchID FROM Batches WHERE Locked = 1) ", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 2, UnApprovalPermitted = 2, VoidablePermitted = 2, UnVoidablePermitted = 2 WHERE UserID = 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Batch, new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID <> 11 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Pallet, new ObjectParameter[] { });
+            }
+
+
+            if (!this.totalSmartCodingEntities.ColumnExists("Users", "PasswordHash"))
+            {
+                this.ExecuteStoreCommand(" UPDATE Batches_1 SET Batches_1.NextPackNo   = UPDATELOTS.NextPackNo, Batches_1.NextCartonNo = UPDATELOTS.NextCartonNo    FROM (SELECT FillingLineID, LotID,          MAX(NextPackNo) AS NextPackNo, MAX(NextCartonNo) AS NextCartonNo, MAX(NextPalletNo) AS NextPalletNo FROM Batches GROUP BY FillingLineID, LotID)             AS UPDATELOTS       INNER JOIN Batches AS Batches_1 ON UPDATELOTS.FillingLineID = Batches_1.FillingLineID       AND UPDATELOTS.LotID = Batches_1.LotID                      ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Batches_1 SET Batches_1.NextPalletNo = UPDATEPALLETS.NextPalletNo                                                 FROM (SELECT FillingLineID, BatchMasterID,  MAX(NextPackNo) AS NextPackNo, MAX(NextCartonNo) AS NextCartonNo, MAX(NextPalletNo) AS NextPalletNo FROM Batches GROUP BY FillingLineID, BatchMasterID)     AS UPDATEPALLETS    INNER JOIN Batches AS Batches_1 ON UPDATEPALLETS.FillingLineID = Batches_1.FillingLineID    AND UPDATEPALLETS.BatchMasterID = Batches_1.BatchMasterID   ", new ObjectParameter[] { });
+
+                this.totalSmartCodingEntities.ColumnAdd("Users", "PasswordHash", "nvarchar(1000)", "", true);
+
+                this.ExecuteStoreCommand(" UPDATE Users SET SecurityIdentifier = N'S-1-5-21-2907738014-1953812902-1740135539-2132-NTF' WHERE UserID IN (11, 24) ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Users SET FirstName = N'BATCH MANAGER', LastName = N'BATCH MANAGER', UserName = N'BATCH MANAGER' WHERE UserID = 11", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE Users SET FirstName = N'READONLY USERS', LastName = N'READONLY USERS', UserName = N'READONLY USERS' WHERE UserID = 24", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 1, ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID = 24", new ObjectParameter[] { });
+
+                //this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 1, ApprovalPermitted = 0, UnApprovalPermitted = 0, VoidablePermitted = 0, UnVoidablePermitted = 0 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
+                //this.ExecuteStoreCommand(" UPDATE AccessControls SET AccessLevel = 2, ApprovalPermitted = 1, UnApprovalPermitted = 1, VoidablePermitted = 1, UnVoidablePermitted = 1 WHERE UserID = 1 AND NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster, new ObjectParameter[] { });
+            }
+
+
+
+
+            this.totalSmartCodingEntities.ColumnAdd("Repacks", "SerialID", "int", "0", true);
+
+            //////////////this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.Repack + ", 108, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
+            //////////////this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.Repack + " AS NMVNTaskID, OrganizationalUnitID, 2 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Pack + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Repack + ") = 0", new ObjectParameter[] { }); 
+
+
+            ////////////////////this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.BatchMaster + ", 108, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
+            ////////////////////this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.BatchMaster + " AS NMVNTaskID, OrganizationalUnitID, 2 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.BatchMaster + ") = 0", new ObjectParameter[] { }); 
+
+
+
+            //this.ExecuteStoreCommand("INSERT INTO ModuleDetails (ModuleDetailID, ModuleID, Code, Name, FullName, Actions, Controller, LastOpen, SerialID, ImageIndex, InActive) VALUES(" + (int)GlobalEnums.NmvnTaskID.Report + ", 9, 'Reports', 'Reports', '#', '#', '#', 1, 10, 1, 0) ", new ObjectParameter[] { });
+            //this.ExecuteStoreCommand("INSERT INTO AccessControls (UserID, NMVNTaskID, OrganizationalUnitID, AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP) SELECT UserID, " + (int)GlobalEnums.NmvnTaskID.Report + " AS NMVNTaskID, OrganizationalUnitID, 1 AS AccessLevel, ApprovalPermitted, UnApprovalPermitted, VoidablePermitted, UnVoidablePermitted, ShowDiscount, AccessLevelBACKUP, ApprovalPermittedBACKUP, UnApprovalPermittedBACKUP FROM AccessControls WHERE (NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Commodity + ") AND (SELECT COUNT(*) FROM AccessControls WHERE NMVNTaskID = " + (int)GlobalEnums.NmvnTaskID.Report + ") = 0", new ObjectParameter[] { });
+
+            if (!this.totalSmartCodingEntities.ColumnExists("Pallets", "MinPackDate"))
+            {
+                this.totalSmartCodingEntities.ColumnAdd("Pallets", "MinPackDate", "datetime", null, false);
+                this.totalSmartCodingEntities.ColumnAdd("Pallets", "MaxPackDate", "datetime", null, false);
+
+                this.ExecuteStoreCommand(" UPDATE      Pallets     SET     MinPackDate = (SELECT MIN(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = Pallets.PalletID) ", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" UPDATE      Pallets     SET     MaxPackDate = (SELECT MAX(Packs.EntryDate) FROM Packs INNER JOIN Cartons ON Packs.CartonID = Cartons.CartonID WHERE Cartons.PalletID = Pallets.PalletID) ", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" ALTER TABLE Pallets ALTER COLUMN MinPackDate datetime NOT NULL", new ObjectParameter[] { });
+                this.ExecuteStoreCommand(" ALTER TABLE Pallets ALTER COLUMN MaxPackDate datetime NOT NULL", new ObjectParameter[] { });
+
+                this.ExecuteStoreCommand(" UPDATE       Commodities SET Unit = N'Lon'", new ObjectParameter[] { });
+            }
+
+            #endregion Final 2018
 
             //if (!this.totalSmartCodingEntities.ColumnExists("GoodsReceipts", "ForkliftDriverID"))
             //{
