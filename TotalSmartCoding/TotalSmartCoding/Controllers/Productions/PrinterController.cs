@@ -418,7 +418,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 return ".              . " + this.firstLineA2(true) + " " + this.thirdLine(true, 1, false) + " .              ."; //GlobalVariables.charESC + "u/1/" + 
             else if (this.printerName == GlobalVariables.PrinterName.PackInkjet || this.printerName == GlobalVariables.PrinterName.CartonInkjet)
             {
-                return (this.printerName == GlobalVariables.PrinterName.CartonInkjet && !this.privateFillingData.IsFV ? GlobalVariables.charESC + "u/3/" + this.cartonTextBeforeBarcode() : "") + GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.wholeBarcode(2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
+                return (this.printerName == GlobalVariables.PrinterName.CartonInkjet ? GlobalVariables.charESC + "u/3/" + this.cartonTextBeforeBarcode() : "") + GlobalVariables.charESC + "u/3/" + GlobalVariables.charESC + "/z/1/0/26/20/20/1/0/0/0/" + this.wholeBarcode(2) + "/" + GlobalVariables.charESC + "/z/0" + //2D DATA MATRIX Barcode
                        GlobalVariables.charESC + "u/1/" + " " + this.firstLine(true, true) + "/" +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.secondLine(true, true) +
                        GlobalVariables.charESC + "/r/" + " " + GlobalVariables.charESC + "u/1/" + this.thirdLine(true, 1, true);
